@@ -10,4 +10,5 @@ public:
 private:    
     DTFecha fechaCompra;
     int montoFinal;   
+    // detallescompra o producto?
 };

@@ -2,7 +2,7 @@
 using namespace std;
 
 
-class controladorCompras{
+class controladorCompras : public ICompras{
 public:
     void registrarCompra();
     void finalizarCompra();

@@ -2,7 +2,7 @@
 using namespace std;
 
 
-class controladorPromociones{
+class controladorPromociones : public IPromociones{
 public:
     void ingresarDatosPromocion(String, String, int, DTFecha);
     Promocion obtenerPromocion(Set(ParProdCant));

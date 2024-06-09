@@ -12,4 +12,5 @@ private:
     DTFecha vencimiento;
     String descripcion;
     String nombre;    
+    //producto o minimo?
 };
