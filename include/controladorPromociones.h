@@ -5,7 +5,7 @@
 #include <set>
 #include "./promocion.h"
 #include "./compra.h"
-// import datatypes
+#include "./datatypes.h"
 
 using String = std::string;
 

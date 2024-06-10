@@ -5,7 +5,7 @@
 #include <set>
 #include "./promocion.h"
 #include "./compra.h"
-// import datatypes
+#include "./datatypes.h"
 using String = std::string;
 class ControladorCompras
 {
@@ -17,7 +17,7 @@ private:
     int precioTotal; // no se si se usa
 
 public:
-    ControladorCompras(/* args */);
+    ControladorCompras();
     ~ControladorCompras();
 
     void setCompras(std::set<Compra>);
@@ -35,6 +35,6 @@ public:
     void finalizarCompra();
     std::set<String> listarClientes();
     void seleccionarUsuario(String);
-    void calcularPrecio(Promocion, std::set<ParProdCant>)
+    void calcularPrecio(Promocion, std::set<ParProdCant>);
 };
 #endif // _CONTROLADORCOMPRAS_H

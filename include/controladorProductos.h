@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include "./producto.h"
+#include "./datatypes.h"
 using String = std::string;
 class ControladorProductos
 {
