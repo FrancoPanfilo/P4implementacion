@@ -1,14 +1,10 @@
+#ifndef _PRODUCTO_H
+#define _PRODUCTO_H
 
 #include <string>
-using namespace std;
-
-
-class Producto{
-public:
-    Producto() = default;
-    Producto(int, int, int, String, String, String);
-    ~Producto() = default;
-    void agregarAPromo(String, int);
+using String = std::string;
+class Producto
+{
 private:
     int codigo;
     int stock;
@@ -16,4 +12,15 @@ private:
     String nombre;
     String descripcion;
     String tipo;
-}
+
+public:
+    int getCodigo();
+    int getStock();
+    int getPrecio();
+    String getNombre();
+    String getDescripcion();
+    String getTipo();
+    void agregarAPromo(String, int);
+};
+
+#endif // _PRODUCTO_H

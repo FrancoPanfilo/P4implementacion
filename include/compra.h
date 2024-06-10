@@ -1,14 +1,14 @@
-//include
-
-
-
-class Compra{
-public: 
-    Compra() = default;
-    Compra(DTFecha, int);
-    ~Compra() = default;
-private:    
+#ifndef _Compra_H
+#define _Compra_H
+#include "./datatypes.h"
+class Compra
+{
+private:
     DTFecha fechaCompra;
-    int montoFinal;   
-    // detallescompra o producto?
+    int montoFinal;
+
+public:
+    DTFecha getFechaCompra();
+    int getMontoFinal();
 };
+#endif //_Compra_H

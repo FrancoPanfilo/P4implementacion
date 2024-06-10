@@ -1,13 +1,40 @@
+#ifndef _CONTROLADORCOMPRAS_H
+#define _CONTROLADORCOMPRAS_H
+
 #include <string>
-using namespace std;
+#include <set>
+#include "./promocion.h"
+#include "./compra.h"
+#include "./datatypes.h"
+using String = std::string;
+class ControladorCompras
+{
+private:
+    std::set<Compra> compras;
+    String nickname;
+    DTFecha fechaActual;
+    std::set<ParProdCant> datosProductos;
+    int precioTotal; // no se si se usa
 
-
-class controladorCompras : public ICompras{
 public:
+    ControladorCompras();
+    ~ControladorCompras();
+
+    void setCompras(std::set<Compra>);
+    std::set<Compra> getCompras();
+    void setNickname(String);
+    String getNickname();
+    void setFechaActual(DTFecha);
+    DTFecha getFechaActual();
+    void setDatosProductos(std::set<ParProdCant>);
+    std::set<ParProdCant> getDatosProductos();
+    int getPrecioTotal();
+    void setPrecioTotal(int);
+
     void registrarCompra();
     void finalizarCompra();
-    Set(String) listarClientes();
+    std::set<String> listarClientes();
     void seleccionarUsuario(String);
-    DTCompra solicitarDetallesCompra();
-    void calcularPrecio(Promocion, Set(ParProdCant));
-}
+    void calcularPrecio(Promocion, std::set<ParProdCant>);
+};
+#endif // _CONTROLADORCOMPRAS_H

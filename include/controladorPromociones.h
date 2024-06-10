@@ -1,15 +1,43 @@
+#ifndef _CONTROLADORPROMOCIONES_H
+#define _CONTROLADORPROMOCIONES_H
+
 #include <string>
-using namespace std;
+#include <set>
+#include "./promocion.h"
+#include "./compra.h"
+#include "./datatypes.h"
 
+using String = std::string;
 
-class controladorPromociones : public IPromociones{
+class ControladorPromociones
+{
+private:
+    std::set<Promocion> promociones;
+    Promocion promocionTmp;
+    String nickname;
+    std::set<ParProdCant> productosTmp;
+
 public:
+    ControladorPromociones(/* args */);
+    ~ControladorPromociones();
+
+    void setPromociones(std::set<Promocion>);
+    std::set<Promocion> getPromociones();
+    void setPromocionTmp(Promocion);
+    Promocion getPromocionTmp();
+    void setNickname(String);
+    String getNickname();
+    void setProductosTmp(std::set<ParProdCant>);
+    std::set<ParProdCant> getProductosTmp();
+
     void ingresarDatosPromocion(String, String, int, DTFecha);
-    Promocion obtenerPromocion(Set(ParProdCant));
-    Set(String) obtenerNicknames():
+    Promocion obtenerPromocion(std::set<ParProdCant>);
+    std::set<String> obtenerNicknames();
     void seleccionarNickname(String);
-    void agregarProductoAPromocion(int, int);
-    Set(DTProducto) obtenerProductosAsociados(String);
+    void agregarProductosAPromocion(int, int);
+    std::set<DTProducto> obtenerProductosAsociados(String);
     void confirmarCrearPromocion();
-    int obtenerDescuento(ParProdCantidad);
-}    
+    int obtenerDescuento(ParProdCant);
+};
+
+#endif // _CONTROLADORPROMOCIONES_H

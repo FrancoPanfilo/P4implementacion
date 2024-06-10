@@ -1,11 +1,23 @@
+#ifndef _CONTROLADORPRODUCTOS_H
+#define _CONTROLADORPRODUCTOS_H
+
 #include <string>
-using namespace std;
-
-
-class controladorProductos : public IProductos {
+#include <set>
+#include "./producto.h"
+#include "./datatypes.h"
+using String = std::string;
+class ControladorProductos
+{
+private:
+    std::set<Producto> productos;
+    // es posible que se agreguen mas atributos para facilitar algunos procesos
 public:
-    Set(DTProducto) listarProductos();
-    int seleccionarProducto(int,int);
-    void agregarAPromo(String,int,int);
+    ControladorProductos();
+    ~ControladorProductos();
+    std::set<DTProducto> listarProductos();
+    int seleccionarProducto(int, int);
+    void agregarAPromo(String, int, int);
     Producto obtenerProducto(int);
-}
+};
+
+#endif // _CONTROLADORPRODUCTOS_H
