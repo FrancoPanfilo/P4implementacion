@@ -57,6 +57,10 @@ void Cliente::setSuscripciones(set<string> suscripciones) {
 
 // Metodos
 
+void Cliente::notificar() {
+    // TODO
+}
+
 void Cliente::eliminarNotificacionesPendientes() {
     notificacionesPendientes.clear();
 }

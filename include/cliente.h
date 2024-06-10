@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class Cliente : public Usuario {
+class Cliente : private Usuario, public ObserverNotificacion {
 private:
     string direccion;
     string ciudad;
@@ -39,6 +39,7 @@ public:
     void setSuscripciones(set<string> suscripciones);
 
     // Metodos
+    void notificar();
     void eliminarNotificacionesPendientes(); // Se eliminan todas las instancias de DTNotificacion del campo notifiacionesPendientes del cliente
     void create(DTAltaCliente altaCliente);
 };

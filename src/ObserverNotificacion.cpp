@@ -1,5 +1,5 @@
 // File IObserver.cpp
 
-#include "../include/IObserver.h"
+#include "../include/ObserverNotificacion.h"
 #include <string>
 using namespace std;
