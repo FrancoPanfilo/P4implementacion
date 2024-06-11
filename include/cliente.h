@@ -3,21 +3,24 @@
 #ifndef _CLIENTE_H
 #define _CLIENTE_H
 
-#include "dtNotificacion.h"
-#include "dtAltaCliente.h"
+#include "./Datatypes/DTNotificacion.h"
+#include "./Datatypes/DTAltaCliente.h"
 #include "usuario.h"
+#include "ObserverNotificacion.h"
 
 #include <string>
 #include <set>
 
 using namespace std;
 
-class Cliente : private Usuario, public ObserverNotificacion {
+class Cliente : private Usuario, public Iobserver
+{
 private:
     string direccion;
     string ciudad;
     set<DTNotificacion> notificacionesPendientes;
     set<string> suscripciones;
+
 public:
     // Constructor
     Cliente(string direccion, string ciudad, set<DTNotificacion> notificacionesPendientes, set<string> suscripciones);
@@ -44,4 +47,4 @@ public:
     void create(DTAltaCliente altaCliente);
 };
 
-#endif  // _CLIENTE_H
+#endif // _CLIENTE_H

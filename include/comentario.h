@@ -3,16 +3,18 @@
 #ifndef _COMENTARIO_H
 #define _COMENTARIO_H
 
-#include "dtFecha.h"
+#include "./Datatypes/DTFecha.h"
 
 #include <string>
 
 using namespace std;
 
-class Comentario {
+class Comentario
+{
 private:
     string contenido;
     DTFecha fecha;
+
 public:
     // Constructor
     Comentario(string contenido, DTFecha fecha);
@@ -33,4 +35,4 @@ public:
     void destroy();
 };
 
-#endif  // _COMENTARIO_H
+#endif // _COMENTARIO_H

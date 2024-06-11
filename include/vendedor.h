@@ -3,18 +3,20 @@
 #ifndef _VENDEDOR_H
 #define _VENDEDOR_H
 
-#include "dtNotificacion.h"
-#include "dtAltaVendedor.h"
+#include "./Datatypes/DTAltaVendedor.h"
+#include "./Datatypes/DTNotificacion.h"
 #include "usuario.h"
 
 #include <string>
 
 using namespace std;
 
-class Vendedor : public Usuario {
+class Vendedor : public Usuario
+{
 private:
     string rut;
     set<string> productosAsociados;
+
 public:
     // Constructor
     Vendedor(string rut);
@@ -37,4 +39,4 @@ public:
     void create(DTAltaVendedor altaVendedor);
 };
 
-#endif  // _VENDEDOR_H
+#endif // _VENDEDOR_H

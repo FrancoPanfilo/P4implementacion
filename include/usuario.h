@@ -3,19 +3,21 @@
 #ifndef _USUARIO_H
 #define _USUARIO_H
 
-#include "dtFecha.h"
+#include "./Datatypes/DTFecha.h"
 
 #include <string>
 #include <set>
 
 using namespace std;
 
-class Usuario {
+class Usuario
+{
 private:
     string nickname;
     string contrasenia;
     DTFecha fechaNac;
     set<string> comentarios;
+
 public:
     // Constructor
     Usuario(string nickname, string contrasenia, DTFecha fecha);
@@ -38,4 +40,4 @@ public:
     bool estaSuscrito(string nickname);
 };
 
-#endif  // _USUARIO_H
+#endif // _USUARIO_H

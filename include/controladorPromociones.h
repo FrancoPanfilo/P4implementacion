@@ -5,20 +5,24 @@
 #include <set>
 #include "./promocion.h"
 #include "./compra.h"
-#include "./datatypes.h"
-
+#include "./Datatypes/ParProdCant.h"
+#include "./Datatypes/DTFecha.h"
+#include "Interface/IPromocion.h"
 using String = std::string;
 
-class ControladorPromociones
+class ControladorPromociones : public IPromocion
 {
 private:
+    static ControladorPromociones *instance;
     std::set<Promocion> promociones;
     Promocion promocionTmp;
     String nickname;
     std::set<ParProdCant> productosTmp;
 
 public:
-    ControladorPromociones(/* args */);
+    static ControladorPromociones *getInstance();
+
+    ControladorPromociones();
     ~ControladorPromociones();
 
     void setPromociones(std::set<Promocion>);
