@@ -1,18 +1,19 @@
 #include <string>
 #include "./Datatypes/DTFecha.h"
+using namespace std;
 
 class DTPromocion 
 {
 private:
-    String nombre;
-    String descripcion;
+    string nombre;
+    string descripcion;
     int descuento;
     DTFecha fechaVencimiento;
 public:
-    DTPromocion(String nombre, String descripcion, int descuento, DTFecha fechaVencimiento);
+    DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento);
     ~DTPromocion();
-    String getNombre();
-    String getDescripcion();
+    string getNombre();
+    string getDescripcion();
     int getDescuento();
     DTFecha getFechaVencimiento();    
 };
