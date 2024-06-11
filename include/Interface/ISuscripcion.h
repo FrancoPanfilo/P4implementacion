@@ -10,13 +10,13 @@ using namespace std;
 class ISuscripcion
 {
 public:
-    virtual set<string> listarNoSuscritos(string nickname);
-    virtual void agregarSuscripcion(string nickname);
-    virtual void confirmarSuscripcion();
-    virtual set<string> listarVendedoresSuscritos(string nickname);
-    virtual void eliminarSuscriptor(string nickname);
-    virtual set<DTNotificacion> consultarNotificacionesRecibidas(string nickname);
-    virtual void eliminarNotificaciones();
+    virtual set<string> listarNoSuscritos(string nickname) = 0;
+    virtual void agregarSuscripcion(string nickname) = 0;
+    virtual void confirmarSuscripcion() = 0;
+    virtual set<string> listarVendedoresSuscritos(string nickname) = 0;
+    virtual void eliminarSuscriptor(string nickname) = 0;
+    virtual set<DTNotificacion> consultarNotificacionesRecibidas(string nickname) = 0;
+    virtual void eliminarNotificaciones() = 0;
     virtual ~ISuscripcion(){};
 };
 

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Iobserver
+class IObserver
 {
 public:
     virtual void notificar(DTNotificacion notificacion) = 0;
