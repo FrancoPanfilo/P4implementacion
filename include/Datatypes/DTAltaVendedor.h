@@ -1,18 +1,19 @@
 #include <string>
 #include "./Datatypes/DTFecha.h"
-
+using namespace std;
+ 
 class DTAltaVendedor
 {
 private:
-    String nickname;
+    string nickname;
     DTFecha fechaNac;
-    String contrasenia;
+    string contrasenia;
     int RUT;
 public:
-    DTAltaVendedor(String nickname, DTFecha fechaNac, String contrasenia, int RUT);
+    DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, int RUT);
     ~DTAltaVendedor();
-    String getNickname();
+    string getNickname();
     DTFecha getFechaNac();
-    String getContrasenia();
+    string getContrasenia();
     int getRUT();
 };

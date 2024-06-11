@@ -1,20 +1,21 @@
 #include <string>
 #include "./Datatypes/DTFecha.h"
+using namespace std;
 
 class DTAltaCliente
 {
 private:
-    String nickname;
+    string nickname;
     DTFecha fechaNac;
-    String contrasenia;
-    String ciudad;
-    String direccion;
+    string contrasenia;
+    string ciudad;
+    string direccion;
 public:
-    DTAltaCliente(String nickname, DTFecha fechaNac, String contrasenia, String ciudad, String direccion);
+    DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion);
     ~DTAltaCliente(); 
-    String getNickname();
+    string getNickname();
     DTFecha getFechaNac();
-    String getContrasenia();
-    String getCiudad();
-    String getDireccion();   
+    string getContrasenia();
+    string getCiudad();
+    string getDireccion();   
 };

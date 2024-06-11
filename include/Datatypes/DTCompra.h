@@ -1,16 +1,17 @@
 #include <set>
 #include "./Datatypes/DTFecha.h"
+using namespace std;
 
 class DTCompra
 {
 private:
     DTFecha fecha;
     int montoFinal;
-    Set<int> datosProductos;    
+    std::set<int> datosProductos;    
 public:
-    DTCompra(DTFecha fecha, int montoFinal, Set<int> datosProductos);
+    DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos);
     ~DTCompra();
     DTFecha getFecha();
     int getMontoFinal();
-    Set<int> getDatosProductos();   
+    set<int> getDatosProductos();   
 };

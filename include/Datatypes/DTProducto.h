@@ -6,16 +6,16 @@ private:
     int codigo;
     int stock;
     int precio;
-    String nombre;
-    String descripcion;
-    String tipo;  
+    string nombre;
+    string descripcion;
+    string tipo;  
 public:
-    DTProducto(int codigo, int stock, int precio, String nombre, String descripcion, String tipo);
+    DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo);
     ~DTProducto();
     int getCodigo();
     int getStock();
     int getPrecio();
-    String getNombre();
-    String getDescripcion();
-    String getTipo();      
+    string getNombre();
+    string getDescripcion();
+    string getTipo();      
 };

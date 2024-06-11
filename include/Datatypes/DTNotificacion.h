@@ -4,13 +4,13 @@
 class DTNotificacion
 {
 private:
-    String nombreVendedor;
-    Set<int> productos;
-    String nombrePromo;   
+    string nombreVendedor;
+    set<int> productos;
+    string nombrePromo;   
 public:
-    DTNotificacion(String nombreVendedor, Set<int> productos, String nombrePromo);
+    DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo);
     ~DTNotificacion();
-    String getNombreVendedor();
-    Set<int> getProductos();
-    String getNombrePromo();      
+    string getNombreVendedor();
+    set<int> getProductos();
+    string getNombrePromo();      
 };
