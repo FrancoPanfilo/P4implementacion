@@ -3,13 +3,14 @@
 #ifndef _IOBSERVER_H
 #define _IOBSERVER_H
 
-#include "dtNotificacion.h"
+#include "./Datatypes/DTNotificacion.h"
 
 #include <string>
 
 using namespace std;
 
-class Iobserver {
+class IObserver
+{
 public:
     virtual void notificar(DTNotificacion notificacion) = 0;
 };

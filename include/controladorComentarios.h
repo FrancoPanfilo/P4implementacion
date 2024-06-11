@@ -3,8 +3,6 @@
 #ifndef _CONTROLADORCOMENTARIOS_H
 #define _CONTROLADORCOMENTARIOS_H
 
-#include "dtComentario.h"
-#include "dtProducto.h"
 #include "IComentario.h"
 
 #include <string>
@@ -12,13 +10,15 @@
 
 using namespace std;
 
-class ControladorComentarios : public IComentario {
+class ControladorComentarios : public IComentario
+{
 private:
-    static ControladorComentarios * instance;
+    static ControladorComentarios *instance;
     ControladorComentarios();
     ~ControladorComentarios();
+
 public:
-    static ControladorComentarios* getInstance();
+    static ControladorComentarios *getInstance();
 
     // Getters
 

@@ -5,11 +5,15 @@
 #include <set>
 #include "./promocion.h"
 #include "./compra.h"
-#include "./datatypes.h"
+#include "./Interface/ICompra.h"
+#include "./Datatypes/DTFecha.h"
+#include "./Datatypes/ParProdCant.h"
+
 using String = std::string;
-class ControladorCompras
+class ControladorCompras : public ICompra
 {
 private:
+    static ControladorCompras *instance;
     std::set<Compra> compras;
     String nickname;
     DTFecha fechaActual;
@@ -17,6 +21,7 @@ private:
     int precioTotal; // no se si se usa
 
 public:
+    static ControladorCompras *getInstance();
     ControladorCompras();
     ~ControladorCompras();
 

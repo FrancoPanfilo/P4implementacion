@@ -1,7 +1,8 @@
 #ifndef _PROMOCION_H
 #define _PROMOCION_H
 #include <string>
-#include "./datatypes.h"
+#include "./Datatypes/ParProdCant.h"
+#include "./Datatypes/DTFecha.h"
 #include <set>
 using String = std::string;
 class Promocion

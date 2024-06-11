@@ -1,6 +1,6 @@
 #ifndef _Compra_H
 #define _Compra_H
-#include "./datatypes.h"
+#include "./Datatypes/DTFecha.h"
 class Compra
 {
 private:
