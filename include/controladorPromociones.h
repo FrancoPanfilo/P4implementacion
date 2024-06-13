@@ -38,7 +38,7 @@ public:
     Promocion obtenerPromocion(std::set<ParProdCant>);
     std::set<String> obtenerNicknames();
     void seleccionarNickname(String);
-    void agregarProductosAPromocion(int, int);
+    void agregarProductoAPromocion(int, int);
     std::set<DTProducto> obtenerProductosAsociados(String);
     void confirmarCrearPromocion();
     int obtenerDescuento(ParProdCant);
