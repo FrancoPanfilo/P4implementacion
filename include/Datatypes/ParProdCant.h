@@ -8,6 +8,7 @@ public:
     Producto producto;
     int cantidad;    
     ParProdCant(Producto producto, int cantidad);
+    ParProdCant();
     ~ParProdCant();
 };
 

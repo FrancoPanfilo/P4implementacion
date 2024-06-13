@@ -13,6 +13,7 @@ public:
     string contrasenia;
     int RUT;
     DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, int RUT);
+    DTAltaVendedor();
     ~DTAltaVendedor();
 };
 

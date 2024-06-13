@@ -12,6 +12,7 @@ public:
     set<int> productos;
     string nombrePromo;   
     DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo);
+    DTNotificacion();
     ~DTNotificacion();     
 };
 

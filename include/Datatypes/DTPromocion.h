@@ -13,6 +13,7 @@ public:
     int descuento;
     DTFecha fechaVencimiento;
     DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento);
+    DTPromocion();
     ~DTPromocion();  
 };
 

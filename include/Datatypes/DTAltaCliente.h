@@ -14,6 +14,7 @@ public:
     string ciudad;
     string direccion;
     DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion);
+    DTAltaCliente();
     ~DTAltaCliente();   
 };
 

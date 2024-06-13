@@ -12,6 +12,7 @@ public:
     int montoFinal;
     std::set<int> datosProductos;    
     DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos);
+    DTCompra();
     ~DTCompra();  
 };
 
