@@ -1,3 +1,6 @@
+#ifndef _DTPRODUCTO_H
+#define _DTPRODUCTO_H
+
 #include <string>
 using namespace std;
 
@@ -20,3 +23,5 @@ public:
     string getDescripcion();
     string getTipo();      
 };
+
+#endif // _DTPRODUCTO_H

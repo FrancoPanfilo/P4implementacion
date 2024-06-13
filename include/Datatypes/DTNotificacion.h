@@ -1,3 +1,6 @@
+#ifndef _DTNOTIFICACION_H
+#define _DTNOTIFICACION_H
+
 #include <string>
 #include <set> 
 using namespace std;
@@ -15,3 +18,5 @@ public:
     set<int> getProductos();
     string getNombrePromo();      
 };
+
+#endif // _DTNOTIFICACION_H

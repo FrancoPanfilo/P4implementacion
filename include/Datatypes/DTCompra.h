@@ -1,3 +1,6 @@
+#ifndef _DTCOMPRA_H
+#define _DTCOMPRA_H
+
 #include <set>
 #include "./Datatypes/DTFecha.h"
 using namespace std;
@@ -15,3 +18,5 @@ public:
     int getMontoFinal();
     set<int> getDatosProductos();   
 };
+
+#endif _DTCOMPRA_H

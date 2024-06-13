@@ -1,3 +1,6 @@
+#ifndef _DTALTAVENDEDOR_H
+#define _DTALTAVENDEDOR_H
+
 #include <string>
 #include "./Datatypes/DTFecha.h"
 using namespace std;
@@ -17,3 +20,5 @@ public:
     string getContrasenia();
     int getRUT();
 };
+
+#endif _DTALTAVENDEDOR_H

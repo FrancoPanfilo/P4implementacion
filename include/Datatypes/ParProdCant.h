@@ -1,5 +1,7 @@
-#include "Producto.h" //no supe como incluir producto acá
+#ifndef _PARPRODCANT_H
+#define _PARPRODCANT_H
 
+#include "../producto.h" 
 class ParProdCant
 {
 private:
@@ -11,3 +13,5 @@ public:
     Producto getProducto();
     int getCantidad();
 };
+
+#endif // _PARPRODCANT_H

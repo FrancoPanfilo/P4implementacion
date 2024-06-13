@@ -1,3 +1,6 @@
+#ifndef _DTALTACLIENTE_H
+#define _DTALTACLIENTE_H
+
 #include <string>
 #include "./Datatypes/DTFecha.h"
 using namespace std;
@@ -19,3 +22,5 @@ public:
     string getCiudad();
     string getDireccion();   
 };
+
+#endif _DTALTACLIENTE_H

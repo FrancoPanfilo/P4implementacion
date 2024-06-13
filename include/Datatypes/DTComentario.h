@@ -1,3 +1,6 @@
+#ifndef _DTCOMENTARIO_H
+#define _DTCOMENTARIO_H
+
 #include <string>
 #include "./Datatypes/DTFecha.h"
 using namespace std;
@@ -15,3 +18,5 @@ public:
     string getContenido();
     DTFecha getFecha(); 
 };
+
+#endif _DTCOMENTARIO_H

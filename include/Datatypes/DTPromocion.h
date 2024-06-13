@@ -1,3 +1,6 @@
+#ifndef _DTPROMOCION_H
+#define _DTPROMOCION_H
+
 #include <string>
 #include "./Datatypes/DTFecha.h"
 using namespace std;
@@ -17,3 +20,5 @@ public:
     int getDescuento();
     DTFecha getFechaVencimiento();    
 };
+
+#endif // _DTPROMOCION_H
