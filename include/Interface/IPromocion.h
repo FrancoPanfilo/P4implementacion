@@ -14,13 +14,13 @@ class IPromocion
 {
 public:
     virtual void ingresarDatosPromocion(String, String, int, DTFecha) = 0;
-    virtual Promocion obtenerPromocion(std::set<ParProdCant>) = 0;
+    // virtual Promocion obtenerPromocion(std::set<ParProdCant>) = 0;
     virtual std::set<String> obtenerNicknames() = 0;
     virtual void seleccionarNickname(String) = 0;
-    virtual void agregarProductosAPromocion(int, int) = 0;
+    virtual void agregarProductoAPromocion(int, int) = 0;
     virtual std::set<DTProducto> obtenerProductosAsociados(String) = 0;
     virtual void confirmarCrearPromocion() = 0;
-    virtual int obtenerDescuento(ParProdCant) = 0;
+    // virtual int obtenerDescuento(ParProdCant) = 0;
     virtual ~IPromocion(){};
 };
 

@@ -5,7 +5,6 @@
 
 #include <string>
 
-#include "dtComentario.h"
 
 using namespace std;
 

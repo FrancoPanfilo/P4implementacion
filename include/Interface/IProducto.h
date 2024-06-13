@@ -10,10 +10,10 @@ class IProducto
 {
 
 public:
-    virtual std::set<DTProducto> listarProductos() = 0;
-    virtual int seleccionarProducto(int, int) = 0;
-    virtual void agregarAPromo(String, int, int) = 0;
-    virtual Producto obtenerProducto(int) = 0;
+    // virtual std::set<DTProducto> listarProductos() = 0;
+    // virtual int seleccionarProducto(int, int) = 0;
+    // virtual void agregarAPromo(String, int, int) = 0;
+    // virtual Producto obtenerProducto(int) = 0;
     virtual ~IProducto(){};
 };
 
