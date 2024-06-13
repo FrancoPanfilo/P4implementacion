@@ -1,8 +1,8 @@
 #ifndef OBSERVER_NOTIFICACION_H
 #define OBSERVER_NOTIFICACION_H
-
-#include "datatypes.h"
-class ObserverNotificacion {
+#include "./Datatypes/DTNotificacion.h"
+class ObserverNotificacion
+{
 public:
 	ObserverNotificacion();
 	// ObserverNotificacion(ObserverNotificacion &&) = default;
@@ -11,10 +11,9 @@ public:
 	// ObserverNotificacion &operator=(const ObserverNotificacion &) = default;
 	~ObserverNotificacion();
 
-	virtual void notificar(DTNotificacion) = 0;
+	virtual void notificar(DTNotificacion);
 
 private:
-	
 };
 
 #endif // !OBSERVER_NOTIFICACION_H

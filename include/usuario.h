@@ -4,6 +4,7 @@
 #define _USUARIO_H
 
 #include "./Datatypes/DTFecha.h"
+#include "./Datatypes/DTNotificacion.h"
 
 #include <string>
 #include <set>
@@ -16,7 +17,7 @@ private:
     string nickname;
     string contrasenia;
     DTFecha fechaNac;
-    set<string> comentarios;
+    set<DTComentario> comentarios;
 
 public:
     // Constructor

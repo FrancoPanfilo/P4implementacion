@@ -6,14 +6,14 @@
 #include "./Datatypes/DTNotificacion.h"
 #include "./Datatypes/DTAltaCliente.h"
 #include "usuario.h"
-#include "IObserver.h"
+#include "observer.h"
 
 #include <string>
 #include <set>
 
 using namespace std;
 
-class Cliente : private Usuario, public IObserver
+class Cliente : private Usuario, public ObserverNotificacion
 {
 private:
     string direccion;
