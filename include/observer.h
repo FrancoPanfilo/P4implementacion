@@ -1,8 +1,10 @@
 #ifndef OBSERVER_NOTIFICACION_H
 #define OBSERVER_NOTIFICACION_H
+
 #include "./Datatypes/DTNotificacion.h"
 class ObserverNotificacion
 {
+
 public:
 	ObserverNotificacion();
 	// ObserverNotificacion(ObserverNotificacion &&) = default;

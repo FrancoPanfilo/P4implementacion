@@ -7,16 +7,13 @@ using namespace std;
 
 class DTCompra
 {
-private:
+public: 
     DTFecha fecha;
     int montoFinal;
     std::set<int> datosProductos;    
-public:
     DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos);
-    ~DTCompra();
-    DTFecha getFecha();
-    int getMontoFinal();
-    set<int> getDatosProductos();   
+    DTCompra();
+    ~DTCompra();  
 };
 
 #endif _DTCOMPRA_H

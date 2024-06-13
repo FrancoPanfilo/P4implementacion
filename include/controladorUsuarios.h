@@ -6,10 +6,10 @@
 #include <string>
 #include <set>
 
-#include "dtComentario.h"
-#include "dtProducto.h"
-#include "dtAltaCliente.h"
-#include "dtAltaVendedor.h"
+#include "./Datatypes/DTComentario.h"
+#include "./Datatypes/DTProducto.h"
+#include "./Datatypes/DTAltaCliente.h"
+#include "./Datatypes/DTAltaVendedor.h"
 #include "IUsuario.h"
 
 using namespace std;

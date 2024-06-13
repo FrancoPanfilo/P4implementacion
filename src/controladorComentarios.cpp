@@ -6,11 +6,11 @@
 
 using namespace std;
 
-controladorComentarios * controladorComentarios::instance = NULL;
+ControladorComentarios * ControladorComentarios::instance = NULL;
 
 // Constructor
 
-controladorComentarios::controladorComentarios() {}
+ControladorComentarios::ControladorComentarios() {}
 
 // Destructor
 
@@ -18,9 +18,9 @@ ControladorComentarios::~ControladorComentarios() {}
 
 // Getters
 
-controladorComentarios * controladorComentarios::getInstance() {
+ControladorComentarios * ControladorComentarios::getInstance() {
     if (instance == NULL)
-        instance = new controladorComentarios();
+        instance = new ControladorComentarios();
     return instance;
 }
 

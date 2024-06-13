@@ -7,18 +7,14 @@ using namespace std;
  
 class DTAltaVendedor
 {
-private:
+public:
     string nickname;
     DTFecha fechaNac;
     string contrasenia;
     int RUT;
-public:
     DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, int RUT);
+    DTAltaVendedor();
     ~DTAltaVendedor();
-    string getNickname();
-    DTFecha getFechaNac();
-    string getContrasenia();
-    int getRUT();
 };
 
 #endif _DTALTAVENDEDOR_H

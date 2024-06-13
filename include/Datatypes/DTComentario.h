@@ -2,21 +2,18 @@
 #define _DTCOMENTARIO_H
 
 #include <string>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
 
 class DTComentario
 {
-private:
+public:
     int id;
     string contenido;
     DTFecha fecha;   
-public:
     DTComentario(int id, string contenido, DTFecha fecha);
+    DTComentario();
     ~DTComentario();
-    int getId();
-    string getContenido();
-    DTFecha getFecha(); 
 };
 
 #endif _DTCOMENTARIO_H

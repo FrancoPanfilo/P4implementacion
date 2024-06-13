@@ -3,16 +3,13 @@
 
 class DTFecha
 {
-private:
+public:
     int anio;
     int mes;
     int dia;
-public:
     DTFecha(int dia, int mes, int anio); 
+    DTFecha();
     ~DTFecha();   
-    int getDia() const;
-    int getMes() const;
-    int getAnio() const;
 };
 
 #endif _DTFECHA_H
