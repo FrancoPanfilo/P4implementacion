@@ -2,7 +2,7 @@
 #define _DTCOMENTARIO_H
 
 #include <string>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
 
 class DTComentario

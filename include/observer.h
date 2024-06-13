@@ -1,7 +1,7 @@
 #ifndef OBSERVER_NOTIFICACION_H
 #define OBSERVER_NOTIFICACION_H
 
-#include "datatypes.h"
+#include "./Datatypes/DTNotificacion.h"
 class ObserverNotificacion {
 public:
 	ObserverNotificacion();

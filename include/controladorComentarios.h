@@ -3,7 +3,7 @@
 #ifndef _CONTROLADORCOMENTARIOS_H
 #define _CONTROLADORCOMENTARIOS_H
 
-#include "IComentario.h"
+#include "./Interface/IComentario.h"
 
 #include <string>
 #include <set>
