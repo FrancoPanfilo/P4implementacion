@@ -7,20 +7,14 @@ using namespace std;
 
 class DTAltaCliente
 {
-private:
+public:
     string nickname;
     DTFecha fechaNac;
     string contrasenia;
     string ciudad;
     string direccion;
-public:
     DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion);
-    ~DTAltaCliente(); 
-    string getNickname();
-    DTFecha getFechaNac();
-    string getContrasenia();
-    string getCiudad();
-    string getDireccion();   
+    ~DTAltaCliente();   
 };
 
 #endif _DTALTACLIENTE_H

@@ -7,18 +7,13 @@ using namespace std;
 
 class DTPromocion 
 {
-private:
+public:
     string nombre;
     string descripcion;
     int descuento;
     DTFecha fechaVencimiento;
-public:
     DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento);
-    ~DTPromocion();
-    string getNombre();
-    string getDescripcion();
-    int getDescuento();
-    DTFecha getFechaVencimiento();    
+    ~DTPromocion();  
 };
 
 #endif // _DTPROMOCION_H
