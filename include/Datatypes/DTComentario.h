@@ -10,10 +10,10 @@ class DTComentario
 public:
     int id;
     string contenido;
-    DTFecha fecha;   
+    DTFecha fecha;
     DTComentario(int id, string contenido, DTFecha fecha);
     DTComentario();
     ~DTComentario();
 };
 
-#endif _DTCOMENTARIO_H
+#endif //_DTCOMENTARIO_H

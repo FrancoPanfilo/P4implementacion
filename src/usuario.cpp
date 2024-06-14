@@ -1,6 +1,7 @@
 // File usuario.cpp
 
-#include "../include/dtFecha.h"
+#include "../include/Datatypes/DTFecha.h"
+#include "../include/Datatypes/DTComentario.h"
 #include "../include/usuario.h"
 
 #include <string>
@@ -18,38 +19,34 @@ Usuario::~Usuario() {}
 
 // Getters
 
-Usuario::getNickname() {
+string Usuario::getNickname()
+{
     return nickname;
 }
 
-Usuario::getContrasenia() {
+string Usuario::getContrasenia()
+{
     return contrasenia;
 }
 
-Usuario::getFechaNac() {
+DTFecha Usuario::getFechaNac()
+{
     return fechaNac;
 }
 
-Usuario::getComentarios() {
+set<DTComentario> Usuario::getComentarios()
+{
     return comentarios;
 }
 
 // Setters
 
-void Usuario::setNickname(string nickname) {
+void Usuario::setNickname(string nickname)
+{
     this->nickname = nickname;
 }
 
-void Usuario::setContrasena(string contrasenia) {
+void Usuario::setContrasenia(string contrasenia)
+{
     this->contrasenia = contrasenia;
-}
-
-// Metodos
-
-void Usuario::eliminarNotificacionesPendientes() {
-    // TODO
-}
-
-bool Usuario::estaSuscrito(string nickname) {
-    // TODO
 }

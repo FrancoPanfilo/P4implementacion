@@ -2,18 +2,18 @@
 #define _DTCOMPRA_H
 
 #include <set>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
 
 class DTCompra
 {
-public: 
+public:
     DTFecha fecha;
     int montoFinal;
-    std::set<int> datosProductos;    
+    std::set<int> datosProductos;
     DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos);
     DTCompra();
-    ~DTCompra();  
+    ~DTCompra();
 };
 
-#endif _DTCOMPRA_H
+#endif //_DTCOMPRA_H

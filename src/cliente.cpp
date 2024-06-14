@@ -8,8 +8,8 @@ using namespace std;
 
 // Constructor
 
-Cliente::Cliente(string direccion, string ciudad, set<DTNotificacion> notificacionesPendientes, set<string> suscripciones) 
-    : direccion(direccion), ciudad(ciudad), notificacionesPendientes(notificacionesPendientes), suscripciones(suscripciones) {}
+Cliente::Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad)
+    : Usuario(nickname, contrasenia, fechaNac), direccion(direccion), ciudad(ciudad) {}
 
 // Destructor
 
@@ -17,54 +17,57 @@ Cliente::~Cliente() {}
 
 // Getters
 
-string Cliente::getDireccion() {
+string Cliente::getDireccion()
+{
     return direccion;
 }
 
-string Cliente::getCiudad() {
+string Cliente::getCiudad()
+{
     return ciudad;
 }
 
-set<DTNotificacion> Cliente::getNotificacionesPendientes() {
+set<DTNotificacion> Cliente::getNotificacionesPendientes()
+{
     return notificacionesPendientes;
 }
 
-set<string> Cliente::getSuscripciones() {
+set<string> Cliente::getSuscripciones()
+{
     return suscripciones;
 }
 
-string Cliente::getNickname() {
+string Cliente::getNickname()
+{
     return Usuario::getNickname();
 }
 
 // Setters
 
-void Cliente::setDireccion(string direccion) {
-    this->direccion = direccion;
-}
-
-void Cliente::setCiudad(string ciudad) {
-    this->ciudad = ciudad;
-}
-
-void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes) {
+void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes)
+{
     this->notificacionesPendientes = notificacionesPendientes;
 }
 
-void Cliente::setSuscripciones(set<string> suscripciones) {
+void Cliente::setSuscripciones(set<string> suscripciones)
+{
     this->suscripciones = suscripciones;
 }
 
 // Metodos
 
-void Cliente::notificar() {
+void Cliente::notificar()
+{
     // TODO
 }
 
-void Cliente::eliminarNotificacionesPendientes() {
+void Cliente::eliminarNotificacionesPendientes()
+{
     notificacionesPendientes.clear();
 }
 
-void Cliente::create(DTAltaCliente altaCliente) {
-    // TODO
+Cliente *Cliente::create(DTAltaCliente altaCliente)
+{
+    Cliente *c = new Cliente(altaCliente.nickname, altaCliente.contrasenia, altaCliente.fechaNac, altaCliente.direccion, altaCliente.ciudad);
+    return c;
 }

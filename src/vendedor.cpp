@@ -1,15 +1,16 @@
 // File vendedor.cpp
 
 #include "../include/vendedor.h"
-
+#include "../include/observer.h"
+#include "../include/Datatypes/DTAltaVendedor.h"
 #include <string>
 
 using namespace std;
 
 // Constructor
 
-Vendedor::Vendedor(string rut) 
-    : rut(rut) {}
+Vendedor::Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut)
+    : Usuario(nickname, contrasenia, fechaNac), rut(rut) {}
 
 // Destructor
 
@@ -17,38 +18,41 @@ Vendedor::~Vendedor() {}
 
 // Getters
 
-string Vendedor::getRUT() {
+int Vendedor::getRUT()
+{
     return rut;
 }
 
-string Vendedor::getNickname() {
+string Vendedor::getNickname()
+{
     return Usuario::getNickname();
 }
 
-void Vendedor::getProductosAsociados() {
+set<string> Vendedor::getProductosAsociados()
+{
     return productosAsociados;
-}
-
-// Setters
-
-void Vendedor::setNickname(string rut) {
-    Usuario::setNickname(rut);
 }
 
 // Metodos
 
-void Vendedor::agregarSuscriptor() {
+void Vendedor::agregarSuscriptor(Cliente *c)
+{
+    ObserverNotificacion *o = c;
+    this->observers.insert(o);
+}
+
+void Vendedor::eliminarSuscriptor(Cliente *c)
+{
+    this->observers.erase(c);
+}
+
+void Vendedor::notificar(DTNotificacion dtNotif)
+{
     // TODO
 }
 
-void Vendedor::eliminarSuscriptor() {
-    // TODO
-}
-
-void Vendedor::notificar(DTNotificacion dtNotif) {
-    // TODO
-}
-
-void Vendedor::create(DTAltaVendedor altaVendedor) {
-    // TODO
+Vendedor *Vendedor::create(DTAltaVendedor altaVendedor)
+{
+    Vendedor *v = new Vendedor(altaVendedor.nickname, altaVendedor.contrasenia, altaVendedor.fechaNac, altaVendedor.RUT);
+    return v;
 }

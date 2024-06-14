@@ -6,37 +6,36 @@
 #include "./Datatypes/DTAltaVendedor.h"
 #include "./Datatypes/DTNotificacion.h"
 #include "usuario.h"
+#include "observer.h"
+#include "cliente.h"
 
 #include <string>
-
 using namespace std;
 
 class Vendedor : public Usuario
 {
 private:
-    string rut;
+    int rut;
     set<string> productosAsociados;
+    set<ObserverNotificacion *> observers;
 
 public:
     // Constructor
-    Vendedor(string rut);
+    Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut);
 
     // Destructor
     virtual ~Vendedor();
 
     // Getters
-    string getRUT();
+    int getRUT();
     string getNickname();
-    void getProductosAsociados();
-
-    // Setters
-    void setNickname(string rut);
+    set<string> getProductosAsociados();
 
     // Metodos
-    void agregarSuscriptor();
-    void eliminarSuscriptor();
+    void agregarSuscriptor(Cliente *c);
+    void eliminarSuscriptor(Cliente *c);
     void notificar(DTNotificacion dtNotif);
-    void create(DTAltaVendedor altaVendedor);
+    Vendedor *create(DTAltaVendedor altaVendedor);
 };
 
 #endif // _VENDEDOR_H

@@ -6,14 +6,14 @@
 #include "./Datatypes/DTNotificacion.h"
 #include "./Datatypes/DTAltaCliente.h"
 #include "usuario.h"
-#include "IObserver.h"
+#include "observer.h"
 
 #include <string>
 #include <set>
 
 using namespace std;
 
-class Cliente : private Usuario, public IObserver
+class Cliente : public Usuario, public ObserverNotificacion
 {
 private:
     string direccion;
@@ -23,7 +23,7 @@ private:
 
 public:
     // Constructor
-    Cliente(string direccion, string ciudad, set<DTNotificacion> notificacionesPendientes, set<string> suscripciones);
+    Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad);
 
     // Destructor
     virtual ~Cliente();
@@ -36,15 +36,13 @@ public:
     string getNickname();
 
     // Setters
-    void setDireccion(string direccion);
-    void setCiudad(string ciudad);
     void setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes);
     void setSuscripciones(set<string> suscripciones);
 
     // Metodos
     void notificar();
     void eliminarNotificacionesPendientes(); // Se eliminan todas las instancias de DTNotificacion del campo notifiacionesPendientes del cliente
-    void create(DTAltaCliente altaCliente);
+    Cliente *create(DTAltaCliente altaCliente);
 };
 
 #endif // _CLIENTE_H
