@@ -10,17 +10,21 @@
 #include "./Datatypes/DTProducto.h"
 #include "./Datatypes/DTAltaCliente.h"
 #include "./Datatypes/DTAltaVendedor.h"
-#include "IUsuario.h"
-
+#include "./Interface/IUsuario.h"
 using namespace std;
 
-class ControladorUsuarios : public IUsuario {
+class ControladorUsuarios : public IUsuario
+{
 private:
-    static ControladorUsuarios * instance;
+    static ControladorUsuarios *instance;
     ControladorUsuarios();
     ~ControladorUsuarios();
+    set<Cliente *> listaClientes;
+    set<Vendedor *> listaVendedores;
+    set<Usuario *> listaUsuarios;
+
 public:
-    static ControladorUsuarios * getInstance();
+    static ControladorUsuarios *getInstance();
 
     // Getters
     Vendedor getVendedor(string nickname);

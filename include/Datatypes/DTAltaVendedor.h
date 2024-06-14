@@ -2,9 +2,9 @@
 #define _DTALTAVENDEDOR_H
 
 #include <string>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
- 
+
 class DTAltaVendedor
 {
 public:
@@ -17,4 +17,4 @@ public:
     ~DTAltaVendedor();
 };
 
-#endif _DTALTAVENDEDOR_H
+#endif //_DTALTAVENDEDOR_H

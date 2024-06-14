@@ -9,7 +9,7 @@ using namespace std;
 
 // Constructor
 
-Vendedor::Vendedor(string nickname, string contrasenia, DTFecha fechaNac, string rut)
+Vendedor::Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut)
     : Usuario(nickname, contrasenia, fechaNac), rut(rut) {}
 
 // Destructor
@@ -18,7 +18,7 @@ Vendedor::~Vendedor() {}
 
 // Getters
 
-string Vendedor::getRUT()
+int Vendedor::getRUT()
 {
     return rut;
 }
@@ -33,13 +33,6 @@ set<string> Vendedor::getProductosAsociados()
     return productosAsociados;
 }
 
-// Setters
-
-void Vendedor::setNickname(string rut)
-{
-    Usuario::setNickname(rut);
-}
-
 // Metodos
 
 void Vendedor::agregarSuscriptor(Cliente *c)
@@ -50,7 +43,7 @@ void Vendedor::agregarSuscriptor(Cliente *c)
 
 void Vendedor::eliminarSuscriptor(Cliente *c)
 {
-    //
+    this->observers.erase(c);
 }
 
 void Vendedor::notificar(DTNotificacion dtNotif)
@@ -60,6 +53,6 @@ void Vendedor::notificar(DTNotificacion dtNotif)
 
 Vendedor *Vendedor::create(DTAltaVendedor altaVendedor)
 {
-    Vendedor *v = new Vendedor(altaVendedor.nickname, altaVendedor.fechaNac, altaVendedor.contrasenia, altaVendedor.RUT);
+    Vendedor *v = new Vendedor(altaVendedor.nickname, altaVendedor.contrasenia, altaVendedor.fechaNac, altaVendedor.RUT);
     return v;
 }

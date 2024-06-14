@@ -15,24 +15,21 @@ using namespace std;
 class Vendedor : public Usuario
 {
 private:
-    string rut;
+    int rut;
     set<string> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:
     // Constructor
-    Vendedor(string nickname, string contrasenia, DTFecha fechaNac, string rut);
+    Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut);
 
     // Destructor
     virtual ~Vendedor();
 
     // Getters
-    string getRUT();
+    int getRUT();
     string getNickname();
     set<string> getProductosAsociados();
-
-    // Setters
-    void setNickname(string rut);
 
     // Metodos
     void agregarSuscriptor(Cliente *c);

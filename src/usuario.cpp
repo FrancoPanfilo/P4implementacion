@@ -50,17 +50,3 @@ void Usuario::setContrasenia(string contrasenia)
 {
     this->contrasenia = contrasenia;
 }
-
-// Metodos
-
-void Usuario::eliminarNotificacionesPendientes()
-{
-    // TODO
-    // aca no va creo
-}
-
-bool Usuario::estaSuscrito(string nickname)
-{
-    // TODO
-    // aca no va creo
-}
