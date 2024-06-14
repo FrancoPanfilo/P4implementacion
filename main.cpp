@@ -1,77 +1,77 @@
+#include <cstdio>
 #include <iostream>
-#include "./include/Datatypes/DTFecha.h"
+#include <string>
+
 #include "./include/Datatypes/DTAltaCliente.h"
+#include "./include/Datatypes/DTAltaVendedor.h"
 #include "./include/controladorUsuarios.h"
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
-  ControladorUsuarios *controladorUsuarios = NULL;
-  *controladorUsuarios = *controladorUsuarios->getInstance();
-  string accion = "";
+// Controladores
+ControladorUsuarios contUsuarios = ControladorUsuarios();
 
-  while (accion != "salir")
-  {
-    cout << "Ingresar acción: ";
-    cin >> accion;
-    
-    // ---- ControladorUsuarios ----
-    if (accion == "ingresarDatosCliente")
-    {
-      // Solicitar datos al usuario
-      string nickname, contrasenia, direccion, ciudad;
-      int dia, mes, anio;
-
-      cout << "Ingrese nickname: ";
-      cin >> nickname;
-      cout << "Ingrese contraseña: ";
-      cin >> contrasenia;
-      cout << "Ingrese fecha de nacimiento (dia mes anio): ";
-      cin >> dia >> mes >> anio;
-      cout << "Ingrese direccion: ";
-      cin.ignore(); // Ignorar el salto de línea anterior
-      getline(cin, direccion);
-      cout << "Ingrese ciudad: ";
-      getline(cin, ciudad);
-
-      // Crear instancia de DTFecha
-      //DTFecha fechaNac = DTFecha(dia, mes, anio);
-      
-      //DTAltaCliente datosCliente(nickname, DTFecha(dia, mes, anio), contrasenia, ciudad, direccion);
-      controladorUsuarios->ingresarDatosCliente(DTAltaCliente(nickname, DTFecha(1, 1, 1), contrasenia, ciudad, direccion));
-    }
-    else if (accion == "ingresarDatosVendedor")
-    {
-    }
-    else if (accion == "listarClientes")
-    {
-    }
-    else if (accion == "listarVendedores")
-    {
-    }
-    else if (accion == "listarUsuarios")
-    {
-    }
-    else if (accion == "listarNoSuscritos")
-    {
-    }
-    else if (accion == "obtenerListaComentarios")
-    {
-    }
-    else if (accion == "obtenerCliente")
-    {
-    }
-    else if (accion == "obtenerVendedor")
-    {
-    }
-    else if (accion == "obtenerProdDeVendedor")
-    {
-    }
-    else
-    {
-      cout << "Acción no reconocida" << endl;
-    }
-  }
-  return 0;
+string leerStr(string pregunta) {
+	cout << pregunta;
+	string respuesta;
+	cin >> respuesta;
+	return respuesta;
 }
+
+DTFecha leerDTFecha(string pregunta) {
+	cout << pregunta;
+	DTFecha respuesta = DTFecha();
+	scanf("%d %d %d", &respuesta.anio, &respuesta.mes, &respuesta.dia);
+	return respuesta;
+}
+
+int leerInt(string pregunta) {
+	cout << pregunta;
+	int respuesta;
+	scanf("%d", &respuesta);
+	return respuesta;
+}
+
+int main(int argc, char *argv[]) {
+	string accion = "";
+
+	while (accion != "salir") {
+		cout << "Ingresar acción: ";
+		cin >> accion;
+
+	// ---- ControladorUsuarios ----
+	if (accion == "ingresarDatosCliente") {
+		DTAltaCliente data = DTAltaCliente();
+		data.nickname = leerStr("Nickname: ");
+		data.contrasenia = leerStr("Contrasenia: ");
+		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
+		data.ciudad = leerStr("Ciudad: ");
+		data.direccion = leerStr("Direccion: ");
+		
+		// cout << data.nickname << data.contrasenia << endl;
+		// printf("%d/%d/%d", data.fechaNac.anio, data.fechaNac.mes, data.fechaNac.dia);
+
+	} else if (accion == "ingresarDatosVendedor") {
+		DTAltaVendedor data = DTAltaVendedor();
+		data.nickname = leerStr("Nickname: ");
+		data.contrasenia = leerStr("Contrasenia: ");
+		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
+		data.RUT = scanf("Fecha de nacimiento: ");
+
+	} else if (accion == "listarClientes") {
+	} else if (accion == "listarVendedores") {
+	} else if (accion == "listarUsuarios") {
+	} else if (accion == "listarNoSuscritos") {
+	} else if (accion == "obtenerListaComentarios") {
+	} else if (accion == "obtenerCliente") {
+	} else if (accion == "obtenerVendedor") {
+	} else if (accion == "obtenerProdDeVendedor") {
+	} else if (accion == "salir") {
+		continue;
+	} else {
+	  cout << "Acción no reconocida: " << accion << endl;
+	}
+}
+return 0;
+}
+

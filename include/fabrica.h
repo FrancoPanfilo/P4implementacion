@@ -14,6 +14,12 @@ class Fabrica
 {
 private:
     Fabrica *fabrica;
+	IComentario iCom;
+	IUsuario iUsuario;
+	ISuscripcion iSusc;
+	IProducto iProd;
+	ICompra iCompra;
+	IPromocion iProm;
 
 public:
     Fabrica();

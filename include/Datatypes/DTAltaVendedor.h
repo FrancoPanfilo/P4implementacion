@@ -4,7 +4,7 @@
 #include <string>
 #include "./DTFecha.h"
 using namespace std;
-
+ 
 class DTAltaVendedor
 {
 public:
@@ -17,4 +17,4 @@ public:
     ~DTAltaVendedor();
 };
 
-#endif //_DTALTAVENDEDOR_H
+#endif _DTALTAVENDEDOR_H
