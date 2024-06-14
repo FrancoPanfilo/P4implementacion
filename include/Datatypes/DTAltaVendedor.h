@@ -2,7 +2,7 @@
 #define _DTALTAVENDEDOR_H
 
 #include <string>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
  
 class DTAltaVendedor

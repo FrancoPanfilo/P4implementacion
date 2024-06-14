@@ -17,9 +17,9 @@ using namespace std;
 class ControladorUsuarios : public IUsuario {
 private:
     static ControladorUsuarios * instance;
+public:
     ControladorUsuarios();
     ~ControladorUsuarios();
-public:
     static ControladorUsuarios * getInstance();
 
     // Getters
