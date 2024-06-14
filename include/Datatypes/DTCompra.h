@@ -2,6 +2,7 @@
 #define _DTCOMPRA_H
 
 #include <set>
+#include <iostream>
 #include "./DTFecha.h"
 using namespace std;
 

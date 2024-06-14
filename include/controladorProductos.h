@@ -3,6 +3,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 #include "./producto.h"
 #include "./Datatypes/DTProducto.h"
 #include "./Interface/IProducto.h"
@@ -11,7 +12,7 @@ class ControladorProductos : public IProducto
 {
 private:
     static ControladorProductos *instance;
-    std::set<Producto> productos;
+    std::map<String, Producto> productos;
     // es posible que se agreguen mas atributos para facilitar algunos procesos
 public:
     static ControladorProductos *getInstance();

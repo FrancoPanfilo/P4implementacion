@@ -3,6 +3,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 #include "./promocion.h"
 #include "./compra.h"
 #include "./Datatypes/ParProdCant.h"

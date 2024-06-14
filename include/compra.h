@@ -6,6 +6,7 @@ class Compra
 private:
     DTFecha fechaCompra;
     int montoFinal;
+    int id;
 
 public:
     DTFecha getFechaCompra();

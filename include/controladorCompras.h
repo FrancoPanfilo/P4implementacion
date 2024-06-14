@@ -2,7 +2,9 @@
 #define _CONTROLADORCOMPRAS_H
 
 #include <string>
+#include <iostream>
 #include <set>
+#include <map>
 #include "./promocion.h"
 #include "./compra.h"
 #include "./Interface/ICompra.h"
@@ -14,7 +16,7 @@ class ControladorCompras : public ICompra
 {
 private:
     static ControladorCompras *instance;
-    std::set<Compra> compras;
+    std::map<int, Compra> compras;
     String nickname;
     DTFecha fechaActual;
     std::set<ParProdCant> datosProductos;
@@ -25,8 +27,8 @@ public:
     ControladorCompras();
     ~ControladorCompras();
 
-    void setCompras(std::set<Compra>);
-    std::set<Compra> getCompras();
+    void setCompras(std::map<int,Compra>);
+    std::map<int, Compra> getCompras();
     void setNickname(String);
     String getNickname();
     void setFechaActual(DTFecha);
