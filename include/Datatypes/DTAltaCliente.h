@@ -2,7 +2,7 @@
 #define _DTALTACLIENTE_H
 
 #include <string>
-#include "./Datatypes/DTFecha.h"
+#include "./DTFecha.h"
 using namespace std;
 
 class DTAltaCliente
@@ -14,8 +14,8 @@ public:
     string ciudad;
     string direccion;
     DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion);
-    DTAltaCliente();
+	DTAltaCliente();
     ~DTAltaCliente();   
 };
 
-#endif _DTALTACLIENTE_H
+#endif // _DTALTACLIENTE_H
