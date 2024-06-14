@@ -19,7 +19,7 @@ class IUsuario
 {
 public:
     // Metodos
-    IUsuario *getInstance();
+    virtual IUsuario *getInstance();
     virtual void ingresarDatosCliente(DTAltaCliente altaCliente) = 0;
     virtual void ingresarDatosVendedor(DTAltaVendedor altaVendedor) = 0;
     virtual set<string> listarClientes() = 0;

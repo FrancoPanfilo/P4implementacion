@@ -9,7 +9,7 @@ public:
     int dia;
     DTFecha(int dia, int mes, int anio);
     DTFecha();
-    ~DTFecha();
+    //~DTFecha();
 };
 
 #endif //_DTFECHA_H

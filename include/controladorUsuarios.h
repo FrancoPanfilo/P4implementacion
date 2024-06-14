@@ -24,7 +24,7 @@ private:
     set<Usuario *> listaUsuarios;
 
 public:
-    static ControladorUsuarios *getInstance();
+    ControladorUsuarios *getInstance();
 
     // Getters
     Vendedor getVendedor(string nickname);

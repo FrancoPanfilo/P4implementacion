@@ -1,4 +1,5 @@
 #include <iostream>
+#include "./include/Datatypes/DTFecha.h"
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/controladorUsuarios.h"
 
@@ -6,7 +7,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  IUsuario *controladorUsuarios = controladorUsuarios->getInstance();
+  ControladorUsuarios *controladorUsuarios = NULL;
+  *controladorUsuarios = *controladorUsuarios->getInstance();
   string accion = "";
 
   while (accion != "salir")
@@ -34,9 +36,10 @@ int main(int argc, char *argv[])
       getline(cin, ciudad);
 
       // Crear instancia de DTFecha
-      DTFecha fechaNac(dia, mes, anio);
-      DTAltaCliente datosCliente(nickname, fechaNac, contrasenia, ciudad, direccion);
-      controladorUsuarios->ingresarDatosCliente(datosCliente);
+      //DTFecha fechaNac = DTFecha(dia, mes, anio);
+      
+      //DTAltaCliente datosCliente(nickname, DTFecha(dia, mes, anio), contrasenia, ciudad, direccion);
+      controladorUsuarios->ingresarDatosCliente(DTAltaCliente(nickname, DTFecha(1, 1, 1), contrasenia, ciudad, direccion));
     }
     else if (accion == "ingresarDatosVendedor")
     {
