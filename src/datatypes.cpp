@@ -11,26 +11,44 @@
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
 
+DTAltaCliente::~DTAltaCliente(){}
+
 DTAltaVendedor::DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, int RUT)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), RUT(RUT) {}
+
+DTAltaVendedor::~DTAltaVendedor(){}    
 
 DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
     : id(id), contenido(contenido), fecha(fecha) {}
 
+DTComentario::~DTComentario(){}
+
 DTCompra::DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos)
     : fecha(fecha), montoFinal(montoFinal), datosProductos(datosProductos) {}
+
+DTCompra::~DTCompra(){}    
 
 DTFecha::DTFecha(int dia, int mes, int anio)
     : dia(dia), mes(mes), anio(anio) {}
 
+DTFecha::~DTFecha(){}
+
 DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo)
     : nombreVendedor(nombreVendedor), productos(productos), nombrePromo(nombrePromo) {}
+
+DTNotificacion::~DTNotificacion(){}    
 
 DTProducto::DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
 
+DTProducto::~DTProducto(){}
+
 DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
     : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
+DTPromocion::~DTPromocion(){}
+
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
+
+ParProdCant::~ParProdCant(){}    

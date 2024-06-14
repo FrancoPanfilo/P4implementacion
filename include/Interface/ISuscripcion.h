@@ -3,7 +3,7 @@
 
 #include <set>
 #include <string>
-#include "./Datatypes/DTNotificacion.h"
+#include "../Datatypes/DTNotificacion.h"
 
 using namespace std;
 

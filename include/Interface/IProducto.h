@@ -3,8 +3,8 @@
 
 #include <string>
 #include <set>
-#include "./producto.h"
-#include "./Datatypes/DTProducto.h"
+#include "../producto.h"
+#include "../Datatypes/DTProducto.h"
 using String = std::string;
 class IProducto
 {

@@ -3,8 +3,8 @@
 
 #include <string>
 #include <set>
-#include "./promocion.h"
-#include "./Datatypes/ParProdCant.h"
+#include "../promocion.h"
+#include "../Datatypes/ParProdCant.h"
 using String = std::string;
 class ICompra
 {

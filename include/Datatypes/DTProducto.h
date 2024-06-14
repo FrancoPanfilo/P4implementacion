@@ -14,7 +14,7 @@ public:
     string descripcion;
     string tipo;  
     DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo);
-    DTProducto();
+    DTProducto() = default;
     ~DTProducto();
 };
 

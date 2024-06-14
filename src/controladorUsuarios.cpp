@@ -1,6 +1,8 @@
 // File controladorUsuarios.cpp
 
 #include "../include/controladorUsuarios.h"
+#include <iostream>
+#include <set>
 
 ControladorUsuarios *ControladorUsuarios::instance = NULL;
 
@@ -23,15 +25,15 @@ ControladorUsuarios *ControladorUsuarios::getInstance()
     return instance;
 }
 
-Vendedor ControladorUsuarios::getVendedor(string nickname)
+/*Vendedor ControladorUsuarios::getVendedor(string nickname)
 {
     return this->obtenerVendedor(nickname);
-}
+}*/
 
-Cliente ControladorUsuarios::getCliente(string nickname)
+/*Cliente ControladorUsuarios::getCliente(string nickname)
 {
     return this->obtenerCliente(nickname);
-}
+}*/
 
 /* set<string> ControladorUsuarios::getListaComentarios(string nickname)
 {
@@ -88,25 +90,42 @@ set<string> ControladorUsuarios::listarUsuarios()
 
 set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 {
-    // TODO
+    set<string> s;
+   return s; // TODO
 }
 
 set<DTComentario> ControladorUsuarios::obtenerListaComentarios(string nickname)
 {
-    // TODO
+   set<DTComentario> d;
+   return d; // TODO
 }
 
-Cliente ControladorUsuarios::obtenerCliente(string nickname)
+Cliente* ControladorUsuarios::obtenerCliente(string nickname)
 {
-    // TODO
+    Cliente *c;
+    for (auto Cliente : listaClientes)
+    {
+        if (Cliente->getNickname() == nickname){
+            c = Cliente;
+        };
+    }
+    return c; 
 }
 
-Vendedor ControladorUsuarios::obtenerVendedor(string nickname)
+Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 {
-    // TODO
+    Vendedor *v;
+    for (auto Vendedor : listaVendedores)
+    {
+        if (Vendedor->getNickname() == nickname){
+            v = Vendedor;
+        };
+    }
+    return v;
 }
 
 set<DTProducto> ControladorUsuarios::obtenerProdDeVendedor(string nickname)
 {
-    // TODO
+    set<DTProducto> c;
+    return c;
 }

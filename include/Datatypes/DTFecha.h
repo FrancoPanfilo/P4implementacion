@@ -8,7 +8,7 @@ public:
     int mes;
     int dia;
     DTFecha(int dia, int mes, int anio); 
-    DTFecha();   
+    DTFecha() = default;   
     ~DTFecha();   
 };
 

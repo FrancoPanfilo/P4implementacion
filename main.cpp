@@ -9,7 +9,7 @@
 using namespace std;
 
 // Controladores
-ControladorUsuarios contUsuarios = ControladorUsuarios();
+//ControladorUsuarios *contUsuarios = ControladorUsuarios(); fabrica
 
 string leerStr(string pregunta) {
 	cout << pregunta;

@@ -5,6 +5,7 @@
 
 #include "./Datatypes/DTFecha.h"
 #include "./Datatypes/DTNotificacion.h"
+#include "./Datatypes/DTComentario.h"
 
 #include <string>
 #include <set>

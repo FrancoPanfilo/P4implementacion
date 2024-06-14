@@ -17,18 +17,20 @@ class ControladorUsuarios : public IUsuario
 {
 private:
     static ControladorUsuarios *instance;
-    ControladorUsuarios();
-    ~ControladorUsuarios();
+    
+    //~ControladorUsuarios();
     set<Cliente *> listaClientes;
     set<Vendedor *> listaVendedores;
     set<Usuario *> listaUsuarios;
 
 public:
     ControladorUsuarios *getInstance();
+    ControladorUsuarios();
+    ~ControladorUsuarios();
 
     // Getters
-    Vendedor getVendedor(string nickname);
-    Cliente getCliente(string nickname);
+    //Vendedor getVendedor(string nickname);
+    //Cliente getCliente(string nickname);
     set<string> getListaComentarios(string nickname);
 
     // Setters
@@ -41,8 +43,8 @@ public:
     set<string> listarUsuarios();
     set<string> listarNoSuscritos(string nickname);
     set<DTComentario> obtenerListaComentarios(string nickname);
-    Cliente obtenerCliente(string nickname);
-    Vendedor obtenerVendedor(string nickname);
+    Cliente* obtenerCliente(string nickname);
+    Vendedor* obtenerVendedor(string nickname);
     set<DTProducto> obtenerProdDeVendedor(string nickname);
 };
 

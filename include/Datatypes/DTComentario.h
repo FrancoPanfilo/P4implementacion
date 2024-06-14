@@ -12,7 +12,7 @@ public:
     string contenido;
     DTFecha fecha;
     DTComentario(int id, string contenido, DTFecha fecha);
-    DTComentario();
+    DTComentario() = default;
     ~DTComentario();
 };
 

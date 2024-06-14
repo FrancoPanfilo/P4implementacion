@@ -3,10 +3,10 @@
 
 #include <string>
 #include <set>
-#include "./promocion.h"
-#include "./Datatypes/ParProdCant.h"
-#include "./Datatypes/DTProducto.h"
-#include "./Datatypes/DTFecha.h"
+#include "../promocion.h"
+#include "../Datatypes/ParProdCant.h"
+#include "../Datatypes/DTProducto.h"
+#include "../Datatypes/DTFecha.h"
 
 using String = std::string;
 
