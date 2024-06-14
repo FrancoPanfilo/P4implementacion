@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "string": "cpp",
+<<<<<<< Updated upstream
         "set": "cpp"
+=======
+        "set": "cpp",
+        "random": "cpp",
+        "iostream": "cpp"
+>>>>>>> Stashed changes
     }
 }

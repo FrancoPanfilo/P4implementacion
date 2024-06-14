@@ -16,11 +16,25 @@ using namespace std;
 
 class ControladorUsuarios : public IUsuario {
 private:
+<<<<<<< Updated upstream
     static ControladorUsuarios * instance;
     ControladorUsuarios();
     ~ControladorUsuarios();
 public:
     static ControladorUsuarios * getInstance();
+=======
+    static ControladorUsuarios *instance;
+    //ControladorUsuarios();
+    //~ControladorUsuarios();
+    set<Cliente *> listaClientes;
+    set<Vendedor *> listaVendedores;
+    set<Usuario *> listaUsuarios;
+
+public:
+    ControladorUsuarios *getInstance();
+    ~ControladorUsuarios();
+    ControladorUsuarios();
+>>>>>>> Stashed changes
 
     // Getters
     Vendedor getVendedor(string nickname);
