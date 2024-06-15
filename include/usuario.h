@@ -4,7 +4,6 @@
 #define _USUARIO_H
 
 #include "./Datatypes/DTFecha.h"
-#include "./Datatypes/DTNotificacion.h"
 #include "./Datatypes/DTComentario.h"
 
 #include <string>
@@ -36,6 +35,10 @@ public:
     // Setters
     void setNickname(string nickname);
     void setContrasenia(string contrasenia);
+
+    // Metodos
+    void eliminarNotificacionesPendientes();
+    bool estaSuscrito(string nickname);
 };
 
 #endif // _USUARIO_H

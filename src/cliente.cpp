@@ -17,22 +17,22 @@ Cliente::~Cliente() {}
 
 // Getters
 
-string Cliente::getDireccion()
+string Cliente::getDireccion() 
 {
     return direccion;
 }
 
-string Cliente::getCiudad()
+string Cliente::getCiudad() 
 {
     return ciudad;
 }
 
 set<DTNotificacion> Cliente::getNotificacionesPendientes()
-{
+ {
     return notificacionesPendientes;
 }
 
-set<string> Cliente::getSuscripciones()
+set<string> Cliente::getSuscripciones() 
 {
     return suscripciones;
 }
@@ -44,30 +44,31 @@ string Cliente::getNickname()
 
 // Setters
 
-void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes)
+void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes) 
 {
     this->notificacionesPendientes = notificacionesPendientes;
 }
 
-void Cliente::setSuscripciones(set<string> suscripciones)
+void Cliente::setSuscripciones(set<string> suscripciones) 
 {
     this->suscripciones = suscripciones;
 }
 
 // Metodos
 
-void Cliente::notificar()
+void Cliente::notificar() 
 {
     // TODO
 }
 
-void Cliente::eliminarNotificacionesPendientes()
+void Cliente::eliminarNotificacionesPendientes() 
 {
     notificacionesPendientes.clear();
 }
 
-Cliente *Cliente::create(DTAltaCliente altaCliente)
-{
+Cliente *Cliente::create(DTAltaCliente altaCliente) 
+{    
+    
     Cliente *c = new Cliente(altaCliente.nickname, altaCliente.contrasenia, altaCliente.fechaNac, altaCliente.direccion, altaCliente.ciudad);
     return c;
 }
