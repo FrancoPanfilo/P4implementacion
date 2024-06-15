@@ -1,21 +1,21 @@
 // // File: controladorProductos.cpp
 
-// #include "../include/controladorProductos.h"
+#include "../include/controladorProductos.h"
 
-// ControladorProductos *ControladorProductos::instance = nullptr;
+ControladorProductos *ControladorProductos::instance = NULL;
 
 // ControladorProductos::ControladorProductos() {}
 
 // ControladorProductos::~ControladorProductos() {}
 
-// ControladorProductos *ControladorProductos::getInstance()
-// {
-//     if (instance == nullptr)
-//     {
-//         instance = new ControladorProductos();
-//     }
-//     return instance;
-// }
+ControladorProductos *ControladorProductos::getInstance()
+{
+    if (instance == NULL)
+    {
+        instance = new ControladorProductos();
+    }
+    return instance;
+}
 
 // std::set<DTProducto> ControladorProductos::listarProductos()
 // {
@@ -53,7 +53,6 @@
 //     }
 //     return -1; // Producto no encontrado
 // }
-
 
 // void ControladorProductos::agregarAPromo(String nombrePromo, int codigo, int cantidad)
 // {

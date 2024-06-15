@@ -23,26 +23,25 @@ class IUsuario
 {
 public:
     // Metodos
-    virtual IUsuario *getInstance() = 0;
     virtual void ingresarDatosCliente(DTAltaCliente altaCliente) = 0;
     virtual void ingresarDatosVendedor(DTAltaVendedor altaVendedor) = 0;
     virtual set<string> listarClientes() = 0;
     virtual set<string> listarVendedores() = 0;
-	// Creo q esto debería devolver todo, no solo nicknames
+    // Creo q esto debería devolver todo, no solo nicknames
     virtual set<string> listarUsuarios() = 0;
     virtual set<string> listarNoSuscritos(string nickname) = 0;
     virtual set<DTComentario> listarComentarios(string nickname) = 0;
     // virtual Cliente* obtenerCliente(string nickname) = 0;
     // virtual Vendedor* obtenerVendedor(string nickname) = 0;
-    virtual set<DTProducto> prodDeVendedor(string nickname) = 0;
+    virtual set<DTProductoId> prodDeVendedor(string nickname) = 0;
 
-	virtual void seleccionarNickname(string nickname) = 0;
-	virtual set<DTProducto> listarProductosVendedor() = 0;
-	virtual set<DTPromocion> listarPromocionesVendedor() = 0;
-	virtual DTVendedor listarInfoVendedor() = 0;
-	virtual set<DTDetalleCompra> listarComprasCliente() = 0;
-	virtual DTCliente listarInfoCliente() = 0;
-	virtual void finalizarExpediente() = 0;
+    virtual void seleccionarNickname(string nickname) = 0;
+    virtual set<DTProducto> listarProductosVendedor() = 0;
+    virtual set<DTPromocion> listarPromocionesVendedor() = 0;
+    virtual DTVendedor listarInfoVendedor() = 0;
+    virtual set<DTDetalleCompra> listarComprasCliente() = 0;
+    virtual DTCliente listarInfoCliente() = 0;
+    virtual void finalizarExpediente() = 0;
 
     virtual ~IUsuario(){};
 };

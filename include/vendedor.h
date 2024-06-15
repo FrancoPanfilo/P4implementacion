@@ -10,14 +10,17 @@
 #include "cliente.h"
 
 #include <string>
+
 #include "./Datatypes/DTProducto.h"
+#include "./Datatypes/DTProductoId.h"
+
 using namespace std;
 
 class Vendedor : public Usuario
 {
 private:
     int rut;
-    set<string> productosAsociados;
+    set<DTProductoId> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:
@@ -30,7 +33,7 @@ public:
     // Getters
     int getRUT();
     string getNickname();
-    set<string> getProductosAsociados();
+    set<DTProductoId> getProductosAsociados();
 
     // Metodos
     void agregarSuscriptor(Cliente *c);

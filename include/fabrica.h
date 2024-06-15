@@ -10,21 +10,20 @@
 #include "./Interface/ICompra.h"
 #include "./Interface/IPromocion.h"
 using String = std::string;
-class Fabrica : public IUsuario
+class Fabrica
 {
 private:
-    Fabrica *fabrica;
+    static Fabrica *fabrica;
 
 public:
     Fabrica();
     ~Fabrica();
-
-    Fabrica *getFabrica();
-    IComentario *getIComentarios();
+    static Fabrica *getFabrica();
+    // IComentario *getIComentarios();
     IUsuario *getIUsuarios();
-    ISuscripcion *getISuscripciones();
-    IProducto *getIProductos();
-    ICompra *getICompras();
-    IPromocion *getIPromociones();
+    // ISuscripcion *getISuscripciones();
+    // IProducto *getIProductos();
+    // ICompra *getICompras();
+    //   IPromocion *getIPromociones();
 };
 #endif // _FABRICA_H

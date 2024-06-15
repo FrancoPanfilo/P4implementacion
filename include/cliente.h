@@ -26,8 +26,7 @@ public:
     Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad);
 
     // Destructor
-    virtual ~Cliente();
-
+    ~Cliente();
     // Getters
     string getDireccion();
     string getCiudad();

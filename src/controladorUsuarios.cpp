@@ -10,13 +10,11 @@ ControladorUsuarios *ControladorUsuarios::instance = NULL;
 
 // Constructor
 
-//ControladorUsuarios::ControladorUsuarios()
-
-
+// ControladorUsuarios::ControladorUsuarios()
 
 // Destructor
 
-//ControladorUsuarios::~ControladorUsuarios() {}
+// ControladorUsuarios::~ControladorUsuarios() {}
 
 // Getters
 
@@ -49,31 +47,43 @@ ControladorUsuarios *ControladorUsuarios::getInstance()
 // Metodos
 
 void ControladorUsuarios::ingresarDatosCliente(DTAltaCliente altaCliente)
-{   
-    if (size(altaCliente.contrasenia) < 6) {
+{
+    if (size(altaCliente.contrasenia) < 6)
+    {
         throw std::runtime_error("Contraseña no es lo suficientemente larga");
-    } else if(listaUsuarios.count(altaCliente.nickname) > 0){
+    }
+    else if (listaUsuarios.count(altaCliente.nickname) > 0)
+    {
         throw std::runtime_error("Ya existe un usuario con el nickname ingresado");
-    } else{
-    Cliente *c = c->create(altaCliente);
-    listaClientes.insert(std::pair<string,Cliente>(c->getNickname(),*c));
-    listaUsuarios.insert(std::pair<string,Cliente>(c->getNickname(),*c));
+    }
+    else
+    {
+        Cliente *c = c->create(altaCliente);
+        listaClientes.insert(std::pair<string, Cliente>(c->getNickname(), *c));
+        listaUsuarios.insert(std::pair<string, Cliente>(c->getNickname(), *c));
     }
 }
 
 void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
 {
-    if (size(altaVendedor.contrasenia) < 6) {
+    if (size(altaVendedor.contrasenia) < 6)
+    {
         throw std::runtime_error("Contraseña es demasiado corta");
-    }else if(altaVendedor.RUT <000000000000 ||altaVendedor.RUT > 999999999999){
+    }
+    else if (altaVendedor.RUT < 000000000000 || altaVendedor.RUT > 999999999999)
+    {
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
-    } else if(listaUsuarios.count(altaVendedor.nickname) > 0){
+    }
+    else if (listaUsuarios.count(altaVendedor.nickname) > 0)
+    {
         throw std::runtime_error("Ya existe un usuario con el nickname ingresado");
-    } else{
-    
-    Vendedor *v = v->create(altaVendedor);
-    listaVendedores.insert(std::pair<string,Vendedor>(v->getNickname(),*v));
-    listaUsuarios.insert(std::pair<string,Vendedor>(v->getNickname(),*v));
+    }
+    else
+    {
+
+        Vendedor *v = v->create(altaVendedor);
+        listaVendedores.insert(std::pair<string, Vendedor>(v->getNickname(), *v));
+        listaUsuarios.insert(std::pair<string, Vendedor>(v->getNickname(), *v));
     }
 }
 
@@ -110,30 +120,38 @@ set<string> ControladorUsuarios::listarUsuarios()
 set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 {
     set<string> ns; // controlar si existe el usuario?
-    Cliente c = listaClientes[nickname];
-    set<string> s = c.getSuscripciones();
-    for (auto vendedor : listaVendedores)
-    {
-        if (s.count(vendedor.second.getNickname()) == 0){
-        ns.insert(vendedor.second.getNickname());
-        }
-    }
-    return s; 
+                    /*     if (listaClientes.count(nickname) != 0)
+                        {
+                            Cliente c = listaClientes[nickname];
+                            set<string> s = c.getSuscripciones();
+                            for (auto vendedor : listaVendedores)
+                            {
+                                if (s.count(vendedor.second.getNickname()) == 0)
+                                {
+                                    ns.insert(vendedor.second.getNickname());
+                                }
+                            }
+                        } */
+    return ns;
 }
 
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    Usuario u = listaUsuarios[nickname];
-    d = u.getComentarios();
+    /*     if (listaUsuarios.count(nickname) != 0)
+        {
+            Usuario u = listaUsuarios[nickname];
+            d = u.getComentarios();
+        } */
+
     return d;
 }
 
-/*Cliente* ControladorUsuarios::obtenerCliente(string nickname)
+/* Cliente* ControladorUsuarios::obtenerCliente(string nickname)
 {
-    Cliente *c; 
+    Cliente *c;
     *c = listaClientes[nickname];
-    return c; 
+    return c;
 }
 
 Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
@@ -141,13 +159,17 @@ Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
    Vendedor *v;
    *v = listaVendedores[nickname];
     return v;
-}*/
+} */
 
-set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
+set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
 {
-    set<DTProducto> c;
-    Vendedor *v;
-    *v = listaVendedores[nickname];
-    c = v->getProductosAsociados();
+    set<DTProductoId> c;
+    /*     Vendedor *v;
+        if (listaVendedores.count(nickname) != 0)
+        {
+            *v = listaVendedores[nickname];
+            c = v->getProductosAsociados();
+        } */
+
     return c;
 }

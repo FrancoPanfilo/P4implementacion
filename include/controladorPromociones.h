@@ -46,8 +46,8 @@ public:
     void confirmarCrearPromocion();
     int obtenerDescuento(ParProdCant);
 
-	std::set<DTPromocion> obtenerPromocionesVigentes();
-	DTProductosYVendedor seleccionarPromocionPorNombre(String);
+    std::set<DTPromocion> obtenerPromocionesVigentes();
+    DTProductosYVendedor seleccionarPromocionPorNombre(String);
 };
 
 #endif // _CONTROLADORPROMOCIONES_H

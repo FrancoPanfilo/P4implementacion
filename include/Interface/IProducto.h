@@ -13,19 +13,19 @@ class IProducto
 {
 
 public:
-    virtual std::set<DTProductoId> listarProductosConId() = 0;
+	virtual std::set<DTProductoId> listarProductosConId() = 0;
 	virtual void seleccionarProductoPorCodigo(int) = 0;
 	virtual DTProducto mostrarProducto() = 0;
-    // virtual int seleccionarProducto(int, int) = 0;
-    // virtual void agregarAPromo(String, int, int) = 0;
-    // virtual Producto obtenerProducto(int) = 0;
+	// virtual int seleccionarProducto(int, int) = 0;
+	// virtual void agregarAPromo(String, int, int) = 0;
+	// virtual Producto obtenerProducto(int) = 0;
 
 	virtual std::set<string> listarVendedores() = 0;
 	virtual std::set<DTProducto> seleccionarVendedor(string nickname) = 0;
 	virtual std::set<EnviosPendientes> seleccionarProductoAEnviar(int) = 0;
 	virtual void seleccionarVenta(EnviosPendientes env) = 0;
-	
-    virtual ~IProducto(){};
+
+	virtual ~IProducto(){};
 };
 
 #endif // _IPRODUCTO_H

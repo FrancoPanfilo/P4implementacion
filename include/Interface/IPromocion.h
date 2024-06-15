@@ -25,9 +25,8 @@ public:
     // virtual int obtenerDescuento(ParProdCant) = 0;
     virtual ~IPromocion(){};
 
-	virtual std::set<DTPromocion> obtenerPromocionesVigentes() = 0;
-	virtual DTProductosYVendedor seleccionarPromocionPorNombre(String) = 0;
-
+    virtual std::set<DTPromocion> obtenerPromocionesVigentes() = 0;
+    virtual DTProductosYVendedor seleccionarPromocionPorNombre(String) = 0;
 };
 
 #endif // _IPROMOCION_H

@@ -4,31 +4,36 @@
 #include <set>
 #include <map>
 #include <stdexcept>
+ControladorSuscripciones *ControladorSuscripciones::instance = NULL;
 
-
-ControladorSuscripciones ControladorSuscripciones::*getInstance(){
-
+ControladorSuscripciones *ControladorSuscripciones::getInstance()
+{
+  if (instance == NULL)
+  {
+    instance = new ControladorSuscripciones();
+  }
+  return instance;
 }
 
-set<string> ControladorSuscripciones::listarNoSuscritos(string nickname){
-  //ControladorUsuarios c = ControladorSuscripciones.get
-
+set<string> ControladorSuscripciones::listarNoSuscritos(string nickname)
+{
+  // ControladorUsuarios c = ControladorSuscripciones.get
 }
-void ControladorSuscripciones::agregarSuscripcion(string nickname){
-
+void ControladorSuscripciones::agregarSuscripcion(string nickname)
+{
 }
-void ControladorSuscripciones::confirmarSuscripcion(){
-
+void ControladorSuscripciones::confirmarSuscripcion()
+{
 }
-set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname){
-
+set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname)
+{
 }
-void ControladorSuscripciones::eliminarSuscriptor(string nickname){
-
+void ControladorSuscripciones::eliminarSuscriptor(string nickname)
+{
 }
-set<DTNotificacion> ControladorSuscripciones::consultarNotificacionesRecibidas(string nickname){
-
+set<DTNotificacion> ControladorSuscripciones::consultarNotificacionesRecibidas(string nickname)
+{
 }
-void ControladorSuscripciones::eliminarNotificaciones(){
-
+void ControladorSuscripciones::eliminarNotificaciones()
+{
 }

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-ControladorComentarios * ControladorComentarios::instance = NULL;
+ControladorComentarios *ControladorComentarios::instance = NULL;
 
 // Constructor
 
@@ -19,12 +19,12 @@ ControladorComentarios::~ControladorComentarios() {}
 
 // Getters
 
-ControladorComentarios * ControladorComentarios::getInstance() {
+ControladorComentarios *ControladorComentarios::getInstance()
+{
     if (instance == NULL)
         instance = new ControladorComentarios();
     return instance;
 }
-
 
 // Setters
 

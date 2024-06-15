@@ -26,15 +26,15 @@ public:
     // Setters
 
     // Metodos
-	// Eliminar Comentario
+    // Eliminar Comentario
     void elegirComentario(int idComentario);
 
-	// Dejar Comentario
-	void seleccionarUsuarioCom(string nick);
-	void introducirTexto(string contenido);
-	set<DTComentario> listarComentarios();
-	void ingresarRespuesta(int codigo, string contenido);
-	void confirmarDejarComentario();
+    // Dejar Comentario
+    void seleccionarUsuarioCom(string nick);
+    void introducirTexto(string contenido);
+    set<DTComentario> listarComentarios();
+    void ingresarRespuesta(int codigo, string contenido);
+    void confirmarDejarComentario();
 };
 
 #endif // _CONTROLADORCOMENTARIOS_H

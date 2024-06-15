@@ -28,7 +28,7 @@ string Vendedor::getNickname()
     return Usuario::getNickname();
 }
 
-set<string> Vendedor::getProductosAsociados()
+set<DTProductoId> Vendedor::getProductosAsociados()
 {
     return productosAsociados;
 }

@@ -25,10 +25,10 @@ private:
 
 public:
     static ControladorCompras *getInstance();
-    //ControladorCompras();
+    // ControladorCompras();
     //~ControladorCompras();
 
-    void setCompras(std::map<int,Compra>);
+    void setCompras(std::map<int, Compra>);
     std::map<int, Compra> getCompras();
     void setNickname(String);
     String getNickname();

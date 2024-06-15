@@ -27,14 +27,13 @@ public:
     Producto obtenerProducto(int);
 
     std::set<DTProductoId> listarProductosConId();
-	void seleccionarProductoPorCodigo(int);
-	DTProducto mostrarProducto();
+    void seleccionarProductoPorCodigo(int);
+    DTProducto mostrarProducto();
 
-	std::set<string> listarVendedores();
-	std::set<DTProducto> seleccionarVendedor(string nickname);
-	std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
-	void seleccionarVenta(EnviosPendientes env);
-
+    std::set<string> listarVendedores();
+    std::set<DTProducto> seleccionarVendedor(string nickname);
+    std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
+    void seleccionarVenta(EnviosPendientes env);
 };
 
 #endif // _CONTROLADORPRODUCTOS_H
