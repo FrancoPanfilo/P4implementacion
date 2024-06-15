@@ -12,6 +12,7 @@ DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasen
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
 
 DTAltaCliente::~DTAltaCliente(){}
+DTAltaCliente::DTAltaCliente(){}
 
 DTAltaVendedor::DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, int RUT)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), RUT(RUT) {}
