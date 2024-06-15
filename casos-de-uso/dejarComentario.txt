@@ -1,0 +1,14 @@
+listarUsuarios
+seleccionarUsuarioCom
+usuario1
+introducirTexto
+contenido del comentario
+confirmarDejarComentario
+
+listarUsuarios
+seleccionarUsuarioCom
+usuario1
+listarComentarios
+ingresarRespuesta
+contenido la respuesta
+confirmarDejarComentario
