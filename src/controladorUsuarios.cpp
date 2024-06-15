@@ -119,31 +119,22 @@ set<string> ControladorUsuarios::listarUsuarios()
 
 set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 {
-    set<string> ns; // controlar si existe el usuario?
-                    /*     if (listaClientes.count(nickname) != 0)
-                        {
-                            Cliente c = listaClientes[nickname];
-                            set<string> s = c.getSuscripciones();
-                            for (auto vendedor : listaVendedores)
-                            {
-                                if (s.count(vendedor.second.getNickname()) == 0)
-                                {
-                                    ns.insert(vendedor.second.getNickname());
-                                }
-                            }
-                        } */
+    set<string> ns; 
+    Cliente c = listaClientes.at(nickname);
+    set<string> s = c.getSuscripciones();
+    for (auto vendedor : listaVendedores){
+        if (s.count(vendedor.second.getNickname()) == 0){
+            ns.insert(vendedor.second.getNickname());
+        }
+    }    
     return ns;
 }
 
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    /*     if (listaUsuarios.count(nickname) != 0)
-        {
-            Usuario u = listaUsuarios[nickname];
-            d = u.getComentarios();
-        } */
-
+    Usuario u = listaUsuarios.at(nickname);
+    d = u.getComentarios();
     return d;
 }
 
@@ -164,12 +155,8 @@ Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
 {
     set<DTProductoId> c;
-    /*     Vendedor *v;
-        if (listaVendedores.count(nickname) != 0)
-        {
-            *v = listaVendedores[nickname];
-            c = v->getProductosAsociados();
-        } */
-
+    Vendedor *v;
+    *v = listaVendedores.at(nickname);
+    c = v->getProductosAsociados();
     return c;
 }

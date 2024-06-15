@@ -10,10 +10,8 @@
 #include "cliente.h"
 
 #include <string>
-
 #include "./Datatypes/DTProducto.h"
 #include "./Datatypes/DTProductoId.h"
-
 using namespace std;
 
 class Vendedor : public Usuario
