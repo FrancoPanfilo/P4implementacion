@@ -43,7 +43,7 @@ public:
     set<string> listarVendedores();
     set<string> listarUsuarios();
     set<string> listarNoSuscritos(string nickname);
-    set<DTComentario> listaComentarios(string nickname);
+    set<DTComentario> listarComentarios(string nickname);
    // Cliente* obtenerCliente(string nickname);
     //Vendedor* obtenerVendedor(string nickname);
     set<DTProducto> prodDeVendedor(string nickname);
