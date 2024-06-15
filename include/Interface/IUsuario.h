@@ -17,6 +17,7 @@ using namespace std;
 
 class IUsuario
 {
+
 public:
     // Metodos
     virtual IUsuario *getInstance() = 0;
@@ -27,8 +28,8 @@ public:
     virtual set<string> listarUsuarios() = 0;
     virtual set<string> listarNoSuscritos(string nickname) = 0;
     virtual set<DTComentario> obtenerListaComentarios(string nickname) = 0;
-    virtual Cliente* obtenerCliente(string nickname) = 0;
-    virtual Vendedor* obtenerVendedor(string nickname) = 0;
+    virtual Cliente *obtenerCliente(string nickname) = 0;
+    virtual Vendedor *obtenerVendedor(string nickname) = 0;
     virtual set<DTProducto> obtenerProdDeVendedor(string nickname) = 0;
     virtual ~IUsuario(){};
 };
