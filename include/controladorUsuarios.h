@@ -5,6 +5,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 
 #include "./Datatypes/DTComentario.h"
 #include "./Datatypes/DTProducto.h"
@@ -19,9 +20,9 @@ private:
     static ControladorUsuarios *instance;
     ControladorUsuarios();
     //~ControladorUsuarios();
-    set<Cliente *> listaClientes;
-    set<Vendedor *> listaVendedores;
-    set<Usuario *> listaUsuarios;
+    map<string, Cliente > listaClientes;
+    map<string, Vendedor > listaVendedores;
+    map<string, Usuario > listaUsuarios;
 
 public:
     static ControladorUsuarios *getInstance();
