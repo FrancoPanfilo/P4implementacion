@@ -17,16 +17,16 @@ class ControladorUsuarios : public IUsuario
 {
 private:
     static ControladorUsuarios *instance;
-    
+    ControladorUsuarios();
     //~ControladorUsuarios();
     set<Cliente *> listaClientes;
     set<Vendedor *> listaVendedores;
     set<Usuario *> listaUsuarios;
 
 public:
-    ControladorUsuarios *getInstance();
-    ControladorUsuarios();
-    ~ControladorUsuarios();
+    static ControladorUsuarios *getInstance();
+    //ControladorUsuarios();
+    //~ControladorUsuarios();
 
     // Getters
     //Vendedor getVendedor(string nickname);
