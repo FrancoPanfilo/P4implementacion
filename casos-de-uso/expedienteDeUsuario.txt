@@ -1,0 +1,14 @@
+listarUsuarios
+seleccionarNickname
+vendedor1
+listarProductosVendedor
+listarPromocionesVendedor
+listarInfoVendedor
+finalizarExpediente
+
+listarUsuarios
+seleccionarNickname
+cliente1
+listarComprasCliente
+listarInfoCliente
+finalizarExpediente

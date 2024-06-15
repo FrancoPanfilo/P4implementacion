@@ -1,0 +1,3 @@
+obtenerPromocionesVigentes
+seleccionarPromocionPorNombre
+promo1

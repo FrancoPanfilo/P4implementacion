@@ -6,7 +6,9 @@
 #include "../promocion.h"
 #include "../Datatypes/ParProdCant.h"
 #include "../Datatypes/DTProducto.h"
+#include "../Datatypes/DTPromocion.h"
 #include "../Datatypes/DTFecha.h"
+#include "../Datatypes/DTProductosYVendedor.h"
 
 using String = std::string;
 
@@ -22,6 +24,10 @@ public:
     virtual void confirmarCrearPromocion() = 0;
     // virtual int obtenerDescuento(ParProdCant) = 0;
     virtual ~IPromocion(){};
+
+	virtual std::set<DTPromocion> obtenerPromocionesVigentes() = 0;
+	virtual DTProductosYVendedor seleccionarPromocionPorNombre(String) = 0;
+
 };
 
 #endif // _IPROMOCION_H

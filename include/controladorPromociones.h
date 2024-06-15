@@ -8,6 +8,8 @@
 #include "./compra.h"
 #include "./Datatypes/ParProdCant.h"
 #include "./Datatypes/DTFecha.h"
+#include "./Datatypes/DTProductosYVendedor.h"
+#include "./Datatypes/DTPromocion.h"
 #include "Interface/IPromocion.h"
 using String = std::string;
 
@@ -43,6 +45,9 @@ public:
     std::set<DTProducto> obtenerProductosAsociados(String);
     void confirmarCrearPromocion();
     int obtenerDescuento(ParProdCant);
+
+	std::set<DTPromocion> obtenerPromocionesVigentes();
+	DTProductosYVendedor seleccionarPromocionPorNombre(String);
 };
 
 #endif // _CONTROLADORPROMOCIONES_H

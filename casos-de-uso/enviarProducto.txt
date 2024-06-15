@@ -1,0 +1,9 @@
+listarVendedores
+seleccionarVendedor
+vendedor1
+seleccionar
+seleccionarProductoAEnviar
+1
+seleccionarVenta
+1
+??

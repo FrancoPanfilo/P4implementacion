@@ -11,6 +11,10 @@
 #include "./Datatypes/DTAltaCliente.h"
 #include "./Datatypes/DTAltaVendedor.h"
 #include "./Interface/IUsuario.h"
+#include "Datatypes/DTCliente.h"
+#include "Datatypes/DTPromocion.h"
+#include "Datatypes/DTVendedor.h"
+#include "producto.h"
 using namespace std;
 
 class ControladorUsuarios : public IUsuario
@@ -46,6 +50,14 @@ public:
     Cliente* obtenerCliente(string nickname);
     Vendedor* obtenerVendedor(string nickname);
     set<DTProducto> obtenerProdDeVendedor(string nickname);
+
+	void seleccionarNickname(string nickname);
+	set<DTProducto> listarProductosVendedor();
+	set<DTPromocion> listarPromocionesVendedor();
+	DTVendedor listarInfoVendedor();
+	set<DTDetalleCompra> listarComprasCliente();
+	DTCliente listarInfoCliente();
+	void finalizarExpediente();
 };
 
 #endif // _CONTROLADORUSUARIOS_H
