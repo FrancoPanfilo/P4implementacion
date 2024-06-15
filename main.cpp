@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 	} else if (accion == "obtenerCliente") {
 	} else if (accion == "obtenerVendedor") {
 	} else if (accion == "obtenerProdDeVendedor") {
-	} else if (accion == "salir") {
+	} else if (accion == "salir" || accion == "") {
 		continue;
 	} else {
 	  cout << "Acción no reconocida: " << accion << endl;

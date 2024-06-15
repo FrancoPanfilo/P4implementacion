@@ -1,0 +1,4 @@
+listarProductosConId
+seleccionarProductoPorCodigo
+1
+mostrarProducto

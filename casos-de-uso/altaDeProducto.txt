@@ -1,0 +1,10 @@
+listarVendedores
+elegirVendedor
+A
+crearProducto
+prod1
+20
+1
+producto 1 
+Ropa
+solCodigo

@@ -4,6 +4,7 @@
 #define _CONTROLADORCOMENTARIOS_H
 
 #include "./Interface/IComentario.h"
+#include "Datatypes/DTComentario.h"
 
 #include <string>
 #include <set>
@@ -25,7 +26,15 @@ public:
     // Setters
 
     // Metodos
+	// Eliminar Comentario
     void elegirComentario(int idComentario);
+
+	// Dejar Comentario
+	void seleccionarUsuarioCom(string nick);
+	void introducirTexto(string contenido);
+	set<DTComentario> listarComentarios();
+	void ingresarRespuesta(int codigo, string contenido);
+	void confirmarDejarComentario();
 };
 
 #endif // _CONTROLADORCOMENTARIOS_H
