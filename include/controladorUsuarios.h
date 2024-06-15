@@ -9,13 +9,13 @@
 
 #include "./Datatypes/DTComentario.h"
 #include "./Datatypes/DTProducto.h"
-#include "./Datatypes/DTProductoId.h"
 #include "./Datatypes/DTAltaCliente.h"
 #include "./Datatypes/DTAltaVendedor.h"
 #include "./Interface/IUsuario.h"
 #include "Datatypes/DTCliente.h"
 #include "Datatypes/DTPromocion.h"
 #include "Datatypes/DTVendedor.h"
+#include "Datatypes/DTProductoId.h"
 #include "producto.h"
 using namespace std;
 
@@ -25,18 +25,19 @@ private:
     static ControladorUsuarios *instance;
     ControladorUsuarios();
     //~ControladorUsuarios();
-    map<string, Cliente> listaClientes;
-    map<string, Vendedor> listaVendedores;
-    map<string, Usuario> listaUsuarios;
+    map<string, Cliente > listaClientes;
+    map<string, Vendedor > listaVendedores;
+    map<string, Usuario > listaUsuarios;
+    //atributo privado para lo que quiero guardar en las operaciones que guardan algo en la memoria
 
 public:
     static ControladorUsuarios *getInstance();
-    // ControladorUsuarios();
+    //ControladorUsuarios();
     //~ControladorUsuarios();
 
     // Getters
-    // Vendedor getVendedor(string nickname);
-    // Cliente getCliente(string nickname);
+    //Vendedor getVendedor(string nickname);
+    //Cliente getCliente(string nickname);
     set<string> getListaComentarios(string nickname);
 
     // Setters
@@ -49,17 +50,17 @@ public:
     set<string> listarUsuarios();
     set<string> listarNoSuscritos(string nickname);
     set<DTComentario> listarComentarios(string nickname);
-    Cliente *obtenerCliente(string nickname);
-    Vendedor *obtenerVendedor(string nickname);
+    Cliente* obtenerCliente(string nickname);
+    Vendedor* obtenerVendedor(string nickname);
     set<DTProductoId> prodDeVendedor(string nickname);
 
-    void seleccionarNickname(string nickname);
-    set<DTProducto> listarProductosVendedor();
-    set<DTPromocion> listarPromocionesVendedor();
-    DTVendedor listarInfoVendedor();
-    set<DTDetalleCompra> listarComprasCliente();
-    DTCliente listarInfoCliente();
-    void finalizarExpediente();
+	void seleccionarNickname(string nickname);
+	set<DTProducto> listarProductosVendedor();
+	set<DTPromocion> listarPromocionesVendedor();
+	DTVendedor listarInfoVendedor();
+	set<DTDetalleCompra> listarComprasCliente();
+	DTCliente listarInfoCliente();
+	void finalizarExpediente();
 };
 
 #endif // _CONTROLADORUSUARIOS_H
