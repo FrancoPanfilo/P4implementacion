@@ -12,3 +12,4 @@ if (instancia == NULL)
 instancia = new IUsuario();
 return instancia;
 }*/
+
