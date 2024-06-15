@@ -43,10 +43,10 @@ public:
     set<string> listarVendedores();
     set<string> listarUsuarios();
     set<string> listarNoSuscritos(string nickname);
-    set<DTComentario> obtenerListaComentarios(string nickname);
-    Cliente* obtenerCliente(string nickname);
-    Vendedor* obtenerVendedor(string nickname);
-    set<DTProducto> obtenerProdDeVendedor(string nickname);
+    set<DTComentario> listaComentarios(string nickname);
+   // Cliente* obtenerCliente(string nickname);
+    //Vendedor* obtenerVendedor(string nickname);
+    set<DTProducto> prodDeVendedor(string nickname);
 };
 
 #endif // _CONTROLADORUSUARIOS_H

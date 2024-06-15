@@ -119,7 +119,7 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
     return s; 
 }
 
-set<DTComentario> ControladorUsuarios::obtenerListaComentarios(string nickname)
+set<DTComentario> ControladorUsuarios::listaComentarios(string nickname)
 {
     set<DTComentario> d;
     Usuario u = listaUsuarios[nickname];
@@ -127,7 +127,7 @@ set<DTComentario> ControladorUsuarios::obtenerListaComentarios(string nickname)
     return d;
 }
 
-Cliente* ControladorUsuarios::obtenerCliente(string nickname)
+/*Cliente* ControladorUsuarios::obtenerCliente(string nickname)
 {
     Cliente *c; 
     *c = listaClientes[nickname];
@@ -139,9 +139,9 @@ Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
    Vendedor *v;
    *v = listaVendedores[nickname];
     return v;
-}
+}*/
 
-set<DTProducto> ControladorUsuarios::obtenerProdDeVendedor(string nickname)
+set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
 {
     set<DTProducto> c;
     Vendedor *v;
