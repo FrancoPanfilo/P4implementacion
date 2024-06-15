@@ -10,11 +10,13 @@ ControladorUsuarios *ControladorUsuarios::instance = NULL;
 
 // Constructor
 
-ControladorUsuarios::ControladorUsuarios() {}
+//ControladorUsuarios::ControladorUsuarios()
+
+
 
 // Destructor
 
-ControladorUsuarios::~ControladorUsuarios() {}
+//ControladorUsuarios::~ControladorUsuarios() {}
 
 // Getters
 
@@ -119,7 +121,7 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
     return s; 
 }
 
-set<DTComentario> ControladorUsuarios::listaComentarios(string nickname)
+set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
     Usuario u = listaUsuarios[nickname];

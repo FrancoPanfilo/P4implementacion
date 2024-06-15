@@ -1,6 +1,7 @@
 // File controladorComentarios.h
 
 #include "../include/controladorComentarios.h"
+#include "../include/controladorUsuarios.h"
 
 #include <string>
 
@@ -31,4 +32,4 @@ ControladorComentarios * ControladorComentarios::getInstance() {
 
 void ControladorComentarios::elegirComentario(int idComentario) {
     // TODO
-}
+};
