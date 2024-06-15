@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 		data.nickname = leerStr("Nickname: ");
 		data.contrasenia = leerStr("Contrasenia: ");
 		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-		data.RUT = scanf("Fecha de nacimiento: ");
+		data.RUT = scanf("RUT ");
 
 	} else if (accion == "listarClientes") {
 	} else if (accion == "listarVendedores") {
