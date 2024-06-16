@@ -21,13 +21,20 @@ ControladorSuscripciones *ControladorSuscripciones::getInstance()
 
 set<string> ControladorSuscripciones::listarNoSuscritos(string nickname)
 {
-  // ControladorUsuarios c = ControladorSuscripciones.get
+  set<string> r;
+  ControladorUsuarios *cu;
+  *ControladorUsuarios::getInstance() = *cu;
+  r = cu->listarNoSuscritos(nickname);
+  suscriptor = cu->obtenerCliente(nickname); 
+  return r;
 }
 void ControladorSuscripciones::agregarSuscripcion(string nickname)
 {
+  suscriptor.getSuscripciones().insert(nickname);
 }
 void ControladorSuscripciones::confirmarSuscripcion()
 {
+  
 }
 set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname)
 {

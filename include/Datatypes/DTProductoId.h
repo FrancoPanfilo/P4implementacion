@@ -8,6 +8,8 @@ class DTProductoId {
 	public:
 	int codigo;
 	string nombre;
+	DTProductoId(int codigo, string nombre);
+	~DTProductoId();
 };
 
 #endif // !DT_PRODUCTO_ID

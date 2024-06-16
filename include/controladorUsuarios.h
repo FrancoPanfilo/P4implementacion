@@ -28,6 +28,7 @@ private:
     map<string, Cliente > listaClientes;
     map<string, Vendedor > listaVendedores;
     map<string, Usuario > listaUsuarios;
+    string nickGuardado;
     //atributo privado para lo que quiero guardar en las operaciones que guardan algo en la memoria
 
 public:

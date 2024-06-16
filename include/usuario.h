@@ -22,7 +22,7 @@ private:
 public:
     // Constructor
     Usuario(string nickname, string contrasenia, DTFecha fecha);
-
+    Usuario() = default;
     // Destructor
     virtual ~Usuario();
 

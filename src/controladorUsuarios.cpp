@@ -137,14 +137,13 @@ set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
     return d;
 }
 
-/* Cliente* ControladorUsuarios::obtenerCliente(string nickname)
+ Cliente ControladorUsuarios::obtenerCliente(string nickname)
 {
-    Cliente *c;
-    *c = listaClientes[nickname];
+    Cliente c = listaClientes[nickname];
     return c;
 }
 
-Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
+/*Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 {
    Vendedor *v;
    *v = listaVendedores[nickname];
@@ -153,33 +152,40 @@ Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 
 set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
 {
-    set<DTProductoId> c;
-    Vendedor *v;
-    *v = listaVendedores.at(nickname);
-    c = v->getProductosAsociados();
-    return c;
+    set<DTProducto> c;
+    Vendedor v = listaVendedores.at(nickname);
+    c = v.getProductosAsociados();
+    set<DTProductoId> d;
+    for (auto p : c){
+        d.insert(DTProductoId(p.codigo, p.nombre));
+    }   
+    return d;
 }
 
 
 void ControladorUsuarios::seleccionarNickname(string nickname){
-	//TODO
-}
+	nickGuardado = nickname;
+};
 
 set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
-	// TODO
 	set<DTProducto> resultado;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    resultado = v.getProductosAsociados();
 	return resultado;
 }
 
 set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
-	// TODO
 	set<DTPromocion> resultado;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    //como acceder a las promociones de un vendedor?
+	
 	return resultado;
 }
 
 DTVendedor ControladorUsuarios::listarInfoVendedor(){
-	// TODO
 	DTVendedor vendedor;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    //DTVendedor no tendría que tener nickname y fechaNac tambien? lo mismo con DTCliente
 	return vendedor;
 }
 
