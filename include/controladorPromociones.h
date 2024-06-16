@@ -28,9 +28,8 @@ public:
     ControladorPromociones();
     ~ControladorPromociones();
 
-    void setPromociones(std::set<Promocion>);
-    std::set<Promocion> getPromociones();
-
+     std::map<string, Promocion> listarPromociones();
+    //void setPromociones(std::set<Promocion>);
     void ingresarDatosPromocion(String, String, int, DTFecha);
     Promocion *obtenerPromocion(std::set<ParProdCant>);
     std::set<String> obtenerNicknames();

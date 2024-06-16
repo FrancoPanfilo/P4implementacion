@@ -44,6 +44,11 @@ DTProductosYVendedor ControladorPromociones::seleccionarPromocionPorNombre(strin
 	return DTProductosYVendedor(p.getProductos(), p.getVendedor());
 }
 
+
+map<string, Promocion> ControladorPromociones::listarPromociones(){
+	return promociones;
+}
+
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc)
 {
 	promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);

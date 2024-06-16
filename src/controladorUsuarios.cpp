@@ -1,6 +1,9 @@
 // File controladorUsuarios.cpp
 
 #include "../include/controladorUsuarios.h"
+#include "../include/controladorPromociones.h"
+#include "../include/controladorProductos.h"
+#include "../include/fabrica.h"
 #include <iostream>
 #include <sstream>
 #include <set>
@@ -71,7 +74,8 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
         throw std::runtime_error("Contraseña es demasiado corta");
     }
     else if (altaVendedor.RUT.length() != 12)
-    {
+    {   
+
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
     else if (listaUsuarios.count(altaVendedor.nickname) > 0)
@@ -135,58 +139,73 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    Usuario u = listaUsuarios.at(nickname);
-    d = u.getComentarios();
+    //Usuario u = listaUsuarios.at(nickname);
+    //d = u.getComentarios();
     return d;
 }
 
-/* Cliente* ControladorUsuarios::obtenerCliente(string nickname)
-{
+ Cliente* ControladorUsuarios::obtenerCliente(string nickname)
+{   
     Cliente *c;
-    *c = listaClientes[nickname];
+    *c = listaClientes.at(nickname);
     return c;
 }
 
 Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 {
    Vendedor *v;
-   *v = listaVendedores[nickname];
+   *v = listaVendedores.at(nickname);
     return v;
-} */
+} 
 
-set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
+set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
 {
-    set<DTProductoId> c;
-    Vendedor *v;
-    *v = listaVendedores.at(nickname);
-    c = v->getProductosAsociados();
-    return c;
+    set<DTProducto> c;
+    Vendedor v = listaVendedores.at(nickname);
+    c = v.getProductosAsociados();
+    set<DTProducto> d;
+    for (auto p : c){
+        d.insert(DTProducto(p.codigo, 0, 0, p.nombre, "", "")); //se podria hacer un creador con solo esos datos
+    }   
+    return d;
 }
 
-void ControladorUsuarios::seleccionarNickname(string nickname)
-{
-    // TODO
+
+void ControladorUsuarios::seleccionarNickname(string nickname){
+	nickGuardado = nickname;
+};
+
+set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
+	set<DTProducto> resultado;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    resultado = v.getProductosAsociados();
+	return resultado;
 }
 
-set<DTProducto> ControladorUsuarios::listarProductosVendedor()
-{
-    // TODO
-    set<DTProducto> resultado;
-    return resultado;
-}
-
-set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor()
-{
-    // TODO
+set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
+    //Fabrica *f = Fabrica::getFabrica();
     set<DTPromocion> resultado;
-    return resultado;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    //ControladorPromociones cp = f->getIPromociones();
+    ControladorPromociones cp ;
+    map<string, Promocion> promos = cp.listarPromociones();
+    for (auto p : promos){
+        map<Producto, Minimo> min = p.second.getMinimos();
+        pair<Producto, Minimo> primero = *min.begin();
+        Producto pr = primero.first;
+        DTProducto buscar = DTProducto(pr.getCodigo(),pr.getStock(),pr.getPrecio(),pr.getNombre(),pr.getDescripcion(),pr.getTipo());
+        if (v.getProductosAsociados().count(buscar) == 1){
+           resultado.insert(DTPromocion(p.second.getNombre(),p.second.getDescripcion(),p.second.getDescuento(),p.second.getVencimiento()));
+        }           
+    }   
+	return resultado;
 }
 
-DTVendedor ControladorUsuarios::listarInfoVendedor()
-{
-    // TODO
-    DTVendedor vendedor;
-    return vendedor;
+DTVendedor ControladorUsuarios::listarInfoVendedor(){
+	DTVendedor vendedor;
+    Vendedor v = listaVendedores.at(nickGuardado);
+    //DTVendedor no tendría que tener nickname y fechaNac tambien? lo mismo con DTCliente
+	return vendedor;
 }
 
 set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()

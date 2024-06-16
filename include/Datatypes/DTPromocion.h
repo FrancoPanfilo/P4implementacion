@@ -15,7 +15,7 @@ public:
     DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento);
     bool operator<(const DTPromocion &other) const;
     DTPromocion() = default;
-    ~DTPromocion();
+    ~DTPromocion();  
 };
 
 #endif // _DTPROMOCION_H

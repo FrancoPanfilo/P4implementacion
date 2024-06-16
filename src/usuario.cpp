@@ -34,7 +34,7 @@ DTFecha Usuario::getFechaNac()
     return fechaNac;
 }
 
-set<DTComentario> Usuario::getComentarios()
+map<int, Comentario> Usuario::getComentarios()
 {
     return comentarios;
 }

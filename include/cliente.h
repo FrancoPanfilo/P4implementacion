@@ -24,7 +24,7 @@ private:
 public:
     // Constructor
     Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad);
-
+    Cliente();
     // Destructor
     ~Cliente();
     // Getters

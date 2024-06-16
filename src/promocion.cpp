@@ -19,12 +19,13 @@ String Promocion::getNombre()
 {
     return nombre;
 }
-set<DTProducto> Promocion::getProductos()
+std::map<Producto, Minimo> Promocion::getMinimos()
 {
-    set<DTProducto> p;
-    return p;
-}
-/* Promocion Promocion::obtenerSiAplica(std::set<ParProdCant>){
+    return minimos;
+}  
+/* Promocion Promocion
+::obtenerSiAplica(std::set<ParProdCant>){
     Promocion p;
     return p;
 } */
+

@@ -5,6 +5,7 @@
 #include <string>
 #include "./Datatypes/DTNotificacion.h"
 #include "./Interface/ISuscripcion.h"
+#include "./cliente.h"
 using namespace std;
 
 class ControladorSuscripciones : public ISuscripcion
@@ -13,6 +14,7 @@ private:
     static ControladorSuscripciones *instance;
     ControladorSuscripciones();
     ~ControladorSuscripciones();
+    Cliente* suscriptor;
 
 public:
     static ControladorSuscripciones *getInstance();

@@ -18,7 +18,7 @@ class Vendedor : public Usuario
 {
 private:
     string rut;
-    set<DTProductoId> productosAsociados;
+    set<DTProducto> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:
@@ -31,7 +31,7 @@ public:
     // Getters
     string getRUT();
     string getNickname();
-    set<DTProductoId> getProductosAsociados();
+    set<DTProducto> getProductosAsociados();
 
     // Metodos
     void agregarSuscriptor(Cliente *c);

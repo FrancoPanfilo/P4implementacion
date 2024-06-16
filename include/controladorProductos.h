@@ -23,10 +23,12 @@ public:
     static ControladorProductos *getInstance();
     ControladorProductos();
     ~ControladorProductos();
+
+
+    //void agregarAPromo(String, int, int);
     std::set<DTProducto> listarProductos();
     ParProdCant seleccionarProducto(int, int);
     Producto obtenerProducto(int);
-
     std::set<DTProducto> listarProductosConId();
     void seleccionarProductoPorCodigo(int);
     DTProducto mostrarProducto();

@@ -26,6 +26,9 @@ public:
     DTFecha getVencimiento();
     String getDescripcion();
     String getNombre();
+
+    std::map<Producto, Minimo> getMinimos();
+    Promocion obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
     // Promocion obtenerSiAplica(std::set<ParProdCant>);
 };
