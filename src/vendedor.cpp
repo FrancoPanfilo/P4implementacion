@@ -9,7 +9,7 @@ using namespace std;
 
 // Constructor
 
-Vendedor::Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut)
+Vendedor::Vendedor(string nickname, string contrasenia, DTFecha fechaNac, string rut)
     : Usuario(nickname, contrasenia, fechaNac), rut(rut) {}
 
 // Destructor
@@ -18,7 +18,7 @@ Vendedor::~Vendedor() {}
 
 // Getters
 
-int Vendedor::getRUT()
+string Vendedor::getRUT()
 {
     return rut;
 }
