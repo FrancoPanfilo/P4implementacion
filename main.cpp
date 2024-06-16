@@ -7,7 +7,7 @@
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "include/Interface/IUsuario.h"
 #include "include/fabrica.h"
-
+#include "datos.cpp"
 using namespace std;
 
 // Controladores

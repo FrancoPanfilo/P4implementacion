@@ -17,19 +17,19 @@ using namespace std;
 class Vendedor : public Usuario
 {
 private:
-    int rut;
-    set<DTProducto> productosAsociados;
+    string rut;
+    set<DTProductoId> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:
     // Constructor
-    Vendedor(string nickname, string contrasenia, DTFecha fechaNac, int rut);
+    Vendedor(string nickname, string contrasenia, DTFecha fechaNac, string rut);
 
     // Destructor
     virtual ~Vendedor();
 
     // Getters
-    int getRUT();
+    string getRUT();
     string getNickname();
     set<DTProducto> getProductosAsociados();
 

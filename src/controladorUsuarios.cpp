@@ -2,6 +2,7 @@
 
 #include "../include/controladorUsuarios.h"
 #include <iostream>
+#include <sstream>
 #include <set>
 #include <map>
 #include <stdexcept>
@@ -69,7 +70,7 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
     {
         throw std::runtime_error("Contraseña es demasiado corta");
     }
-    else if (altaVendedor.RUT < 99999999999 || altaVendedor.RUT > 999999999999)
+    else if (altaVendedor.RUT.length() != 12)
     {
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
@@ -118,14 +119,16 @@ set<string> ControladorUsuarios::listarUsuarios()
 
 set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 {
-    set<string> ns; 
+    set<string> ns;
     Cliente c = listaClientes.at(nickname);
     set<string> s = c.getSuscripciones();
-    for (auto vendedor : listaVendedores){
-        if (s.count(vendedor.second.getNickname()) == 0){
+    for (auto vendedor : listaVendedores)
+    {
+        if (s.count(vendedor.second.getNickname()) == 0)
+        {
             ns.insert(vendedor.second.getNickname());
         }
-    }    
+    }
     return ns;
 }
 
@@ -189,17 +192,20 @@ DTVendedor ControladorUsuarios::listarInfoVendedor(){
 	return vendedor;
 }
 
-set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente(){
-	// TODO
-	set<DTDetalleCompra> resultado;
-	return resultado;
+set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
+{
+    // TODO
+    set<DTDetalleCompra> resultado;
+    return resultado;
 }
 
-DTCliente ControladorUsuarios::listarInfoCliente(){
-	// TODO
-	DTCliente cliente;
-	return cliente;
+DTCliente ControladorUsuarios::listarInfoCliente()
+{
+    // TODO
+    DTCliente cliente;
+    return cliente;
 }
 
-void ControladorUsuarios::finalizarExpediente(){
+void ControladorUsuarios::finalizarExpediente()
+{
 }
