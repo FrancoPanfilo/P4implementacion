@@ -46,6 +46,8 @@ int main(int argc, char *argv[]) {
 	IUsuario *contUsuarios = f->getIUsuarios();
 	IComentario *contCom = f->getIComentarios();	
 
+	cargarDatos();
+
 	string accion = "";
 
 	while (accion != "salir") {

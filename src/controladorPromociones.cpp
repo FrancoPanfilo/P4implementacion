@@ -91,3 +91,8 @@ int ControladorPromociones::obtenerDescuento(ParProdCant)
 	// TODO
 	return 0;
 }
+
+std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname) {
+	std::set<DTPromocion> dtpromo;
+	return dtpromo;
+}

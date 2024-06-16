@@ -153,20 +153,6 @@ set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
     return d;
 }
 
- Cliente* ControladorUsuarios::obtenerCliente(string nickname)
-{   
-    Cliente *c;
-    *c = listaClientes.at(nickname);
-    return c;
-}
-
-Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
-{
-   Vendedor *v;
-   *v = listaVendedores.at(nickname);
-    return v;
-} 
-
 set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
 {
     set<DTProducto> c;
@@ -193,20 +179,20 @@ set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
 
 set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
     //Fabrica *f = Fabrica::getFabrica();
-    set<DTPromocion> resultado;
-    Vendedor v = listaVendedores.at(nickGuardado);
+    ControladorPromociones *cp = ControladorPromociones::getInstance();
+    set<DTPromocion> resultado = cp->listarPromocionesVendedor(nickGuardado);
+    // Vendedor v = listaVendedores.at(nickGuardado);
     //ControladorPromociones cp = f->getIPromociones();
-    ControladorPromociones cp ;
-    map<string, Promocion> promos = cp.listarPromociones();
-    for (auto p : promos){
-        map<Producto, Minimo> min = p.second.getMinimos();
-        pair<Producto, Minimo> primero = *min.begin();
-        Producto pr = primero.first;
-        DTProducto buscar = DTProducto(pr.getCodigo(),pr.getStock(),pr.getPrecio(),pr.getNombre(),pr.getDescripcion(),pr.getTipo());
-        if (v.getProductosAsociados().count(buscar) == 1){
-           resultado.insert(DTPromocion(p.second.getNombre(),p.second.getDescripcion(),p.second.getDescuento(),p.second.getVencimiento()));
-        }           
-    }   
+ //    map<string, Promocion> promos = cp.listarPromociones();
+ //    for (auto p : promos){
+ //        map<Producto, Minimo> min = p.second.getMinimos();
+ //        pair<Producto, Minimo> primero = *min.begin();
+ //        Producto pr = primero.first;
+ //        DTProducto buscar = DTProducto(pr.getCodigo(),pr.getStock(),pr.getPrecio(),pr.getNombre(),pr.getDescripcion(),pr.getTipo());
+ //        if (v.getProductosAsociados().count(buscar) == 1){
+ //           resultado.insert(DTPromocion(p.second.getNombre(),p.second.getDescripcion(),p.second.getDescuento(),p.second.getVencimiento()));
+ //        }           
+ //    }   
 	return resultado;
 }
 
