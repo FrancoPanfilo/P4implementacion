@@ -1,27 +1,31 @@
-#include "../include/promocion.h" 
-
-
-int Promocion::getDescuento(){
+#include "../include/promocion.h"
+Vendedor Promocion::getVendedor()
+{
+    return vendedor;
+}
+int Promocion::getDescuento()
+{
     return descuento;
 }
-
-DTFecha Promocion::getVencimiento(){
+DTFecha Promocion::getVencimiento()
+{
     return vencimiento;
 }
-
-String Promocion::getDescripcion(){
+String Promocion::getDescripcion()
+{
     return descripcion;
 }
-
-
-String Promocion::getNombre(){
+String Promocion::getNombre()
+{
     return nombre;
 }
-
-
-std::map<Producto, Minimo> Promocion::getMinimos(){
+std::map<Producto, Minimo> Promocion::getMinimos()
+{
     return minimos;
-}
-Promocion Promocion::obtenerSiAplica(std::set<ParProdCant>){
+}  
+/* Promocion Promocion
+::obtenerSiAplica(std::set<ParProdCant>){
+    Promocion p;
+    return p;
+} */
 
-}

@@ -12,11 +12,11 @@ public:
     int precio;
     string nombre;
     string descripcion;
-    string tipo;  
+    string tipo;
     DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo);
     DTProducto() = default;
     ~DTProducto();
-    bool operator<(const DTProducto& otro) const;
+    bool operator<(const DTProducto &other) const;
 };
 
 #endif // _DTPRODUCTO_H

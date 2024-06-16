@@ -8,6 +8,7 @@
 #include "../include/Datatypes/DTProducto.h"
 #include "../include/Datatypes/DTProductoId.h"
 #include "../include/Datatypes/ParProdCant.h"
+#include "../include/Datatypes/DTProductosYVendedor.h"
 
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
@@ -35,6 +36,26 @@ DTFecha::DTFecha(int dia, int mes, int anio)
 
 DTFecha::~DTFecha(){}
 
+bool DTFecha::operator>(const DTFecha &otra) const
+{
+    if (anio > otra.anio)
+    {
+        return true;
+    }
+    else if (anio == otra.anio)
+    {
+        if (mes > otra.mes)
+        {
+            return true;
+        }
+        else if (mes == otra.mes)
+        {
+            return dia > otra.dia;
+        }
+    }
+    return false;
+}
+
 DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo)
     : nombreVendedor(nombreVendedor), productos(productos), nombrePromo(nombrePromo) {}
 
@@ -43,27 +64,26 @@ DTNotificacion::~DTNotificacion(){}
 DTProducto::DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
 
-DTProducto::~DTProducto(){}
-
-/*DTProductoId::DTProductoId(int codigo, string nombre)
-    : codigo(codigo), nombre(nombre) {}
-*/
-bool DTProducto::operator<(const DTProducto& otro) const{
-    return codigo < otro.codigo;
+bool DTProducto::operator<(const DTProducto &other) const
+{
+    return codigo < other.codigo;
 }
+DTProducto::~DTProducto() {}
 
 DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
     : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
 DTPromocion::~DTPromocion(){}
 
-bool DTPromocion::operator<(const DTPromocion& otro) const{
-    return  (nombre.compare(otro.nombre) < 0);
-}    
-
+bool DTPromocion::operator<(const DTPromocion &other) const
+{
+    return (nombre.compare(other.nombre) < 0);
+}
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
 
-ParProdCant::~ParProdCant(){}  
 
+ParProdCant::~ParProdCant() {}
 
+DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
+    : productos(productos), vendedor(vendedor) {}

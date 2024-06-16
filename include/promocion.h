@@ -3,25 +3,33 @@
 #include <string>
 #include "./Datatypes/ParProdCant.h"
 #include "./Datatypes/DTFecha.h"
-#include "./Datatypes/Minimo.h"
+#include "./Minimo.h"
+#include "./vendedor.h"
 #include <set>
 #include <map>
 using String = std::string;
+using namespace std;
+
 class Promocion
 {
 private:
+    Vendedor vendedor;
     int descuento;
     DTFecha vencimiento;
     String descripcion;
     String nombre;
-    std::map<Producto, Minimo> minimos;
+    map<Producto, Minimo> productos;
 
 public:
+    Vendedor getVendedor();
     int getDescuento();
     DTFecha getVencimiento();
     String getDescripcion();
     String getNombre();
+
     std::map<Producto, Minimo> getMinimos();
     Promocion obtenerSiAplica(std::set<ParProdCant>);
+    set<DTProducto> getProductos();
+    // Promocion obtenerSiAplica(std::set<ParProdCant>);
 };
 #endif //_PROMOCION_H
