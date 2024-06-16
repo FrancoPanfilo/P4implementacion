@@ -52,13 +52,14 @@ bool DTProducto::operator<(const DTProducto& otro) const{
     return codigo < otro.codigo;
 }
 
-
-
-
 DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
     : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
 DTPromocion::~DTPromocion(){}
+
+bool DTPromocion::operator<(const DTPromocion& otro) const{
+    return  (nombre.compare(otro.nombre) < 0);
+}    
 
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
