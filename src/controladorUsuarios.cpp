@@ -9,8 +9,7 @@
 ControladorUsuarios *ControladorUsuarios::instance = NULL;
 
 // Constructor
-
-// ControladorUsuarios::ControladorUsuarios()
+ControladorUsuarios::ControladorUsuarios() {}
 
 // Destructor
 
@@ -159,4 +158,42 @@ set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
     *v = listaVendedores.at(nickname);
     c = v->getProductosAsociados();
     return c;
+}
+
+
+void ControladorUsuarios::seleccionarNickname(string nickname){
+	//TODO
+}
+
+set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
+	// TODO
+	set<DTProducto> resultado;
+	return resultado;
+}
+
+set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
+	// TODO
+	set<DTPromocion> resultado;
+	return resultado;
+}
+
+DTVendedor ControladorUsuarios::listarInfoVendedor(){
+	// TODO
+	DTVendedor vendedor;
+	return vendedor;
+}
+
+set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente(){
+	// TODO
+	set<DTDetalleCompra> resultado;
+	return resultado;
+}
+
+DTCliente ControladorUsuarios::listarInfoCliente(){
+	// TODO
+	DTCliente cliente;
+	return cliente;
+}
+
+void ControladorUsuarios::finalizarExpediente(){
 }

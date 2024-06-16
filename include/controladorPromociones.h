@@ -28,17 +28,17 @@ public:
     ControladorPromociones();
     ~ControladorPromociones();
 
-    void setPromociones(std::set<Promocion>);
-    std::set<Promocion> getPromociones();
-    void setPromocionTmp(Promocion);
-    Promocion getPromocionTmp();
-    void setNickname(String);
-    String getNickname();
-    void setProductosTmp(std::set<ParProdCant>);
-    std::set<ParProdCant> getProductosTmp();
+    // void setPromociones(std::set<Promocion>);
+    // std::set<Promocion> getPromociones();
+    // void setPromocionTmp(Promocion);
+    // Promocion getPromocionTmp();
+    // void setNickname(String);
+    // String getNickname();
+    // void setProductosTmp(std::set<ParProdCant>);
+    // std::set<ParProdCant> getProductosTmp();
 
     void ingresarDatosPromocion(String, String, int, DTFecha);
-    Promocion obtenerPromocion(std::set<ParProdCant>);
+    Promocion* obtenerPromocion(std::set<ParProdCant>);
     std::set<String> obtenerNicknames();
     void seleccionarNickname(String);
     void agregarProductoAPromocion(int, int);
