@@ -7,6 +7,7 @@
 #include "./producto.h"
 #include "./Datatypes/DTProducto.h"
 #include "./Datatypes/DTProductoId.h"
+#include "./Datatypes/ParProdCant.h"
 #include "./Datatypes/EnviosPendientes.h"
 #include "./Interface/IProducto.h"
 
@@ -23,15 +24,14 @@ public:
     ControladorProductos();
     ~ControladorProductos();
     std::set<DTProducto> listarProductos();
-    int seleccionarProducto(int, int);
-    void agregarAPromo(String, int, int);
+    ParProdCant seleccionarProducto(int, int);
     Producto obtenerProducto(int);
 
-    std::set<DTProductoId> listarProductosConId();
+    std::set<DTProducto> listarProductosConId();
     void seleccionarProductoPorCodigo(int);
     DTProducto mostrarProducto();
 
-    std::set<string> listarVendedores();
+    // std::set<string> listarVendedores();
     std::set<DTProducto> seleccionarVendedor(string nickname);
     std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
     void seleccionarVenta(EnviosPendientes env);

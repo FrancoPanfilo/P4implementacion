@@ -5,7 +5,7 @@
 #include "./DTFecha.h"
 using namespace std;
 
-class DTPromocion 
+class DTPromocion
 {
 public:
     string nombre;
@@ -13,8 +13,9 @@ public:
     int descuento;
     DTFecha fechaVencimiento;
     DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento);
+    bool operator<(const DTPromocion &other) const;
     DTPromocion() = default;
-    ~DTPromocion();  
+    ~DTPromocion();
 };
 
 #endif // _DTPROMOCION_H

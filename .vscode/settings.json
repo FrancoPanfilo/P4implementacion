@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.cpp": "cpp",
         "string": "cpp",
         "set": "cpp",
         "random": "cpp",
@@ -45,6 +46,9 @@
         "ostream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "ctime": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
     }
 }
