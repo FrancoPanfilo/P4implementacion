@@ -30,15 +30,20 @@ ControladorUsuarios *ControladorUsuarios::getInstance()
     return instance;
 }
 
-/*Vendedor ControladorUsuarios::getVendedor(string nickname)
+Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 {
-    return this->obtenerVendedor(nickname);
-}*/
+	if (listaVendedores.count(nickname) == 0) {
+		return NULL;	
+	}
+	return &(this->listaVendedores.at(nickname));
+}
 
-/*Cliente ControladorUsuarios::getCliente(string nickname)
-{
-    return this->obtenerCliente(nickname);
-}*/
+Cliente* ControladorUsuarios::obtenerCliente(string nickname){
+	if (listaClientes.count(nickname) == 0) {
+		return NULL;	
+	}
+	return &(this->listaClientes.at(nickname));
+}
 
 /* set<string> ControladorUsuarios::getListaComentarios(string nickname)
 {
@@ -139,8 +144,12 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    //Usuario u = listaUsuarios.at(nickname);
-    //d = u.getComentarios();
+    Usuario u = listaUsuarios.at(nickname);
+	for (auto par : u.getComentarios()) {
+		Comentario com = par.second;
+		DTComentario dtc = DTComentario(com.getId(), com.getContenido(), com.getfecha());
+		d.insert(dtc);
+	}
     return d;
 }
 

@@ -87,3 +87,8 @@ ParProdCant::~ParProdCant() {}
 
 DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
     : productos(productos), vendedor(vendedor) {}
+
+ bool DTComentario::operator<(const DTComentario& other) const
+ {
+	return id < other.id;
+ }

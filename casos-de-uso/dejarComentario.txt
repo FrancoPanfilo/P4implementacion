@@ -1,3 +1,6 @@
+listarProductos
+elegirProducto
+1
 listarUsuarios
 seleccionarUsuarioCom
 usuario1
@@ -5,6 +8,9 @@ introducirTexto
 contenido del comentario
 confirmarDejarComentario
 
+listarProductos
+elegirProducto
+1
 listarUsuarios
 seleccionarUsuarioCom
 usuario1

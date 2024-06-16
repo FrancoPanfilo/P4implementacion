@@ -41,6 +41,7 @@ public:
     // Metodos
     void eliminarNotificacionesPendientes();
     bool estaSuscrito(string nickname);
+	void agregarComentario(Comentario com);
 };
 
 #endif // _USUARIO_H
