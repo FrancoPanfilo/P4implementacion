@@ -69,7 +69,7 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
     {
         throw std::runtime_error("Contraseña es demasiado corta");
     }
-    else if (altaVendedor.RUT < 000000000000 || altaVendedor.RUT > 999999999999)
+    else if (altaVendedor.RUT < 99999999999 || altaVendedor.RUT > 999999999999)
     {
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
@@ -139,7 +139,7 @@ set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 
  Cliente ControladorUsuarios::obtenerCliente(string nickname)
 {
-    Cliente c = listaClientes[nickname];
+    Cliente c = listaClientes.at(nickname);
     return c;
 }
 
@@ -177,7 +177,7 @@ set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
 set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
 	set<DTPromocion> resultado;
     Vendedor v = listaVendedores.at(nickGuardado);
-    //como acceder a las promociones de un vendedor?
+    
 	
 	return resultado;
 }

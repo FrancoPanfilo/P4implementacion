@@ -26,6 +26,7 @@ set<string> ControladorSuscripciones::listarNoSuscritos(string nickname)
   *ControladorUsuarios::getInstance() = *cu;
   r = cu->listarNoSuscritos(nickname);
   suscriptor = cu->obtenerCliente(nickname); 
+  //suscriptor = 
   return r;
 }
 void ControladorSuscripciones::agregarSuscripcion(string nickname)
