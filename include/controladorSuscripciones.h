@@ -14,7 +14,7 @@ private:
     static ControladorSuscripciones *instance;
     ControladorSuscripciones();
     ~ControladorSuscripciones();
-    Cliente suscriptor;
+    Cliente* suscriptor;
 
 public:
     static ControladorSuscripciones *getInstance();

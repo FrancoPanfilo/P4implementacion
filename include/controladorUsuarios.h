@@ -53,7 +53,7 @@ public:
     set<DTComentario> listarComentarios(string nickname);
     Cliente* obtenerCliente(string nickname);
     Vendedor* obtenerVendedor(string nickname);
-    set<DTProductoId> prodDeVendedor(string nickname);
+    set<DTProducto> prodDeVendedor(string nickname);
 
 	void seleccionarNickname(string nickname);
 	set<DTProducto> listarProductosVendedor();

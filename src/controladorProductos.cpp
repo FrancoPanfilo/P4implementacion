@@ -85,9 +85,9 @@ Producto ControladorProductos::obtenerProducto(int codigo)
 }
 
 
-std::set<DTProductoId> ControladorProductos::listarProductosConId(){
+std::set<DTProducto> ControladorProductos::listarProductosConId(){
 	// TODO
-	std::set<DTProductoId> productos;
+	std::set<DTProducto> productos;
 	return productos;
 }
 void ControladorProductos::seleccionarProductoPorCodigo(int){

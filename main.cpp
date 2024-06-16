@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		data.nickname = leerStr("Nickname: ");
 		data.contrasenia = leerStr("Contrasenia: ");
 		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-		data.RUT = leerInt("RUT: ");
+		data.RUT = leerStr("RUT: ");
 
 		contUsuarios->ingresarDatosVendedor(data);
 

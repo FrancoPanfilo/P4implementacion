@@ -18,7 +18,7 @@ class Vendedor : public Usuario
 {
 private:
     string rut;
-    set<DTProductoId> productosAsociados;
+    set<DTProducto> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:

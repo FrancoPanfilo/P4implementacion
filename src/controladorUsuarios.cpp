@@ -1,6 +1,9 @@
 // File controladorUsuarios.cpp
 
 #include "../include/controladorUsuarios.h"
+#include "../include/controladorPromociones.h"
+#include "../include/controladorProductos.h"
+#include "../include/fabrica.h"
 #include <iostream>
 #include <sstream>
 #include <set>
@@ -71,7 +74,8 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
         throw std::runtime_error("Contraseña es demasiado corta");
     }
     else if (altaVendedor.RUT.length() != 12)
-    {
+    {   
+
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
     else if (listaUsuarios.count(altaVendedor.nickname) > 0)
@@ -135,32 +139,33 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    Usuario u = listaUsuarios.at(nickname);
-    d = u.getComentarios();
+    //Usuario u = listaUsuarios.at(nickname);
+    //d = u.getComentarios();
     return d;
 }
 
- Cliente ControladorUsuarios::obtenerCliente(string nickname)
-{
-    Cliente c = listaClientes.at(nickname);
+ Cliente* ControladorUsuarios::obtenerCliente(string nickname)
+{   
+    Cliente *c;
+    *c = listaClientes.at(nickname);
     return c;
 }
 
-/*Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
+Vendedor* ControladorUsuarios::obtenerVendedor(string nickname)
 {
    Vendedor *v;
-   *v = listaVendedores[nickname];
+   *v = listaVendedores.at(nickname);
     return v;
-} */
+} 
 
-set<DTProductoId> ControladorUsuarios::prodDeVendedor(string nickname)
+set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
 {
     set<DTProducto> c;
     Vendedor v = listaVendedores.at(nickname);
     c = v.getProductosAsociados();
-    set<DTProductoId> d;
+    set<DTProducto> d;
     for (auto p : c){
-        d.insert(DTProductoId(p.codigo, p.nombre));
+        d.insert(DTProducto(p.codigo, 0, 0, p.nombre, "", "")); //se podria hacer un creador con solo esos datos
     }   
     return d;
 }
@@ -178,10 +183,21 @@ set<DTProducto> ControladorUsuarios::listarProductosVendedor(){
 }
 
 set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
-	set<DTPromocion> resultado;
+    //Fabrica *f = Fabrica::getFabrica();
+    set<DTPromocion> resultado;
     Vendedor v = listaVendedores.at(nickGuardado);
-    
-	
+    //ControladorPromociones cp = f->getIPromociones();
+    ControladorPromociones cp ;
+    map<string, Promocion> promos = cp.listarPromociones();
+    for (auto p : promos){
+        map<Producto, Minimo> min = p.second.getMinimos();
+        pair<Producto, Minimo> primero = *min.begin();
+        Producto pr = primero.first;
+        DTProducto buscar = DTProducto(pr.getCodigo(),pr.getStock(),pr.getPrecio(),pr.getNombre(),pr.getDescripcion(),pr.getTipo());
+        if (v.getProductosAsociados().count(buscar) == 1){
+           resultado.insert(DTPromocion(p.second.getNombre(),p.second.getDescripcion(),p.second.getDescuento(),p.second.getVencimiento()));
+        }           
+    }   
 	return resultado;
 }
 

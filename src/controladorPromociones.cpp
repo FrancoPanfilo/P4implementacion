@@ -32,6 +32,10 @@ DTProductosYVendedor ControladorPromociones::seleccionarPromocionPorNombre(strin
 	return pyv;
 }
 
+map<string, Promocion> ControladorPromociones::listarPromociones(){
+	return promociones;
+}
+
 
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc){
 	// TODO

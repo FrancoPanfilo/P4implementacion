@@ -5,9 +5,11 @@
 
 #include "./Datatypes/DTFecha.h"
 #include "./Datatypes/DTComentario.h"
+#include "./comentario.h"
 
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -17,7 +19,7 @@ private:
     string nickname;
     string contrasenia;
     DTFecha fechaNac;
-    set<DTComentario> comentarios;
+    map<int, Comentario> comentarios;
 
 public:
     // Constructor
@@ -30,7 +32,7 @@ public:
     string getNickname();
     string getContrasenia();
     DTFecha getFechaNac();
-    set<DTComentario> getComentarios();
+    map<int, Comentario> getComentarios();
 
     // Setters
     void setNickname(string nickname);

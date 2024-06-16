@@ -10,6 +10,7 @@ class DTProductoId {
 	string nombre;
 	DTProductoId(int codigo, string nombre);
 	~DTProductoId();
+	//bool operator<(const DTProductoId& otro) const;
 };
 
 #endif // !DT_PRODUCTO_ID

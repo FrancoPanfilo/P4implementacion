@@ -6,6 +6,7 @@
 class Minimo{
     public:
     int cantidad;
+    Producto producto;
     bool verificarMinimo(ParProdCant prod);
 
 };

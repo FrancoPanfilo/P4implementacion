@@ -13,7 +13,7 @@ class IProducto
 {
 
 public:
-	virtual std::set<DTProductoId> listarProductosConId() = 0;
+	virtual std::set<DTProducto> listarProductosConId() = 0;
 	virtual void seleccionarProductoPorCodigo(int) = 0;
 	virtual DTProducto mostrarProducto() = 0;
 	// virtual int seleccionarProducto(int, int) = 0;

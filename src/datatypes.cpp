@@ -12,50 +12,57 @@
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
 
-DTAltaCliente::~DTAltaCliente() {}
-DTAltaCliente::DTAltaCliente() {}
+DTAltaCliente::~DTAltaCliente(){}
+DTAltaCliente::DTAltaCliente(){}
 
 DTAltaVendedor::DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, string RUT)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), RUT(RUT) {}
 
-DTAltaVendedor::~DTAltaVendedor() {}
+DTAltaVendedor::~DTAltaVendedor(){}    
 
 DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
     : id(id), contenido(contenido), fecha(fecha) {}
 
-DTComentario::~DTComentario() {}
+DTComentario::~DTComentario(){}
 
 DTCompra::DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos)
     : fecha(fecha), montoFinal(montoFinal), datosProductos(datosProductos) {}
 
-DTCompra::~DTCompra() {}
+DTCompra::~DTCompra(){}    
 
 DTFecha::DTFecha(int dia, int mes, int anio)
     : dia(dia), mes(mes), anio(anio) {}
 
-DTFecha::~DTFecha() {}
+DTFecha::~DTFecha(){}
 
 DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo)
     : nombreVendedor(nombreVendedor), productos(productos), nombrePromo(nombrePromo) {}
 
-DTNotificacion::~DTNotificacion() {}
+DTNotificacion::~DTNotificacion(){}    
 
 DTProducto::DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
 
-DTProducto::~DTProducto() {}
-
-DTProductoId::DTProductoId(int codigo, string nombre)
-    : codigo(codigo), nombre(nombre) {}
-
 DTProducto::~DTProducto(){}
+
+/*DTProductoId::DTProductoId(int codigo, string nombre)
+    : codigo(codigo), nombre(nombre) {}
+*/
+bool DTProducto::operator<(const DTProducto& otro) const{
+    return codigo < otro.codigo;
+}
+
+
+
 
 DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
     : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
-DTPromocion::~DTPromocion() {}
+DTPromocion::~DTPromocion(){}
 
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
 
-ParProdCant::~ParProdCant() {}
+ParProdCant::~ParProdCant(){}  
+
+
