@@ -1,10 +1,12 @@
 #include <cstdio>
 #include <iostream>
+#include <set>
 #include <string>
 
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
-#include "./include/controladorUsuarios.h"
+#include "include/Interface/IUsuario.h"
+#include "include/fabrica.h"
 
 using namespace std;
 
@@ -33,6 +35,10 @@ int leerInt(string pregunta) {
 }
 
 int main(int argc, char *argv[]) {
+
+	Fabrica *f = Fabrica::getFabrica();
+	IUsuario *contUsuarios = f->getIUsuarios();
+
 	string accion = "";
 
 	while (accion != "salir") {
@@ -47,18 +53,23 @@ int main(int argc, char *argv[]) {
 		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
 		data.ciudad = leerStr("Ciudad: ");
 		data.direccion = leerStr("Direccion: ");
-		
-		// cout << data.nickname << data.contrasenia << endl;
-		// printf("%d/%d/%d", data.fechaNac.anio, data.fechaNac.mes, data.fechaNac.dia);
+
+		contUsuarios->ingresarDatosCliente(data);
 
 	} else if (accion == "ingresarDatosVendedor") {
 		DTAltaVendedor data = DTAltaVendedor();
 		data.nickname = leerStr("Nickname: ");
 		data.contrasenia = leerStr("Contrasenia: ");
 		data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-		data.RUT = scanf("RUT ");
+		data.RUT = leerInt("RUT: ");
+
+		contUsuarios->ingresarDatosVendedor(data);
 
 	} else if (accion == "listarClientes") {
+		set<string> clientes = contUsuarios->listarClientes();
+		for (auto nick : clientes) {
+			cout << nick << endl;
+		}
 	} else if (accion == "listarVendedores") {
 	} else if (accion == "listarUsuarios") {
 	} else if (accion == "listarNoSuscritos") {

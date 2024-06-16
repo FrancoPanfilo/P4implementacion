@@ -6,6 +6,7 @@
 #include <map>
 #include "./producto.h"
 #include "./Datatypes/DTProducto.h"
+#include "./Datatypes/DTProductoId.h"
 #include "./Datatypes/EnviosPendientes.h"
 #include "./Interface/IProducto.h"
 

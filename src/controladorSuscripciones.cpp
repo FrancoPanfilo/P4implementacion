@@ -4,7 +4,11 @@
 #include <set>
 #include <map>
 #include <stdexcept>
+
 ControladorSuscripciones *ControladorSuscripciones::instance = NULL;
+
+ControladorSuscripciones::ControladorSuscripciones() {}
+ControladorSuscripciones::~ControladorSuscripciones() {}
 
 ControladorSuscripciones *ControladorSuscripciones::getInstance()
 {
