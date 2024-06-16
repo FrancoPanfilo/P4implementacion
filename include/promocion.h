@@ -27,7 +27,7 @@ public:
     String getDescripcion();
     String getNombre();
 
-    std::map<Producto, Minimo> getMinimos();
+    //std::map<Producto, Minimo> getMinimos();
     Promocion obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
     // Promocion obtenerSiAplica(std::set<ParProdCant>);

@@ -14,6 +14,8 @@ public:
     DTComentario(int id, string contenido, DTFecha fecha);
     DTComentario() = default;
     ~DTComentario();
+
+	bool operator<(const DTComentario& other) const;
 };
 
 #endif //_DTCOMENTARIO_H

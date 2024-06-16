@@ -19,7 +19,7 @@ public:
     Fabrica();
     ~Fabrica();
     static Fabrica *getFabrica();
-    // IComentario *getIComentarios();
+    IComentario *getIComentarios();
     IUsuario *getIUsuarios();
     // ISuscripcion *getISuscripciones();
     // IProducto *getIProductos();

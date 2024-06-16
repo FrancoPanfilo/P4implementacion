@@ -50,3 +50,7 @@ void Usuario::setContrasenia(string contrasenia)
 {
     this->contrasenia = contrasenia;
 }
+
+void Usuario::agregarComentario(Comentario com) {
+	this->comentarios[com.getId()] = com;
+}

@@ -2,7 +2,6 @@
 
 #ifndef _ICOMENTARIO_H
 #define _ICOMENTARIO_H
-#include "../fabrica.h"
 #include <string>
 #include <set>
 #include "../Datatypes/DTComentario.h"
@@ -13,7 +12,7 @@ class IComentario
 {
 public:
 	// Metodos
-	virtual void elegirComentario(int idComentario) = 0;
+	virtual void elegirYBorrarComentario(int idComentario) = 0;
 	virtual void seleccionarUsuarioCom(string nick) = 0;
 	virtual void introducirTexto(string contenido) = 0;
 	virtual set<DTComentario> listarComentarios() = 0;

@@ -8,11 +8,12 @@ using namespace std;
 
 // Constructor
 
-Comentario::Comentario(string contenido, DTFecha fecha) 
-    : contenido(contenido), fecha(fecha) {}
+Comentario::Comentario(int id, string contenido, DTFecha fecha, Producto *producto) 
+    : id(id), contenido(contenido), fecha(fecha), producto(producto) {}
 
 // Destructor
 
+Comentario::Comentario() {}
 Comentario::~Comentario() {}
 
 // Getters
@@ -23,6 +24,10 @@ string Comentario::getContenido() {
 
 DTFecha Comentario::getfecha() {
     return fecha;
+}
+
+int Comentario::getId() {
+	return id;
 }
 
 // Setters
@@ -38,7 +43,8 @@ void Comentario::setFecha(DTFecha fecha) {
 // Metodos
 
 void Comentario::borrarRespuestas() {
-    // TODO
+	// TODO
+	// Acá hay q tener cuidado xq la relación es Respuesta -> Original
 }
 
 void Comentario::destroy() {

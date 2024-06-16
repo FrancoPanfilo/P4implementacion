@@ -23,10 +23,10 @@ Fabrica *Fabrica::getFabrica()
     }
     return fabrica;
 }
-/* IComentario *Fabrica::getIComentarios()
+IComentario *Fabrica::getIComentarios()
 {
     return ControladorComentarios::getInstance();
-} */
+} 
 IUsuario *Fabrica::getIUsuarios()
 {
     return ControladorUsuarios::getInstance();

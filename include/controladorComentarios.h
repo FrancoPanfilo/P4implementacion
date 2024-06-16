@@ -5,7 +5,10 @@
 
 #include "./Interface/IComentario.h"
 #include "Datatypes/DTComentario.h"
+#include "comentario.h"
+#include "producto.h"
 
+#include <map>
 #include <string>
 #include <set>
 
@@ -18,6 +21,17 @@ private:
     ControladorComentarios();
     ~ControladorComentarios();
 
+	map<int, Comentario> comentarios;
+
+	// Registro de ids
+	int ultimaId;
+
+	// Memoria
+	string comentador; // Nickname del usuario ingresando un Comentario
+	string contenido;  // Contenido del comentario
+	int respondiendoA; // Id del comentario al que estamos respondiendo
+	Producto *comentarioSobre; // Referencia al producto correspondiente al comentario
+
 public:
     static ControladorComentarios *getInstance();
 
@@ -27,9 +41,10 @@ public:
 
     // Metodos
     // Eliminar Comentario
-    void elegirComentario(int idComentario);
+    void elegirYBorrarComentario(int idComentario);
 
     // Dejar Comentario
+	void elegirProducto(int codigo);
     void seleccionarUsuarioCom(string nick);
     void introducirTexto(string contenido);
     set<DTComentario> listarComentarios();
