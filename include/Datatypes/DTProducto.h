@@ -9,11 +9,11 @@ class DTProducto
 public:
     int codigo;
     int stock;
-    int precio;
+    double precio;
     string nombre;
     string descripcion;
     string tipo;
-    DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo);
+    DTProducto(int codigo, int stock, double precio, string nombre, string descripcion, string tipo);
     DTProducto() = default;
     ~DTProducto();
     bool operator<(const DTProducto &other) const;

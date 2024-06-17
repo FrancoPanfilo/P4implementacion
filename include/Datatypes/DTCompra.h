@@ -10,9 +10,9 @@ class DTCompra
 {
 public:
     DTFecha fecha;
-    int montoFinal;
+    double montoFinal;
     std::set<int> datosProductos;
-    DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos);
+    DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos);
     DTCompra() = default;
     ~DTCompra();
 };

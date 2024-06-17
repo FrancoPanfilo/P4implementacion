@@ -26,7 +26,7 @@ DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
 
 DTComentario::~DTComentario(){}
 
-DTCompra::DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos)
+DTCompra::DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos)
     : fecha(fecha), montoFinal(montoFinal), datosProductos(datosProductos) {}
 
 DTCompra::~DTCompra(){}    
@@ -61,7 +61,7 @@ DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string
 
 DTNotificacion::~DTNotificacion(){}    
 
-DTProducto::DTProducto(int codigo, int stock, int precio, string nombre, string descripcion, string tipo)
+DTProducto::DTProducto(int codigo, int stock, double precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
 
 bool DTProducto::operator<(const DTProducto &other) const
