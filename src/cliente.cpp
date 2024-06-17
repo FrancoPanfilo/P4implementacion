@@ -11,6 +11,7 @@ using namespace std;
 Cliente::Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad)
     : Usuario(nickname, contrasenia, fechaNac), direccion(direccion), ciudad(ciudad) {}
 
+Cliente::Cliente(){};
 // Destructor
 
 Cliente::~Cliente() {}
