@@ -197,9 +197,8 @@ set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
 }
 
 DTVendedor ControladorUsuarios::listarInfoVendedor(){
-	DTVendedor vendedor;
     Vendedor v = listaVendedores.at(nickGuardado);
-    //DTVendedor no tendría que tener nickname y fechaNac tambien? lo mismo con DTCliente
+    DTVendedor vendedor = DTVendedor(v.getNickname(),v.getFechaNac(), v.getRUT());
 	return vendedor;
 }
 
@@ -212,11 +211,12 @@ set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
 
 DTCliente ControladorUsuarios::listarInfoCliente()
 {
-    // TODO
-    DTCliente cliente;
+    Cliente c = listaClientes.at(nickGuardado);
+    DTCliente cliente = DTCliente(c.getNickname(),c.getFechaNac(), c.getCiudad(), c.getDireccion());
     return cliente;
 }
 
 void ControladorUsuarios::finalizarExpediente()
 {
+    nickGuardado = ""; //hay que hacer esto?
 }

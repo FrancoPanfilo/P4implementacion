@@ -1,5 +1,6 @@
 #include "../include/Datatypes/DTAltaCliente.h"
 #include "../include/Datatypes/DTAltaVendedor.h"
+#include "../include/Datatypes/DTCliente.h"
 #include "../include/Datatypes/DTComentario.h"
 #include "../include/Datatypes/DTCompra.h"
 #include "../include/Datatypes/DTFecha.h"
@@ -9,6 +10,7 @@
 #include "../include/Datatypes/DTProductoId.h"
 #include "../include/Datatypes/ParProdCant.h"
 #include "../include/Datatypes/DTProductosYVendedor.h"
+#include"../include/Datatypes/DTVendedor.h"
 
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
@@ -20,6 +22,12 @@ DTAltaVendedor::DTAltaVendedor(string nickname, DTFecha fechaNac, string contras
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), RUT(RUT) {}
 
 DTAltaVendedor::~DTAltaVendedor(){}    
+
+
+DTCliente::DTCliente(string nickname, DTFecha fechaNach, string ciudad, string direccion)
+    : nickname(nickname), fechaNac(fechaNac), ciudad(ciudad), direccion(direccion){}
+
+DTCliente::~DTCliente(){}
 
 DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
     : id(id), contenido(contenido), fecha(fecha) {}
@@ -92,3 +100,8 @@ DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vende
  {
 	return id < other.id;
  }
+
+DTVendedor::DTVendedor(string nickname, DTFecha fechaNac, string RUT)
+    : nickname(nickname), fechaNac(fechaNac), RUT(RUT){}
+
+DTVendedor::~DTVendedor(){}
