@@ -41,17 +41,25 @@ set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 DTProductosYVendedor ControladorPromociones::seleccionarPromocionPorNombre(string nombre)
 {
 	Promocion p = promociones.at(nombre);
-	return DTProductosYVendedor(p.getProductos(), p.getVendedor());
+	Fabrica *f = f->getFabrica();
+	IUsuario *cu = f->getIUsuarios();
+	Vendedor *v = cu->obtenerVendedor(p.getVendedor());
+	return DTProductosYVendedor(p.getProductos(), *v);
 }
 
-
-map<string, Promocion> ControladorPromociones::listarPromociones(){
+map<string, Promocion> ControladorPromociones::listarPromociones()
+{
 	return promociones;
 }
 
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc)
 {
 	promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
+}
+void ControladorPromociones::agregarPromocion(Promocion p)
+{
+	promociones.insert(std::pair<string, Promocion>(p.getNombre(), p));
+	// esta version es solo para cargar datos
 }
 
 /*
@@ -76,7 +84,6 @@ void ControladorPromociones::seleccionarNickname(String)
 }
 void ControladorPromociones::agregarProductoAPromocion(int, int)
 {
-	// TODO
 }
 set<DTProducto> ControladorPromociones::obtenerProductosAsociados(String)
 {
@@ -92,7 +99,15 @@ int ControladorPromociones::obtenerDescuento(ParProdCant)
 	return 0;
 }
 
-std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname) {
+std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname)
+{
 	std::set<DTPromocion> dtpromo;
+	for (auto p : promociones)
+	{
+		if (p.first == nickname)
+		{
+			dtpromo.insert(DTPromocion(p.second.getNombre(), p.second.getDescripcion(), p.second.getDescuento(), p.second.getVencimiento()));
+		}
+	}
 	return dtpromo;
 }

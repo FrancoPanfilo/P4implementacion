@@ -24,6 +24,6 @@ public:
     ISuscripcion *getISuscripciones();
     IProducto *getIProductos();
     // ICompra *getICompras();
-    // IPromocion *getIPromociones();
+    IPromocion *getIPromociones();
 };
 #endif // _FABRICA_H

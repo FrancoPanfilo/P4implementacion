@@ -37,8 +37,3 @@ string Producto::getTipo()
 {
     return tipo;
 }
-
-void Producto::agregarAPromo(string nombrePromo, int cantidad)
-{
-    // TODO
-}

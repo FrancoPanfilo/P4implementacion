@@ -5,9 +5,14 @@
 #include <set>
 class Minimo
 {
-public:
+private:
     int cantidad;
     Producto producto;
+
+public:
+    Minimo(Producto, int);
+    int getCantidad();
+    Producto getProducto();
     bool verificarMinimo(std::set<ParProdCant> prod);
 };
 

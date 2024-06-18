@@ -7,9 +7,9 @@
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "include/Interface/IComentario.h"
-#include "include/Interface/IProducto.h"
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/ISuscripcion.h"
+#include "include/Interface/IPromocion.h"
 #include "include/fabrica.h"
 #include "datos.cpp"
 using namespace std;
@@ -56,9 +56,9 @@ int main(int argc, char *argv[])
 	Fabrica *f = Fabrica::getFabrica();
 	IUsuario *contUsuarios = f->getIUsuarios();
 	IComentario *contCom = f->getIComentarios();
+	IProducto *contProductos = f->getIProductos();
 	ISuscripcion *contSuscripciones = f->getISuscripciones();
-	IProducto *contProd = f->getIProductos();	
-
+	IPromocion *contPromociones = f->getIPromociones();
 	cargarDatos();
 
 	string accion = "";
@@ -121,79 +121,58 @@ int main(int argc, char *argv[])
 			for (auto nick : noSusc)
 			{
 				cout << nick << endl;
-
 			}
-		} else if(accion == "agregarSuscripcion"){
+		}
+		else if (accion == "agregarSuscripcion")
+		{
 			string nickname = leerStr("Cliente: ");
 			set<string> noSusc = contSuscripciones->listarNoSuscritos(nickname);
 			for (auto nick : noSusc)
 			{
 				cout << nick << endl;
-			}	
-			bool seguir = size(noSusc) != 0;
-			if (seguir){
-				set<string> sLista;
-				while(seguir){
-					if (size(noSusc) != 0){
-					string vendedor = leerStr("Vendedor: ");
-					contSuscripciones->agregarSuscripcion(vendedor);
-					string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
-					while (!(resp == "y" || resp == "n")){
-						resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
-					}	
-					seguir = (resp == "y");
-					sLista.insert(vendedor);
-					noSusc.erase(vendedor);
-					} else cout << "Ya no hay vendedores a los cuales se pueda suscribir." << endl;
+			}
+			bool seguir = true;
+			set<string> sLista;
+			while (seguir && size(noSusc) != 0)
+			{
+				string vendedor = leerStr("Vendedor: ");
+				contSuscripciones->agregarSuscripcion(vendedor);
+				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
 				}
-				cout << "Suscripciones:" << endl;
-				for (auto s : sLista){
-					cout << s << endl;
-				}
-				string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
-				while (!(resp2 == "y" || resp2 == "n")){
-						resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
-					}
-				if (resp2 == "y"){
-					contSuscripciones->confirmarSuscripcion();
-				}
-			} else cout << "No hay vendedores a los cuales se pueda suscribir." << endl;
-
-		} else if(accion == "eliminarSuscripcion"){
-			string nickname = leerStr("Cliente: ");
-			set<string> listaSus = contSuscripciones->listarVendedoresSuscritos(nickname);
-			for (auto s :listaSus){
+				seguir = (resp == "y");
+				sLista.insert(vendedor);
+				noSusc.erase(vendedor);
+			}
+			cout << "Suscripciones:" << endl;
+			for (auto s : sLista)
+			{
 				cout << s << endl;
 			}
-			bool seguir = (size(listaSus) != 0);
-			if (!seguir){
-				cout << "El cliente no está suscrito a ningún vendedor." << endl;
+			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
+			while (!(resp2 == "y" || resp2 == "n"))
+			{
+				resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
 			}
-			while (seguir){
-				if (size(listaSus) != 0){
-					string nickV = leerStr("Ingrese la suscripcion a eliminar: ");
-					contSuscripciones->eliminarSuscriptor(nickV);
-					listaSus.erase(nickV);
-					string resp = leerStr("¿Desea seguir eliminando suscripciones? [y/n]");
-					while (!(resp == "y" || resp == "n")){
-						resp = leerStr("Respuesta no válida. ¿Desea seguir eliminando suscripciones? [y/n]");
-					}
-					seguir = (resp == "y");
-				} else cout << "El cliente ya no tiene suscripciones." << endl;
+			if (resp2 == "y")
+			{
+				contSuscripciones->confirmarSuscripcion();
 			}
-
-		} else if (accion == "obtenerListaComentarios") {
+		}
+		else if (accion == "obtenerListaComentarios")
+		{
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
-			cout << "Listando comentarios de " << nickname << endl;
-			printf("Cantidad: %lu", comentarios.size());
 			for (auto com : comentarios)
 			{
-				printf("%d, ", com.id);
+				printf("%d", com.id);
 				mostrarFecha(com.fecha);
-				cout << ", " << com.contenido << endl;
+				cout << com.contenido << endl;
 			}
-		} else if (accion == "obtenerCliente")
+		}
+		else if (accion == "obtenerCliente")
 		{
 			string nickname = leerStr("Cliente: ");
 			Cliente *c = contUsuarios->obtenerCliente(nickname);
@@ -228,6 +207,17 @@ int main(int argc, char *argv[])
 		}
 		else if (accion == "listarPromocionesVendedor")
 		{
+			string nickname = leerStr("Vendedor: ");
+			set<DTPromocion> dp = contPromociones->listarPromocionesVendedor(nickname);
+			cout << "EL vendedor " << nickname << "tiene las siguientes promociones." << std::endl;
+			for (auto p : dp)
+			{
+				cout << "Nombre: " << p.nombre << std::endl
+					 << "Descripción: " << p.descripcion << std::endl
+					 << "Descuento: " << p.descuento << "%" << std::endl
+					 << "Fecha de Vencimiento: ";
+				mostrarFecha(p.fechaVencimiento);
+			}
 		}
 		else if (accion == "listarInfoVendedor")
 		{
@@ -246,12 +236,9 @@ int main(int argc, char *argv[])
 		{
 			int id = leerInt("Id: ");
 			contCom->elegirYBorrarComentario(id);
-
-		} else if (accion == "elegirProducto") {
-			int id = leerInt("Id: ");
-			contCom->elegirProducto(id);
-
-		} else if (accion == "seleccionarUsuarioCom") {
+		}
+		else if (accion == "seleccionarUsuarioCom")
+		{
 			string nick = leerStr("Nickname: ");
 			contCom->seleccionarUsuarioCom(nick);
 		}
@@ -265,9 +252,9 @@ int main(int argc, char *argv[])
 			set<DTComentario> comentarios = contCom->listarComentarios();
 			for (auto com : comentarios)
 			{
-				printf("%d, ", com.id);
+				printf("%d", com.id);
 				mostrarFecha(com.fecha);
-				cout << ", " << com.contenido << endl;
+				cout << com.contenido << endl;
 			}
 		}
 		else if (accion == "ingresarRespuesta")
@@ -279,36 +266,9 @@ int main(int argc, char *argv[])
 		else if (accion == "confirmarDejarComentario")
 		{
 			contCom->confirmarDejarComentario();
-
 		}
-		// ---- ControladorProducto ----
-		else if (accion == "listarProductosConId") {
-			std::set<DTProducto> dtproductos = contProd->listarProductosConId();
-			for (auto prod : dtproductos) {
-				printf("Codigo: %d, ", prod.codigo);
-				printf("Stock: %d, ", prod.stock);
-				printf("Precio: %.2lf, ", prod.precio);
-				cout << prod.nombre << ",";	
-				cout << prod.descripcion << ",";	
-				cout << prod.tipo << "," << endl;	
-			}
-		}
-		else if (accion == "seleccionarProductoPorCodigo") {
-		}
-		else if (accion == "mostrarProducto") {
-		}
-		else if (accion == "seleccionarProducto") {
-		}
-		else if (accion == "obtenerProducto") {
-		}
-		else if (accion == "seleccionarVendedor") {
-		}
-		else if (accion == "seleccionarProductoAEnviar") {
-		}
-		else if (accion == "seleccionarVenta") {
-
-		}
-		else if (accion == "salir" || accion == "") {
+		else if (accion == "salir" || accion == "")
+		{
 			continue;
 		}
 		else
