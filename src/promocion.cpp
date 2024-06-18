@@ -1,9 +1,9 @@
 #include "../include/promocion.h"
 #include "../include/Datatypes/DTProducto.h"
 #include <set>
-Vendedor Promocion::getVendedor()
+string Promocion::getVendedor()
 {
-    return vendedor;
+    return nickVendedor;
 }
 int Promocion::getDescuento()
 {
@@ -21,22 +21,29 @@ String Promocion::getNombre()
 {
     return nombre;
 }
+
+Promocion::Promocion(DTPromocion p, string v)
+    : nickVendedor(v), descuento(p.descuento), vencimiento(p.fechaVencimiento),
+      nombre(p.nombre), descripcion(p.descripcion) {}
+
 // std::map<Producto, Minimo> Promocion::getMinimos()
 // {
 //     return productos;
-// }  
+// }
 /* Promocion Promocion
 ::obtenerSiAplica(std::set<ParProdCant>){
     Promocion p;
     return p;
 } */
 
-set<DTProducto> Promocion::getProductos() {
-	set<DTProducto> dtproductos;
-	for (auto par : productos) {
-		Producto p = par.first;
-		DTProducto dtp = DTProducto(p.getCodigo(), p.getStock(), p.getPrecio(), p.getNombre(), p.getDescripcion(), p.getTipo());
-		dtproductos.insert(dtp);
-	}
-	return dtproductos;
+set<DTProducto> Promocion::getProductos()
+{
+    set<DTProducto> dtproductos;
+    for (auto par : productos)
+    {
+        Producto p = par.first;
+        DTProducto dtp = DTProducto(p.getCodigo(), p.getStock(), p.getPrecio(), p.getNombre(), p.getDescripcion(), p.getTipo());
+        dtproductos.insert(dtp);
+    }
+    return dtproductos;
 }

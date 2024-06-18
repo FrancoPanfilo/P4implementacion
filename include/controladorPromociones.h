@@ -11,7 +11,7 @@
 #include "./Datatypes/DTProductosYVendedor.h"
 #include "./Datatypes/DTPromocion.h"
 #include "Interface/IPromocion.h"
-using String = std::string;
+using string = std::string;
 
 class ControladorPromociones : public IPromocion
 {
@@ -28,20 +28,21 @@ public:
     ControladorPromociones();
     ~ControladorPromociones();
 
-     std::map<string, Promocion> listarPromociones();
-    //void setPromociones(std::set<Promocion>);
-    void ingresarDatosPromocion(String, String, int, DTFecha);
+    std::map<string, Promocion> listarPromociones();
+    // void setPromociones(std::set<Promocion>);
+    void ingresarDatosPromocion(string, string, int, DTFecha);
+    void agregarPromocion(Promocion);
     Promocion *obtenerPromocion(std::set<ParProdCant>);
-    std::set<String> obtenerNicknames();
-    void seleccionarNickname(String);
+    std::set<string> obtenerNicknames();
+    void seleccionarNickname(string);
     void agregarProductoAPromocion(int, int);
-    std::set<DTProducto> obtenerProductosAsociados(String);
+    std::set<DTProducto> obtenerProductosAsociados(string);
     void confirmarCrearPromocion();
     int obtenerDescuento(ParProdCant);
 
     std::set<DTPromocion> obtenerPromocionesVigentes();
     DTProductosYVendedor seleccionarPromocionPorNombre(String);
-	std::set<DTPromocion> listarPromocionesVendedor(String nickname);
+    std::set<DTPromocion> listarPromocionesVendedor(String nickname);
 };
 
 #endif // _CONTROLADORPROMOCIONES_H

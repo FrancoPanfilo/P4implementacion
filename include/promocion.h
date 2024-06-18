@@ -3,8 +3,8 @@
 #include <string>
 #include "./Datatypes/ParProdCant.h"
 #include "./Datatypes/DTFecha.h"
+#include "./Datatypes/DTPromocion.h"
 #include "./minimo.h"
-#include "./vendedor.h"
 #include <set>
 #include <map>
 using String = std::string;
@@ -13,7 +13,7 @@ using namespace std;
 class Promocion
 {
 private:
-    Vendedor vendedor;
+    string nickVendedor;
     int descuento;
     DTFecha vencimiento;
     String descripcion;
@@ -21,13 +21,13 @@ private:
     map<Producto, Minimo> productos;
 
 public:
-    Vendedor getVendedor();
+    string getVendedor();
     int getDescuento();
     DTFecha getVencimiento();
     String getDescripcion();
     String getNombre();
-
-    //std::map<Producto, Minimo> getMinimos();
+    Promocion(DTPromocion, string);
+    map<Producto, Minimo> getMinimos();
     Promocion obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
     // Promocion obtenerSiAplica(std::set<ParProdCant>);
