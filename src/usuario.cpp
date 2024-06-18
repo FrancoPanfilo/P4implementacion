@@ -1,9 +1,11 @@
 // File usuario.cpp
 
 #include "../include/Datatypes/DTFecha.h"
-#include "../include/Datatypes/DTComentario.h"
 #include "../include/usuario.h"
 
+#include <cstdio>
+#include <iostream>
+#include <ostream>
 #include <string>
 
 using namespace std;
@@ -34,7 +36,7 @@ DTFecha Usuario::getFechaNac()
     return fechaNac;
 }
 
-map<int, Comentario> Usuario::getComentarios()
+map<int, Comentario*> Usuario::getComentarios()
 {
     return comentarios;
 }
@@ -51,6 +53,8 @@ void Usuario::setContrasenia(string contrasenia)
     this->contrasenia = contrasenia;
 }
 
-void Usuario::agregarComentario(Comentario com) {
-	this->comentarios[com.getId()] = com;
+void Usuario::agregarComentario(Comentario *com) {
+	this->comentarios.insert(std::pair<int, Comentario*>(com->getId(), com));
+	//cout << "comentario: " << this->comentarios.at(com->getId())->getContenido() << endl;
+	printf("Agregando comentario a %s, cantidad: %lu", this->getNickname(), this->comentarios.size());
 }

@@ -6,9 +6,12 @@
 
 #include <cstddef>
 #include <ctime>
+#include <iostream>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -20,6 +23,7 @@ ControladorComentarios::ControladorComentarios() {
 	this->respondiendoA = -1;
 	this->contenido = "";
 	this->comentador = "";
+	this->comentarioSobre = NULL;
 
 	// Inicializamos id en 0
 	this->ultimaId = 0;
@@ -40,9 +44,9 @@ ControladorComentarios *ControladorComentarios::getInstance()
 
 // Metodos
 void ControladorComentarios::elegirYBorrarComentario(int idComentario) {
-	Comentario com = this->comentarios.at(idComentario);
+	Comentario *com = this->comentarios.at(idComentario);
 	this->comentarios.erase(idComentario);
-	com.borrarRespuestas();
+	com->borrarRespuestas();
 };
 
 void ControladorComentarios::elegirProducto(int codigo) {
@@ -62,8 +66,8 @@ void ControladorComentarios::introducirTexto(string contenido){
 set<DTComentario> ControladorComentarios::listarComentarios(){
 	set<DTComentario> resultado;
 	for (auto par: comentarios) {
-		Comentario com = par.second;
-		DTComentario dt = DTComentario(com.getId(), com.getContenido(), com.getfecha());
+		Comentario *com = par.second;
+		DTComentario dt = DTComentario(com->getId(), com->getContenido(), com->getfecha());
 		resultado.insert(dt);
 	}
 	return resultado;
@@ -79,8 +83,17 @@ void ControladorComentarios::confirmarDejarComentario(){
 
 	time_t ahora = time(0);
 	tm *local = localtime(&ahora);
-	DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon, local->tm_year);
-	Comentario com = Comentario(this->ultimaId, this->contenido, fecha, this->comentarioSobre);
+	// el mes empieza en 0 así q sumamos uno, y los años se cuentan desde 1900
+	DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
+	Comentario *com = new Comentario(this->ultimaId, this->contenido, fecha, this->comentarioSobre);
+
+	this->comentarios.insert(std::pair<int, Comentario*>(com->getId(), com));
+
+	// Si el comentario es respuesta a alguien
+	if (respondiendoA != -1) {
+		Comentario *padre = this->comentarios.at(respondiendoA);
+		padre->agregarRespuesta(com);
+	}
 
 	// Buscamos al vendedor o cliente que está comentando
 	// Fabrica *f = Fabrica::getFabrica();
@@ -102,5 +115,6 @@ void ControladorComentarios::confirmarDejarComentario(){
 	this->respondiendoA = -1;
 	this->contenido = "";
 	this->comentador = "";
+	this->comentarioSobre = NULL;
 }
 

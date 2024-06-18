@@ -5,7 +5,6 @@
 #include "../include/controladorProductos.h"
 #include "../include/fabrica.h"
 #include <iostream>
-#include <sstream>
 #include <set>
 #include <map>
 #include <stdexcept>
@@ -32,11 +31,15 @@ ControladorUsuarios *ControladorUsuarios::getInstance()
 
 Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
 {
-    if (listaVendedores.count(nickname) == 0)
-    {
-        return NULL;
-    }
-    return &(this->listaVendedores.at(nickname));
+    // if (listaVendedores.count(nickname) == 0)
+    // {
+    //     return NULL;
+    // }
+    auto entry = listaVendedores.find(nickname); 
+    if (entry == listaVendedores.end()) return NULL; 
+    return &(entry->second); 
+
+    // return &(this->listaVendedores.at(nickname));
 }
 
 Cliente *ControladorUsuarios::obtenerCliente(string nickname)
@@ -148,12 +151,11 @@ set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
     Usuario u = listaUsuarios.at(nickname);
-    for (auto par : u.getComentarios())
-    {
-        Comentario com = par.second;
-        DTComentario dtc = DTComentario(com.getId(), com.getContenido(), com.getfecha());
-        d.insert(dtc);
-    }
+	for (auto par : u.getComentarios()) {
+		Comentario *com = par.second;
+		DTComentario dtc = DTComentario(com->getId(), com->getContenido(), com->getfecha());
+		d.insert(dtc);
+	}
     return d;
 }
 
@@ -232,4 +234,19 @@ DTCliente ControladorUsuarios::listarInfoCliente()
 void ControladorUsuarios::finalizarExpediente()
 {
     nickGuardado = ""; 
+}
+
+void ControladorUsuarios::agregarComentario(string nickname, Comentario *com) {
+	// Cliente *c = this->obtenerCliente(nickname);
+	//
+	// if (c == NULL) {
+	// 	Vendedor *v = this->obtenerVendedor(nickname);
+	// 	if (v == NULL) {
+	// 		throw std::runtime_error("No existe el usuario ingresado");
+	// 	}
+	// 	v->agregarComentario(com);
+	// } else {
+	// 	c->agregarComentario(com);
+	// }
+	this->listaUsuarios.at(nickname).agregarComentario(com);
 }

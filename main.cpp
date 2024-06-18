@@ -7,6 +7,7 @@
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "include/Interface/IComentario.h"
+#include "include/Interface/IProducto.h"
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/ISuscripcion.h"
 #include "include/fabrica.h"
@@ -55,8 +56,8 @@ int main(int argc, char *argv[])
 	Fabrica *f = Fabrica::getFabrica();
 	IUsuario *contUsuarios = f->getIUsuarios();
 	IComentario *contCom = f->getIComentarios();
-	IProducto *contProductos = f->getIProductos();
 	ISuscripcion *contSuscripciones = f->getISuscripciones();
+	IProducto *contProd = f->getIProductos();	
 
 	cargarDatos();
 
@@ -184,11 +185,13 @@ int main(int argc, char *argv[])
 		} else if (accion == "obtenerListaComentarios") {
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
+			cout << "Listando comentarios de " << nickname << endl;
+			printf("Cantidad: %lu", comentarios.size());
 			for (auto com : comentarios)
 			{
-				printf("%d", com.id);
+				printf("%d, ", com.id);
 				mostrarFecha(com.fecha);
-				cout << com.contenido << endl;
+				cout << ", " << com.contenido << endl;
 			}
 		} else if (accion == "obtenerCliente")
 		{
@@ -243,9 +246,12 @@ int main(int argc, char *argv[])
 		{
 			int id = leerInt("Id: ");
 			contCom->elegirYBorrarComentario(id);
-		}
-		else if (accion == "seleccionarUsuarioCom")
-		{
+
+		} else if (accion == "elegirProducto") {
+			int id = leerInt("Id: ");
+			contCom->elegirProducto(id);
+
+		} else if (accion == "seleccionarUsuarioCom") {
 			string nick = leerStr("Nickname: ");
 			contCom->seleccionarUsuarioCom(nick);
 		}
@@ -259,9 +265,9 @@ int main(int argc, char *argv[])
 			set<DTComentario> comentarios = contCom->listarComentarios();
 			for (auto com : comentarios)
 			{
-				printf("%d", com.id);
+				printf("%d, ", com.id);
 				mostrarFecha(com.fecha);
-				cout << com.contenido << endl;
+				cout << ", " << com.contenido << endl;
 			}
 		}
 		else if (accion == "ingresarRespuesta")
@@ -273,9 +279,36 @@ int main(int argc, char *argv[])
 		else if (accion == "confirmarDejarComentario")
 		{
 			contCom->confirmarDejarComentario();
+
 		}
-		else if (accion == "salir" || accion == "")
-		{
+		// ---- ControladorProducto ----
+		else if (accion == "listarProductosConId") {
+			std::set<DTProducto> dtproductos = contProd->listarProductosConId();
+			for (auto prod : dtproductos) {
+				printf("Codigo: %d, ", prod.codigo);
+				printf("Stock: %d, ", prod.stock);
+				printf("Precio: %.2lf, ", prod.precio);
+				cout << prod.nombre << ",";	
+				cout << prod.descripcion << ",";	
+				cout << prod.tipo << "," << endl;	
+			}
+		}
+		else if (accion == "seleccionarProductoPorCodigo") {
+		}
+		else if (accion == "mostrarProducto") {
+		}
+		else if (accion == "seleccionarProducto") {
+		}
+		else if (accion == "obtenerProducto") {
+		}
+		else if (accion == "seleccionarVendedor") {
+		}
+		else if (accion == "seleccionarProductoAEnviar") {
+		}
+		else if (accion == "seleccionarVenta") {
+
+		}
+		else if (accion == "salir" || accion == "") {
 			continue;
 		}
 		else

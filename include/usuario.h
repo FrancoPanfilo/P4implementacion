@@ -19,7 +19,7 @@ private:
     string nickname;
     string contrasenia;
     DTFecha fechaNac;
-    map<int, Comentario> comentarios;
+    map<int, Comentario*> comentarios;
 
 public:
     // Constructor
@@ -32,7 +32,7 @@ public:
     string getNickname();
     string getContrasenia();
     DTFecha getFechaNac();
-    map<int, Comentario> getComentarios();
+    map<int, Comentario*> getComentarios();
 
     // Setters
     void setNickname(string nickname);
@@ -41,7 +41,7 @@ public:
     // Metodos
     void eliminarNotificacionesPendientes();
     bool estaSuscrito(string nickname);
-	void agregarComentario(Comentario com);
+	void agregarComentario(Comentario *com);
 };
 
 #endif // _USUARIO_H

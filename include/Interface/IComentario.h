@@ -13,6 +13,7 @@ class IComentario
 public:
 	// Metodos
 	virtual void elegirYBorrarComentario(int idComentario) = 0;
+	virtual void elegirProducto(int codigo) = 0;
 	virtual void seleccionarUsuarioCom(string nick) = 0;
 	virtual void introducirTexto(string contenido) = 0;
 	virtual set<DTComentario> listarComentarios() = 0;

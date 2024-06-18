@@ -33,7 +33,6 @@ void cargarDatos()
     contUsuarios->ingresarDatosCliente(dataUS9);
 
     // Productos
-    // IProducto *contProductos = f->getIProductos();
     DTProducto dataPR1 = DTProducto(1, 50, 1400, "Camiseta Azul", "Camiseta de poliester, color azul", "R");
     DTProducto dataPR2 = DTProducto(2, 30, 40500, "Televisor LED", "Televisor LED 55 pulgadas", "E");
     DTProducto dataPR3 = DTProducto(3, 60, 699.99, "Chaqueta de Cuero", "Chaqueta de cuero, color negro", "R");
