@@ -21,7 +21,7 @@ public:
     virtual std::set<string> obtenerNicknames() = 0;
     virtual void seleccionarNickname(string) = 0;
     virtual void agregarProductoAPromocion(int, int) = 0;
-    virtual std::set<DTProducto> obtenerProductosAsociados(string) = 0;
+    virtual std::set<DTProducto> obtenerProductosAsociados() = 0;
     virtual void confirmarCrearPromocion() = 0;
     // virtual int obtenerDescuento(ParProdCant) = 0;
     virtual ~IPromocion(){};
