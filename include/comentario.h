@@ -7,6 +7,7 @@
 #include "producto.h"
 
 #include <map>
+#include <set>
 #include <string>
 
 using namespace std;
@@ -18,11 +19,13 @@ private:
     string contenido;
     DTFecha fecha;
 	map<int, Comentario*> respuestas;
+	Comentario* respuestaA;
 	Producto *producto; 
+	string comentador; // nickname del Usuario que hizo el comentario
 
 public:
     // Constructor
-    Comentario(int id, string contenido, DTFecha fecha, Producto* producto);
+    Comentario(int id, string contenido, DTFecha fecha, Producto* producto, string comentador);
     Comentario();
 
     // Destructor
@@ -32,14 +35,18 @@ public:
     int getId();
     string getContenido();
     DTFecha getfecha();
+	Comentario* getRespuestaA();
+	string getComentador();
+	set<int> getIdRespuestas();
 
     // Setters
     void setContenido(string texto);
     void setFecha(DTFecha fecha);
+	void setRespuestaA(Comentario *com);
 
     // Metodos
 	void agregarRespuesta(Comentario *respuesta);
-    void borrarRespuestas();
+    void borrarRespuesta(Comentario *respuesta);
     void destroy();
 };
 

@@ -64,6 +64,7 @@ public:
 	void finalizarExpediente();
 
 	void agregarComentario(string nickname, Comentario *com);
+	void borrarComentario(string nickname, Comentario *com);
 };
 
 #endif // _CONTROLADORUSUARIOS_H
