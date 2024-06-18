@@ -3,6 +3,7 @@
 #include "./include/Datatypes/DTCompra.h"
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/IProducto.h"
+#include "include/Interface/ISuscripcion.h"
 #include "include/fabrica.h"
 void cargarDatos()
 {
@@ -110,4 +111,7 @@ void cargarDatos()
     DTComentario dataCM23 = DTComentario(23, "Si, es compatible con ambos.", DTFecha(6, 6, 2024));
     DTComentario dataCM24 = DTComentario(24, "¿Cuanto dura la bateria?", DTFecha(7, 6, 2024));
     DTComentario dataCM25 = DTComentario(25, "¿La aplicacion movil es facil de usar?", DTFecha(7, 6, 2024));
+
+
+    //nuestros datos
 }

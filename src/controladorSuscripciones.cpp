@@ -40,6 +40,7 @@ void ControladorSuscripciones::confirmarSuscripcion()
     ven->agregarSuscriptor(suscriptor);
     suscriptor->agregarSub(v);
   }
+  subsParaAgregar.clear();
 }
 set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname)
 {

@@ -8,6 +8,7 @@
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "include/Interface/IComentario.h"
 #include "include/Interface/IUsuario.h"
+#include "include/Interface/ISuscripcion.h"
 #include "include/fabrica.h"
 #include "datos.cpp"
 using namespace std;
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
 	IUsuario *contUsuarios = f->getIUsuarios();
 	IComentario *contCom = f->getIComentarios();
 	IProducto *contProductos = f->getIProductos();
+	ISuscripcion *contSuscripciones = f->getISuscripciones();
 
 	cargarDatos();
 
@@ -120,11 +122,37 @@ int main(int argc, char *argv[])
 				cout << nick << endl;
 
 			}
-		//} else if(accion == "agregarSuscripcion"){
-		//	st
-
-
-
+		} else if(accion == "agregarSuscripcion"){
+			string nickname = leerStr("Cliente: ");
+			set<string> noSusc = contSuscripciones->listarNoSuscritos(nickname);
+			for (auto nick : noSusc)
+			{
+				cout << nick << endl;
+			}	
+			bool seguir = true;
+			set<string> sLista;
+			while(seguir && size(noSusc) != 0){
+				string vendedor = leerStr("Vendedor: ");
+				contSuscripciones->agregarSuscripcion(vendedor);
+				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
+				while (!(resp == "y" || resp == "n")){
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
+				}
+				seguir = (resp == "y");
+				sLista.insert(vendedor);
+				noSusc.erase(vendedor);
+			}
+			cout << "Suscripciones:" << endl;
+			for (auto s : sLista){
+				cout << s << endl;
+			}
+			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
+			while (!(resp2 == "y" || resp2 == "n")){
+					resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
+				}
+			if (resp2 == "y"){
+				contSuscripciones->confirmarSuscripcion();
+			}
 
 
 		} else if (accion == "obtenerListaComentarios") {
