@@ -219,7 +219,7 @@ set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
     map<int,Compra> comp =  c.getCompras();
     for (auto co : comp){
         Compra ca = co.second; 
-        resultado.insert(DTDetalleCompra(co.first,ca.getMontoFinal(),ca.getFechaCompra(),ca.getProductos(),true));
+        resultado.insert(DTDetalleCompra(co.first,ca.getMontoFinal(),ca.getFechaCompra(),ca.getEnvios(), ca.getProductos()));
     }
     return resultado;
 }

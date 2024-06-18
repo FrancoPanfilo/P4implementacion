@@ -1,10 +1,18 @@
 #include "../include/controladorCompras.h"
+#include "../include/controladorUsuarios.h"
+#include "../include/controladorProductos.h"
+#include "../include/controladorPromociones.h"
+
+#include <ctime>
+//#include <cstddef>
 
 using namespace std;
 
 ControladorCompras *ControladorCompras::instance = NULL;
 
-ControladorCompras::ControladorCompras(){}
+ControladorCompras::ControladorCompras(){
+	int idC = 0;
+}
 ControladorCompras::~ControladorCompras(){};
 
 ControladorCompras *ControladorCompras::getInstance()
@@ -16,29 +24,59 @@ ControladorCompras *ControladorCompras::getInstance()
     return instance;
 }
 
-
-void ControladorCompras::registrarCompra(){
-	// TODO
-
-}
-
-void ControladorCompras::finalizarCompra(){
-	// TODO
-
-}
-
 set<string> ControladorCompras::listarClientes(){
-	// TODO
-	set<string> resultado;
+	ControladorUsuarios* cu = ControladorUsuarios::getInstance();
+	set<string> resultado = cu->listarClientes();
 	return resultado;
 }
 
-void ControladorCompras::seleccionarUsuario(String){
-	// TODO
+void ControladorCompras::seleccionarUsuario(String nickname){
+	ControladorUsuarios* cu = ControladorUsuarios::getInstance();
+	cliente = cu->obtenerCliente(nickname);
+	time_t ahora = time(0);
+	tm *local = localtime(&ahora);
+	fechaActual = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
+}
+
+void ControladorCompras::seleccionarProducto(int cantidad, int id){
+	ControladorProductos* cpro = ControladorProductos::getInstance();
+	Producto p = cpro->obtenerProducto(id);
+	ParProdCant par = ParProdCant(p, cantidad);
+	datosProductos.insert(par);
+	envios.insert(std::pair<int, bool>(id, false));
+}
+
+void ControladorCompras::calcularPrecio(){	
+	precioTotal = 0;
+	ControladorPromociones* cprom = ControladorPromociones::getInstance();
+	Promocion* promo = cprom->obtenerPromocion(datosProductos);
+	int desc = promo->getDescuento();
+	set<DTProducto> pd = promo->getProductos();
+	for (auto p : datosProductos){
+		Producto pr = p.producto;
+		if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
+			precioTotal += (p.cantidad * pr.getPrecio()) / desc;
+		} else {
+			precioTotal += p.cantidad * pr.getPrecio();
+		}
+	}
+}
+
+void ControladorCompras::registrarCompra(){
+	idC++;
+	Compra compra = Compra(fechaActual, precioTotal, idC, datosProductos, envios);
+	cliente->getCompras().insert(std::pair <int, Compra>(idC, compra));
+	compras.insert((std::pair <int, Compra>(idC, compra)));
+}
+
+void ControladorCompras::finalizarCompra(){
+	precioTotal = 0;
+	datosProductos.clear();
+	nickname = "";
 
 }
 
-void ControladorCompras::calcularPrecio(Promocion, std::set<ParProdCant>){
-	// TODO
 
-}
+
+
+

@@ -3,6 +3,7 @@
 
 #include "DTFecha.h"
 #include "DTProducto.h"
+#include "ParProdCant.h"
 #include <set>
 #include <map>
 class DTDetalleCompra {
@@ -10,10 +11,9 @@ class DTDetalleCompra {
 		int id;
 		int montoFinal;
 		DTFecha fechaCompra;
-		//map<DTProducto, bool> produtosEnvio; cuidar cantidad si se usa esto
-		map<DTProducto, int> productos;
-		bool todoEnviado;
-		DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map<DTProducto, int> productos, bool todoEnviado);
+		map<int, bool> produtosEnvio; 
+		set<ParProdCant> productos;
+		DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra, map<int, bool> produtosEnvio, set<ParProdCant> productos);
 		~DTDetalleCompra();
 		bool operator<(const DTDetalleCompra &otra) const;
 };

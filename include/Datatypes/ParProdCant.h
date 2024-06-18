@@ -10,6 +10,7 @@ public:
     ParProdCant(Producto producto, int cantidad);
     ParProdCant() = default;
     ~ParProdCant();
+    bool operator<(const ParProdCant& other) const;
 };
 
 #endif // _PARPRODCANT_H

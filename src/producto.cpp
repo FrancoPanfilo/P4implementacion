@@ -8,7 +8,7 @@ Producto::Producto(DTProducto dtp)
 Producto::Producto(int cod, int stk, int prc, string nom, string desc, string tp)
     : codigo(cod), stock(stk), precio(prc), nombre(nom), descripcion(desc), tipo(tp) {}
 
-int Producto::getCodigo()
+int Producto::getCodigo() const
 {
     return codigo;
 }
