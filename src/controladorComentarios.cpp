@@ -100,16 +100,17 @@ void ControladorComentarios::confirmarDejarComentario(){
 	// IUsuario iusuario = f->getIUsuarios();
 	ControladorUsuarios *cUsuarios = ControladorUsuarios::getInstance();
 
-	Cliente *c = cUsuarios->obtenerCliente(this->comentador);
-	if (c == NULL) {
-		Vendedor *v = cUsuarios->obtenerVendedor(this->comentador);
-		if (v == NULL) {
-			throw std::runtime_error("No existe el usuario ingresado");
-		}
-		v->agregarComentario(com);
-	} else {
-		c->agregarComentario(com);
-	}
+	// Cliente *c = cUsuarios->obtenerCliente(this->comentador);
+	// if (c == NULL) {
+	// 	Vendedor *v = cUsuarios->obtenerVendedor(this->comentador);
+	// 	if (v == NULL) {
+	// 		throw std::runtime_error("No existe el usuario ingresado");
+	// 	}
+	// 	v->agregarComentario(com);
+	// } else {
+	// 	c->agregarComentario(com);
+	// }
+	cUsuarios->agregarComentario(this->comentador, com);
 
 	// Reiniciamos memoria
 	this->respondiendoA = -1;
