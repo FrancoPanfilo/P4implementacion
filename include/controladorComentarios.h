@@ -31,6 +31,8 @@ private:
 	string contenido;  // Contenido del comentario
 	int respondiendoA; // Id del comentario al que estamos respondiendo
 	Producto *comentarioSobre; // Referencia al producto correspondiente al comentario
+	
+	//void borrarComentarioRecursivo(int idComentario);
 
 public:
     static ControladorComentarios *getInstance();

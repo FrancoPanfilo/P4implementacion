@@ -43,10 +43,33 @@ ControladorComentarios *ControladorComentarios::getInstance()
 // Setters
 
 // Metodos
+
+// void ControladorComentarios::borrarComentariosRecursivo(int idComentario) {
+//
+// }
+
 void ControladorComentarios::elegirYBorrarComentario(int idComentario) {
 	Comentario *com = this->comentarios.at(idComentario);
+
+	// 1. Si el comentario es respuesta a otro, sacarlo de la lista de ese otro	
+	Comentario *padre = com->getRespuestaA();
+	if (padre != NULL) {
+		padre->borrarRespuesta(com);
+	}
+
+	// 2. Sacar de la lista del usuario
+	ControladorUsuarios *cUsuarios = ControladorUsuarios::getInstance();
+	cUsuarios->borrarComentario(com->getComentador(), com);
+
+	// 3. Sacar de la lista global de comentarios 
 	this->comentarios.erase(idComentario);
-	com->borrarRespuestas();
+
+	// 4. Aplicar lo mismo a las respuestas
+	// TODO: en principio el paso 1. es redundante 
+	// Se podría hacer una función recursiva que ejecuta los pasos 2.-4. entonces el 1. corre solo para el primer comentario
+	for (auto id : com->getIdRespuestas()) {
+		elegirYBorrarComentario(id);
+	}
 };
 
 void ControladorComentarios::elegirProducto(int codigo) {
@@ -85,31 +108,19 @@ void ControladorComentarios::confirmarDejarComentario(){
 	tm *local = localtime(&ahora);
 	// el mes empieza en 0 así q sumamos uno, y los años se cuentan desde 1900
 	DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
-	Comentario *com = new Comentario(this->ultimaId, this->contenido, fecha, this->comentarioSobre);
+	Comentario *com = new Comentario(this->ultimaId, this->contenido, fecha, this->comentarioSobre, this->comentador);
 
 	this->comentarios.insert(std::pair<int, Comentario*>(com->getId(), com));
 
-	// Si el comentario es respuesta a alguien
+	// Si el comentario es respuesta a alguien:
+	// Registramos la relación bidireccional
 	if (respondiendoA != -1) {
 		Comentario *padre = this->comentarios.at(respondiendoA);
 		padre->agregarRespuesta(com);
+		com->setRespuestaA(padre);
 	}
 
-	// Buscamos al vendedor o cliente que está comentando
-	// Fabrica *f = Fabrica::getFabrica();
-	// IUsuario iusuario = f->getIUsuarios();
 	ControladorUsuarios *cUsuarios = ControladorUsuarios::getInstance();
-
-	// Cliente *c = cUsuarios->obtenerCliente(this->comentador);
-	// if (c == NULL) {
-	// 	Vendedor *v = cUsuarios->obtenerVendedor(this->comentador);
-	// 	if (v == NULL) {
-	// 		throw std::runtime_error("No existe el usuario ingresado");
-	// 	}
-	// 	v->agregarComentario(com);
-	// } else {
-	// 	c->agregarComentario(com);
-	// }
 	cUsuarios->agregarComentario(this->comentador, com);
 
 	// Reiniciamos memoria

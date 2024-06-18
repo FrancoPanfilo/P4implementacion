@@ -36,6 +36,7 @@ DTFecha leerDTFecha(string pregunta)
 void mostrarFecha(DTFecha fecha)
 {
 	printf("%d/%d/%d", fecha.dia, fecha.mes, fecha.anio);
+	std::cout << "" << std::endl;
 }
 
 void mostrarProducto(DTProducto p)
@@ -209,14 +210,15 @@ int main(int argc, char *argv[])
 		{
 			string nickname = leerStr("Vendedor: ");
 			set<DTPromocion> dp = contPromociones->listarPromocionesVendedor(nickname);
-			cout << "EL vendedor " << nickname << "tiene las siguientes promociones." << std::endl;
+			cout << "EL vendedor " << nickname << " tiene las siguientes promociones." << std::endl;
 			for (auto p : dp)
 			{
 				cout << "Nombre: " << p.nombre << std::endl
 					 << "Descripción: " << p.descripcion << std::endl
 					 << "Descuento: " << p.descuento << "%" << std::endl
-					 << "Fecha de Vencimiento: ";
+					 << "Fecha de Vencimiento: " << std::endl;
 				mostrarFecha(p.fechaVencimiento);
+				std::cout << "" << std::endl;
 			}
 		}
 		else if (accion == "listarInfoVendedor")
@@ -250,6 +252,7 @@ int main(int argc, char *argv[])
 		else if (accion == "listarComentarios")
 		{
 			set<DTComentario> comentarios = contCom->listarComentarios();
+			cout << "Listando todos los comentarios" << endl;
 			for (auto com : comentarios)
 			{
 				printf("%d", com.id);
