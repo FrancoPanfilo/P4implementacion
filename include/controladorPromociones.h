@@ -36,7 +36,7 @@ public:
     std::set<string> obtenerNicknames();
     void seleccionarNickname(string);
     void agregarProductoAPromocion(int, int);
-    std::set<DTProducto> obtenerProductosAsociados(string);
+    std::set<DTProducto> obtenerProductosAsociados();
     void confirmarCrearPromocion();
     int obtenerDescuento(ParProdCant);
 

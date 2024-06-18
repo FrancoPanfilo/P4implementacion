@@ -30,11 +30,32 @@ Promocion::Promocion(DTPromocion p, string v)
 // {
 //     return productos;
 // }
-/* Promocion Promocion
-::obtenerSiAplica(std::set<ParProdCant>){
-    Promocion p;
+Promocion *Promocion::obtenerSiAplica(std::set<ParProdCant> ppp)
+{
+    std::map<int, Minimo> ppp2;
+    for (auto producto : ppp)
+    {
+        ppp2.insert(std::pair<int, Minimo>(producto.producto.getCodigo(), Minimo(producto.producto, producto.cantidad)));
+    }
+    Promocion *p = NULL;
+    bool cp = true;
+    for (auto producto : productos)
+    {
+        if (ppp2.count(producto.first) == 0 || ppp2.at(producto.first).getCantidad() < producto.second.getCantidad())
+        {
+            cp = false;
+        }
+        if (!cp)
+        {
+            break;
+        }
+    }
+    if (cp)
+    {
+        p = this;
+    }
     return p;
-} */
+}
 
 set<DTProducto> Promocion::getProductos()
 {

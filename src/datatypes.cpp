@@ -11,42 +11,40 @@
 #include "../include/Datatypes/DTProductoId.h"
 #include "../include/Datatypes/ParProdCant.h"
 #include "../include/Datatypes/DTProductosYVendedor.h"
-#include"../include/Datatypes/DTVendedor.h"
+#include "../include/Datatypes/DTVendedor.h"
 
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
 
-DTAltaCliente::~DTAltaCliente(){}
-DTAltaCliente::DTAltaCliente(){}
+DTAltaCliente::~DTAltaCliente() {}
+DTAltaCliente::DTAltaCliente() {}
 
 DTAltaVendedor::DTAltaVendedor(string nickname, DTFecha fechaNac, string contrasenia, string RUT)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), RUT(RUT) {}
 
-DTAltaVendedor::~DTAltaVendedor(){}    
-
+DTAltaVendedor::~DTAltaVendedor() {}
 
 DTCliente::DTCliente(string nickname, DTFecha fechaNach, string ciudad, string direccion)
-    : nickname(nickname), fechaNac(fechaNac), ciudad(ciudad), direccion(direccion){}
+    : nickname(nickname), fechaNac(fechaNac), ciudad(ciudad), direccion(direccion) {}
 
-DTCliente::~DTCliente(){}
+DTCliente::~DTCliente() {}
 
 DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
     : id(id), contenido(contenido), fecha(fecha) {}
 
-DTComentario::~DTComentario(){}
+DTComentario::~DTComentario() {}
 
 DTCompra::DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos)
     : fecha(fecha), montoFinal(montoFinal), datosProductos(datosProductos) {}
 
-DTCompra::~DTCompra(){}    
-
+DTCompra::~DTCompra() {}
 
 DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
     :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos) {
         this->produtosEnvio = productosEnvio;
     }
 
-DTDetalleCompra::~DTDetalleCompra(){}
+DTDetalleCompra::~DTDetalleCompra() {}
 
 bool DTDetalleCompra::operator<(const DTDetalleCompra &otra) const
 {
@@ -56,7 +54,7 @@ bool DTDetalleCompra::operator<(const DTDetalleCompra &otra) const
 DTFecha::DTFecha(int dia, int mes, int anio)
     : dia(dia), mes(mes), anio(anio) {}
 
-DTFecha::~DTFecha(){}
+DTFecha::~DTFecha() {}
 
 bool DTFecha::operator>(const DTFecha &otra) const
 {
@@ -81,7 +79,7 @@ bool DTFecha::operator>(const DTFecha &otra) const
 DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo)
     : nombreVendedor(nombreVendedor), productos(productos), nombrePromo(nombrePromo) {}
 
-DTNotificacion::~DTNotificacion(){}    
+DTNotificacion::~DTNotificacion() {}
 
 DTProducto::DTProducto(int codigo, int stock, double precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
@@ -95,7 +93,7 @@ DTProducto::~DTProducto() {}
 DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
     : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
-DTPromocion::~DTPromocion(){}
+DTPromocion::~DTPromocion() {}
 
 bool DTPromocion::operator<(const DTPromocion &other) const
 {
@@ -104,8 +102,11 @@ bool DTPromocion::operator<(const DTPromocion &other) const
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
 
-
 ParProdCant::~ParProdCant() {}
+bool ParProdCant::operator<(const ParProdCant &other) const
+{
+    return producto.getCodigo() < other.producto.getCodigo();
+}
 
 bool ParProdCant::operator<(const ParProdCant& other) const
 {
@@ -115,12 +116,13 @@ bool ParProdCant::operator<(const ParProdCant& other) const
 DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
     : productos(productos), vendedor(vendedor) {}
 
-bool DTComentario::operator<(const DTComentario& other) const
+bool DTComentario::operator<(const DTComentario &other) const
+
 {
     return id < other.id;
 }
 
 DTVendedor::DTVendedor(string nickname, DTFecha fechaNac, string RUT)
-    : nickname(nickname), fechaNac(fechaNac), RUT(RUT){}
+    : nickname(nickname), fechaNac(fechaNac), RUT(RUT) {}
 
-DTVendedor::~DTVendedor(){}
+DTVendedor::~DTVendedor() {}

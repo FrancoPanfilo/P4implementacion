@@ -55,6 +55,8 @@ void Usuario::setContrasenia(string contrasenia)
 
 void Usuario::agregarComentario(Comentario *com) {
 	this->comentarios.insert(std::pair<int, Comentario*>(com->getId(), com));
-	//cout << "comentario: " << this->comentarios.at(com->getId())->getContenido() << endl;
-	printf("Agregando comentario a %s, cantidad: %lu", this->getNickname(), this->comentarios.size());
+}
+
+void Usuario::borrarComentario(Comentario *com) {
+	this->comentarios.erase(com->getId());
 }
