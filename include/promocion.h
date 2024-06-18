@@ -28,7 +28,7 @@ public:
     String getNombre();
     Promocion(DTPromocion, string);
     map<Producto, Minimo> getMinimos();
-    Promocion obtenerSiAplica(std::set<ParProdCant>);
+    Promocion *obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
     void agregarAPromo(Producto, int cantidad);
     // Promocion obtenerSiAplica(std::set<ParProdCant>);

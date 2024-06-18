@@ -54,23 +54,14 @@ map<string, Promocion> ControladorPromociones::listarPromociones()
 
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc)
 {
-	promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
+	this->promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
 }
+
 void ControladorPromociones::agregarPromocion(Promocion p)
 {
 	promociones.insert(std::pair<string, Promocion>(p.getNombre(), p));
-	// esta version es solo para cargar datos
 }
 
-/*
- * Devuelve una promoción si el conjunto de productos y cantidades aplica para la promoción
- * Si no, devuelve NULL
- * */
-Promocion *ControladorPromociones::obtenerPromocion(set<ParProdCant>)
-{
-	Promocion *promo;
-	return promo;
-}
 set<string> ControladorPromociones::obtenerNicknames()
 {
 	Fabrica *f = Fabrica::getFabrica();
@@ -78,25 +69,41 @@ set<string> ControladorPromociones::obtenerNicknames()
 	return contUsuarios->listarVendedores();
 }
 
-void ControladorPromociones::seleccionarNickname(String)
+void ControladorPromociones::seleccionarNickname(String n)
 {
-	// TODO
+	this->nickname = n;
 }
-void ControladorPromociones::agregarProductoAPromocion(int, int)
+
+set<DTProducto> ControladorPromociones::obtenerProductosAsociados()
 {
+	Fabrica *f = Fabrica::getFabrica();
+	IUsuario *contUsuarios = f->getIUsuarios();
+	return contUsuarios->prodDeVendedor(this->nickname);
 }
-set<DTProducto> ControladorPromociones::obtenerProductosAsociados(String)
+void ControladorPromociones::agregarProductoAPromocion(int codigo, int cantidad)
 {
-	// TODO
+	Fabrica *f = Fabrica::getFabrica();
+	IProducto *contProducto = f->getIProductos();
+	Producto p = contProducto->obtenerProducto(codigo);
+	ParProdCant ppp(p, cantidad);
+	productosTmp.insert(ppp);
 }
+
 void ControladorPromociones::confirmarCrearPromocion()
 {
-	// TODO
-}
-int ControladorPromociones::obtenerDescuento(ParProdCant)
-{
-	// TODO
-	return 0;
+	set<int> pCodigos;
+	Promocion promo(promocionTmp, nickname);
+	for (auto p : productosTmp)
+	{
+		pCodigos.insert(p.producto.getCodigo());
+		promo.agregarAPromo(p.producto, p.cantidad);
+	}
+	this->promociones.insert(std::pair<string, Promocion>(promo.getNombre(), promo));
+	Fabrica *f = Fabrica::getFabrica();
+	IUsuario *contUsuarios = f->getIUsuarios();
+	Vendedor *v = contUsuarios->obtenerVendedor(nickname);
+	DTNotificacion notificacion(nickname, pCodigos, promo.getNombre());
+	v->notificar(notificacion);
 }
 
 std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname)
@@ -104,10 +111,29 @@ std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String n
 	std::set<DTPromocion> dtpromo;
 	for (auto p : promociones)
 	{
-		if (p.first == nickname)
+		if (p.second.getVendedor() == nickname)
 		{
 			dtpromo.insert(DTPromocion(p.second.getNombre(), p.second.getDescripcion(), p.second.getDescuento(), p.second.getVencimiento()));
 		}
 	}
 	return dtpromo;
+}
+
+Promocion *ControladorPromociones::obtenerPromocion(set<ParProdCant> ppp)
+{
+	Promocion *promo = NULL;
+	std::map<string, Promocion>::iterator it = this->promociones.begin();
+	while (promo == NULL)
+	{
+		promo = it->second.obtenerSiAplica(ppp);
+		it++;
+	}
+
+	return promo;
+}
+
+int ControladorPromociones::obtenerDescuento(ParProdCant)
+{
+	// TODO
+	return 0;
 }

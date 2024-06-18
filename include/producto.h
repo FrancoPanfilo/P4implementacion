@@ -16,7 +16,7 @@ private:
 public:
     Producto(DTProducto dtp);
     Producto(int cod, int stk, int prc, string nom, string desc, string tp);
-    int getCodigo();
+    int getCodigo() const;
     int getStock();
     int getPrecio();
     string getNombre();
