@@ -113,15 +113,21 @@ int main(int argc, char *argv[])
 		}
 		else if (accion == "listarNoSuscritos")
 		{
-			string nickname = leerStr("Vendedor: ");
+			string nickname = leerStr("Cliente: ");
 			set<string> noSusc = contUsuarios->listarNoSuscritos(nickname);
 			for (auto nick : noSusc)
 			{
 				cout << nick << endl;
+
 			}
-		}
-		else if (accion == "obtenerListaComentarios")
-		{
+		//} else if(accion == "agregarSuscripcion"){
+		//	st
+
+
+
+
+
+		} else if (accion == "obtenerListaComentarios") {
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
 			for (auto com : comentarios)

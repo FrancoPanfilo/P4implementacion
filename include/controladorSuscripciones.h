@@ -15,6 +15,7 @@ private:
     ControladorSuscripciones();
     ~ControladorSuscripciones();
     Cliente* suscriptor;
+    set<string> subsParaAgregar;
 
 public:
     static ControladorSuscripciones *getInstance();

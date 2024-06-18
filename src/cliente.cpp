@@ -11,6 +11,7 @@ using namespace std;
 Cliente::Cliente(string nickname, string contrasenia, DTFecha fechaNac, string direccion, string ciudad)
     : Usuario(nickname, contrasenia, fechaNac), direccion(direccion), ciudad(ciudad) {}
 
+Cliente::Cliente(){};
 // Destructor
 
 Cliente::~Cliente() {}
@@ -42,6 +43,11 @@ string Cliente::getNickname()
     return Usuario::getNickname();
 }
 
+map <int, Compra> Cliente::getCompras()
+{
+    return compras;
+}
+
 // Setters
 
 void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes) 
@@ -64,6 +70,16 @@ void Cliente::notificar()
 void Cliente::eliminarNotificacionesPendientes() 
 {
     notificacionesPendientes.clear();
+}
+
+void Cliente::agregarSub(string nickname)
+{
+    suscripciones.insert(nickname);
+}
+
+void Cliente::eliminarSub(string nickname)
+{
+    suscripciones.erase(nickname);
 }
 
 Cliente *Cliente::create(DTAltaCliente altaCliente) 

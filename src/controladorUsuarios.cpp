@@ -205,26 +205,31 @@ set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor()
 
 DTVendedor ControladorUsuarios::listarInfoVendedor()
 {
-    DTVendedor vendedor;
     Vendedor v = listaVendedores.at(nickGuardado);
-    // DTVendedor no tendría que tener nickname y fechaNac tambien? lo mismo con DTCliente
-    return vendedor;
+    DTVendedor vendedor = DTVendedor(v.getNickname(),v.getFechaNac(), v.getRUT());
+	return vendedor;
 }
 
 set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
 {
-    // TODO
     set<DTDetalleCompra> resultado;
+    Cliente c = listaClientes.at(nickGuardado);
+    map<int,Compra> comp =  c.getCompras();
+    for (auto co : comp){
+        Compra ca = co.second; 
+        resultado.insert(DTDetalleCompra(co.first,ca.getMontoFinal(),ca.getFechaCompra(),ca.getProductos(),true));
+    }
     return resultado;
 }
 
 DTCliente ControladorUsuarios::listarInfoCliente()
 {
-    // TODO
-    DTCliente cliente;
+    Cliente c = listaClientes.at(nickGuardado);
+    DTCliente cliente = DTCliente(c.getNickname(),c.getFechaNac(), c.getCiudad(), c.getDireccion());
     return cliente;
 }
 
 void ControladorUsuarios::finalizarExpediente()
 {
+    nickGuardado = ""; 
 }
