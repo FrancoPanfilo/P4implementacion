@@ -1,31 +1,44 @@
 // // File: producto.cpp
 
 #include "../include/producto.h"
+Producto::Producto(DTProducto dtp)
+    : codigo(dtp.codigo), stock(dtp.stock), precio(dtp.precio),
+      nombre(dtp.nombre), descripcion(dtp.descripcion), tipo(dtp.tipo) {}
 
-int Producto::getCodigo() {
+Producto::Producto(int cod, int stk, int prc, string nom, string desc, string tp)
+    : codigo(cod), stock(stk), precio(prc), nombre(nom), descripcion(desc), tipo(tp) {}
+
+int Producto::getCodigo()
+{
     return codigo;
 }
 
-int Producto::getStock() {
+int Producto::getStock()
+{
     return stock;
 }
 
-int Producto::getPrecio() {
+int Producto::getPrecio()
+{
     return precio;
 }
 
-String Producto::getNombre() {
+string Producto::getNombre()
+{
     return nombre;
 }
 
-String Producto::getDescripcion() {
+string Producto::getDescripcion()
+{
     return descripcion;
 }
 
-String Producto::getTipo() {
+string Producto::getTipo()
+{
     return tipo;
 }
 
-void Producto::agregarAPromo(String nombrePromo, int cantidad) {
+void Producto::agregarAPromo(string nombrePromo, int cantidad)
+{
     // TODO
 }

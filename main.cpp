@@ -13,49 +13,61 @@
 using namespace std;
 
 // Controladores
-//ControladorUsuarios *contUsuarios = ControladorUsuarios(); fabrica
+// ControladorUsuarios *contUsuarios = ControladorUsuarios(); fabrica
 
-string leerStr(string pregunta) {
+string leerStr(string pregunta)
+{
 	cout << pregunta;
 	string respuesta;
 	cin >> respuesta;
 	return respuesta;
 }
 
-DTFecha leerDTFecha(string pregunta) {
+DTFecha leerDTFecha(string pregunta)
+{
 	cout << pregunta;
 	DTFecha respuesta = DTFecha();
 	scanf("%d %d %d", &respuesta.dia, &respuesta.mes, &respuesta.anio);
 	return respuesta;
 }
 
-void mostrarFecha(DTFecha fecha) {
+void mostrarFecha(DTFecha fecha)
+{
 	printf("%d/%d/%d", fecha.dia, fecha.mes, fecha.anio);
 }
 
-int leerInt(string pregunta) {
+void mostrarProducto(DTProducto p)
+{
+	std::cout << "Producto: " << p.nombre << ". Descripcion: " << p.descripcion << "." << std::endl;
+}
+int leerInt(string pregunta)
+{
 	cout << pregunta;
 	int respuesta;
 	scanf("%d", &respuesta);
 	return respuesta;
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
 	Fabrica *f = Fabrica::getFabrica();
 	IUsuario *contUsuarios = f->getIUsuarios();
-	IComentario *contCom = f->getIComentarios();	
+	IComentario *contCom = f->getIComentarios();
+	IProducto *contProductos = f->getIProductos();
 
 	cargarDatos();
 
 	string accion = "";
 
-	while (accion != "salir") {
+	while (accion != "salir")
+	{
 		cout << "Ingresar acción: ";
 		cin >> accion;
 
 		// ---- ControladorUsuarios ----
-		if (accion == "ingresarDatosCliente") {
+		if (accion == "ingresarDatosCliente")
+		{
 			DTAltaCliente data = DTAltaCliente();
 			data.nickname = leerStr("Nickname: ");
 			data.contrasenia = leerStr("Contrasenia: ");
@@ -64,8 +76,9 @@ int main(int argc, char *argv[]) {
 			data.direccion = leerStr("Direccion: ");
 
 			contUsuarios->ingresarDatosCliente(data);
-
-		} else if (accion == "ingresarDatosVendedor") {
+		}
+		else if (accion == "ingresarDatosVendedor")
+		{
 			DTAltaVendedor data = DTAltaVendedor();
 			data.nickname = leerStr("Nickname: ");
 			data.contrasenia = leerStr("Contrasenia: ");
@@ -73,97 +86,143 @@ int main(int argc, char *argv[]) {
 			data.RUT = leerInt("RUT: ");
 
 			contUsuarios->ingresarDatosVendedor(data);
-
-		} else if (accion == "listarClientes") {
+		}
+		else if (accion == "listarClientes")
+		{
 			set<string> clientes = contUsuarios->listarClientes();
-			for (auto nick : clientes) {
+			for (auto nick : clientes)
+			{
 				cout << nick << endl;
 			}
-		} else if (accion == "listarVendedores") {
+		}
+		else if (accion == "listarVendedores")
+		{
 			set<string> vendedores = contUsuarios->listarVendedores();
-			for (auto nick : vendedores) {
+			for (auto nick : vendedores)
+			{
 				cout << nick << endl;
 			}
-		} else if (accion == "listarUsuarios") {
+		}
+		else if (accion == "listarUsuarios")
+		{
 			set<string> usuarios = contUsuarios->listarUsuarios();
-			for (auto nick : usuarios) {
+			for (auto nick : usuarios)
+			{
 				cout << nick << endl;
 			}
-		} else if (accion == "listarNoSuscritos") {
+		}
+		else if (accion == "listarNoSuscritos")
+		{
 			string nickname = leerStr("Vendedor: ");
 			set<string> noSusc = contUsuarios->listarNoSuscritos(nickname);
-			for (auto nick : noSusc) {
+			for (auto nick : noSusc)
+			{
 				cout << nick << endl;
 			}
-		} else if (accion == "obtenerListaComentarios") {
+		}
+		else if (accion == "obtenerListaComentarios")
+		{
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
-			for (auto com : comentarios) {
+			for (auto com : comentarios)
+			{
 				printf("%d", com.id);
 				mostrarFecha(com.fecha);
-				cout << com.contenido << endl;	
+				cout << com.contenido << endl;
 			}
-
-		// } else if (accion == "obtenerCliente") {
-		// } else if (accion == "obtenerVendedor") {
-		} else if (accion == "prodDeVendedor") {
-
-		} else if (accion == "seleccionarNickname") {
-
 		}
-		else if (accion == "listarProductosVendedor") {
-
+		else if (accion == "obtenerCliente")
+		{
+			string nickname = leerStr("Cliente: ");
+			Cliente *c = contUsuarios->obtenerCliente(nickname);
+			std::cout << "El cliente de nickname " << c->getNickname() << " vive en la ciudad "
+					  << c->getCiudad() << " y tiene como direccion " << c->getDireccion() << ". Nacio el dia: ";
+			mostrarFecha(c->getFechaNac());
+			std::cout << std::endl;
 		}
-		else if (accion == "listarPromocionesVendedor") {
-
+		else if (accion == "obtenerVendedor")
+		{
+			string nickname = leerStr("Vendedor: ");
+			Vendedor *v = contUsuarios->obtenerVendedor(nickname);
+			std::cout << "El vendedor de nickname " << v->getNickname() << " lo identifica el RUT "
+					  << v->getRUT() << ". Nacio el dia: ";
+			mostrarFecha(v->getFechaNac());
+			std::cout << v->getNickname() << "Tiene asociados los siguientes productos: ";
+			std::cout << std::endl;
+			set<DTProducto> pa = v->getProductosAsociados();
+			for (auto p : pa)
+			{
+				mostrarProducto(p);
+			}
 		}
-		else if (accion == "listarInfoVendedor") {
-
+		else if (accion == "prodDeVendedor")
+		{
 		}
-		else if (accion == "listarComprasCliente") {
-
+		else if (accion == "seleccionarNickname")
+		{
 		}
-		else if (accion == "listarInfoCliente") {
-
+		else if (accion == "listarProductosVendedor")
+		{
 		}
-		else if (accion == "finalizarExpediente") {
-				
-		} 
+		else if (accion == "listarPromocionesVendedor")
+		{
+		}
+		else if (accion == "listarInfoVendedor")
+		{
+		}
+		else if (accion == "listarComprasCliente")
+		{
+		}
+		else if (accion == "listarInfoCliente")
+		{
+		}
+		else if (accion == "finalizarExpediente")
+		{
+		}
 		// ---- ControladorComentarios ----
-		else if (accion == "elegirYBorrarComentario") {
+		else if (accion == "elegirYBorrarComentario")
+		{
 			int id = leerInt("Id: ");
 			contCom->elegirYBorrarComentario(id);
 		}
-		else if (accion == "seleccionarUsuarioCom") {
+		else if (accion == "seleccionarUsuarioCom")
+		{
 			string nick = leerStr("Nickname: ");
-			contCom->seleccionarUsuarioCom(nick);		
+			contCom->seleccionarUsuarioCom(nick);
 		}
-		else if (accion == "introducirTexto") {
+		else if (accion == "introducirTexto")
+		{
 			string contenido = leerStr("Contenido: ");
-			contCom->introducirTexto(contenido);		
+			contCom->introducirTexto(contenido);
 		}
-		else if (accion == "listarComentarios") {
+		else if (accion == "listarComentarios")
+		{
 			set<DTComentario> comentarios = contCom->listarComentarios();
-			for (auto com : comentarios) {
+			for (auto com : comentarios)
+			{
 				printf("%d", com.id);
 				mostrarFecha(com.fecha);
-				cout << com.contenido << endl;	
+				cout << com.contenido << endl;
 			}
 		}
-		else if (accion == "ingresarRespuesta") {
+		else if (accion == "ingresarRespuesta")
+		{
 			int id = leerInt("Id: ");
 			string respuesta = leerStr("Respuesta: ");
-			contCom->ingresarRespuesta(id, respuesta);		
+			contCom->ingresarRespuesta(id, respuesta);
 		}
-		else if (accion == "confirmarDejarComentario") {
+		else if (accion == "confirmarDejarComentario")
+		{
 			contCom->confirmarDejarComentario();
-
-		} else if (accion == "salir" || accion == "") {
+		}
+		else if (accion == "salir" || accion == "")
+		{
 			continue;
-		} else {
-		  cout << "Acción no reconocida: " << accion << endl;
+		}
+		else
+		{
+			cout << "Acción no reconocida: " << accion << endl;
 		}
 	}
 	return 0;
 }
-

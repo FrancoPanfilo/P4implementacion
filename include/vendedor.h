@@ -18,7 +18,7 @@ class Vendedor : public Usuario
 {
 private:
     string rut;
-    set<DTProducto> productosAsociados;
+    map<int, Producto> productosAsociados;
     set<ObserverNotificacion *> observers;
 
 public:
@@ -34,6 +34,7 @@ public:
     set<DTProducto> getProductosAsociados();
 
     // Metodos
+    void agregarProducto(Producto);
     void agregarSuscriptor(Cliente *c);
     void eliminarSuscriptor(Cliente *c);
     void notificar(DTNotificacion dtNotif);

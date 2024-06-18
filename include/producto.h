@@ -1,26 +1,28 @@
 #ifndef _PRODUCTO_H
 #define _PRODUCTO_H
-
+#include "../include/Datatypes/DTProducto.h"
 #include <string>
-using String = std::string;
+using string = std::string;
 class Producto
 {
 private:
     int codigo;
     int stock;
     int precio;
-    String nombre;
-    String descripcion;
-    String tipo;
+    string nombre;
+    string descripcion;
+    string tipo;
 
 public:
+    Producto(DTProducto dtp);
+    Producto(int cod, int stk, int prc, string nom, string desc, string tp);
     int getCodigo();
     int getStock();
     int getPrecio();
-    String getNombre();
-    String getDescripcion();
-    String getTipo();
-    void agregarAPromo(String, int);
+    string getNombre();
+    string getDescripcion();
+    string getTipo();
+    void agregarAPromo(string, int);
 };
 
 #endif // _PRODUCTO_H

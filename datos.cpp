@@ -2,11 +2,13 @@
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "./include/Datatypes/DTCompra.h"
 #include "include/Interface/IUsuario.h"
+#include "include/Interface/IProducto.h"
 #include "include/fabrica.h"
 void cargarDatos()
 {
     Fabrica *f = Fabrica::getFabrica();
     IUsuario *contUsuarios = f->getIUsuarios();
+    IProducto *contProductos = f->getIProductos();
     DTAltaVendedor dataUS1 = DTAltaVendedor("ana23", DTFecha(13, 5, 1988), "qwer1234", "212345678001");
     DTAltaVendedor dataUS2 = DTAltaVendedor("carlos78", DTFecha(18, 6, 1986), "asdfghj", "356789012345");
     DTAltaVendedor dataUS3 = DTAltaVendedor("diegom", DTFecha(28, 7, 1993), "zxcvbn", "190123456789");
@@ -47,16 +49,27 @@ void cargarDatos()
     DTProducto dataPR14 = DTProducto(14, 15, 15000, "Tablet", "Tablet Android de 10 pulgadas", "E");
     DTProducto dataPR15 = DTProducto(15, 20, 150.50, "Reloj de Pared", "Reloj de pared vintage", "O");
 
-
-
+    contProductos->altaProducto("carlos78", dataPR1);
+    contProductos->altaProducto("ana23", dataPR2);
+    contProductos->altaProducto("carlos78", dataPR3);
+    contProductos->altaProducto("ana23", dataPR4);
+    contProductos->altaProducto("diegom", dataPR5);
+    contProductos->altaProducto("carlos78", dataPR6);
+    contProductos->altaProducto("diegom", dataPR7);
+    contProductos->altaProducto("ana23", dataPR8);
+    contProductos->altaProducto("ana23", dataPR9);
+    contProductos->altaProducto("carlos78", dataPR10);
+    contProductos->altaProducto("carlos78", dataPR11);
+    contProductos->altaProducto("diegom", dataPR12);
+    contProductos->altaProducto("sofia25", dataPR13);
+    contProductos->altaProducto("diegom", dataPR14);
+    contProductos->altaProducto("sofia25", dataPR15);
     // Promociones
     // IPromocion *contPromociones = f->getIPromociones();
     DTPromocion dataPM1 = DTPromocion("Casa nueva", "Para que puedas ahorrar en la casa nueva", 30, DTFecha(25, 10, 2024));
     DTPromocion dataPM2 = DTPromocion("Fiesta", "Para que no te quedes sin ropa para las fiestas", 20, DTFecha(26, 10, 2024));
     DTPromocion dataPM3 = DTPromocion("Domotica", "Para modernizar tu casa", 10, DTFecha(26, 10, 2024));
     DTPromocion dataPM4 = DTPromocion("Liquidacion", "Hasta agotar stock", 10, DTFecha(26, 3, 2024));
-
-
 
     // Compras
     // ICompra *contCompras = f->getICompras();
@@ -69,7 +82,6 @@ void cargarDatos()
     DTCompra dataCO7 = DTCompra(DTFecha(13, 5, 2024), 4200, {dataPR1.codigo});
     DTCompra dataCO8 = DTCompra(DTFecha(14, 5, 2024), 5600, {dataPR1.codigo});
     DTCompra dataCO9 = DTCompra(DTFecha(15, 5, 2024), 7000, {dataPR1.codigo});
-
 
     // Comentarios
     // IComentario *contComentarios = f->getIComentarios();

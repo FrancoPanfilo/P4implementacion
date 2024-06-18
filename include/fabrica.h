@@ -22,8 +22,8 @@ public:
     IComentario *getIComentarios();
     IUsuario *getIUsuarios();
     // ISuscripcion *getISuscripciones();
-    // IProducto *getIProductos();
+    IProducto *getIProductos();
     // ICompra *getICompras();
-    //   IPromocion *getIPromociones();
+    // IPromocion *getIPromociones();
 };
 #endif // _FABRICA_H

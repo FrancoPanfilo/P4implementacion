@@ -26,7 +26,7 @@ Fabrica *Fabrica::getFabrica()
 IComentario *Fabrica::getIComentarios()
 {
     return ControladorComentarios::getInstance();
-} 
+}
 IUsuario *Fabrica::getIUsuarios()
 {
     return ControladorUsuarios::getInstance();
@@ -36,10 +36,7 @@ ISuscripcion *Fabrica::getISuscripciones()
 {
     return ControladorSuscripciones::getInstance();
 }
-IProducto *Fabrica::getIProductos()
-{
-    return ControladorProductos::getInstance();
-}
+
 ICompra *Fabrica::getICompras()
 {
     return ControladorCompras::getInstance();
@@ -49,3 +46,7 @@ IPromocion *Fabrica::getIPromociones()
     return ControladorPromociones::getInstance();
 }
 */
+IProducto *Fabrica::getIProductos()
+{
+    return ControladorProductos::getInstance();
+}

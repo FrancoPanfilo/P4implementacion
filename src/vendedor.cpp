@@ -30,11 +30,20 @@ string Vendedor::getNickname()
 
 set<DTProducto> Vendedor::getProductosAsociados()
 {
-    return productosAsociados;
+    set<DTProducto> pa;
+    for (auto p : productosAsociados)
+    {
+        DTProducto elem(p.second.getCodigo(), p.second.getStock(), p.second.getPrecio(), p.second.getNombre(), p.second.getDescripcion(), p.second.getTipo());
+        pa.insert(elem);
+    }
+    return pa;
 }
 
 // Metodos
-
+void Vendedor::agregarProducto(Producto p)
+{
+    productosAsociados.insert(std::pair<int, Producto>(p.getCodigo(), p));
+}
 void Vendedor::agregarSuscriptor(Cliente *c)
 {
     ObserverNotificacion *o = c;

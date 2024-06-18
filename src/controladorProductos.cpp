@@ -61,6 +61,16 @@ DTProducto ControladorProductos::mostrarProducto()
     return prod;
 }
 
+void ControladorProductos::altaProducto(string nickname, DTProducto p)
+{
+    Fabrica *f = Fabrica::getFabrica();
+    IUsuario *contUsuarios = f->getIUsuarios();
+    Producto producto(p);
+    productos.insert(std::pair<int, Producto>(producto.getCodigo(), producto));
+    Vendedor *v = contUsuarios->obtenerVendedor(nickname);
+    v->agregarProducto(producto);
+}
+
 std::set<DTProducto> ControladorProductos::seleccionarVendedor(string nickname)
 {
     // TODO

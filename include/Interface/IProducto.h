@@ -19,6 +19,7 @@ public:
 	virtual DTProducto mostrarProducto() = 0;
 	virtual ParProdCant seleccionarProducto(int, int) = 0;
 	virtual Producto obtenerProducto(int) = 0;
+	virtual void altaProducto(string, DTProducto) = 0;
 
 	// virtual std::set<string> listarVendedores() = 0;
 	virtual std::set<DTProducto> seleccionarVendedor(string nickname) = 0;
