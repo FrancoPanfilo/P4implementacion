@@ -66,11 +66,27 @@ void cargarDatos()
     contProductos->altaProducto("diegom", dataPR14);
     contProductos->altaProducto("sofia25", dataPR15);
     // Promociones
-    // IPromocion *contPromociones = f->getIPromociones();
+    IPromocion *contPromociones = f->getIPromociones();
     DTPromocion dataPM1 = DTPromocion("Casa nueva", "Para que puedas ahorrar en la casa nueva", 30, DTFecha(25, 10, 2024));
     DTPromocion dataPM2 = DTPromocion("Fiesta", "Para que no te quedes sin ropa para las fiestas", 20, DTFecha(26, 10, 2024));
     DTPromocion dataPM3 = DTPromocion("Domotica", "Para modernizar tu casa", 10, DTFecha(26, 10, 2024));
     DTPromocion dataPM4 = DTPromocion("Liquidacion", "Hasta agotar stock", 10, DTFecha(26, 3, 2024));
+
+    Promocion p1(dataPM1, "ana23");
+    p1.agregarAPromo(contProductos->obtenerProducto(2), 1);
+    p1.agregarAPromo(contProductos->obtenerProducto(4), 1);
+    p1.agregarAPromo(contProductos->obtenerProducto(8), 1);
+    Promocion p2(dataPM2, "carlos78");
+    p2.agregarAPromo(contProductos->obtenerProducto(3), 2);
+    p2.agregarAPromo(contProductos->obtenerProducto(6), 3);
+    Promocion p3(dataPM3, "diegom");
+    p3.agregarAPromo(contProductos->obtenerProducto(5), 2);
+    Promocion p4(dataPM4, "diegom");
+    p4.agregarAPromo(contProductos->obtenerProducto(14), 1);
+    contPromociones->agregarPromocion(p1);
+    contPromociones->agregarPromocion(p2);
+    contPromociones->agregarPromocion(p3);
+    contPromociones->agregarPromocion(p4);
 
     // Compras
     // ICompra *contCompras = f->getICompras();
@@ -112,6 +128,5 @@ void cargarDatos()
     DTComentario dataCM24 = DTComentario(24, "¿Cuanto dura la bateria?", DTFecha(7, 6, 2024));
     DTComentario dataCM25 = DTComentario(25, "¿La aplicacion movil es facil de usar?", DTFecha(7, 6, 2024));
 
-
-    //nuestros datos
+    // nuestros datos
 }

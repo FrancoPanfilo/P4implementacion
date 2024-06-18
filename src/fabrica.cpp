@@ -41,11 +41,12 @@ ICompra *Fabrica::getICompras()
 {
     return ControladorCompras::getInstance();
 }
+*/
 IPromocion *Fabrica::getIPromociones()
 {
     return ControladorPromociones::getInstance();
 }
-*/
+
 IProducto *Fabrica::getIProductos()
 {
     return ControladorProductos::getInstance();

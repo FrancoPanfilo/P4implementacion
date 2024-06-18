@@ -22,7 +22,6 @@ public:
     string getNombre();
     string getDescripcion();
     string getTipo();
-    void agregarAPromo(string, int);
 };
 
 #endif // _PRODUCTO_H

@@ -41,9 +41,15 @@ set<DTProducto> Promocion::getProductos()
     set<DTProducto> dtproductos;
     for (auto par : productos)
     {
-        Producto p = par.first;
+        Producto p = par.second.getProducto();
         DTProducto dtp = DTProducto(p.getCodigo(), p.getStock(), p.getPrecio(), p.getNombre(), p.getDescripcion(), p.getTipo());
         dtproductos.insert(dtp);
     }
     return dtproductos;
+}
+
+void Promocion::agregarAPromo(Producto p, int cantidad)
+{
+    Minimo m(p, cantidad);
+    this->productos.insert(std::pair<int, Minimo>(p.getCodigo(), m));
 }

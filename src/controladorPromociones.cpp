@@ -84,7 +84,6 @@ void ControladorPromociones::seleccionarNickname(String)
 }
 void ControladorPromociones::agregarProductoAPromocion(int, int)
 {
-	// TODO
 }
 set<DTProducto> ControladorPromociones::obtenerProductosAsociados(String)
 {
@@ -103,5 +102,12 @@ int ControladorPromociones::obtenerDescuento(ParProdCant)
 std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname)
 {
 	std::set<DTPromocion> dtpromo;
+	for (auto p : promociones)
+	{
+		if (p.first == nickname)
+		{
+			dtpromo.insert(DTPromocion(p.second.getNombre(), p.second.getDescripcion(), p.second.getDescuento(), p.second.getVencimiento()));
+		}
+	}
 	return dtpromo;
 }

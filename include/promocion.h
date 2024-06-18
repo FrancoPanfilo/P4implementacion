@@ -18,7 +18,7 @@ private:
     DTFecha vencimiento;
     String descripcion;
     String nombre;
-    map<Producto, Minimo> productos;
+    map<int, Minimo> productos;
 
 public:
     string getVendedor();
@@ -30,6 +30,7 @@ public:
     map<Producto, Minimo> getMinimos();
     Promocion obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
+    void agregarAPromo(Producto, int cantidad);
     // Promocion obtenerSiAplica(std::set<ParProdCant>);
 };
 #endif //_PROMOCION_H

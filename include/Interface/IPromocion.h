@@ -25,7 +25,7 @@ public:
     virtual void confirmarCrearPromocion() = 0;
     // virtual int obtenerDescuento(ParProdCant) = 0;
     virtual ~IPromocion(){};
-
+    virtual std::set<DTPromocion> listarPromocionesVendedor(string) = 0;
     virtual std::set<DTPromocion> obtenerPromocionesVigentes() = 0;
     virtual DTProductosYVendedor seleccionarPromocionPorNombre(string) = 0;
 };
