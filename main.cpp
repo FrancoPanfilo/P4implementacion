@@ -263,6 +263,7 @@ int main(int argc, char *argv[])
 		else if (accion == "listarComentarios")
 		{
 			set<DTComentario> comentarios = contCom->listarComentarios();
+			cout << "Listando todos los comentarios" << endl;
 			for (auto com : comentarios)
 			{
 				printf("%d, ", com.id);

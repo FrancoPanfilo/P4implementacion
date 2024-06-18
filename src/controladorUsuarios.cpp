@@ -237,16 +237,9 @@ void ControladorUsuarios::finalizarExpediente()
 }
 
 void ControladorUsuarios::agregarComentario(string nickname, Comentario *com) {
-	// Cliente *c = this->obtenerCliente(nickname);
-	//
-	// if (c == NULL) {
-	// 	Vendedor *v = this->obtenerVendedor(nickname);
-	// 	if (v == NULL) {
-	// 		throw std::runtime_error("No existe el usuario ingresado");
-	// 	}
-	// 	v->agregarComentario(com);
-	// } else {
-	// 	c->agregarComentario(com);
-	// }
 	this->listaUsuarios.at(nickname).agregarComentario(com);
+}
+
+void ControladorUsuarios::borrarComentario(string nickname, Comentario *com) {
+	this->listaUsuarios.at(nickname).borrarComentario(com);
 }
