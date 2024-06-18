@@ -6,6 +6,7 @@
 #include "./Datatypes/DTFecha.h"
 #include "producto.h"
 
+#include <map>
 #include <string>
 
 using namespace std;
@@ -16,7 +17,7 @@ private:
 	int id;
     string contenido;
     DTFecha fecha;
-	Comentario *respuestaA;
+	map<int, Comentario*> respuestas;
 	Producto *producto; 
 
 public:
@@ -35,9 +36,9 @@ public:
     // Setters
     void setContenido(string texto);
     void setFecha(DTFecha fecha);
-	void setRespuestaA(Comentario *respuestaA);
 
     // Metodos
+	void agregarRespuesta(Comentario *respuesta);
     void borrarRespuestas();
     void destroy();
 };

@@ -21,7 +21,7 @@ private:
     ControladorComentarios();
     ~ControladorComentarios();
 
-	map<int, Comentario> comentarios;
+	map<int, Comentario*> comentarios;
 
 	// Registro de ids
 	int ultimaId;

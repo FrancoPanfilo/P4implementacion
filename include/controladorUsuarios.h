@@ -62,6 +62,8 @@ public:
 	set<DTDetalleCompra> listarComprasCliente();
 	DTCliente listarInfoCliente();
 	void finalizarExpediente();
+
+	void agregarComentario(string nickname, Comentario *com);
 };
 
 #endif // _CONTROLADORUSUARIOS_H

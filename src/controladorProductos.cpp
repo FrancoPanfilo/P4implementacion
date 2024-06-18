@@ -1,9 +1,10 @@
 // // File: controladorProductos.cpp
 
 #include "../include/controladorProductos.h"
-#include "../include/Interface/IUsuario.h"
-#include "../include/fabrica.h"
+#include "../include/controladorUsuarios.h"
 #include <string>
+#include <iostream>
+#include <ostream>
 
 ControladorProductos *ControladorProductos::instance = NULL;
 
@@ -47,6 +48,7 @@ std::set<DTProducto> ControladorProductos::listarProductosConId()
     std::set<DTProducto> dtProductos;
     for (auto producto : productos)
     {
+		Producto prod = producto.second;
         dtProductos.insert(DTProducto(producto.second.getCodigo(), 0, 0, producto.second.getNombre(), "", ""));
     }
     return dtProductos;
@@ -63,8 +65,7 @@ DTProducto ControladorProductos::mostrarProducto()
 
 void ControladorProductos::altaProducto(string nickname, DTProducto p)
 {
-    Fabrica *f = Fabrica::getFabrica();
-    IUsuario *contUsuarios = f->getIUsuarios();
+	ControladorUsuarios *contUsuarios = ControladorUsuarios::getInstance();
     Producto producto(p);
     productos.insert(std::pair<int, Producto>(producto.getCodigo(), producto));
     Vendedor *v = contUsuarios->obtenerVendedor(nickname);

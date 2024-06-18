@@ -41,10 +41,12 @@ void Comentario::setFecha(DTFecha fecha) {
 }
 
 // Metodos
+void Comentario::agregarRespuesta(Comentario *respuesta) {
+	this->respuestas.insert(std::pair<int, Comentario*>(respuesta->getId(), respuesta));
+}
 
 void Comentario::borrarRespuestas() {
 	// TODO
-	// Acá hay q tener cuidado xq la relación es Respuesta -> Original
 }
 
 void Comentario::destroy() {
