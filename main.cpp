@@ -129,31 +129,57 @@ int main(int argc, char *argv[])
 			{
 				cout << nick << endl;
 			}	
-			bool seguir = true;
-			set<string> sLista;
-			while(seguir && size(noSusc) != 0){
-				string vendedor = leerStr("Vendedor: ");
-				contSuscripciones->agregarSuscripcion(vendedor);
-				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
-				while (!(resp == "y" || resp == "n")){
-					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
+			bool seguir = size(noSusc) != 0;
+			if (seguir){
+				set<string> sLista;
+				while(seguir){
+					if (size(noSusc) != 0){
+					string vendedor = leerStr("Vendedor: ");
+					contSuscripciones->agregarSuscripcion(vendedor);
+					string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
+					while (!(resp == "y" || resp == "n")){
+						resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
+					}	
+					seguir = (resp == "y");
+					sLista.insert(vendedor);
+					noSusc.erase(vendedor);
+					} else cout << "Ya no hay vendedores a los cuales se pueda suscribir." << endl;
 				}
-				seguir = (resp == "y");
-				sLista.insert(vendedor);
-				noSusc.erase(vendedor);
-			}
-			cout << "Suscripciones:" << endl;
-			for (auto s : sLista){
+				cout << "Suscripciones:" << endl;
+				for (auto s : sLista){
+					cout << s << endl;
+				}
+				string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
+				while (!(resp2 == "y" || resp2 == "n")){
+						resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
+					}
+				if (resp2 == "y"){
+					contSuscripciones->confirmarSuscripcion();
+				}
+			} else cout << "No hay vendedores a los cuales se pueda suscribir." << endl;
+
+		} else if(accion == "eliminarSuscripcion"){
+			string nickname = leerStr("Cliente: ");
+			set<string> listaSus = contSuscripciones->listarVendedoresSuscritos(nickname);
+			for (auto s :listaSus){
 				cout << s << endl;
 			}
-			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
-			while (!(resp2 == "y" || resp2 == "n")){
-					resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
-				}
-			if (resp2 == "y"){
-				contSuscripciones->confirmarSuscripcion();
+			bool seguir = (size(listaSus) != 0);
+			if (!seguir){
+				cout << "El cliente no está suscrito a ningún vendedor." << endl;
 			}
-
+			while (seguir){
+				if (size(listaSus) != 0){
+					string nickV = leerStr("Ingrese la suscripcion a eliminar: ");
+					contSuscripciones->eliminarSuscriptor(nickV);
+					listaSus.erase(nickV);
+					string resp = leerStr("¿Desea seguir eliminando suscripciones? [y/n]");
+					while (!(resp == "y" || resp == "n")){
+						resp = leerStr("Respuesta no válida. ¿Desea seguir eliminando suscripciones? [y/n]");
+					}
+					seguir = (resp == "y");
+				} else cout << "El cliente ya no tiene suscripciones." << endl;
+			}
 
 		} else if (accion == "obtenerListaComentarios") {
 			string nickname = leerStr("Usuario: ");
@@ -164,8 +190,7 @@ int main(int argc, char *argv[])
 				mostrarFecha(com.fecha);
 				cout << com.contenido << endl;
 			}
-		}
-		else if (accion == "obtenerCliente")
+		} else if (accion == "obtenerCliente")
 		{
 			string nickname = leerStr("Cliente: ");
 			Cliente *c = contUsuarios->obtenerCliente(nickname);
