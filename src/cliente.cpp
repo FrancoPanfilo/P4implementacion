@@ -43,6 +43,11 @@ string Cliente::getNickname()
     return Usuario::getNickname();
 }
 
+map <int, Compra> Cliente::getCompras()
+{
+    return compras;
+}
+
 // Setters
 
 void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes) 
@@ -65,6 +70,16 @@ void Cliente::notificar()
 void Cliente::eliminarNotificacionesPendientes() 
 {
     notificacionesPendientes.clear();
+}
+
+void Cliente::agregarSub(string nickname)
+{
+    suscripciones.insert(nickname);
+}
+
+void Cliente::eliminarSub(string nickname)
+{
+    suscripciones.erase(nickname);
 }
 
 Cliente *Cliente::create(DTAltaCliente altaCliente) 

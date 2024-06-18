@@ -21,7 +21,7 @@ public:
     static Fabrica *getFabrica();
     IComentario *getIComentarios();
     IUsuario *getIUsuarios();
-    // ISuscripcion *getISuscripciones();
+    ISuscripcion *getISuscripciones();
     // IProducto *getIProductos();
     // ICompra *getICompras();
     //   IPromocion *getIPromociones();

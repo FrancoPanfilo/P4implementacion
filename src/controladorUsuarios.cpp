@@ -196,7 +196,8 @@ set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor(){
 	return resultado;
 }
 
-DTVendedor ControladorUsuarios::listarInfoVendedor(){
+DTVendedor ControladorUsuarios::listarInfoVendedor()
+{
     Vendedor v = listaVendedores.at(nickGuardado);
     DTVendedor vendedor = DTVendedor(v.getNickname(),v.getFechaNac(), v.getRUT());
 	return vendedor;
@@ -204,8 +205,13 @@ DTVendedor ControladorUsuarios::listarInfoVendedor(){
 
 set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
 {
-    // TODO
     set<DTDetalleCompra> resultado;
+    Cliente c = listaClientes.at(nickGuardado);
+    map<int,Compra> comp =  c.getCompras();
+    for (auto co : comp){
+        Compra ca = co.second; 
+        resultado.insert(DTDetalleCompra(co.first,ca.getMontoFinal(),ca.getFechaCompra(),ca.getProductos(),true));
+    }
     return resultado;
 }
 
@@ -218,5 +224,5 @@ DTCliente ControladorUsuarios::listarInfoCliente()
 
 void ControladorUsuarios::finalizarExpediente()
 {
-    nickGuardado = ""; //hay que hacer esto?
+    nickGuardado = ""; 
 }

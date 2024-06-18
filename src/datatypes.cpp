@@ -3,6 +3,7 @@
 #include "../include/Datatypes/DTCliente.h"
 #include "../include/Datatypes/DTComentario.h"
 #include "../include/Datatypes/DTCompra.h"
+#include "../include/Datatypes/DTDetalleCompra.h"
 #include "../include/Datatypes/DTFecha.h"
 #include "../include/Datatypes/DTNotificacion.h"
 #include "../include/Datatypes/DTPromocion.h"
@@ -38,6 +39,17 @@ DTCompra::DTCompra(DTFecha fecha, int montoFinal, set<int> datosProductos)
     : fecha(fecha), montoFinal(montoFinal), datosProductos(datosProductos) {}
 
 DTCompra::~DTCompra(){}    
+
+
+DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map<DTProducto, int> productos, bool todoEnviado)
+    :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos), todoEnviado(todoEnviado) {}
+
+DTDetalleCompra::~DTDetalleCompra(){}
+
+bool DTDetalleCompra::operator<(const DTDetalleCompra &otra) const
+{
+    return id < otra.id;
+}
 
 DTFecha::DTFecha(int dia, int mes, int anio)
     : dia(dia), mes(mes), anio(anio) {}

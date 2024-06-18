@@ -29,11 +29,17 @@ set<string> ControladorSuscripciones::listarNoSuscritos(string nickname)
 }
 void ControladorSuscripciones::agregarSuscripcion(string nickname)
 {
-  suscriptor->getSuscripciones().insert(nickname);
+  //suscriptor->agregarSub(nickname);
+  subsParaAgregar.insert(nickname);
 }
 void ControladorSuscripciones::confirmarSuscripcion()
 {
-  
+  ControladorUsuarios *cu = ControladorUsuarios::getInstance();
+  for (auto v : subsParaAgregar){
+    Vendedor *ven = cu->obtenerVendedor(v);
+    ven->agregarSuscriptor(suscriptor);
+    suscriptor->agregarSub(v);
+  }
 }
 set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname)
 {
@@ -46,14 +52,25 @@ set<string> ControladorSuscripciones::listarVendedoresSuscritos(string nickname)
       vs.insert(v);
     }
   }
+  suscriptor = cu->obtenerCliente(nickname); 
   return vs;
 }
 void ControladorSuscripciones::eliminarSuscriptor(string nickname)
 {
+  ControladorUsuarios *cu = ControladorUsuarios::getInstance();
+  Vendedor* v = cu->obtenerVendedor(nickname);
+  v->eliminarSuscriptor(suscriptor);
+  suscriptor->eliminarSub(nickname);
 }
 set<DTNotificacion> ControladorSuscripciones::consultarNotificacionesRecibidas(string nickname)
 {
+  set<DTNotificacion> resultado;
+  ControladorUsuarios *cu = ControladorUsuarios::getInstance();
+  suscriptor = cu->obtenerCliente(nickname); 
+  resultado = suscriptor->getNotificacionesPendientes();
+  return resultado;
 }
 void ControladorSuscripciones::eliminarNotificaciones()
 {
+  suscriptor->eliminarNotificacionesPendientes();
 }

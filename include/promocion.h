@@ -3,7 +3,7 @@
 #include <string>
 #include "./Datatypes/ParProdCant.h"
 #include "./Datatypes/DTFecha.h"
-#include "./Minimo.h"
+#include "./minimo.h"
 #include "./vendedor.h"
 #include <set>
 #include <map>

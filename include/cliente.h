@@ -7,9 +7,11 @@
 #include "./Datatypes/DTAltaCliente.h"
 #include "usuario.h"
 #include "observer.h"
+#include "compra.h"
 
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
 
@@ -20,6 +22,7 @@ private:
     string ciudad;
     set<DTNotificacion> notificacionesPendientes;
     set<string> suscripciones;
+    map<int, Compra> compras;
 
 public:
     // Constructor
@@ -33,6 +36,7 @@ public:
     set<DTNotificacion> getNotificacionesPendientes();
     set<string> getSuscripciones();
     string getNickname();
+    map<int, Compra> getCompras();
 
     // Setters
     void setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes);
@@ -42,6 +46,9 @@ public:
     void notificar();
     void eliminarNotificacionesPendientes(); // Se eliminan todas las instancias de DTNotificacion del campo notifiacionesPendientes del cliente
     Cliente *create(DTAltaCliente altaCliente);
+
+    void agregarSub(string nickname);
+    void eliminarSub(string nickname);
 };
 
 #endif // _CLIENTE_H

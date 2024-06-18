@@ -1,4 +1,4 @@
-#include "../include/Minimo.h"
+#include "../include/minimo.h"
 /*
 bool Minimo::verificarMinimo(std::set<ParProdCant> prod)
 {
