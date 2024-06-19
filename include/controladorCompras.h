@@ -45,7 +45,7 @@ public:
     std::set<String> listarClientes();
     void seleccionarUsuario(String);
     void seleccionarProducto(int, int);
-    void calcularPrecio();
+    double calcularPrecio();
     void registrarCompra();
     void finalizarCompra();
     

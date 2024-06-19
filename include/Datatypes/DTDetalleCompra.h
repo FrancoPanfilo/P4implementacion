@@ -9,7 +9,7 @@
 class DTDetalleCompra {
 	public:
 		int id;
-		int montoFinal;
+		double montoFinal;
 		DTFecha fechaCompra;
 		map<int, bool> productosEnvio; 
 		set<ParProdCant> productos;

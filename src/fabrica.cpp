@@ -36,11 +36,11 @@ ISuscripcion *Fabrica::getISuscripciones()
 {
     return ControladorSuscripciones::getInstance();
 }
-/*ICompra *Fabrica::getICompras()
+ICompra *Fabrica::getICompras()
 {
     return ControladorCompras::getInstance();
 }
-*/
+
 IPromocion *Fabrica::getIPromociones()
 {
     return ControladorPromociones::getInstance();

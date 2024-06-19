@@ -46,7 +46,7 @@ void ControladorCompras::seleccionarProducto(int cantidad, int id){
 	envios.insert(std::pair<int, bool>(id, false));
 }
 
-void ControladorCompras::calcularPrecio(){	
+double ControladorCompras::calcularPrecio(){	
 	precioTotal = 0;
 	ControladorPromociones* cprom = ControladorPromociones::getInstance();
 	Promocion* promo = cprom->obtenerPromocion(datosProductos);

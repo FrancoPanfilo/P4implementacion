@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
 	IProducto *contProductos = f->getIProductos();
 	ISuscripcion *contSuscripciones = f->getISuscripciones();
 	IPromocion *contPromociones = f->getIPromociones();
+	ICompra *contCompra = f->getICompras();
 	cargarDatos();
 
 	string accion = "";
@@ -199,6 +200,17 @@ int main(int argc, char *argv[])
 		}
 		else if (accion == "prodDeVendedor")
 		{
+		}
+		else if (accion == "seleccionarUsuarioCompra")
+		{
+			string nick = leerStr("Nickname: ");
+			contCompra->seleccionarUsuario(nick);
+		}
+		else if(accion == "seleccionarProductoCompra")
+		{
+			int idProd = leerInt("Ingrese id del producto: ");
+			int cantidad = leerInt("Ingrese cantidad a comprar: ");
+			contCompra->seleccionarProducto(idProd, cantidad);
 		}
 		else if (accion == "seleccionarNickname")
 		{
