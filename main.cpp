@@ -218,9 +218,9 @@ int main(int argc, char *argv[])
 		{	
 			bool seguir = true;
 			while (seguir){
-				int idProd = leerInt("Ingrese id del producto: ");
 				int cantidad = leerInt("Ingrese cantidad a comprar: ");
-				contCompra->seleccionarProducto(idProd, cantidad);
+				int idProd = leerInt("Ingrese id del producto: ");
+				contCompra->seleccionarProducto(cantidad, idProd);
 				string resp = leerStr("¿Desea comprar otro producto? [y/n]");
 				while (!(resp == "y" || resp == "n"))
 				{

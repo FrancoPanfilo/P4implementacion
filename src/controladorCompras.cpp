@@ -44,6 +44,7 @@ void ControladorCompras::seleccionarProducto(int cantidad, int id){
 	ParProdCant par = ParProdCant(p, cantidad);
 	datosProductos.insert(par);
 	envios.insert(std::pair<int, bool>(id, false));
+	//bajar y controlar el stock
 }
 
 double ControladorCompras::calcularPrecio(){	
