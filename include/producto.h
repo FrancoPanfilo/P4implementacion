@@ -8,17 +8,17 @@ class Producto
 private:
     int codigo;
     int stock;
-    int precio;
+    double precio;
     string nombre;
     string descripcion;
     string tipo;
 
 public:
     Producto(DTProducto dtp);
-    Producto(int cod, int stk, int prc, string nom, string desc, string tp);
+    Producto(int cod, int stk, double prc, string nom, string desc, string tp);
     int getCodigo() const;
     int getStock();
-    int getPrecio();
+    double getPrecio();
     string getNombre();
     string getDescripcion();
     string getTipo();

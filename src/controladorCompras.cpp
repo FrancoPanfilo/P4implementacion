@@ -47,19 +47,28 @@ void ControladorCompras::seleccionarProducto(int cantidad, int id){
 }
 
 double ControladorCompras::calcularPrecio(){	
-	precioTotal = 0;
+	double total = 0;
 	ControladorPromociones* cprom = ControladorPromociones::getInstance();
 	Promocion* promo = cprom->obtenerPromocion(datosProductos);
-	int desc = promo->getDescuento();
-	set<DTProducto> pd = promo->getProductos();
-	for (auto p : datosProductos){
-		Producto pr = p.producto;
-		if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
-			precioTotal += (p.cantidad * pr.getPrecio()) / desc;
-		} else {
-			precioTotal += p.cantidad * pr.getPrecio();
+	if (promo != NULL){
+		int desc = promo->getDescuento();
+		set<DTProducto> pd = promo->getProductos();
+		for (auto p : datosProductos){
+			Producto pr = p.producto;
+			if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
+				total += (p.cantidad * pr.getPrecio()) / desc;
+			} else {
+				total += p.cantidad * pr.getPrecio();
+			}
 		}
-	}
+	} else {
+		for (auto p : datosProductos){
+			Producto pr = p.producto;
+			total += p.cantidad * pr.getPrecio();
+		}
+	};		
+	precioTotal = total;
+	return total;
 }
 
 void ControladorCompras::registrarCompra(){

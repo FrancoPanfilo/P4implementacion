@@ -51,6 +51,14 @@ int leerInt(string pregunta)
 	return respuesta;
 }
 
+int leerDouble(string pregunta)
+{
+	cout << pregunta;
+	int respuesta;
+	scanf("%lf", &respuesta);
+	return respuesta;
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -207,10 +215,26 @@ int main(int argc, char *argv[])
 			contCompra->seleccionarUsuario(nick);
 		}
 		else if(accion == "seleccionarProductoCompra")
-		{
-			int idProd = leerInt("Ingrese id del producto: ");
-			int cantidad = leerInt("Ingrese cantidad a comprar: ");
-			contCompra->seleccionarProducto(idProd, cantidad);
+		{	
+			bool seguir = true;
+			while (seguir){
+				int idProd = leerInt("Ingrese id del producto: ");
+				int cantidad = leerInt("Ingrese cantidad a comprar: ");
+				contCompra->seleccionarProducto(idProd, cantidad);
+				string resp = leerStr("¿Desea comprar otro producto? [y/n]");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea comprar otro producto? [y/n]");
+				}
+				seguir = (resp == "y");
+			}
+			//cout << "El monto final de la compra será: " << contCompra->calcularPrecio();
+			printf("El monto final de la compra será: %lf ", contCompra->calcularPrecio());
+
+		}
+		else if (accion == "confirmarCompra"){
+			contCompra->registrarCompra();
+			contCompra->finalizarCompra();
 		}
 		else if (accion == "seleccionarNickname")
 		{
