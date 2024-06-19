@@ -14,6 +14,7 @@ class DTDetalleCompra {
 		map<int, bool> productosEnvio; 
 		set<ParProdCant> productos;
 		DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra, map<int, bool> productosEnvio, set<ParProdCant> productos);
+		DTDetalleCompra();
 		~DTDetalleCompra();
 		bool operator<(const DTDetalleCompra &otra) const;
 };

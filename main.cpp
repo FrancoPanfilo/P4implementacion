@@ -147,10 +147,10 @@ int main(int argc, char *argv[])
 			{
 				string vendedor = leerStr("Vendedor: ");
 				contSuscripciones->agregarSuscripcion(vendedor);
-				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n]");
+				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n] ");
 				while (!(resp == "y" || resp == "n"))
 				{
-					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n]");
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n] ");
 				}
 				seguir = (resp == "y");
 				sLista.insert(vendedor);
@@ -161,10 +161,10 @@ int main(int argc, char *argv[])
 			{
 				cout << s << endl;
 			}
-			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n]");
+			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n] ");
 			while (!(resp2 == "y" || resp2 == "n"))
 			{
-				resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n]");
+				resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n] ");
 			}
 			if (resp2 == "y")
 			{
@@ -218,8 +218,8 @@ int main(int argc, char *argv[])
 		{	
 			bool seguir = true;
 			while (seguir){
-				int cantidad = leerInt("Ingrese cantidad a comprar: ");
 				int idProd = leerInt("Ingrese id del producto: ");
+				int cantidad = leerInt("Ingrese cantidad a comprar: ");
 				contCompra->seleccionarProducto(cantidad, idProd);
 				string resp = leerStr("¿Desea comprar otro producto? [y/n]");
 				while (!(resp == "y" || resp == "n"))
@@ -228,9 +228,15 @@ int main(int argc, char *argv[])
 				}
 				seguir = (resp == "y");
 			}
-			//cout << "El monto final de la compra será: " << contCompra->calcularPrecio();
-			printf("El monto final de la compra será: %lf ", contCompra->calcularPrecio());
-
+			DTDetalleCompra detalles = contCompra->devolverDetalles();
+			cout << "El monto final de la compra será: $" << detalles.montoFinal << endl;
+			//printf("El monto final de la compra será: %lf ", detalles.montoFinal);
+			cout << "Fecha de compra: ";
+			mostrarFecha(detalles.fechaCompra);
+			cout << "Producto/s a comprar: " << endl;
+			for (auto dp : detalles.productos){
+				cout << dp.producto.getNombre() << " x " << dp.cantidad << endl;
+			}
 		}
 		else if (accion == "confirmarCompra"){
 			contCompra->registrarCompra();

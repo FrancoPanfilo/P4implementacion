@@ -11,6 +11,7 @@
 #include "./Datatypes/DTFecha.h"
 #include "./Datatypes/ParProdCant.h"
 #include "./cliente.h"
+#include "./Datatypes/DTDetalleCompra.h"
 
 using String = std::string;
 class ControladorCompras : public ICompra
@@ -22,10 +23,11 @@ private:
     String nickname;
     DTFecha fechaActual;
     std::set<ParProdCant> datosProductos;
-    int precioTotal; // no se si se usa
+    //int precioTotal; // no se si se usa
     Cliente* cliente;
     int idC;
     map<int, bool> envios;
+    DTDetalleCompra compraActual;
 
 public:
     static ControladorCompras *getInstance();
@@ -45,7 +47,7 @@ public:
     std::set<String> listarClientes();
     void seleccionarUsuario(String);
     void seleccionarProducto(int, int);
-    double calcularPrecio();
+    DTDetalleCompra devolverDetalles();
     void registrarCompra();
     void finalizarCompra();
     

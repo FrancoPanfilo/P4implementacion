@@ -37,3 +37,7 @@ string Producto::getTipo()
 {
     return tipo;
 }
+
+void Producto::setStock(int nuevoStock){
+    stock = nuevoStock;
+}

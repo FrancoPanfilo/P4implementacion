@@ -45,6 +45,8 @@ DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map
         this->productosEnvio = productosEnvio;
     }
 
+DTDetalleCompra::DTDetalleCompra() {}
+
 DTDetalleCompra::~DTDetalleCompra() {}
 
 bool DTDetalleCompra::operator<(const DTDetalleCompra &otra) const

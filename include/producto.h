@@ -22,6 +22,7 @@ public:
     string getNombre();
     string getDescripcion();
     string getTipo();
+    void setStock(int);
 };
 
 #endif // _PRODUCTO_H
