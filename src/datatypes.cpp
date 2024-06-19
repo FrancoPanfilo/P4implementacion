@@ -40,13 +40,12 @@ DTCompra::DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos)
 
 DTCompra::~DTCompra(){}    
 
-
 DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
     :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos) {
-        this->produtosEnvio = productosEnvio;
+        this->productosEnvio = productosEnvio;
     }
 
-DTDetalleCompra::~DTDetalleCompra(){}
+DTDetalleCompra::~DTDetalleCompra() {}
 
 bool DTDetalleCompra::operator<(const DTDetalleCompra &otra) const
 {
@@ -115,7 +114,8 @@ bool ParProdCant::operator<(const ParProdCant& other) const
 DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
     : productos(productos), vendedor(vendedor) {}
 
-bool DTComentario::operator<(const DTComentario& other) const
+bool DTComentario::operator<(const DTComentario &other) const
+
 {
     return id < other.id;
 }
