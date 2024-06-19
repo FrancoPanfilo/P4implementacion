@@ -41,7 +41,7 @@ DTCompra::~DTCompra() {}
 
 DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
     :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos) {
-        this->produtosEnvio = productosEnvio;
+        this->productosEnvio = productosEnvio;
     }
 
 DTDetalleCompra::~DTDetalleCompra() {}
