@@ -5,7 +5,7 @@ Producto::Producto(DTProducto dtp)
     : codigo(dtp.codigo), stock(dtp.stock), precio(dtp.precio),
       nombre(dtp.nombre), descripcion(dtp.descripcion), tipo(dtp.tipo) {}
 
-Producto::Producto(int cod, int stk, int prc, string nom, string desc, string tp)
+Producto::Producto(int cod, int stk, double prc, string nom, string desc, string tp)
     : codigo(cod), stock(stk), precio(prc), nombre(nom), descripcion(desc), tipo(tp) {}
 
 int Producto::getCodigo() const
@@ -18,7 +18,7 @@ int Producto::getStock()
     return stock;
 }
 
-int Producto::getPrecio()
+double Producto::getPrecio()
 {
     return precio;
 }
@@ -36,4 +36,8 @@ string Producto::getDescripcion()
 string Producto::getTipo()
 {
     return tipo;
+}
+
+void Producto::setStock(int nuevoStock){
+    stock = nuevoStock;
 }

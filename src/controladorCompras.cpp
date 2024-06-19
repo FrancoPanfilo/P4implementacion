@@ -4,7 +4,7 @@
 #include "../include/controladorPromociones.h"
 
 #include <ctime>
-//#include <cstddef>
+#include <stdexcept>
 
 using namespace std;
 
@@ -40,37 +40,58 @@ void ControladorCompras::seleccionarUsuario(String nickname){
 
 void ControladorCompras::seleccionarProducto(int cantidad, int id){
 	ControladorProductos* cpro = ControladorProductos::getInstance();
-	Producto p = cpro->obtenerProducto(id);
-	ParProdCant par = ParProdCant(p, cantidad);
-	datosProductos.insert(par);
-	envios.insert(std::pair<int, bool>(id, false));
-}
-
-void ControladorCompras::calcularPrecio(){	
-	precioTotal = 0;
-	ControladorPromociones* cprom = ControladorPromociones::getInstance();
-	Promocion* promo = cprom->obtenerPromocion(datosProductos);
-	int desc = promo->getDescuento();
-	set<DTProducto> pd = promo->getProductos();
+	Producto prod = cpro->obtenerProducto(id);
+	ParProdCant par = ParProdCant(prod, cantidad);
+	//control producto no repetido
+	bool repetido = false;
 	for (auto p : datosProductos){
-		Producto pr = p.producto;
-		if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
-			precioTotal += (p.cantidad * pr.getPrecio()) / desc;
-		} else {
-			precioTotal += p.cantidad * pr.getPrecio();
+		repetido = (p.producto.getCodigo() == par.producto.getCodigo());
+		if (repetido){
+			throw std::runtime_error("Producto ya seleccionado anteriormente. ");
 		}
 	}
+	datosProductos.insert(par);
+	envios.insert(std::pair<int, bool>(id, false));
+	//bajar y controlar el stock
+}
+
+DTDetalleCompra ControladorCompras::devolverDetalles(){	
+	double total = 0;
+	ControladorPromociones* cprom = ControladorPromociones::getInstance();
+	Promocion* promo = cprom->obtenerPromocion(datosProductos);
+	if (promo != NULL){
+		int desc = promo->getDescuento();
+		set<DTProducto> pd = promo->getProductos();
+		for (auto p : datosProductos){
+			Producto pr = p.producto;
+			if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
+				total += (p.cantidad * pr.getPrecio()) -(p.cantidad * pr.getPrecio()/desc); //(p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio()) / desc;
+			} else {
+				total += p.cantidad * pr.getPrecio();
+			}
+		}
+	} else {
+		for (auto p : datosProductos){
+			Producto pr = p.producto;
+			total += p.cantidad * pr.getPrecio();
+		}
+	};		
+	idC++;
+	compraActual = DTDetalleCompra(idC, total, fechaActual, envios, datosProductos);
+	return compraActual;
 }
 
 void ControladorCompras::registrarCompra(){
-	idC++;
-	Compra compra = Compra(fechaActual, precioTotal, idC, datosProductos, envios);
+	Compra compra = Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios);
 	cliente->getCompras().insert(std::pair <int, Compra>(idC, compra));
 	compras.insert((std::pair <int, Compra>(idC, compra)));
+	
 }
 
 void ControladorCompras::finalizarCompra(){
-	precioTotal = 0;
+	for(auto p : datosProductos){
+		p.producto.setStock(p.producto.getStock() - p.cantidad); 
+	};
 	datosProductos.clear();
 	nickname = "";
 

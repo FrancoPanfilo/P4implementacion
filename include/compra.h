@@ -11,18 +11,18 @@ class Compra
 {
 private:
     DTFecha fechaCompra;
-    int montoFinal;
+    double montoFinal;
     int id;
     set<ParProdCant> productos;
     map<int, bool> envios;
 
 public:
     DTFecha getFechaCompra();
-    int getMontoFinal();
+    double getMontoFinal();
     int getId();
     set<ParProdCant> getProductos();
     map<int, bool> getEnvios();
-    Compra(DTFecha fechaCompra, int montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios);
+    Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios);
     Compra();
     ~Compra();
 };

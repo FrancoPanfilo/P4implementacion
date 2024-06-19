@@ -123,7 +123,7 @@ Promocion *ControladorPromociones::obtenerPromocion(set<ParProdCant> ppp)
 {
 	Promocion *promo = NULL;
 	std::map<string, Promocion>::iterator it = this->promociones.begin();
-	while (promo == NULL)
+	while (promo == NULL && it != promociones.end())
 	{
 		promo = it->second.obtenerSiAplica(ppp);
 		it++;
