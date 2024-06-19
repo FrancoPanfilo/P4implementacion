@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
 	IProducto *contProductos = f->getIProductos();
 	ISuscripcion *contSuscripciones = f->getISuscripciones();
 	IPromocion *contPromociones = f->getIPromociones();
+	ICompra *contCompra = f->getICompras();
 	cargarDatos();
 
 	string accion = "";

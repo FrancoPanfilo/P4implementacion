@@ -108,11 +108,6 @@ bool ParProdCant::operator<(const ParProdCant &other) const
     return producto.getCodigo() < other.producto.getCodigo();
 }
 
-bool ParProdCant::operator<(const ParProdCant& other) const
-{
-    return (this->producto.getCodigo() < other.producto.getCodigo());
-}
-
 DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
     : productos(productos), vendedor(vendedor) {}
 

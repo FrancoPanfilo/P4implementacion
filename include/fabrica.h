@@ -23,7 +23,7 @@ public:
     IUsuario *getIUsuarios();
     ISuscripcion *getISuscripciones();
     IProducto *getIProductos();
-    // ICompra *getICompras();
+    ICompra *getICompras();
     IPromocion *getIPromociones();
 };
 #endif // _FABRICA_H
