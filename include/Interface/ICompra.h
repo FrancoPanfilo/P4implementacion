@@ -13,7 +13,8 @@ public:
     virtual void finalizarCompra() = 0;
     virtual std::set<String> listarClientes() = 0;
     virtual void seleccionarUsuario(String) = 0;
-    // virtual void calcularPrecio(Promocion, std::set<ParProdCant>) = 0;
+    virtual void seleccionarProducto(int, int) = 0;
+    virtual void calcularPrecio(Promocion, std::set<ParProdCant>) = 0;
     virtual ~ICompra(){};
 };
 #endif // _ICOMPRA_H
