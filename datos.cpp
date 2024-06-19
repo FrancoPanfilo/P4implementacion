@@ -10,7 +10,7 @@ void cargarDatos()
     Fabrica *f = Fabrica::getFabrica();
     IUsuario *contUsuarios = f->getIUsuarios();
     IProducto *contProductos = f->getIProductos();
-    DTAltaVendedor dataUS1 = DTAltaVendedor("ana23", DTFecha(13, 5, 1988), "qwer1234", "212345678001");
+    DTAltaVendedor dataUS1 = DTAltaVendedor("ana23", DTFecha(15, 5, 1988), "qwer1234", "212345678001");
     DTAltaVendedor dataUS2 = DTAltaVendedor("carlos78", DTFecha(18, 6, 1986), "asdfghj", "356789012345");
     DTAltaVendedor dataUS3 = DTAltaVendedor("diegom", DTFecha(28, 7, 1993), "zxcvbn", "190123456789");
     DTAltaVendedor dataUS6 = DTAltaVendedor("maria01", DTFecha(25, 3, 1985), "5tgb6yhn", "321098765432");
@@ -36,7 +36,7 @@ void cargarDatos()
     // IProducto *contProductos = f->getIProductos();
     DTProducto dataPR1 = DTProducto(1, 50, 1400, "Camiseta Azul", "Camiseta de poliester, color azul", "R");
     DTProducto dataPR2 = DTProducto(2, 30, 40500, "Televisor LED", "Televisor LED 55 pulgadas", "E");
-    DTProducto dataPR3 = DTProducto(3, 60, 699.99, "Chaqueta de Cuero", "Chaqueta de cuero, color negro", "R");
+    DTProducto dataPR3 = DTProducto(3, 20, 699.99, "Chaqueta de Cuero", "Chaqueta de cuero, color negro", "R");
     DTProducto dataPR4 = DTProducto(4, 15, 1199.99, "Microondas Digital", "Microondas digital, 30L", "E");
     DTProducto dataPR5 = DTProducto(5, 40, 599.99, "Luz LED", "Luz Bluetooth LED", "O");
     DTProducto dataPR6 = DTProducto(6, 25, 60, "Pantalones Vaqueros", "Pantalones vaqueros, talla 32", "R");
@@ -44,9 +44,9 @@ void cargarDatos()
     DTProducto dataPR8 = DTProducto(8, 10, 15499, "Refrigerador", "Refrigerador de doble puerta", "E");
     DTProducto dataPR9 = DTProducto(9, 50, 23000, "Cafetera", "Cafetera de goteo programable", "E");
     DTProducto dataPR10 = DTProducto(10, 20, 5500, "Zapatillas Deportivas", "Zapatillas para correr, talla 42", "R");
-    DTProducto dataPR11 = DTProducto(11, 25, 9000, "Mochila", "Mochila de viaje, 40L", "O");
-    DTProducto dataPR12 = DTProducto(12, 20, 2534, "Plancha de Ropa", "Plancha a vapor, 1500W", "E");
-    DTProducto dataPR13 = DTProducto(13, 50, 199.99, "Gorra", "Gorra para deportes, color rojo", "R");
+    DTProducto dataPR11 = DTProducto(11, 30, 9000, "Mochila", "Mochila de viaje, 40L", "O");
+    DTProducto dataPR12 = DTProducto(12, 25, 2534, "Plancha de Ropa", "Plancha a vapor, 1500W", "E");
+    DTProducto dataPR13 = DTProducto(13, 50, 200, "Gorra", "Gorra para deportes, color rojo", "R");
     DTProducto dataPR14 = DTProducto(14, 15, 15000, "Tablet", "Tablet Android de 10 pulgadas", "E");
     DTProducto dataPR15 = DTProducto(15, 20, 150.50, "Reloj de Pared", "Reloj de pared vintage", "O");
 

@@ -60,12 +60,12 @@ DTDetalleCompra ControladorCompras::devolverDetalles(){
 	ControladorPromociones* cprom = ControladorPromociones::getInstance();
 	Promocion* promo = cprom->obtenerPromocion(datosProductos);
 	if (promo != NULL){
-		int desc = promo->getDescuento();
+		double desc = promo->getDescuento();
 		set<DTProducto> pd = promo->getProductos();
 		for (auto p : datosProductos){
 			Producto pr = p.producto;
 			if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1){
-				total += (p.cantidad * pr.getPrecio()) -(p.cantidad * pr.getPrecio()/desc); //(p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio()) / desc;
+				total += (p.cantidad * pr.getPrecio()) -(p.cantidad * pr.getPrecio() * desc/100); //(p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio()) / desc;
 			} else {
 				total += p.cantidad * pr.getPrecio();
 			}

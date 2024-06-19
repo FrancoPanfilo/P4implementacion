@@ -229,8 +229,8 @@ int main(int argc, char *argv[])
 				seguir = (resp == "y");
 			}
 			DTDetalleCompra detalles = contCompra->devolverDetalles();
-			cout << "El monto final de la compra será: $" << detalles.montoFinal << endl;
-			//printf("El monto final de la compra será: %lf ", detalles.montoFinal);
+			//cout << "El monto final de la compra será: $" << detalles.montoFinal << endl;
+			printf("El monto final de la compra será: %lf \n", detalles.montoFinal);
 			cout << "Fecha de compra: ";
 			mostrarFecha(detalles.fechaCompra);
 			cout << "Producto/s a comprar: " << endl;
