@@ -6,6 +6,7 @@
 
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
+#include "include/Datatypes/DTProductosYVendedor.h"
 #include "include/Interface/IComentario.h"
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/ISuscripcion.h"
@@ -41,7 +42,7 @@ void mostrarFecha(DTFecha fecha)
 
 void mostrarProducto(DTProducto p)
 {
-	std::cout << "Producto: " << p.nombre << ". Descripcion: " << p.descripcion << "." << std::endl;
+	std::cout << "Producto: " << p.nombre << " (" << p.codigo << ") . Descripcion: " << p.descripcion << "." << std::endl;
 }
 int leerInt(string pregunta)
 {
@@ -242,7 +243,7 @@ int main(int argc, char *argv[])
 			contCompra->registrarCompra();
 			contCompra->finalizarCompra();
 		}
-		else if (accion == "seleccionarNickname")
+		else if (accion == "seleccionarNicknameExp")
 		{
 		}
 		else if (accion == "listarProductosVendedor")
@@ -275,13 +276,89 @@ int main(int argc, char *argv[])
 		else if (accion == "finalizarExpediente")
 		{
 		}
+		// ---- ControladorPromociones ----
+		else if (accion == "ingresarDatosPromocion") {
+			string nombre = leerStr("Nombre: ");
+			string descripcion = leerStr("Descripcion: ");
+			int descuento = leerInt("Descuento: ");
+			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
+			contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+		} else if (accion == "obtenerNicknames") {
+			set<string> vendedores = contPromociones->obtenerNicknames();
+			for (auto nick : vendedores)
+			{
+				cout << nick << endl;
+			}
+		} else if (accion == "seleccionarNickname") {
+			string nick = leerStr("Nickname: ");
+			contPromociones->seleccionarNickname(nick);
+
+		} else if (accion == "obtenerProductosAsociados") {
+			set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
+			for (auto p : dtproductos)
+			{
+				mostrarProducto(p);
+			}
+		} else if (accion == "agregarProductoAPromocion") {
+			bool seguir = true;
+			while (seguir) {
+				int codigo = leerInt("Codigo: ");
+				int cantidad = leerInt("Cantidad: ");
+				contPromociones->agregarProductoAPromocion(codigo, cantidad);
+				string resp = leerStr("¿Desea seguir agregando productos? [y/n]");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando productos? [y/n]");
+				}
+				seguir = resp == "y";
+			}
+
+		} else if (accion == "confirmarCrearPromocion") {
+			contPromociones->confirmarCrearPromocion();
+		} else if (accion == "obtenerPromocionesVigentes") {
+			set<DTPromocion> promosVigentes = contPromociones->obtenerPromocionesVigentes();
+			for (auto promo : promosVigentes) {
+				cout << promo.nombre << " (-" << promo.descuento << "%): " << promo.descripcion << endl;
+				cout << "Vendida por: " << promo.vendedor << endl;
+				cout << "Hasta ";
+				mostrarFecha(promo.fechaVencimiento);
+			}
+
+		} else if (accion == "seleccionarPromocionPorNombre") {
+			string nombre = leerStr("Nombre de la promocion: ");
+			DTProductosYVendedor pyv = contPromociones->seleccionarPromocionPorNombre(nombre);
+			cout << "Vendedor: " << pyv.vendedor.getNickname() << endl;
+			for (auto producto : pyv.productos) {
+				mostrarProducto(producto);
+			}
+		}
+		// ---- ControladorProductos ----
+
+		else if (accion == "listarProductosConId") {
+			set<DTProducto> productos = contProductos->listarProductosConId();
+			for (auto producto : productos) {
+				mostrarProducto(producto);
+			}
+		}
+		else if (accion == "seleccionarProductoPorCodigo") {}
+		else if (accion == "mostrarProducto") {}
+		else if (accion == "seleccionarProducto") {}
+		else if (accion == "obtenerProducto") {}
+		else if (accion == "altaProducto") {}
+		else if (accion == "seleccionarVendedor") {}
+		else if (accion == "seleccionarProductoAEnviar") {}
+		else if (accion == "seleccionarVenta") {}
+
 		// ---- ControladorComentarios ----
 		else if (accion == "elegirYBorrarComentario")
 		{
 			int id = leerInt("Id: ");
 			contCom->elegirYBorrarComentario(id);
 		}
-		else if (accion == "seleccionarUsuarioCom")
+		else if (accion == "elegirProducto") {
+			int codigo = leerInt("Codigo: ");
+			contCom->elegirProducto(codigo);
+		} else if (accion == "seleccionarUsuarioCom")
 		{
 			string nick = leerStr("Nickname: ");
 			contCom->seleccionarUsuarioCom(nick);

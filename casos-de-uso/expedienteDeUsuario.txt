@@ -1,5 +1,5 @@
 listarUsuarios
-seleccionarNickname
+seleccionarNicknameExp
 vendedor1
 listarProductosVendedor
 listarPromocionesVendedor
@@ -7,7 +7,7 @@ listarInfoVendedor
 finalizarExpediente
 
 listarUsuarios
-seleccionarNickname
+seleccionarNicknameExp
 cliente1
 listarComprasCliente
 listarInfoCliente

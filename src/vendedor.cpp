@@ -57,7 +57,9 @@ void Vendedor::eliminarSuscriptor(Cliente *c)
 
 void Vendedor::notificar(DTNotificacion dtNotif)
 {
-    // TODO
+    for (auto obs : this->observers) {
+		obs->notificar(dtNotif);
+    }
 }
 
 Vendedor *Vendedor::create(DTAltaVendedor altaVendedor)

@@ -83,6 +83,9 @@ DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string
     : nombreVendedor(nombreVendedor), productos(productos), nombrePromo(nombrePromo) {}
 
 DTNotificacion::~DTNotificacion(){}    
+bool DTNotificacion::operator<(const DTNotificacion &otra) const {
+	return (this->nombrePromo.compare(otra.nombrePromo) == -1);
+}
 
 DTProducto::DTProducto(int codigo, int stock, double precio, string nombre, string descripcion, string tipo)
     : codigo(codigo), stock(stock), precio(precio), nombre(nombre), descripcion(descripcion), tipo(tipo) {}
