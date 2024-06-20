@@ -62,9 +62,9 @@ void Cliente::setSuscripciones(set<string> suscripciones)
 
 // Metodos
 
-void Cliente::notificar() 
+void Cliente::notificar(DTNotificacion notificacion) 
 {
-    // TODO
+	notificacionesPendientes.insert(notificacion);
 }
 
 void Cliente::eliminarNotificacionesPendientes() 

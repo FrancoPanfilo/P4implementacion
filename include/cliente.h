@@ -43,7 +43,7 @@ public:
     void setSuscripciones(set<string> suscripciones);
 
     // Metodos
-    void notificar();
+    void notificar(DTNotificacion notificacion);
     void eliminarNotificacionesPendientes(); // Se eliminan todas las instancias de DTNotificacion del campo notifiacionesPendientes del cliente
     Cliente *create(DTAltaCliente altaCliente);
 

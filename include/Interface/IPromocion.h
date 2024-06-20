@@ -15,7 +15,7 @@ using string = std::string;
 class IPromocion
 {
 public:
-    virtual void agregarPromocion(Promocion) = 0;
+    virtual void agregarPromocion(Promocion) = 0;// Este es solo para cargar los datos, no es parte de los casos de uso
     virtual void ingresarDatosPromocion(string, string, int, DTFecha) = 0;
     // virtual Promocion obtenerPromocion(std::set<ParProdCant>) = 0;
     virtual std::set<string> obtenerNicknames() = 0;

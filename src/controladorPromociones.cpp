@@ -1,5 +1,6 @@
 #include "../include/controladorPromociones.h"
 #include <cstddef>
+#include <cstdio>
 #include <set>
 #include <string>
 #include <ctime>
@@ -29,8 +30,8 @@ set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 	{
 		time_t ahora = time(0);
 		tm *local = localtime(&ahora);
-		DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon, local->tm_year);
-		if (fecha > promo.second.getVencimiento())
+		DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
+		if (promo.second.getVencimiento() > fecha)
 		{
 			promocionesVigentes.insert(DTPromocion(promo.second.getNombre(), promo.second.getDescripcion(), promo.second.getDescuento(), promo.second.getVencimiento()));
 		}

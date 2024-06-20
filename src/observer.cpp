@@ -7,7 +7,7 @@ using namespace std;
 ObserverNotificacion::ObserverNotificacion() {}
 ObserverNotificacion::~ObserverNotificacion() {}
 
-void ObserverNotificacion::notificar(DTNotificacion)
+void ObserverNotificacion::notificar(DTNotificacion notificacion)
 {
     // hacer
 }

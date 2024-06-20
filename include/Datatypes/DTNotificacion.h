@@ -14,6 +14,8 @@ public:
     DTNotificacion(string nombreVendedor, set<int> productos, string nombrePromo);
     DTNotificacion() = default;
     ~DTNotificacion();     
+
+	bool operator<(const DTNotificacion &otra) const;
 };
 
 #endif // _DTNOTIFICACION_H
