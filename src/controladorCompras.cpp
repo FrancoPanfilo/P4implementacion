@@ -56,6 +56,7 @@ void ControladorCompras::seleccionarProducto(int cantidad, int id){
 }
 
 DTDetalleCompra ControladorCompras::devolverDetalles(){	
+	//checkear si el carrito esta vacio?
 	double total = 0;
 	ControladorPromociones* cprom = ControladorPromociones::getInstance();
 	Promocion* promo = cprom->obtenerPromocion(datosProductos);

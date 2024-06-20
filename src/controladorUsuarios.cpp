@@ -74,7 +74,7 @@ void ControladorUsuarios::ingresarDatosCliente(DTAltaCliente altaCliente)
     {
         Cliente *c = c->create(altaCliente);
         listaClientes.insert(std::pair<string, Cliente>(c->getNickname(), *c));
-        listaUsuarios.insert(std::pair<string, Cliente>(c->getNickname(), *c));
+        listaUsuarios.insert(std::pair<string, Cliente>(c->getNickname(), *c)); // tal vez habría que guardar los datos acá y confirmar por separado, lo mismo con vendedor
     }
 }
 
