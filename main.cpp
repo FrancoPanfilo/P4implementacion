@@ -10,6 +10,7 @@
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/ISuscripcion.h"
 #include "include/Interface/IPromocion.h"
+#include "include/Interface/ICompra.h"
 #include "include/fabrica.h"
 #include "datos.cpp"
 using namespace std;
@@ -311,6 +312,71 @@ int main(int argc, char *argv[])
 		else if (accion == "confirmarDejarComentario")
 		{
 			contCom->confirmarDejarComentario();
+		}
+
+		// casos de uso
+		else if (accion == "realizarCompra")
+		{
+			set<string> lc = contCompra->listarClientes();
+			for (auto nick : lc)
+			{
+				cout << nick << endl;
+			}
+			string nickname = leerStr("Nickname del cliente: ");
+			contCompra->seleccionarUsuario(nickname);
+			set<DTProducto> dp = contProductos->listarProductosConId();
+			// con este set verifico que los productos se agreguen solo una vez y que si se agregar ya todos ,no permita intentar agregar mas
+			bool seguir = true;
+			while (seguir)
+			{
+				cout << "Productos disponibles: " << endl;
+				for (auto p : dp)
+				{
+					cout << "Nombre: " << p.nombre << "   Codigo: " << p.codigo << endl;
+				}
+				int idProd = leerInt("Ingrese id del producto: ");
+				DTProducto prod(idProd, 0, 0, "", "", "");
+				auto it = dp.find(prod);
+				if (dp.count(prod) != 0)
+				{
+					int cantidad = leerInt("Ingrese cantidad a comprar: ");
+					contCompra->seleccionarProducto(cantidad, idProd);
+					dp.erase(prod);
+				}
+				else
+				{
+					cout << "Codigo incorrecto o ya producto ya agregado" << endl;
+				}
+
+				string resp = leerStr("¿Desea comprar otro producto? [y/n] ");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea comprar otro producto? [y/n] ");
+				}
+				seguir = (resp == "y");
+			}
+			DTDetalleCompra detalles = contCompra->devolverDetalles();
+			// cout << "El monto final de la compra será: $" << detalles.montoFinal << endl;
+			printf("El monto final de la compra será: %lf \n", detalles.montoFinal);
+			cout << "Fecha de compra: ";
+			mostrarFecha(detalles.fechaCompra);
+			cout << "Producto/s a comprar: " << endl;
+			for (auto dp : detalles.productos)
+			{
+				cout << dp.producto.getNombre() << " x " << dp.cantidad << endl;
+			}
+			string conf = leerStr("¿Desea confirmar la compra? [y/n] ");
+			if (conf == "y")
+			{
+				contCompra->registrarCompra();
+			}
+			contCompra->finalizarCompra();
+		}
+		else if (accion == "")
+		{
+		}
+		else if (accion == "")
+		{
 		}
 		else if (accion == "salir" || accion == "")
 		{
