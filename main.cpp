@@ -221,10 +221,10 @@ int main(int argc, char *argv[])
 				int idProd = leerInt("Ingrese id del producto: ");
 				int cantidad = leerInt("Ingrese cantidad a comprar: ");
 				contCompra->seleccionarProducto(cantidad, idProd);
-				string resp = leerStr("¿Desea comprar otro producto? [y/n]");
+				string resp = leerStr("¿Desea comprar otro producto? [y/n] ");
 				while (!(resp == "y" || resp == "n"))
 				{
-					resp = leerStr("Respuesta no válida. ¿Desea comprar otro producto? [y/n]");
+					resp = leerStr("Respuesta no válida. ¿Desea comprar otro producto? [y/n] ");
 				}
 				seguir = (resp == "y");
 			}

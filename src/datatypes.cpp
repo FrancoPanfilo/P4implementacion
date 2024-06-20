@@ -40,7 +40,7 @@ DTCompra::DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos)
 
 DTCompra::~DTCompra(){}    
 
-DTDetalleCompra::DTDetalleCompra(int id, int montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
+DTDetalleCompra::DTDetalleCompra(int id, double montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
     :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos) {
         this->productosEnvio = productosEnvio;
     }
