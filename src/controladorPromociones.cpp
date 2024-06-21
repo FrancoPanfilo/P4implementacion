@@ -30,10 +30,11 @@ set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 	{
 		time_t ahora = time(0);
 		tm *local = localtime(&ahora);
-		DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
-		if (promo.second.getVencimiento() > fecha)
+		DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon + 1, local->tm_year + 1900);
+		Promocion *p = promo.second;
+		if (p->getVencimiento() > fecha)
 		{
-			promocionesVigentes.insert(DTPromocion(promo.second.getNombre(), promo.second.getDescripcion(), promo.second.getDescuento(), promo.second.getVencimiento()));
+			promocionesVigentes.insert(DTPromocion(p->getNombre(), p->getDescripcion(), p->getDescuento(), p->getVencimiento()));
 		}
 	}
 	return promocionesVigentes;
@@ -41,14 +42,15 @@ set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 
 DTProductosYVendedor ControladorPromociones::seleccionarPromocionPorNombre(string nombre)
 {
-	Promocion p = promociones.at(nombre);
+	Promocion *p = promociones.at(nombre);
 	Fabrica *f = f->getFabrica();
 	IUsuario *cu = f->getIUsuarios();
-	Vendedor *v = cu->obtenerVendedor(p.getVendedor());
-	return DTProductosYVendedor(p.getProductos(), *v);
+	Vendedor *v = cu->obtenerVendedor(p->getVendedor());
+	return DTProductosYVendedor(p->getProductos(), *v);
 }
 
-map<string, Promocion> ControladorPromociones::listarPromociones()
+// no seberia devolver un set DTPromos?
+map<string, Promocion *> ControladorPromociones::listarPromociones()
 {
 	return promociones;
 }
@@ -60,7 +62,8 @@ void ControladorPromociones::ingresarDatosPromocion(string nombre, string descri
 
 void ControladorPromociones::agregarPromocion(Promocion p)
 {
-	promociones.insert(std::pair<string, Promocion>(p.getNombre(), p));
+	Promocion *promo = new Promocion(p);
+	promociones.insert(std::pair<string, Promocion *>(p.getNombre(), promo));
 }
 
 set<string> ControladorPromociones::obtenerNicknames()
@@ -94,12 +97,14 @@ void ControladorPromociones::confirmarCrearPromocion()
 {
 	set<int> pCodigos;
 	Promocion promo(promocionTmp, nickname);
+
 	for (auto p : productosTmp)
 	{
 		pCodigos.insert(p.producto.getCodigo());
 		promo.agregarAPromo(p.producto, p.cantidad);
 	}
-	this->promociones.insert(std::pair<string, Promocion>(promo.getNombre(), promo));
+	Promocion *p = new Promocion(promo);
+	this->promociones.insert(std::pair<string, Promocion *>(promo.getNombre(), p));
 	Fabrica *f = Fabrica::getFabrica();
 	IUsuario *contUsuarios = f->getIUsuarios();
 	Vendedor *v = contUsuarios->obtenerVendedor(nickname);
@@ -112,9 +117,10 @@ std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String n
 	std::set<DTPromocion> dtpromo;
 	for (auto p : promociones)
 	{
-		if (p.second.getVendedor() == nickname)
+		Promocion *promo = p.second;
+		if (promo->getVendedor() == nickname)
 		{
-			dtpromo.insert(DTPromocion(p.second.getNombre(), p.second.getDescripcion(), p.second.getDescuento(), p.second.getVencimiento()));
+			dtpromo.insert(DTPromocion(promo->getNombre(), promo->getDescripcion(), promo->getDescuento(), promo->getVencimiento()));
 		}
 	}
 	return dtpromo;
@@ -123,10 +129,11 @@ std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String n
 Promocion *ControladorPromociones::obtenerPromocion(set<ParProdCant> ppp)
 {
 	Promocion *promo = NULL;
-	std::map<string, Promocion>::iterator it = this->promociones.begin();
+	std::map<string, Promocion *>::iterator it = this->promociones.begin();
 	while (promo == NULL && it != promociones.end())
 	{
-		promo = it->second.obtenerSiAplica(ppp);
+		Promocion *p = it->second;
+		promo = p->obtenerSiAplica(ppp);
 		it++;
 	}
 

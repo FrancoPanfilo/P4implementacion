@@ -17,7 +17,7 @@ class ControladorProductos : public IProducto
 {
 private:
     static ControladorProductos *instance;
-    std::map<int, Producto> productos;
+    std::map<int, Producto *> productos;
     // es posible que se agreguen mas atributos para facilitar algunos procesos
 public:
     static ControladorProductos *getInstance();

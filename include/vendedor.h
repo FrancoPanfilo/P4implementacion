@@ -18,8 +18,8 @@ class Vendedor : public Usuario
 {
 private:
     string rut;
-    map<int, Producto> productosAsociados;
-    set<ObserverNotificacion*> observers;
+    map<int, Producto *> productosAsociados;
+    set<ObserverNotificacion *> observers;
 
 public:
     // Constructor

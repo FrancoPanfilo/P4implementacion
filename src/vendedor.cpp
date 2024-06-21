@@ -33,7 +33,8 @@ set<DTProducto> Vendedor::getProductosAsociados()
     set<DTProducto> pa;
     for (auto p : productosAsociados)
     {
-        DTProducto elem(p.second.getCodigo(), p.second.getStock(), p.second.getPrecio(), p.second.getNombre(), p.second.getDescripcion(), p.second.getTipo());
+        Producto *pr = p.second;
+        DTProducto elem(pr->getCodigo(), pr->getStock(), pr->getPrecio(), pr->getNombre(), pr->getDescripcion(), pr->getTipo());
         pa.insert(elem);
     }
     return pa;
@@ -42,7 +43,8 @@ set<DTProducto> Vendedor::getProductosAsociados()
 // Metodos
 void Vendedor::agregarProducto(Producto p)
 {
-    productosAsociados.insert(std::pair<int, Producto>(p.getCodigo(), p));
+    Producto *pr = new Producto(p);
+    productosAsociados.insert(std::pair<int, Producto *>(p.getCodigo(), pr));
 }
 void Vendedor::agregarSuscriptor(Cliente *c)
 {
@@ -57,8 +59,9 @@ void Vendedor::eliminarSuscriptor(Cliente *c)
 
 void Vendedor::notificar(DTNotificacion dtNotif)
 {
-    for (auto obs : this->observers) {
-		obs->notificar(dtNotif);
+    for (auto obs : this->observers)
+    {
+        obs->notificar(dtNotif);
     }
 }
 

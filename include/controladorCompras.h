@@ -19,12 +19,12 @@ class ControladorCompras : public ICompra
 private:
     static ControladorCompras *instance;
     ControladorCompras();
-    std::map<int, Compra> compras;
+    std::map<int, Compra *> compras;
     String nickname;
     DTFecha fechaActual;
     std::set<ParProdCant> datosProductos;
-    //int precioTotal; // no se si se usa
-    Cliente* cliente;
+    // int precioTotal; // no se si se usa
+    Cliente *cliente;
     int idC;
     map<int, bool> envios;
     DTDetalleCompra compraActual;
@@ -50,9 +50,5 @@ public:
     DTDetalleCompra devolverDetalles();
     void registrarCompra();
     void finalizarCompra();
-    
-    
-    
-    
 };
 #endif // _CONTROLADORCOMPRAS_H

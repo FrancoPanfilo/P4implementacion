@@ -22,7 +22,7 @@ private:
     string ciudad;
     set<DTNotificacion> notificacionesPendientes;
     set<string> suscripciones;
-    map<int, Compra> compras;
+    map<int, Compra *> compras;
 
 public:
     // Constructor
@@ -36,7 +36,7 @@ public:
     set<DTNotificacion> getNotificacionesPendientes();
     set<string> getSuscripciones();
     string getNickname();
-    map<int, Compra> getCompras();
+    map<int, Compra *> getCompras();
 
     // Setters
     void setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes);

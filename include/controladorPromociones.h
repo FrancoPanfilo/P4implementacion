@@ -17,7 +17,7 @@ class ControladorPromociones : public IPromocion
 {
 private:
     static ControladorPromociones *instance;
-    std::map<string, Promocion> promociones;
+    std::map<string, Promocion *> promociones;
     DTPromocion promocionTmp;
     String nickname;
     std::set<ParProdCant> productosTmp;
@@ -28,7 +28,7 @@ public:
     ControladorPromociones();
     ~ControladorPromociones();
 
-    std::map<string, Promocion> listarPromociones();
+    std::map<string, Promocion *> listarPromociones();
     // void setPromociones(std::set<Promocion>);
     void ingresarDatosPromocion(string, string, int, DTFecha);
     void agregarPromocion(Promocion);

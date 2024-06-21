@@ -35,9 +35,10 @@ Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
     // {
     //     return NULL;
     // }
-    auto entry = listaVendedores.find(nickname); 
-    if (entry == listaVendedores.end()) return NULL; 
-    return &(entry->second); 
+    auto entry = listaVendedores.find(nickname);
+    if (entry == listaVendedores.end())
+        return NULL;
+    return entry->second;
 
     // return &(this->listaVendedores.at(nickname));
 }
@@ -48,7 +49,7 @@ Cliente *ControladorUsuarios::obtenerCliente(string nickname)
     {
         return NULL;
     }
-    return &(this->listaClientes.at(nickname));
+    return this->listaClientes.at(nickname);
 }
 
 /* set<string> ControladorUsuarios::getListaComentarios(string nickname)
@@ -73,8 +74,8 @@ void ControladorUsuarios::ingresarDatosCliente(DTAltaCliente altaCliente)
     else
     {
         Cliente *c = c->create(altaCliente);
-        listaClientes.insert(std::pair<string, Cliente>(c->getNickname(), *c));
-        listaUsuarios.insert(std::pair<string, Cliente>(c->getNickname(), *c)); // tal vez habría que guardar los datos acá y confirmar por separado, lo mismo con vendedor
+        listaClientes.insert(std::pair<string, Cliente *>(c->getNickname(), c));
+        listaUsuarios.insert(std::pair<string, Cliente *>(c->getNickname(), c)); // tal vez habría que guardar los datos acá y confirmar por separado, lo mismo con vendedor
     }
 }
 
@@ -97,8 +98,8 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
     {
 
         Vendedor *v = v->create(altaVendedor);
-        listaVendedores.insert(std::pair<string, Vendedor>(v->getNickname(), *v));
-        listaUsuarios.insert(std::pair<string, Vendedor>(v->getNickname(), *v));
+        listaVendedores.insert(std::pair<string, Vendedor *>(v->getNickname(), v));
+        listaUsuarios.insert(std::pair<string, Vendedor *>(v->getNickname(), v));
     }
 }
 
@@ -107,7 +108,8 @@ set<string> ControladorUsuarios::listarClientes()
     set<string> nicknames;
     for (auto cliente : listaClientes)
     {
-        nicknames.insert(cliente.second.getNickname());
+        Cliente *cl = cliente.second;
+        nicknames.insert(cl->getNickname());
     }
     return nicknames;
 }
@@ -117,7 +119,8 @@ set<string> ControladorUsuarios::listarVendedores()
     set<string> nicknames;
     for (auto vendedor : listaVendedores)
     {
-        nicknames.insert(vendedor.second.getNickname());
+        Vendedor *v = vendedor.second;
+        nicknames.insert(v->getNickname());
     }
     return nicknames;
 }
@@ -127,7 +130,8 @@ set<string> ControladorUsuarios::listarUsuarios()
     set<string> nicknames;
     for (auto usuario : listaUsuarios)
     {
-        nicknames.insert(usuario.second.getNickname());
+        Usuario *u = usuario.second;
+        nicknames.insert(u->getNickname());
     }
     return nicknames;
 }
@@ -135,13 +139,14 @@ set<string> ControladorUsuarios::listarUsuarios()
 set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 {
     set<string> ns;
-    Cliente c = listaClientes.at(nickname);
-    set<string> s = c.getSuscripciones();
+    Cliente *c = listaClientes.at(nickname);
+    set<string> s = c->getSuscripciones();
     for (auto vendedor : listaVendedores)
     {
-        if (s.count(vendedor.second.getNickname()) == 0)
+        Vendedor *v = vendedor.second;
+        if (s.count(v->getNickname()) == 0)
         {
-            ns.insert(vendedor.second.getNickname());
+            ns.insert(v->getNickname());
         }
     }
     return ns;
@@ -150,20 +155,21 @@ set<string> ControladorUsuarios::listarNoSuscritos(string nickname)
 set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
 {
     set<DTComentario> d;
-    Usuario u = listaUsuarios.at(nickname);
-	for (auto par : u.getComentarios()) {
-		Comentario *com = par.second;
-		DTComentario dtc = DTComentario(com->getId(), com->getContenido(), com->getfecha());
-		d.insert(dtc);
-	}
+    Usuario *u = listaUsuarios.at(nickname);
+    for (auto par : u->getComentarios())
+    {
+        Comentario *com = par.second;
+        DTComentario dtc = DTComentario(com->getId(), com->getContenido(), com->getfecha());
+        d.insert(dtc);
+    }
     return d;
 }
 
 set<DTProducto> ControladorUsuarios::prodDeVendedor(string nickname)
 {
     set<DTProducto> c;
-    Vendedor v = listaVendedores.at(nickname);
-    c = v.getProductosAsociados();
+    Vendedor *v = listaVendedores.at(nickname);
+    c = v->getProductosAsociados();
     set<DTProducto> d;
     for (auto p : c)
     {
@@ -180,8 +186,8 @@ void ControladorUsuarios::seleccionarNickname(string nickname)
 set<DTProducto> ControladorUsuarios::listarProductosVendedor()
 {
     set<DTProducto> resultado;
-    Vendedor v = listaVendedores.at(nickGuardado);
-    resultado = v.getProductosAsociados();
+    Vendedor *v = listaVendedores.at(nickGuardado);
+    resultado = v->getProductosAsociados();
     return resultado;
 }
 
@@ -207,39 +213,44 @@ set<DTPromocion> ControladorUsuarios::listarPromocionesVendedor()
 
 DTVendedor ControladorUsuarios::listarInfoVendedor()
 {
-    Vendedor v = listaVendedores.at(nickGuardado);
-    DTVendedor vendedor = DTVendedor(v.getNickname(),v.getFechaNac(), v.getRUT());
-	return vendedor;
+    Vendedor *v = listaVendedores.at(nickGuardado);
+    DTVendedor vendedor = DTVendedor(v->getNickname(), v->getFechaNac(), v->getRUT());
+    return vendedor;
 }
 
 set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
 {
     set<DTDetalleCompra> resultado;
-    Cliente c = listaClientes.at(nickGuardado);
-    map<int,Compra> comp =  c.getCompras();
-    for (auto co : comp){
-        Compra ca = co.second; 
-        resultado.insert(DTDetalleCompra(co.first,ca.getMontoFinal(),ca.getFechaCompra(),ca.getEnvios(), ca.getProductos()));
+    Cliente *c = listaClientes.at(nickGuardado);
+    map<int, Compra *> comp = c->getCompras();
+    for (auto co : comp)
+    {
+        Compra *ca = co.second;
+        resultado.insert(DTDetalleCompra(co.first, ca->getMontoFinal(), ca->getFechaCompra(), ca->getEnvios(), ca->getProductos()));
     }
     return resultado;
 }
 
 DTCliente ControladorUsuarios::listarInfoCliente()
 {
-    Cliente c = listaClientes.at(nickGuardado);
-    DTCliente cliente = DTCliente(c.getNickname(),c.getFechaNac(), c.getCiudad(), c.getDireccion());
+    Cliente *c = listaClientes.at(nickGuardado);
+    DTCliente cliente = DTCliente(c->getNickname(), c->getFechaNac(), c->getCiudad(), c->getDireccion());
     return cliente;
 }
 
 void ControladorUsuarios::finalizarExpediente()
 {
-    nickGuardado = ""; 
+    nickGuardado = "";
 }
 
-void ControladorUsuarios::agregarComentario(string nickname, Comentario *com) {
-	this->listaUsuarios.at(nickname).agregarComentario(com);
+void ControladorUsuarios::agregarComentario(string nickname, Comentario *com)
+{
+    Usuario *u = this->listaUsuarios.at(nickname);
+    u->agregarComentario(com);
 }
 
-void ControladorUsuarios::borrarComentario(string nickname, Comentario *com) {
-	this->listaUsuarios.at(nickname).borrarComentario(com);
+void ControladorUsuarios::borrarComentario(string nickname, Comentario *com)
+{
+    Usuario *u = this->listaUsuarios.at(nickname);
+    u->borrarComentario(com);
 }

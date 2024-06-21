@@ -26,21 +26,22 @@ std::set<DTProducto> ControladorProductos::listarProductos()
     std::set<DTProducto> dtProductos;
     for (auto producto : productos)
     {
-        dtProductos.insert(DTProducto(producto.second.getCodigo(), producto.second.getStock(), producto.second.getPrecio(), producto.second.getNombre(), producto.second.getDescripcion(), producto.second.getTipo()));
+        Producto *p = producto.second;
+        dtProductos.insert(DTProducto(p->getCodigo(), p->getStock(), p->getPrecio(), p->getNombre(), p->getDescripcion(), p->getTipo()));
     }
     return dtProductos;
 }
 
 ParProdCant ControladorProductos::seleccionarProducto(int codigo, int cantidad)
 {
-    Producto p = productos.at(codigo);
-    ParProdCant ppc = ParProdCant(p, cantidad);
+    Producto *p = productos.at(codigo);
+    ParProdCant ppc = ParProdCant(*p, cantidad);
     return ppc;
 }
 
 Producto ControladorProductos::obtenerProducto(int codigo)
 {
-    return productos.at(codigo);
+    return *productos.at(codigo);
 }
 
 std::set<DTProducto> ControladorProductos::listarProductosConId()
@@ -48,8 +49,8 @@ std::set<DTProducto> ControladorProductos::listarProductosConId()
     std::set<DTProducto> dtProductos;
     for (auto producto : productos)
     {
-		Producto prod = producto.second;
-        dtProductos.insert(DTProducto(producto.second.getCodigo(), 0, 0, producto.second.getNombre(), "", ""));
+        Producto *prod = producto.second;
+        dtProductos.insert(DTProducto(prod->getCodigo(), 0, 0, prod->getNombre(), "", ""));
     }
     return dtProductos;
 }
@@ -65,9 +66,10 @@ DTProducto ControladorProductos::mostrarProducto()
 
 void ControladorProductos::altaProducto(string nickname, DTProducto p)
 {
-	ControladorUsuarios *contUsuarios = ControladorUsuarios::getInstance();
+    ControladorUsuarios *contUsuarios = ControladorUsuarios::getInstance();
     Producto producto(p);
-    productos.insert(std::pair<int, Producto>(producto.getCodigo(), producto));
+    Producto *pr = new Producto(producto);
+    productos.insert(std::pair<int, Producto *>(producto.getCodigo(), pr));
     Vendedor *v = contUsuarios->obtenerVendedor(nickname);
     v->agregarProducto(producto);
 }
