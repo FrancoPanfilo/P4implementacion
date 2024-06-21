@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					cout << "Codigo incorrecto o ya producto ya agregado" << endl;
+					cout << "Codigo incorrecto o producto ya agregado" << endl;
 				}
 
 				string resp = leerStr("¿Desea comprar otro producto? [y/n] ");
@@ -257,9 +257,10 @@ int main(int argc, char *argv[])
 		}
 		else if (indice = 15)
 		{
-			string accion = leerStr("Ingrese funcion uso interno:   ");
-			while (accion != "salir" || accion != "")
+			string accion = " ";
+			while (accion != "salir" && accion != "")
 			{
+				accion = leerStr("Ingrese funcion uso interno:   ");
 				if (accion == "ingresarDatosCliente")
 				{
 					DTAltaCliente data = DTAltaCliente();
