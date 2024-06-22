@@ -33,7 +33,7 @@ set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 		Promocion *p = promo.second;
 		if (p->getVencimiento() > fecha)
 		{
-			promocionesVigentes.insert(DTPromocion(p->getNombre(), p->getDescripcion(), p->getDescuento(), p->getVencimiento()));
+			promocionesVigentes.insert(DTPromocion(p->getNombre(), p->getVendedor(), p->getDescripcion(), p->getDescuento(), p->getVencimiento()));
 		}
 	}
 	return promocionesVigentes;
@@ -56,7 +56,7 @@ map<string, Promocion *> ControladorPromociones::listarPromociones()
 
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc)
 {
-	this->promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
+	this->promocionTmp = DTPromocion(nombre, nickname, descripcion, descuento, fechaVenc);
 }
 
 void ControladorPromociones::agregarPromocion(Promocion p)
@@ -119,7 +119,7 @@ std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String n
 		Promocion *promo = p.second;
 		if (promo->getVendedor() == nickname)
 		{
-			dtpromo.insert(DTPromocion(promo->getNombre(), promo->getDescripcion(), promo->getDescuento(), promo->getVencimiento()));
+			dtpromo.insert(DTPromocion(promo->getNombre(), promo->getVendedor(), promo->getDescripcion(), promo->getDescuento(), promo->getVencimiento()));
 		}
 	}
 	return dtpromo;

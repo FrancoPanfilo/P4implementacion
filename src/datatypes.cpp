@@ -31,8 +31,8 @@ DTCliente::DTCliente(string nickname, DTFecha fechaNach, string ciudad, string d
 
 DTCliente::~DTCliente(){}
 
-DTComentario::DTComentario(int id, string contenido, DTFecha fecha)
-    : id(id), contenido(contenido), fecha(fecha) {}
+DTComentario::DTComentario(int id, string contenido, DTFecha fecha, int idProducto)
+    : id(id), contenido(contenido), fecha(fecha), idProducto(idProducto) {}
 
 DTComentario::~DTComentario(){}
 
@@ -97,8 +97,8 @@ bool DTProducto::operator<(const DTProducto &other) const
 }
 DTProducto::~DTProducto() {}
 
-DTPromocion::DTPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVencimiento)
-    : nombre(nombre), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
+DTPromocion::DTPromocion(string nombre, string vendedor, string descripcion, int descuento, DTFecha fechaVencimiento)
+    : nombre(nombre), vendedor(vendedor), descripcion(descripcion), descuento(descuento), fechaVencimiento(fechaVencimiento) {}
 
 DTPromocion::~DTPromocion(){}
 

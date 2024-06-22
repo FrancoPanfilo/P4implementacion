@@ -45,13 +45,13 @@ Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
 
 Cliente *ControladorUsuarios::obtenerCliente(string nickname)
 {
-	cout << "Buscando " << nickname << endl;
+	//cout << "Buscando " << nickname << endl;
     if (listaClientes.count(nickname) == 0)
     {
         return NULL;
     }
 	Cliente* c =this->listaClientes.at(nickname); 
-	cout << c->getNickname() << endl;
+	//cout << c->getNickname() << endl;
     return c;
 }
 
@@ -162,7 +162,7 @@ set<DTComentario> ControladorUsuarios::listarComentarios(string nickname)
     for (auto par : u->getComentarios())
     {
         Comentario *com = par.second;
-        DTComentario dtc = DTComentario(com->getId(), com->getContenido(), com->getfecha());
+        DTComentario dtc = DTComentario(com->getId(), com->getContenido(), com->getfecha(), com->getProducto()->getCodigo());
         d.insert(dtc);
     }
     return d;
