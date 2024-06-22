@@ -45,11 +45,14 @@ Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
 
 Cliente *ControladorUsuarios::obtenerCliente(string nickname)
 {
+	cout << "Buscando " << nickname << endl;
     if (listaClientes.count(nickname) == 0)
     {
         return NULL;
     }
-    return this->listaClientes.at(nickname);
+	Cliente* c =this->listaClientes.at(nickname); 
+	cout << c->getNickname() << endl;
+    return c;
 }
 
 /* set<string> ControladorUsuarios::getListaComentarios(string nickname)
@@ -87,7 +90,7 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
     }
     else if (altaVendedor.RUT.length() != 12)
     {
-
+		cout << "RUT: " << altaVendedor.RUT << endl;
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
     else if (listaUsuarios.count(altaVendedor.nickname) > 0)

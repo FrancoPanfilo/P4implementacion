@@ -68,10 +68,12 @@ DTProducto ControladorProductos::mostrarProducto()
 
 void ControladorProductos::altaProducto(string nickname, DTProducto p)
 {
+	ultimaId++;
     ControladorUsuarios *contUsuarios = ControladorUsuarios::getInstance();
+	p.codigo = ultimaId;
     Producto producto(p);
     Producto *pr = new Producto(producto);
-    productos.insert(std::pair<int, Producto *>(producto.getCodigo(), pr));
+    productos.insert(std::pair<int, Producto *>(ultimaId, pr));
     Vendedor *v = contUsuarios->obtenerVendedor(nickname);
     v->agregarProducto(producto);
 }

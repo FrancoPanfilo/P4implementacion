@@ -41,6 +41,7 @@ Promocion *Promocion::obtenerSiAplica(std::set<ParProdCant> ppp)
     bool cp = true;
     for (auto producto : productos)
     {
+		// Si el producto no esta en el carrito o compramos menos que la cantidad minima, entonces se descarta la promo
         if (ppp2.count(producto.first) == 0 || ppp2.at(producto.first).getCantidad() < producto.second.getCantidad())
         {
             cp = false;
@@ -50,6 +51,7 @@ Promocion *Promocion::obtenerSiAplica(std::set<ParProdCant> ppp)
             break;
         }
     }
+	// Si la iteracion termina naturalmente entonces la promo aplica
     if (cp)
     {
         p = this;
