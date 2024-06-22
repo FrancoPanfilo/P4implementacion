@@ -44,14 +44,12 @@ void ControladorCompras::seleccionarUsuario(String nickname)
 void ControladorCompras::seleccionarProducto(int cantidad, int id)
 {
 	ControladorProductos *cpro = ControladorProductos::getInstance();
-	Producto prod = cpro->obtenerProducto(id);
-	ParProdCant par = ParProdCant(prod, cantidad);
+	Producto *prod = cpro->obtenerProducto(id);
+	ParProdCant par = ParProdCant(prod->getCodigo(), cantidad);
 	// control producto no repetido
-	bool repetido = false;
 	for (auto p : datosProductos)
 	{
-		repetido = (p.producto.getCodigo() == par.producto.getCodigo());
-		if (repetido)
+		if (p.codigo == par.codigo)
 		{
 			throw std::runtime_error("Producto ya seleccionado anteriormente. ");
 		}
@@ -72,20 +70,21 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 	} else {
 		cout << "Aplicando promocion " << promo->getNombre() << endl;
 	}
+	ControladorProductos *cprod = ControladorProductos::getInstance();
 	if (promo != NULL)
 	{
 		double desc = promo->getDescuento();
 		set<DTProducto> pd = promo->getProductos();
 		for (auto p : datosProductos)
 		{
-			Producto pr = p.producto;
-			if (pd.count(DTProducto(pr.getCodigo(), pr.getStock(), pr.getPrecio(), pr.getNombre(), pr.getDescripcion(), pr.getTipo())) == 1)
+			Producto *pr = cprod->obtenerProducto(p.codigo);
+			if (pd.count(DTProducto(p.codigo, pr->getStock(), pr->getPrecio(), pr->getNombre(), pr->getDescripcion(), pr->getTipo())) == 1)
 			{
-				total += (p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio() * desc / 100); //(p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio()) / desc;
+				total += (p.cantidad * pr->getPrecio()) - (p.cantidad * pr->getPrecio() * desc / 100); //(p.cantidad * pr.getPrecio()) - (p.cantidad * pr.getPrecio()) / desc;
 			}
 			else
 			{
-				total += p.cantidad * pr.getPrecio();
+				total += p.cantidad * pr->getPrecio();
 			}
 		}
 	}
@@ -93,8 +92,8 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 	{
 		for (auto p : datosProductos)
 		{
-			Producto pr = p.producto;
-			total += p.cantidad * pr.getPrecio();
+			Producto *pr = cprod->obtenerProducto(p.codigo);
+			total += p.cantidad * pr->getPrecio();
 		}
 	};
 	idC++;
@@ -112,9 +111,11 @@ void ControladorCompras::registrarCompra()
 
 void ControladorCompras::finalizarCompra()
 {
+	ControladorProductos *cprod = ControladorProductos::getInstance();
 	for (auto p : datosProductos)
 	{
-		p.producto.setStock(p.producto.getStock() - p.cantidad);
+		Producto *pr = cprod->obtenerProducto(p.codigo);
+		pr->setStock(pr->getStock() - p.cantidad);
 	};
 	datosProductos.clear();
 	nickname = "";

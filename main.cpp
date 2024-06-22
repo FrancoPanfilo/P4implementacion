@@ -24,7 +24,6 @@ string leerStr(string pregunta)
 {
 	string respuesta;
 	cout << pregunta << "\n";
-	// cin.ignore(numeric_limits<std::streamsize>::max(), '\n'); 
 	getline(cin >> ws, respuesta);
 	return respuesta;
 }
@@ -129,14 +128,10 @@ int main(int argc, char *argv[])
 			cout << "altaDeProducto" << endl;
 			DTProducto p;
 			string n = leerStr("Ingrese el nickname del vendedor: ");
-			// TODO: creo q el código no se debería poder elegir
-			// p.codigo = leerInt("Ingrese el codigo: ");
-			// cin.ignore();
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
 			p.stock = leerInt("Ingrese la cantidad en stock: ");
 			p.precio = leerDouble("Ingrese el precio: ");
-			// cin.ignore();
 			p.tipo = leerStr("Ingrese el tipo de producto [R , E , O]: ");
 			contProductos->altaProducto(n, p);
 		}
@@ -155,7 +150,6 @@ int main(int argc, char *argv[])
 				v.nickname = leerStr("Ingrese Nickname:  ");
 				v.contrasenia = leerStr("Ingrese contraseña: ");
 				v.fechaNac = leerDTFecha("Ingrese fecha de nacimiento [dia mes anio]:  ");
-				// cin.ignore();
 				v.RUT = leerStr("Ingrese RUT [12 digitos]:  ");
 				contUsuarios->ingresarDatosVendedor(v);
 				cout << "Vendedor ingresado correctamente " << endl;
@@ -166,7 +160,6 @@ int main(int argc, char *argv[])
 				data.nickname = leerStr("Nickname: ");
 				data.contrasenia = leerStr("Contrasenia: ");
 				data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-				// cin.ignore();
 				data.ciudad = leerStr("Ciudad: ");
 				data.direccion = leerStr("Direccion: ");
 				contUsuarios->ingresarDatosCliente(data);
@@ -199,8 +192,8 @@ int main(int argc, char *argv[])
 				cout << "Nombre: " << p.nombre << "  Codigo: " << p.codigo << endl;
 			}
 			int id = leerInt("Ingrese el codigo del producto que desea consultar: ");
-			Producto p = contProductos->obtenerProducto(id);
-			cout << "El producto seleccionado es " << p.getNombre() << " su vendedor lo describe de la siguiente forma " << p.getDescripcion() << ". Tiene un valor de " << p.getPrecio() << " y en este momento hay " << p.getStock() << " unidades en stock" << endl;
+			Producto *p = contProductos->obtenerProducto(id);
+			cout << "El producto seleccionado es " << p->getNombre() << " su vendedor lo describe de la siguiente forma " << p->getDescripcion() << ". Tiene un valor de " << p->getPrecio() << " y en este momento hay " << p->getStock() << " unidades en stock" << endl;
 		}
 		else if (indice == 5)
 		{
@@ -224,9 +217,7 @@ int main(int argc, char *argv[])
 		{
 			cout << "crearPromocion" << endl;
 			// ingresarDatosPromocion
-			// cin.ignore();
 			string nombre = leerStr("Nombre: ");
-			// cin.ignore();
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
@@ -285,7 +276,6 @@ int main(int argc, char *argv[])
 				cout << nick << endl;
 			}
 			// seleccionarUsuarioCom
-			// cin.ignore();
 			string nick = leerStr("Elegir usuario: ");
 			contCom->seleccionarUsuarioCom(nick);
 
@@ -303,7 +293,6 @@ int main(int argc, char *argv[])
 					cout << com.contenido << endl;
 				}
 				int id = leerInt("Responder a: ");
-				// cin.ignore();
 				string respuesta = leerStr("Texto: ");
 				contCom->ingresarRespuesta(id, respuesta);
 			}
@@ -542,9 +531,10 @@ int main(int argc, char *argv[])
 			cout << "Fecha de compra: ";
 			mostrarFecha(detalles.fechaCompra);
 			cout << "Producto/s a comprar: " << endl;
-			for (auto dp : detalles.productos)
+			for (auto parprodcant : detalles.productos)
 			{
-				cout << dp.producto.getNombre() << " x " << dp.cantidad << endl;
+				Producto *prod = contProductos->obtenerProducto(parprodcant.codigo);	
+				cout << prod->getNombre() << " x " << parprodcant.cantidad << endl;
 			}
 			string conf = leerStr("¿Desea confirmar la compra? [y/n] ");
 			if (conf == "y")
@@ -768,9 +758,10 @@ int main(int argc, char *argv[])
 					cout << "Fecha de compra: ";
 					mostrarFecha(detalles.fechaCompra);
 					cout << "Producto/s a comprar: " << endl;
-					for (auto dp : detalles.productos)
+					for (auto parprodcant : detalles.productos)
 					{
-						cout << dp.producto.getNombre() << " x " << dp.cantidad << endl;
+						Producto *prod = contProductos->obtenerProducto(parprodcant.codigo);
+						cout << prod->getNombre() << " x " << parprodcant.cantidad << endl;
 					}
 				}
 				else if (accion == "confirmarCompra")
