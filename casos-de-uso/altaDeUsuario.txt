@@ -6,12 +6,10 @@ montevideo
 direccion1
 
 ingresarDatosVendedor
-cliente1
+vendedor1
 contraseña456
 8 8 2008
-montevideo
-direccion2
-
+abcdefghijkl
 
 listarClientes
 listarVendedores

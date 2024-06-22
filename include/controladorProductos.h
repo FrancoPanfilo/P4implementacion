@@ -19,6 +19,13 @@ private:
     static ControladorProductos *instance;
     std::map<int, Producto *> productos;
     // es posible que se agreguen mas atributos para facilitar algunos procesos
+	
+	// Codigo autoincrementado
+	int ultimaId;
+	
+	// Memoria
+	string nickname;
+
 public:
     static ControladorProductos *getInstance();
     ControladorProductos();
@@ -32,6 +39,8 @@ public:
     void seleccionarProductoPorCodigo(int);
     DTProducto mostrarProducto();
     void altaProducto(string, DTProducto);
+	void elegirProducto(string);
+	void crearProducto(DTProducto);
     // std::set<string> listarVendedores();
     std::set<DTProducto> seleccionarVendedor(string nickname);
     std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
