@@ -23,9 +23,8 @@ string leerStr(string pregunta)
 {
 	string respuesta;
 	cout << pregunta << "\n";
-	cin.ignore();
 	getline(cin, respuesta);
-	// cin.getline(&respuesta);
+	cin.ignore(10000, '\n');
 	return respuesta;
 }
 
@@ -473,7 +472,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				nickname = leerStr("Ingrese el nickname del Vendedor: ");
+				nickname = leerStr("Ingrese el nickname del Cliente: ");
 				contUsuarios->seleccionarNickname(nickname);
 				Cliente *c = contUsuarios->obtenerCliente(nickname);
 				cout << "Nombre: " << nickname << " Direccion:" << c->getDireccion() << endl;

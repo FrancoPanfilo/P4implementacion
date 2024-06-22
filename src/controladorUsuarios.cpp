@@ -45,11 +45,14 @@ Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
 
 Cliente *ControladorUsuarios::obtenerCliente(string nickname)
 {
+	cout << "Buscando " << nickname << endl;
     if (listaClientes.count(nickname) == 0)
     {
         return NULL;
     }
-    return this->listaClientes.at(nickname);
+	Cliente* c =this->listaClientes.at(nickname); 
+	cout << c->getNickname() << endl;
+    return c;
 }
 
 /* set<string> ControladorUsuarios::getListaComentarios(string nickname)
