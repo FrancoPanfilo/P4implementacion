@@ -4,12 +4,16 @@
 #include <string>
 #include "DTFecha.h"
 
+using namespace std;
+
 class EnviosPendientes {
 	public:
-		std::string nickname;
+		int id;
+		string nickname;
 		DTFecha fecha;
-		EnviosPendientes(string, DTFecha);
+		EnviosPendientes(int, string, DTFecha);
 		~EnviosPendientes();
+		bool operator<(const EnviosPendientes& otro) const;
 };
 
 #endif // !ENVIOS_PENDIENTES_H

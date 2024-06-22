@@ -7,6 +7,8 @@
 #include <map> 
 #include <set> 
 
+class Cliente;
+
 class Compra
 {
 private:
@@ -15,15 +17,22 @@ private:
     int id;
     set<ParProdCant> productos;
     map<int, bool> envios;
+	Cliente* cliente;
 
 public:
     DTFecha getFechaCompra();
     double getMontoFinal();
     int getId();
+	Cliente* getCliente();
+
     set<ParProdCant> getProductos();
     map<int, bool> getEnvios();
-    Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios);
+    Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente *cliente);
     Compra();
     ~Compra();
 };
+
+#include "cliente.h"
 #endif //_Compra_H
+
+

@@ -226,7 +226,7 @@ set<DTDetalleCompra> ControladorUsuarios::listarComprasCliente()
     for (auto co : comp)
     {
         Compra *ca = co.second;
-        resultado.insert(DTDetalleCompra(co.first, ca->getMontoFinal(), ca->getFechaCompra(), ca->getEnvios(), ca->getProductos()));
+        resultado.insert(DTDetalleCompra(co.first, ca->getMontoFinal(), ca->getFechaCompra(), ca->getEnvios(), ca->getProductos(), ca->getCliente()->getNickname()));
     }
     return resultado;
 }

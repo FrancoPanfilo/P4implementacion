@@ -269,6 +269,48 @@ int main(int argc, char *argv[])
 		}
 		else if (indice == "6")
 		{
+			// ingresarDatosPromocion
+			cin.ignore();
+			string nombre = leerStr("Nombre: ");
+			cin.ignore();
+			string descripcion = leerStr("Descripcion: ");
+			int descuento = leerInt("Descuento: ");
+			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
+			contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+
+			// listarVendedores
+			set<string> vendedores = contUsuarios->listarVendedores();
+			for (auto nick : vendedores)
+			{
+				cout << nick << endl;
+			}
+			// seleccionarNickname
+			string nick = leerStr("Nickname: ");
+			contPromociones->seleccionarNickname(nick);
+
+			// obtenerProductosAsociados
+			set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
+			for (auto p : dtproductos)
+			{
+				mostrarProducto(p);
+			}
+			// agregarProductoAPromocion
+			bool seguir = true;
+			while (seguir)
+			{
+				int codigo = leerInt("Codigo: ");
+				int cantidad = leerInt("Cantidad: ");
+				contPromociones->agregarProductoAPromocion(codigo, cantidad);
+				string resp = leerStr("¿Desea seguir agregando productos? [y/n]");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando productos? [y/n]");
+				}
+				seguir = resp == "y";
+			}
+			// confirmarCrearPromocion
+			contPromociones->confirmarCrearPromocion();
+
 		}
 		else if (indice == "7")
 		{
