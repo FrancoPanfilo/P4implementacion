@@ -12,3 +12,4 @@ cliente1
 listarComprasCliente
 listarInfoCliente
 finalizarExpediente
+salir

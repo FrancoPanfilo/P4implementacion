@@ -26,6 +26,9 @@ public:
 	virtual std::set<EnviosPendientes> seleccionarProductoAEnviar(int) = 0;
 	virtual void seleccionarVenta(EnviosPendientes env) = 0;
 
+
+	virtual void elegirProducto(string) = 0;
+	virtual void crearProducto(DTProducto) = 0;
 	virtual ~IProducto(){};
 };
 

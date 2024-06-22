@@ -9,7 +9,10 @@
 
 ControladorProductos *ControladorProductos::instance = NULL;
 
-ControladorProductos::ControladorProductos() {}
+ControladorProductos::ControladorProductos() {
+	this->nickname = "";
+	this->ultimaId = 0;
+}
 ControladorProductos::~ControladorProductos() {}
 
 ControladorProductos *ControladorProductos::getInstance()
@@ -98,4 +101,13 @@ std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int 
 void ControladorProductos::seleccionarVenta(EnviosPendientes env)
 {
     
+}
+
+void ControladorProductos::elegirProducto(string nick) {
+	this->nickname = nick;
+}
+
+void ControladorProductos::crearProducto(DTProducto dtprod) {
+	this->ultimaId++;
+	 
 }

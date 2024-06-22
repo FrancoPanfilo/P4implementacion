@@ -3,7 +3,6 @@
 #include <iostream>
 #include <set>
 #include <string>
-#include <limits>
 
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
@@ -48,6 +47,7 @@ void mostrarProducto(DTProducto p)
 {
 	std::cout << "Producto: " << p.nombre << " (" << p.codigo << ") . Descripcion: " << p.descripcion << "." << std::endl;
 }
+
 int leerInt(string pregunta)
 {
 	cout << pregunta;
@@ -57,14 +57,22 @@ int leerInt(string pregunta)
 	return respuesta;
 }
 
-int leerDouble(string pregunta)
+double leerDouble(string pregunta)
 {
 	cout << pregunta;
-	int respuesta;
+	double respuesta;
 	scanf("%lf", &respuesta);
 	cout << endl;
 
 	return respuesta;
+}
+
+bool pedirConfirmacion(string pregunta) {
+	string respuesta = "";
+	while (respuesta != "y" && respuesta != "n") {
+		respuesta = leerStr(pregunta);
+	};
+	return respuesta == "y";
 }
 
 int main(int argc, char *argv[])
@@ -170,10 +178,13 @@ int main(int argc, char *argv[])
 		cout << endl
 			 << "Caso de Uso: " << accion << endl
 			 << endl;
+
+
 		if (indice == "1")
 		{
 			DTProducto p;
 			string n = leerStr("Ingrese el nickname del vendedor: ");
+			// TODO: creo q el código no se debería poder elegir
 			p.codigo = leerInt("Ingrese el codigo: ");
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
@@ -260,9 +271,66 @@ int main(int argc, char *argv[])
 		}
 		else if (indice == "7")
 		{
+			// listarProductosConId
+			set<DTProducto> productos = contProductos->listarProductosConId();
+			for (auto producto : productos)
+			{
+				mostrarProducto(producto);
+			}
+			// elegirProducto
+			int codigo = leerInt("Elegir codigo: ");
+			contCom->elegirProducto(codigo);
+			// listarUsuarios
+			set<string> usuarios = contUsuarios->listarUsuarios();
+			for (auto nick : usuarios)
+			{
+				cout << nick << endl;
+			}
+			// seleccionarUsuarioCom
+			cin.ignore();
+			string nick = leerStr("Elegir usuario: ");
+			contCom->seleccionarUsuarioCom(nick);
+			
+			bool esRespuesta = pedirConfirmacion("Escribir respuesta? [y/n]");
+
+			if (esRespuesta) {
+				// listarComentarios
+				set<DTComentario> comentarios = contCom->listarComentarios();
+				cout << "Listando todos los comentarios" << endl;
+				for (auto com : comentarios)
+				{
+					printf("%d", com.id);
+					mostrarFecha(com.fecha);
+					cout << com.contenido << endl;
+				}
+				int id = leerInt("Responder a: ");
+				cin.ignore();
+				string respuesta = leerStr("Texto: ");
+				contCom->ingresarRespuesta(id, respuesta);
+			} else {
+				string contenido = leerStr("Contenido: ");
+				contCom->introducirTexto(contenido);
+			}
+			contCom->confirmarDejarComentario();
+			cout << "Comentario creado" << endl;
+			
 		}
 		else if (indice == "8")
 		{
+			// listarComentarios
+			string nickname = leerStr("Usuario: ");
+			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
+			for (auto com : comentarios)
+			{
+				printf("%d", com.id);
+				mostrarFecha(com.fecha);
+				cout << com.contenido << endl;
+			}
+			// elegirYBorrarComentario
+			int id = leerInt("Id a borrar: ");
+			contCom->elegirYBorrarComentario(id);
+
+			cout << "Comentario borrado" << endl;
 		}
 		else if (indice == "9")
 		{	
