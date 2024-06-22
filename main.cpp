@@ -67,9 +67,11 @@ double leerDouble(string pregunta)
 	return respuesta;
 }
 
-bool pedirConfirmacion(string pregunta) {
+bool pedirConfirmacion(string pregunta)
+{
 	string respuesta = "";
-	while (respuesta != "y" && respuesta != "n") {
+	while (respuesta != "y" && respuesta != "n")
+	{
 		respuesta = leerStr(pregunta);
 	};
 	return respuesta == "y";
@@ -178,7 +180,6 @@ int main(int argc, char *argv[])
 		cout << endl
 			 << "Caso de Uso: " << accion << endl
 			 << endl;
-
 
 		if (indice == "1")
 		{
@@ -290,10 +291,11 @@ int main(int argc, char *argv[])
 			cin.ignore();
 			string nick = leerStr("Elegir usuario: ");
 			contCom->seleccionarUsuarioCom(nick);
-			
+
 			bool esRespuesta = pedirConfirmacion("Escribir respuesta? [y/n]");
 
-			if (esRespuesta) {
+			if (esRespuesta)
+			{
 				// listarComentarios
 				set<DTComentario> comentarios = contCom->listarComentarios();
 				cout << "Listando todos los comentarios" << endl;
@@ -307,13 +309,14 @@ int main(int argc, char *argv[])
 				cin.ignore();
 				string respuesta = leerStr("Texto: ");
 				contCom->ingresarRespuesta(id, respuesta);
-			} else {
+			}
+			else
+			{
 				string contenido = leerStr("Contenido: ");
 				contCom->introducirTexto(contenido);
 			}
 			contCom->confirmarDejarComentario();
 			cout << "Comentario creado" << endl;
-			
 		}
 		else if (indice == "8")
 		{
@@ -333,8 +336,8 @@ int main(int argc, char *argv[])
 			cout << "Comentario borrado" << endl;
 		}
 		else if (indice == "9")
-		{	
-			cout << "Clientes: " <<endl;
+		{
+			cout << "Clientes: " << endl;
 			set<string> lc = contCompra->listarClientes();
 			for (auto nick : lc)
 			{
@@ -342,28 +345,38 @@ int main(int argc, char *argv[])
 			}
 			string nickname = leerStr("Cliente: ");
 			set<string> listaSus = contSuscripciones->listarVendedoresSuscritos(nickname);
-			for (auto s :listaSus){
+			for (auto s : listaSus)
+			{
 				cout << s << endl;
 			}
 			bool seguir = (size(listaSus) != 0);
-			if (!seguir){
+			if (!seguir)
+			{
 				cout << "El cliente no está suscrito a ningún vendedor." << endl;
 			}
-			while (seguir){
-				if (size(listaSus) != 0){
+			while (seguir)
+			{
+				if (size(listaSus) != 0)
+				{
 					string nickV = leerStr("Ingrese la suscripcion a eliminar: ");
-					if (listaSus.count(nickV) == 0){
+					if (listaSus.count(nickV) == 0)
+					{
 						cout << "El cliente ya no está suscrito a este vendedor." << endl;
-					} else {
+					}
+					else
+					{
 						contSuscripciones->eliminarSuscriptor(nickV);
 						listaSus.erase(nickV);
 					}
 					string resp = leerStr("¿Desea seguir eliminando suscripciones? [y/n]");
-					while (!(resp == "y" || resp == "n")){
+					while (!(resp == "y" || resp == "n"))
+					{
 						resp = leerStr("Respuesta no válida. ¿Desea seguir eliminando suscripciones? [y/n]");
 					}
 					seguir = (resp == "y");
-				} else {
+				}
+				else
+				{
 					cout << "El cliente ya no tiene suscripciones." << endl;
 					seguir = false;
 				}
@@ -379,41 +392,97 @@ int main(int argc, char *argv[])
 			}
 			string vendedor = leerStr("Vendedor: ");
 			Vendedor *v = contUsuarios->obtenerVendedor(vendedor);
-			//recorrer todas las compras. en cada una mirar el campo de envios y ver si alguna id del prod de vendedor esta en false.
+			// recorrer todas las compras. en cada una mirar el campo de envios y ver si alguna id del prod de vendedor esta en false.
 			set<DTProducto> prod = v->getProductosAsociados();
 			set<DTDetalleCompra> c = contCompra->obtenerCompras();
 			set<DTProducto> res;
 			bool pendienteEnvio;
-			for (auto p : prod){
-				for (auto co : c){
+			for (auto p : prod)
+			{
+				for (auto co : c)
+				{
 					pendienteEnvio = !co.productosEnvio.at(p.codigo);
-					if (pendienteEnvio){
+					if (pendienteEnvio)
+					{
 						res.insert(p);
 						break;
 					}
 				}
 			}
-			for (auto pe : res){
+			for (auto pe : res)
+			{
 				cout << pe.codigo << " " << pe.nombre << endl;
 			}
 			int prodAEnviar = leerInt("Seleccione la id del producto a enviar: ");
-			set<EnviosPendientes> env = contProductos->seleccionarProductoAEnviar(prodAEnviar); 
-			cout << "Lista de compras en las que dicho producto aún no se ha enviado: "  << endl;
-			for (auto ev : env){
+			set<EnviosPendientes> env = contProductos->seleccionarProductoAEnviar(prodAEnviar);
+			cout << "Lista de compras en las que dicho producto aún no se ha enviado: " << endl;
+			for (auto ev : env)
+			{
 				cout << "Compra de " << ev.nickname << "realizada el día ";
 				mostrarFecha(ev.fecha);
 			}
 			string nick = leerStr("Seleccione el cliente: ");
 			DTFecha f = leerDTFecha("Seleccione la fecha de la compra: ");
-			//como encontrar la compra si tengo dos compras con el mismo producto realizadas el mismo dia?
-
-
+			// como encontrar la compra si tengo dos compras con el mismo producto realizadas el mismo dia?
 		}
 		else if (indice == "11")
 		{
+			string t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
+			string nickname;
+
+			while (t != "v" && t != "c")
+			{
+				cout << "TEXTO INCORRECTO" << endl;
+				t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
+			}
+			if (t == "v")
+			{
+				set<string> lV = contUsuarios->listarVendedores();
+				for (auto v : lV)
+				{
+					cout << v << endl;
+				}
+				cout << endl;
+				nickname = leerStr("Ingrese el nickname del Vendedor: ");
+				contUsuarios->seleccionarNickname(nickname);
+				set<DTProducto> dP = contUsuarios->listarProductosVendedor();
+				set<DTPromocion> dProm = contUsuarios->listarPromocionesVendedor();
+				cout << "El vendedor " << nickname << " tiene los siguientes productos en venta: " << endl;
+				for (auto p : dP)
+				{
+					cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " . Su codigo es " << p.codigo << endl;
+				}
+				cout << endl
+					 << "El vendedor " << nickname << " tiene las siguientes promociones creadas" << endl;
+				for (auto p : dProm)
+				{
+					cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " vence en la fecha ";
+					mostrarFecha(p.fechaVencimiento);
+					cout << endl;
+				}
+			}
+			else
+			{
+				nickname = leerStr("Ingrese el nickname del Vendedor: ");
+				contUsuarios->seleccionarNickname(nickname);
+				Cliente *c = contUsuarios->obtenerCliente(nickname);
+				cout << "Nombre: " << nickname << " Direccion:" << c->getDireccion() << endl;
+				set<DTDetalleCompra> dC = contUsuarios->listarComprasCliente();
+				for (auto c : dC)
+				{
+					cout << "Id: " << c.id << "  Monto final: " << c.montoFinal << "  Fecha: ";
+					mostrarFecha(c.fechaCompra);
+					cout << endl;
+				}
+			}
 		}
 		else if (indice == "12")
 		{
+			set<string> usuarios = contUsuarios->listarUsuarios();
+			for (auto nick : usuarios)
+			{
+				cout << nick << endl;
+			}
 		}
 		else if (indice == "13")
 		{
@@ -473,9 +542,9 @@ int main(int argc, char *argv[])
 			contCompra->finalizarCompra();
 		}
 		else if (indice == "14")
-		{	
-			cout << "Clientes: " <<endl;
-			set<string> lc = contCompra->listarClientes(); 
+		{
+			cout << "Clientes: " << endl;
+			set<string> lc = contCompra->listarClientes();
 			for (auto nick : lc)
 			{
 				cout << nick << endl;
@@ -492,11 +561,14 @@ int main(int argc, char *argv[])
 			while (seguir && size(noSusc) != 0)
 			{
 				string vendedor = leerStr("Vendedor: ");
-				if (sLista.count(vendedor) == 0){
+				if (sLista.count(vendedor) == 0)
+				{
 					contSuscripciones->agregarSuscripcion(vendedor);
 					sLista.insert(vendedor);
 					noSusc.erase(vendedor);
-				} else {
+				}
+				else
+				{
 					cout << "Suscripción ya agregada anteriormente. " << endl;
 				}
 				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n] ");
@@ -520,7 +592,6 @@ int main(int argc, char *argv[])
 			{
 				contSuscripciones->confirmarSuscripcion();
 			}
-				
 		}
 		else if (indice == "15")
 		{
