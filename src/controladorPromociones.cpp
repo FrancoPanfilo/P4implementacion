@@ -24,7 +24,6 @@ ControladorPromociones *ControladorPromociones::getInstance()
 
 set<DTPromocion> ControladorPromociones::obtenerPromocionesVigentes()
 {
-	// TODO
 	set<DTPromocion> promocionesVigentes;
 	for (auto promo : promociones)
 	{

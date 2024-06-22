@@ -23,7 +23,9 @@ string leerStr(string pregunta)
 {
 	string respuesta;
 	cout << pregunta << "\n";
+	cin.ignore();
 	getline(cin, respuesta);
+	// cin.getline(&respuesta);
 	return respuesta;
 }
 
@@ -89,9 +91,9 @@ int main(int argc, char *argv[])
 	ICompra *contCompra = f->getICompras();
 	cargarDatos();
 
-	string indice = "1";
+	int indice = 1;
 
-	while (indice != "0")
+	while (indice != 0)
 	{
 		cout << "Ingresar indice caso de uso " << endl;
 		cout << "1--altaDeProducto" << endl;
@@ -110,91 +112,37 @@ int main(int argc, char *argv[])
 		cout << "14--suscribirseANotificaciones" << endl;
 		cout << "-------------" << endl
 			 << endl;
-		indice = leerStr("Ingrese el indice del caso de uso: ");
+		indice = leerInt("Ingrese el indice del caso de uso: ");
 		string accion;
 
-		if (indice == "0")
+		if (indice == 0)
 		{
 			continue;
 		}
-		else if (indice == "1")
-		{
-			accion = "altaDeProducto";
-		}
-		else if (indice == "2")
-		{
-			accion = "altaDeUsuario";
-		}
-		else if (indice == "3")
-		{
-			accion = "consultaDeNotificaciones";
-		}
-		else if (indice == "4")
-		{
-			accion = "consultarProducto";
-		}
-		else if (indice == "5")
-		{
-			accion = "consultarPromocion";
-		}
-		else if (indice == "6")
-		{
-			accion = "crearPromocion";
-		}
-		else if (indice == "7")
-		{
-			accion = "dejarComentario";
-		}
-		else if (indice == "8")
-		{
-			accion = "eliminarComentario";
-		}
-		else if (indice == "9")
-		{
-			accion = "eliminarSuscripciones";
-		}
-		else if (indice == "10")
-		{
-			accion = "enviarProducto";
-		}
-		else if (indice == "11")
-		{
-			accion = "expedienteDeUsuario";
-		}
-		else if (indice == "12")
-		{
-			accion = "listadoDeUsuarios";
-		}
-		else if (indice == "13")
-		{
-			accion = "realizarCompra";
-		}
-		else if (indice == "14")
-		{
-			accion = "suscribirseANotificaciones";
-		}
-		else if (indice == "15")
-		{
-			accion = " Uso Interno ";
-		}
-		cout << endl
-			 << "Caso de Uso: " << accion << endl
-			 << endl;
+		// else if (indice == "15")
+		// {
+		// 	accion = " Uso Interno ";
+		// }
 
-		if (indice == "1")
+		else if (indice == 1)
 		{
+			cout << "altaDeProducto" << endl;
 			DTProducto p;
 			string n = leerStr("Ingrese el nickname del vendedor: ");
 			// TODO: creo q el código no se debería poder elegir
-			p.codigo = leerInt("Ingrese el codigo: ");
+			// p.codigo = leerInt("Ingrese el codigo: ");
+			// cin.ignore();
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
 			p.stock = leerInt("Ingrese la cantidad en stock: ");
+			p.precio = leerDouble("Ingrese el precio: ");
+			// cin.ignore();
 			p.tipo = leerStr("Ingrese el tipo de producto [R , E , O]: ");
 			contProductos->altaProducto(n, p);
 		}
-		else if (indice == "2")
+		else if (indice == 2)
 		{
+			cout << "altaDeUsuario" << endl;
 			string t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
 			while (t != "v" && t != "c")
 			{
@@ -207,6 +155,7 @@ int main(int argc, char *argv[])
 				v.nickname = leerStr("Ingrese Nickname:  ");
 				v.contrasenia = leerStr("Ingrese contraseña: ");
 				v.fechaNac = leerDTFecha("Ingrese fecha de nacimiento [dia mes anio]:  ");
+				// cin.ignore();
 				v.RUT = leerStr("Ingrese RUT [12 digitos]:  ");
 				contUsuarios->ingresarDatosVendedor(v);
 				cout << "Vendedor ingresado correctamente " << endl;
@@ -217,14 +166,16 @@ int main(int argc, char *argv[])
 				data.nickname = leerStr("Nickname: ");
 				data.contrasenia = leerStr("Contrasenia: ");
 				data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
+				// cin.ignore();
 				data.ciudad = leerStr("Ciudad: ");
 				data.direccion = leerStr("Direccion: ");
 				contUsuarios->ingresarDatosCliente(data);
 				cout << "Cliente ingresado correctamente " << endl;
 			}
 		}
-		else if (indice == "3")
+		else if (indice == 3)
 		{
+			cout << "consultaDeNotificaciones" << endl;
 			string n = leerStr("Ingrese nickname del cliente: ");
 			set<DTNotificacion> nP = contSuscripciones->consultarNotificacionesRecibidas(n);
 			for (auto n : nP)
@@ -238,8 +189,9 @@ int main(int argc, char *argv[])
 			}
 			contSuscripciones->eliminarNotificaciones();
 		}
-		else if (indice == "4")
+		else if (indice == 4)
 		{
+			cout << "consultarProducto" << endl;
 			set<DTProducto> productos = contProductos->listarProductosConId();
 			cout << endl;
 			for (auto p : productos)
@@ -250,8 +202,9 @@ int main(int argc, char *argv[])
 			Producto p = contProductos->obtenerProducto(id);
 			cout << "El producto seleccionado es " << p.getNombre() << " su vendedor lo describe de la siguiente forma " << p.getDescripcion() << ". Tiene un valor de " << p.getPrecio() << " y en este momento hay " << p.getStock() << " unidades en stock" << endl;
 		}
-		else if (indice == "5")
+		else if (indice == 5)
 		{
+			cout << "consultarPromocion" << endl;
 			set<DTPromocion> dP = contPromociones->obtenerPromocionesVigentes();
 			for (auto p : dP)
 			{
@@ -267,12 +220,13 @@ int main(int argc, char *argv[])
 			cout << "Estos productos son vendidos por " << p.vendedor.getNickname() << ".  Que tiene como RUT: " << p.vendedor.getRUT() << endl;
 			cout << endl;
 		}
-		else if (indice == "6")
+		else if (indice == 6)
 		{
+			cout << "crearPromocion" << endl;
 			// ingresarDatosPromocion
-			cin.ignore();
+			// cin.ignore();
 			string nombre = leerStr("Nombre: ");
-			cin.ignore();
+			// cin.ignore();
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
@@ -312,8 +266,9 @@ int main(int argc, char *argv[])
 			contPromociones->confirmarCrearPromocion();
 
 		}
-		else if (indice == "7")
+		else if (indice == 7)
 		{
+			cout << "dejarComentario" << endl;
 			// listarProductosConId
 			set<DTProducto> productos = contProductos->listarProductosConId();
 			for (auto producto : productos)
@@ -330,7 +285,7 @@ int main(int argc, char *argv[])
 				cout << nick << endl;
 			}
 			// seleccionarUsuarioCom
-			cin.ignore();
+			// cin.ignore();
 			string nick = leerStr("Elegir usuario: ");
 			contCom->seleccionarUsuarioCom(nick);
 
@@ -348,7 +303,7 @@ int main(int argc, char *argv[])
 					cout << com.contenido << endl;
 				}
 				int id = leerInt("Responder a: ");
-				cin.ignore();
+				// cin.ignore();
 				string respuesta = leerStr("Texto: ");
 				contCom->ingresarRespuesta(id, respuesta);
 			}
@@ -360,8 +315,9 @@ int main(int argc, char *argv[])
 			contCom->confirmarDejarComentario();
 			cout << "Comentario creado" << endl;
 		}
-		else if (indice == "8")
+		else if (indice == 8)
 		{
+			cout << "eliminarComentario" << endl;
 			// listarComentarios
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
@@ -377,8 +333,9 @@ int main(int argc, char *argv[])
 
 			cout << "Comentario borrado" << endl;
 		}
-		else if (indice == "9")
+		else if (indice == 9)
 		{
+			cout << "eliminarSuscripciones" << endl;
 			cout << "Clientes: " << endl;
 			set<string> lc = contCompra->listarClientes();
 			for (auto nick : lc)
@@ -424,8 +381,9 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		else if (indice == "10")
+		else if (indice == 10)
 		{
+			cout << "enviarProducto" << endl;
 			cout << "Vendedores:" << endl;
 			set<string> lv = contUsuarios->listarVendedores();
 			for (auto nick : lv)
@@ -476,8 +434,9 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		else if (indice == "11")
+		else if (indice == 11)
 		{
+			cout << "expedienteDeUsuario" << endl;
 			string t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
 			string nickname;
 
@@ -527,16 +486,18 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
-		else if (indice == "12")
+		else if (indice == 12)
 		{
+			cout << "listadoDeUsuarios" << endl;
 			set<string> usuarios = contUsuarios->listarUsuarios();
 			for (auto nick : usuarios)
 			{
 				cout << nick << endl;
 			}
 		}
-		else if (indice == "13")
+		else if (indice == 13)
 		{
+			cout << "realizarCompra" << endl;
 			set<string> lc = contCompra->listarClientes();
 			for (auto nick : lc)
 			{
@@ -592,8 +553,9 @@ int main(int argc, char *argv[])
 			}
 			contCompra->finalizarCompra();
 		}
-		else if (indice == "14")
+		else if (indice == 14)
 		{
+			cout << "suscribirseANotificaciones" << endl;
 			cout << "Clientes: " << endl;
 			set<string> lc = contCompra->listarClientes();
 			for (auto nick : lc)
@@ -644,7 +606,7 @@ int main(int argc, char *argv[])
 				contSuscripciones->confirmarSuscripcion();
 			}
 		}
-		else if (indice == "15")
+		else if (indice == 15)
 		{
 			string accion = " ";
 			while (accion != "salir" && accion != "")

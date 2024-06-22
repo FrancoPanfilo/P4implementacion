@@ -67,6 +67,11 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 	double total = 0;
 	ControladorPromociones *cprom = ControladorPromociones::getInstance();
 	Promocion *promo = cprom->obtenerPromocion(datosProductos);
+	if (promo == NULL) {
+		cout << "NO HAY PROMO PARA APLICAR" << endl;
+	} else {
+		cout << "Aplicando promocion " << promo->getNombre() << endl;
+	}
 	if (promo != NULL)
 	{
 		double desc = promo->getDescuento();

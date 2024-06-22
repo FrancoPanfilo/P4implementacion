@@ -87,7 +87,7 @@ void ControladorUsuarios::ingresarDatosVendedor(DTAltaVendedor altaVendedor)
     }
     else if (altaVendedor.RUT.length() != 12)
     {
-
+		cout << "RUT: " << altaVendedor.RUT << endl;
         throw std::runtime_error("La RUT no está formada por 12 caracteres ");
     }
     else if (listaUsuarios.count(altaVendedor.nickname) > 0)
