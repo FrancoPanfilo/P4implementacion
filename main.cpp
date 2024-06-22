@@ -1,6 +1,7 @@
 #include <cstdio>
 
 #include <iostream>
+#include <istream>
 #include <set>
 #include <string>
 
@@ -23,8 +24,8 @@ string leerStr(string pregunta)
 {
 	string respuesta;
 	cout << pregunta << "\n";
-	getline(cin, respuesta);
-	cin.ignore(10000, '\n');
+	// cin.ignore(numeric_limits<std::streamsize>::max(), '\n'); 
+	getline(cin >> ws, respuesta);
 	return respuesta;
 }
 
