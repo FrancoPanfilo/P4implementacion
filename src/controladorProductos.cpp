@@ -37,13 +37,13 @@ std::set<DTProducto> ControladorProductos::listarProductos()
 ParProdCant ControladorProductos::seleccionarProducto(int codigo, int cantidad)
 {
     Producto *p = productos.at(codigo);
-    ParProdCant ppc = ParProdCant(*p, cantidad);
+    ParProdCant ppc = ParProdCant(p->getCodigo(), cantidad);
     return ppc;
 }
 
-Producto ControladorProductos::obtenerProducto(int codigo)
+Producto* ControladorProductos::obtenerProducto(int codigo)
 {
-    return *productos.at(codigo);
+    return productos.at(codigo);
 }
 
 std::set<DTProducto> ControladorProductos::listarProductosConId()

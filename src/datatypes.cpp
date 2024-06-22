@@ -116,14 +116,14 @@ bool EnviosPendientes::operator<(const EnviosPendientes& otro) const {
 	return id < otro.id;
 }
 
-ParProdCant::ParProdCant(Producto producto, int cantidad)
-    : producto(producto), cantidad(cantidad) {}
+ParProdCant::ParProdCant(int codigo, int cantidad)
+    : codigo(codigo), cantidad(cantidad) {}
 
 
 ParProdCant::~ParProdCant() {}
 bool ParProdCant::operator<(const ParProdCant &other) const
 {
-    return producto.getCodigo() < other.producto.getCodigo();
+    return codigo < other.codigo;
 }
 
 DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)

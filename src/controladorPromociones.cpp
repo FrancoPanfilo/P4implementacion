@@ -1,4 +1,5 @@
 #include "../include/controladorPromociones.h"
+#include "../include/controladorProductos.h"
 #include <cstddef>
 #include <cstdio>
 #include <set>
@@ -87,8 +88,8 @@ void ControladorPromociones::agregarProductoAPromocion(int codigo, int cantidad)
 {
 	Fabrica *f = Fabrica::getFabrica();
 	IProducto *contProducto = f->getIProductos();
-	Producto p = contProducto->obtenerProducto(codigo);
-	ParProdCant ppp(p, cantidad);
+	// Producto *p = contProducto->obtenerProducto(codigo);
+	ParProdCant ppp(codigo, cantidad);
 	productosTmp.insert(ppp);
 }
 
@@ -96,11 +97,13 @@ void ControladorPromociones::confirmarCrearPromocion()
 {
 	set<int> pCodigos;
 	Promocion promo(promocionTmp, nickname);
+	ControladorProductos *cprod = ControladorProductos::getInstance();
 
 	for (auto p : productosTmp)
 	{
-		pCodigos.insert(p.producto.getCodigo());
-		promo.agregarAPromo(p.producto, p.cantidad);
+		pCodigos.insert(p.codigo);
+		Producto *pr = cprod->obtenerProducto(p.codigo);
+		promo.agregarAPromo(pr, p.cantidad);
 	}
 	Promocion *p = new Promocion(promo);
 	this->promociones.insert(std::pair<string, Promocion *>(promo.getNombre(), p));

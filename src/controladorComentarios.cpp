@@ -74,8 +74,8 @@ void ControladorComentarios::elegirYBorrarComentario(int idComentario) {
 
 void ControladorComentarios::elegirProducto(int codigo) {
 	ControladorProductos *contProductos = ControladorProductos::getInstance();
-	Producto p = contProductos->obtenerProducto(codigo);
-	this->comentarioSobre = &p;
+	Producto *p = contProductos->obtenerProducto(codigo);
+	this->comentarioSobre = p;
 }
 
 void ControladorComentarios::seleccionarUsuarioCom(string nick){

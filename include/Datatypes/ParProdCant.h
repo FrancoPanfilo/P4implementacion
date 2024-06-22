@@ -5,9 +5,10 @@
 class ParProdCant
 {
 public:
-    Producto producto;
+    // Producto producto;
+	int codigo;
     int cantidad;
-    ParProdCant(Producto producto, int cantidad);
+    ParProdCant(int codigo, int cantidad);
     ParProdCant() = default;
     ~ParProdCant();
     bool operator<(const ParProdCant &other) const;
