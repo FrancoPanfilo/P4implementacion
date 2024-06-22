@@ -7,12 +7,12 @@ class Minimo
 {
 private:
     int cantidad;
-    Producto producto;
+    Producto *producto;
 
 public:
-    Minimo(Producto, int);
+    Minimo(Producto*, int);
     int getCantidad();
-    Producto getProducto();
+    Producto* getProducto();
     bool verificarMinimo(std::set<ParProdCant> prod);
 };
 

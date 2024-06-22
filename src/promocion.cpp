@@ -30,19 +30,22 @@ Promocion::Promocion(DTPromocion p, string v)
 // {
 //     return productos;
 // }
-Promocion *Promocion::obtenerSiAplica(std::set<ParProdCant> ppp)
+Promocion *Promocion::obtenerSiAplica(std::set<ParProdCant> carrito)
 {
-    std::map<int, Minimo> ppp2;
-    for (auto producto : ppp)
+    std::map<int, ParProdCant> mapa;
+    for (auto producto : carrito)
     {
-        ppp2.insert(std::pair<int, Minimo>(producto.producto.getCodigo(), Minimo(producto.producto, producto.cantidad)));
+        mapa.insert(std::pair<int, ParProdCant>(producto.codigo, producto));
     }
     Promocion *p = NULL;
     bool cp = true;
     for (auto producto : productos)
     {
+		int codigo = producto.first;
+		Minimo minimo = producto.second;
 		// Si el producto no esta en el carrito o compramos menos que la cantidad minima, entonces se descarta la promo
-        if (ppp2.count(producto.first) == 0 || ppp2.at(producto.first).getCantidad() < producto.second.getCantidad())
+        // if (ppp2.count(producto.first) == 0 || ppp2.at(producto.first).getCantidad() < producto.second.getCantidad())
+        if (mapa.count(codigo) == 0 || mapa.at(codigo).codigo < minimo.getCantidad())
         {
             cp = false;
         }
@@ -64,15 +67,15 @@ set<DTProducto> Promocion::getProductos()
     set<DTProducto> dtproductos;
     for (auto par : productos)
     {
-        Producto p = par.second.getProducto();
-        DTProducto dtp = DTProducto(p.getCodigo(), p.getStock(), p.getPrecio(), p.getNombre(), p.getDescripcion(), p.getTipo());
+        Producto *p = par.second.getProducto();
+        DTProducto dtp = DTProducto(p->getCodigo(), p->getStock(), p->getPrecio(), p->getNombre(), p->getDescripcion(), p->getTipo());
         dtproductos.insert(dtp);
     }
     return dtproductos;
 }
 
-void Promocion::agregarAPromo(Producto p, int cantidad)
+void Promocion::agregarAPromo(Producto *p, int cantidad)
 {
     Minimo m(p, cantidad);
-    this->productos.insert(std::pair<int, Minimo>(p.getCodigo(), m));
+    this->productos.insert(std::pair<int, Minimo>(p->getCodigo(), m));
 }
