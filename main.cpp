@@ -392,7 +392,6 @@ int main(int argc, char *argv[])
 			}
 			string vendedor = leerStr("Vendedor: ");
 			Vendedor *v = contUsuarios->obtenerVendedor(vendedor);
-			// recorrer todas las compras. en cada una mirar el campo de envios y ver si alguna id del prod de vendedor esta en false.
 			set<DTProducto> prod = v->getProductosAsociados();
 			set<DTDetalleCompra> c = contCompra->obtenerCompras();
 			set<DTProducto> res;
@@ -422,8 +421,18 @@ int main(int argc, char *argv[])
 				mostrarFecha(ev.fecha);
 			}
 			string nick = leerStr("Seleccione el cliente: ");
-			DTFecha f = leerDTFecha("Seleccione la fecha de la compra: ");
-			// como encontrar la compra si tengo dos compras con el mismo producto realizadas el mismo dia?
+			DTFecha f = leerDTFecha("Seleccione la fecha de compra: ");
+			Cliente *cl = contUsuarios->obtenerCliente(nick);
+			map<int, Compra *> listaC = cl->getCompras();
+			for (auto comp : listaC)
+			{
+				DTFecha fechaC = comp.second->getFechaCompra();
+				map<int, bool> enviosC = comp.second->getEnvios();
+				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
+				{
+					enviosC.at(prodAEnviar) = true;
+				}
+			}
 		}
 		else if (indice == "11")
 		{
