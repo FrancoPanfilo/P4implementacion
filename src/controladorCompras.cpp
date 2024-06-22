@@ -93,13 +93,13 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 		}
 	};
 	idC++;
-	compraActual = DTDetalleCompra(idC, total, fechaActual, envios, datosProductos);
+	compraActual = DTDetalleCompra(idC, total, fechaActual, envios, datosProductos, nickname);
 	return compraActual;
 }
 
 void ControladorCompras::registrarCompra()
 {
-	Compra compra = Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios);
+	Compra compra = Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios, cliente);
 	Compra *c = new Compra(compra);
 	cliente->getCompras().insert(std::pair<int, Compra *>(idC, c));
 	compras.insert((std::pair<int, Compra *>(idC, c)));
@@ -119,7 +119,7 @@ std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
 	set<DTDetalleCompra> resultado;
 	for (auto c : compras){
 		Compra* co = c.second;
-		DTDetalleCompra dc = DTDetalleCompra(co->getId(), co->getMontoFinal(),co->getFechaCompra(),co->getEnvios(),co->getProductos());
+		DTDetalleCompra dc = DTDetalleCompra(co->getId(), co->getMontoFinal(),co->getFechaCompra(),co->getEnvios(),co->getProductos(), cliente->getNickname());
 		resultado.insert(dc);
 	}
 	return resultado;

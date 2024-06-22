@@ -4,8 +4,6 @@
 #include "../include/controladorUsuarios.h"
 #include "../include/controladorCompras.h"
 #include <string>
-#include <iostream>
-#include <ostream>
 
 ControladorProductos *ControladorProductos::instance = NULL;
 
@@ -91,7 +89,7 @@ std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int 
     set<DTDetalleCompra> cs = contCompras->obtenerCompras();
     for (auto c : cs){
         if(!c.productosEnvio.at(codigo)){
-            EnviosPendientes e = EnviosPendientes(c.cliente, c.fechaCompra);
+            EnviosPendientes e = EnviosPendientes(c.id, c.cliente, c.fechaCompra);
             envios.insert(e);
         }
     }

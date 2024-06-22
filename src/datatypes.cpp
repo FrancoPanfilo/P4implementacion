@@ -107,10 +107,14 @@ bool DTPromocion::operator<(const DTPromocion &other) const
     return (nombre.compare(other.nombre) < 0);
 }
 
-EnviosPendientes::EnviosPendientes(string nickname, DTFecha fecha)
-    : nickname(nickname), fecha(fecha){}
+EnviosPendientes::EnviosPendientes(int id, string nickname, DTFecha fecha)
+    : id(id), nickname(nickname), fecha(fecha){}
 
 EnviosPendientes::~EnviosPendientes(){}
+
+bool EnviosPendientes::operator<(const EnviosPendientes& otro) const {
+	return id < otro.id;
+}
 
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
