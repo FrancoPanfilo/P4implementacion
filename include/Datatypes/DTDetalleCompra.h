@@ -6,6 +6,7 @@
 #include "ParProdCant.h"
 #include <set>
 #include <map>
+#include <string>
 class DTDetalleCompra {
 	public:
 		int id;
@@ -13,7 +14,8 @@ class DTDetalleCompra {
 		DTFecha fechaCompra;
 		map<int, bool> productosEnvio; 
 		set<ParProdCant> productos;
-		DTDetalleCompra(int id, double montoFinal, DTFecha fechaCompra, map<int, bool> productosEnvio, set<ParProdCant> productos);
+		string cliente;
+		DTDetalleCompra(int id, double montoFinal, DTFecha fechaCompra, map<int, bool> productosEnvio, set<ParProdCant> productos, string cliente);
 		DTDetalleCompra();
 		~DTDetalleCompra();
 		bool operator<(const DTDetalleCompra &otra) const;

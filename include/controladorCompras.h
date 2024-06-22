@@ -50,5 +50,7 @@ public:
     DTDetalleCompra devolverDetalles();
     void registrarCompra();
     void finalizarCompra();
+    std::set<DTDetalleCompra> obtenerCompras();
+
 };
 #endif // _CONTROLADORCOMPRAS_H

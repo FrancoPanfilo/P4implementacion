@@ -2,6 +2,7 @@
 
 #include "../include/controladorProductos.h"
 #include "../include/controladorUsuarios.h"
+#include "../include/controladorCompras.h"
 #include <string>
 #include <iostream>
 #include <ostream>
@@ -80,14 +81,21 @@ std::set<DTProducto> ControladorProductos::seleccionarVendedor(string nickname)
     std::set<DTProducto> productos;
     return productos;
 }
-std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int)
-{
-    // TODO
+std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int codigo)
+{   
     std::set<EnviosPendientes> envios;
+    ControladorCompras *contCompras = ControladorCompras::getInstance();
+    set<DTDetalleCompra> cs = contCompras->obtenerCompras();
+    for (auto c : cs){
+        if(!c.productosEnvio.at(codigo)){
+            EnviosPendientes e = EnviosPendientes(c.cliente, c.fechaCompra);
+            envios.insert(e);
+        }
+    }
     return envios;
 }
 
 void ControladorProductos::seleccionarVenta(EnviosPendientes env)
 {
-    // TODO
+    
 }

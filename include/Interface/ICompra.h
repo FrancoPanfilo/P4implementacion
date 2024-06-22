@@ -17,5 +17,6 @@ public:
     virtual void seleccionarProducto(int, int) = 0;
     virtual DTDetalleCompra devolverDetalles() = 0;
     virtual ~ICompra(){};
+    virtual std::set<DTDetalleCompra> obtenerCompras() = 0; 
 };
 #endif // _ICOMPRA_H

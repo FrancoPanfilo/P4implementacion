@@ -7,6 +7,7 @@
 
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
+#include "./include/Datatypes/EnviosPendientes.h"
 #include "include/Datatypes/DTProductosYVendedor.h"
 #include "include/Interface/IComentario.h"
 #include "include/Interface/IUsuario.h"
@@ -264,10 +265,81 @@ int main(int argc, char *argv[])
 		{
 		}
 		else if (indice == "9")
-		{
+		{	
+			cout << "Clientes: " <<endl;
+			set<string> lc = contCompra->listarClientes();
+			for (auto nick : lc)
+			{
+				cout << nick << endl;
+			}
+			string nickname = leerStr("Cliente: ");
+			set<string> listaSus = contSuscripciones->listarVendedoresSuscritos(nickname);
+			for (auto s :listaSus){
+				cout << s << endl;
+			}
+			bool seguir = (size(listaSus) != 0);
+			if (!seguir){
+				cout << "El cliente no está suscrito a ningún vendedor." << endl;
+			}
+			while (seguir){
+				if (size(listaSus) != 0){
+					string nickV = leerStr("Ingrese la suscripcion a eliminar: ");
+					if (listaSus.count(nickV) == 0){
+						cout << "El cliente ya no está suscrito a este vendedor." << endl;
+					} else {
+						contSuscripciones->eliminarSuscriptor(nickV);
+						listaSus.erase(nickV);
+					}
+					string resp = leerStr("¿Desea seguir eliminando suscripciones? [y/n]");
+					while (!(resp == "y" || resp == "n")){
+						resp = leerStr("Respuesta no válida. ¿Desea seguir eliminando suscripciones? [y/n]");
+					}
+					seguir = (resp == "y");
+				} else {
+					cout << "El cliente ya no tiene suscripciones." << endl;
+					seguir = false;
+				}
+			}
 		}
 		else if (indice == "10")
 		{
+			cout << "Vendedores:" << endl;
+			set<string> lv = contUsuarios->listarVendedores();
+			for (auto nick : lv)
+			{
+				cout << nick << endl;
+			}
+			string vendedor = leerStr("Vendedor: ");
+			Vendedor *v = contUsuarios->obtenerVendedor(vendedor);
+			//recorrer todas las compras. en cada una mirar el campo de envios y ver si alguna id del prod de vendedor esta en false.
+			set<DTProducto> prod = v->getProductosAsociados();
+			set<DTDetalleCompra> c = contCompra->obtenerCompras();
+			set<DTProducto> res;
+			bool pendienteEnvio;
+			for (auto p : prod){
+				for (auto co : c){
+					pendienteEnvio = !co.productosEnvio.at(p.codigo);
+					if (pendienteEnvio){
+						res.insert(p);
+						break;
+					}
+				}
+			}
+			for (auto pe : res){
+				cout << pe.codigo << " " << pe.nombre << endl;
+			}
+			int prodAEnviar = leerInt("Seleccione la id del producto a enviar: ");
+			set<EnviosPendientes> env = contProductos->seleccionarProductoAEnviar(prodAEnviar); 
+			cout << "Lista de compras en las que dicho producto aún no se ha enviado: "  << endl;
+			for (auto ev : env){
+				cout << "Compra de " << ev.nickname << "realizada el día ";
+				mostrarFecha(ev.fecha);
+			}
+			string nick = leerStr("Seleccione el cliente: ");
+			DTFecha f = leerDTFecha("Seleccione la fecha de la compra: ");
+			//como encontrar la compra si tengo dos compras con el mismo producto realizadas el mismo dia?
+
+
 		}
 		else if (indice == "11")
 		{
@@ -333,7 +405,54 @@ int main(int argc, char *argv[])
 			contCompra->finalizarCompra();
 		}
 		else if (indice == "14")
-		{
+		{	
+			cout << "Clientes: " <<endl;
+			set<string> lc = contCompra->listarClientes(); 
+			for (auto nick : lc)
+			{
+				cout << nick << endl;
+			}
+			string nickname = leerStr("Cliente: ");
+			cout << "Vendedores a los que " << nickname << " no está suscrito:" << endl;
+			set<string> noSusc = contSuscripciones->listarNoSuscritos(nickname);
+			for (auto nick : noSusc)
+			{
+				cout << nick << endl;
+			}
+			bool seguir = true;
+			set<string> sLista;
+			while (seguir && size(noSusc) != 0)
+			{
+				string vendedor = leerStr("Vendedor: ");
+				if (sLista.count(vendedor) == 0){
+					contSuscripciones->agregarSuscripcion(vendedor);
+					sLista.insert(vendedor);
+					noSusc.erase(vendedor);
+				} else {
+					cout << "Suscripción ya agregada anteriormente. " << endl;
+				}
+				string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n] ");
+				while (!(resp == "y" || resp == "n"))
+				{
+					resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n] ");
+				}
+				seguir = (resp == "y");
+			}
+			cout << "Suscripciones:" << endl;
+			for (auto s : sLista)
+			{
+				cout << s << endl;
+			}
+			string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n] ");
+			while (!(resp2 == "y" || resp2 == "n"))
+			{
+				resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n] ");
+			}
+			if (resp2 == "y")
+			{
+				contSuscripciones->confirmarSuscripcion();
+			}
+				
 		}
 		else if (indice == "15")
 		{

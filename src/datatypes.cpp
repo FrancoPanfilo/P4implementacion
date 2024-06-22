@@ -11,7 +11,8 @@
 #include "../include/Datatypes/DTProductoId.h"
 #include "../include/Datatypes/ParProdCant.h"
 #include "../include/Datatypes/DTProductosYVendedor.h"
-#include"../include/Datatypes/DTVendedor.h"
+#include "../include/Datatypes/DTVendedor.h"
+#include "../include/Datatypes/EnviosPendientes.h"
 
 DTAltaCliente::DTAltaCliente(string nickname, DTFecha fechaNac, string contrasenia, string ciudad, string direccion)
     : nickname(nickname), fechaNac(fechaNac), contrasenia(contrasenia), ciudad(ciudad), direccion(direccion) {}
@@ -40,8 +41,8 @@ DTCompra::DTCompra(DTFecha fecha, double montoFinal, set<int> datosProductos)
 
 DTCompra::~DTCompra(){}    
 
-DTDetalleCompra::DTDetalleCompra(int id, double montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos)
-    :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos) {
+DTDetalleCompra::DTDetalleCompra(int id, double montoFinal, DTFecha fechaCompra,map <int, bool> productosEnvio, set<ParProdCant> productos, string cliente)
+    :id(id), montoFinal(montoFinal), fechaCompra(fechaCompra), productos(productos), cliente(cliente) {
         this->productosEnvio = productosEnvio;
     }
 
@@ -105,6 +106,12 @@ bool DTPromocion::operator<(const DTPromocion &other) const
 {
     return (nombre.compare(other.nombre) < 0);
 }
+
+EnviosPendientes::EnviosPendientes(string nickname, DTFecha fecha)
+    : nickname(nickname), fecha(fecha){}
+
+EnviosPendientes::~EnviosPendientes(){}
+
 ParProdCant::ParProdCant(Producto producto, int cantidad)
     : producto(producto), cantidad(cantidad) {}
 

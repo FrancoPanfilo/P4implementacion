@@ -114,3 +114,13 @@ void ControladorCompras::finalizarCompra()
 	datosProductos.clear();
 	nickname = "";
 }
+
+std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
+	set<DTDetalleCompra> resultado;
+	for (auto c : compras){
+		Compra* co = c.second;
+		DTDetalleCompra dc = DTDetalleCompra(co->getId(), co->getMontoFinal(),co->getFechaCompra(),co->getEnvios(),co->getProductos());
+		resultado.insert(dc);
+	}
+	return resultado;
+}
