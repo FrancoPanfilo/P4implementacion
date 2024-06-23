@@ -103,9 +103,9 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 
 void ControladorCompras::registrarCompra()
 {
-	Compra compra = Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios, cliente);
-	Compra *c = new Compra(compra);
-	cliente->getCompras().insert(std::pair<int, Compra *>(idC, c));
+	Compra *c = new Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios, cliente);
+	//Compra *c = new Compra(compra);
+	cliente->agregarCompra(c);
 	compras.insert((std::pair<int, Compra *>(idC, c)));
 }
 

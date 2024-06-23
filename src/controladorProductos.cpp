@@ -90,7 +90,7 @@ std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int 
     ControladorCompras *contCompras = ControladorCompras::getInstance();
     set<DTDetalleCompra> cs = contCompras->obtenerCompras();
     for (auto c : cs){
-        if(!c.productosEnvio.at(codigo)){
+        if((c.productosEnvio.count(codigo) == 1) && !c.productosEnvio.at(codigo)){
             EnviosPendientes e = EnviosPendientes(c.id, c.cliente, c.fechaCompra);
             envios.insert(e);
         }

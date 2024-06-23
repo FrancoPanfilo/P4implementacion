@@ -290,17 +290,14 @@ int main(int argc, char *argv[])
 				for (auto com : comentarios)
 				{
 					if(com.idProducto == codigo){
-						printf("%d", com.id);
+						printf("%d ", com.id);
 						mostrarFecha(com.fecha);
 						cout << com.contenido << endl;
 						i++;
-					} else {
-						cout << com.idProducto << endl;
-						cout << codigo;
 					}
 				}
 				if (i == 0){
-					cout << "Este producto no tiene comentarios." << endl;
+					cout << "Este producto no tiene comentarios." << endl; // no hay que confirmar crear comentario si entro acá
 				} else {
 					int id = leerInt("Responder a: ");
 					// cin.ignore();
@@ -396,26 +393,21 @@ int main(int argc, char *argv[])
 			}
 			string vendedor = leerStr("Vendedor: ");
 			Vendedor *v = contUsuarios->obtenerVendedor(vendedor);
-			cout << "pase1";
 			set<DTProducto> prod = v->getProductosAsociados();
-			cout << "pase2";
 			set<DTDetalleCompra> c = contCompra->obtenerCompras();
 			set<DTProducto> res;
-			cout << "pase3";
 			bool pendienteEnvio;
 			for (auto p : prod)
 			{
 				for (auto co : c)
-				{
-					pendienteEnvio = !co.productosEnvio.at(p.codigo);
-					if (pendienteEnvio)
-					{
+				{	
+					if (co.productosEnvio.count(p.codigo) == 1 && !co.productosEnvio.at(p.codigo)){
 						res.insert(p);
 						break;
-					}
+						
+					}	
 				}
 			}
-			cout << "pase4";
 			for (auto pe : res)
 			{
 				cout << pe.codigo << " " << pe.nombre << endl;
@@ -425,7 +417,7 @@ int main(int argc, char *argv[])
 			cout << "Lista de compras en las que dicho producto aún no se ha enviado: " << endl;
 			for (auto ev : env)
 			{
-				cout << "Compra de " << ev.nickname << "realizada el día ";
+				cout << "Compra de " << ev.nickname << " realizada el día ";
 				mostrarFecha(ev.fecha);
 			}
 			string nick = leerStr("Seleccione el cliente: ");
@@ -439,7 +431,10 @@ int main(int argc, char *argv[])
 				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
 				{
 					enviosC.at(prodAEnviar) = true;
+					cout << "entre" << endl;
+
 				}
+				cout << enviosC.count(prodAEnviar) << endl; ;
 			}
 		}
 		else if (indice == 11)
@@ -491,11 +486,15 @@ int main(int argc, char *argv[])
 				Cliente *c = contUsuarios->obtenerCliente(nickname);
 				cout << "Nombre: " << nickname << " Direccion:" << c->getDireccion() << endl;
 				set<DTDetalleCompra> dC = contUsuarios->listarComprasCliente();
-				for (auto c : dC)
+				for (auto co : dC)
 				{
-					cout << "Id: " << c.id << "  Monto final: " << c.montoFinal << "  Fecha: ";
-					mostrarFecha(c.fechaCompra);
+					map<int, bool> dP = co.productosEnvio;
+					cout << "Id: " << co.id << "  Monto final: " << co.montoFinal << "  Fecha: ";
+					mostrarFecha(co.fechaCompra);
 					cout << endl;
+					for (auto p : dP){
+						cout << p.first << p.second << endl;
+					}
 				}
 			}
 		}

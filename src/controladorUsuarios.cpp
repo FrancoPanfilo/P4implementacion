@@ -31,16 +31,16 @@ ControladorUsuarios *ControladorUsuarios::getInstance()
 
 Vendedor *ControladorUsuarios::obtenerVendedor(string nickname)
 {
-    // if (listaVendedores.count(nickname) == 0)
-    // {
-    //     return NULL;
-    // }
-    auto entry = listaVendedores.find(nickname);
+     if (listaVendedores.count(nickname) == 0)
+    {
+         return NULL;
+     }
+   /* auto entry = listaVendedores.find(nickname);
     if (entry == listaVendedores.end())
         return NULL;
-    return entry->second;
+    return entry->second;*/
 
-    // return &(this->listaVendedores.at(nickname));
+    return (this->listaVendedores.at(nickname));
 }
 
 Cliente *ControladorUsuarios::obtenerCliente(string nickname)
@@ -250,3 +250,5 @@ void ControladorUsuarios::borrarComentario(string nickname, Comentario *com)
     Usuario *u = this->listaUsuarios.at(nickname);
     u->borrarComentario(com);
 }
+
+

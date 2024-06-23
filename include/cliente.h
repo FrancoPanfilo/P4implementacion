@@ -49,6 +49,7 @@ public:
 
     void agregarSub(string nickname);
     void eliminarSub(string nickname);
+     void agregarCompra(Compra*);
 };
 
 #endif // _CLIENTE_H
