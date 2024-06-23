@@ -38,6 +38,7 @@ public:
 	Comentario* getRespuestaA();
 	string getComentador();
 	set<int> getIdRespuestas();
+    Producto* getProducto();
 
     // Setters
     void setContenido(string texto);

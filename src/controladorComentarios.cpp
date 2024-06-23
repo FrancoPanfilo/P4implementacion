@@ -90,7 +90,7 @@ set<DTComentario> ControladorComentarios::listarComentarios(){
 	set<DTComentario> resultado;
 	for (auto par: comentarios) {
 		Comentario *com = par.second;
-		DTComentario dt = DTComentario(com->getId(), com->getContenido(), com->getfecha());
+		DTComentario dt = DTComentario(com->getId(), com->getContenido(), com->getfecha(), com->getProducto()->getCodigo());
 		resultado.insert(dt);
 	}
 	return resultado;
@@ -109,6 +109,7 @@ void ControladorComentarios::confirmarDejarComentario(){
 	// el mes empieza en 0 así q sumamos uno, y los años se cuentan desde 1900
 	DTFecha fecha = DTFecha(local->tm_mday, local->tm_mon+1, local->tm_year+1900);
 	Comentario *com = new Comentario(this->ultimaId, this->contenido, fecha, this->comentarioSobre, this->comentador);
+	cout << comentarioSobre->getCodigo();
 
 	this->comentarios.insert(std::pair<int, Comentario*>(com->getId(), com));
 

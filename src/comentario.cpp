@@ -48,6 +48,10 @@ set<int> Comentario::getIdRespuestas() {
 	}
 	return ids;
 }
+
+Producto* Comentario::getProducto(){
+	return producto;
+}
 // Setters
 
 void Comentario::setContenido(string texto) {
