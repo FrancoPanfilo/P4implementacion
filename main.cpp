@@ -318,8 +318,9 @@ int main(int argc, char *argv[])
 					cout << "Este producto no tiene comentarios." << endl; // no hay que confirmar crear comentario si entro acá
 				} else {
 					int id = leerInt("Responder a: ");
+					// cin.ignore();
 					string respuesta = leerStr("Texto: ");
-					//checkear que el comentario este en los listados?
+
 					contCom->ingresarRespuesta(id, respuesta);
 				}
 			}
