@@ -12,6 +12,8 @@ class IComentario
 {
 public:
 	// Metodos
+	virtual void cargarComentario(DTComentario, string) = 0;
+	virtual void cargarRespuesta(DTComentario, int, string) = 0;
 	virtual void elegirYBorrarComentario(int idComentario) = 0;
 	virtual void elegirProducto(int codigo) = 0;
 	virtual void seleccionarUsuarioCom(string nick) = 0;
