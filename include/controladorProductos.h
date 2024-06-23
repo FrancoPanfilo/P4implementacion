@@ -42,7 +42,7 @@ public:
 	void elegirProducto(string);
 	void crearProducto(DTProducto);
     // std::set<string> listarVendedores();
-    std::set<DTProducto> seleccionarVendedor(string nickname);
+    // std::set<DTProducto> seleccionarVendedor(string nickname);
     std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
     void seleccionarVenta(EnviosPendientes env);
 };

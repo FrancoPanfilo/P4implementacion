@@ -22,6 +22,8 @@ private:
     String nickname;
     std::set<ParProdCant> productosTmp;
 
+	bool estaEnPromocionVigente(int codigo);
+
 public:
     static ControladorPromociones *getInstance();
 

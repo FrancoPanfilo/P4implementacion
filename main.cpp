@@ -182,6 +182,7 @@ int main(int argc, char *argv[])
 			}
 			string n = leerStr("Ingrese nickname del cliente: ");
 			set<DTNotificacion> nP = contSuscripciones->consultarNotificacionesRecibidas(n);
+			cout << nP.size() << " notificaciones recibidas: " << endl;
 			for (auto n : nP)
 			{
 				cout << n.nombreVendedor << " publico la promocion " << n.nombrePromo << " con los productos identificados por los siguientes codigos: " << endl;
@@ -204,10 +205,7 @@ int main(int argc, char *argv[])
 			}
 			int id = leerInt("Ingrese el codigo del producto que desea consultar: ");
 			Producto *p = contProductos->obtenerProducto(id);
-			cout << "El producto seleccionado es " << p->getNombre() << " su vendedor lo describe de la siguiente forma " << p->getDescripcion() << ". Tiene un valor de $" << p->getPrecio();
-			if (p->getStock() == 0){
-				cout << " y en este momento no hay unidades en stock" << endl;
-			} else cout << " y en este momento hay " << p->getStock() << " unidades en stock" << endl;
+			cout << p->getNombre() << " (" << p->getDescripcion() << "): $" << p->getPrecio() << ". Stock: " << p->getStock() << " unidades, Categoría: " << p->getTipo() << endl;
 		}
 		else if (indice == 5)
 		{
@@ -220,9 +218,10 @@ int main(int argc, char *argv[])
 			string n = leerStr("Ingrese el nombre de la promocion que desea consultar:  ");
 			DTProductosYVendedor p = contPromociones->seleccionarPromocionPorNombre(n);
 			cout << "La Promocion " << n << " tiene los siguientes productos: " << endl;
-			for (auto pr : p.productos)
-			{	//poner el minimo de cada producto?
-				cout << "Nombre: " << pr.nombre << "  Codigo: " << pr.codigo << endl;
+			for (auto ppc : p.productos)
+			{
+				Producto *prod = contProductos->obtenerProducto(ppc.codigo);
+				cout << "Nombre: " << prod->getNombre() << "  Codigo: " << ppc.codigo << ", minimo: " << ppc.cantidad << endl;
 			}
 			cout << "Estos productos son vendidos por " << p.vendedor.getNickname() << ".  Que tiene como RUT: " << p.vendedor.getRUT() << endl;
 			cout << endl;
@@ -910,13 +909,13 @@ int main(int argc, char *argv[])
 				}
 				else if (accion == "seleccionarPromocionPorNombre")
 				{
-					string nombre = leerStr("Nombre de la promocion: ");
-					DTProductosYVendedor pyv = contPromociones->seleccionarPromocionPorNombre(nombre);
-					cout << "Vendedor: " << pyv.vendedor.getNickname() << endl;
-					for (auto producto : pyv.productos)
-					{
-						mostrarProducto(producto);
-					}
+					// string nombre = leerStr("Nombre de la promocion: ");
+					// DTProductosYVendedor pyv = contPromociones->seleccionarPromocionPorNombre(nombre);
+					// cout << "Vendedor: " << pyv.vendedor.getNickname() << endl;
+					// for (auto producto : pyv.productos)
+					// {
+					// 	mostrarProducto(producto);
+					// }
 				}
 				// ---- ControladorProductos ----
 
