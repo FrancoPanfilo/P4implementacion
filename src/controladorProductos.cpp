@@ -24,7 +24,6 @@ ControladorProductos *ControladorProductos::getInstance()
 
 std::set<DTProducto> ControladorProductos::listarProductos()
 {
-    // TODO: esto no compila
     std::set<DTProducto> dtProductos;
     for (auto producto : productos)
     {
@@ -78,12 +77,12 @@ void ControladorProductos::altaProducto(string nickname, DTProducto p)
     v->agregarProducto(producto);
 }
 
-std::set<DTProducto> ControladorProductos::seleccionarVendedor(string nickname)
-{
-    // TODO
-    std::set<DTProducto> productos;
-    return productos;
-}
+// std::set<DTProducto> ControladorProductos::seleccionarVendedor(string nickname)
+// {
+//     std::set<DTProducto> productos;
+//     return productos;
+// }
+
 std::set<EnviosPendientes> ControladorProductos::seleccionarProductoAEnviar(int codigo)
 {   
     std::set<EnviosPendientes> envios;

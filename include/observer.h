@@ -6,14 +6,14 @@ class ObserverNotificacion
 {
 
 public:
-	ObserverNotificacion();
+	// ObserverNotificacion() = 0;
 	// ObserverNotificacion(ObserverNotificacion &&) = default;
 	// ObserverNotificacion(const ObserverNotificacion &) = default;
 	// ObserverNotificacion &operator=(ObserverNotificacion &&) = default;
 	// ObserverNotificacion &operator=(const ObserverNotificacion &) = default;
-	~ObserverNotificacion();
+	virtual ~ObserverNotificacion() {};
 
-	virtual void notificar(DTNotificacion);
+	virtual void notificar(DTNotificacion) = 0;
 
 private:
 };

@@ -3,11 +3,13 @@
 #include "./DTFecha.h"
 
 #include <string>
+using namespace std;
+
 class DTVendedor {
 public:
-	std::string nickname;
+	string nickname;
 	DTFecha fechaNac;
-	std::string RUT;
+	string RUT;
 	DTVendedor(string nickname, DTFecha fechaNac, string RUT);
 	~DTVendedor();
 };

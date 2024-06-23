@@ -22,7 +22,7 @@ public:
 	virtual void altaProducto(string, DTProducto) = 0;
 
 	// virtual std::set<string> listarVendedores() = 0;
-	virtual std::set<DTProducto> seleccionarVendedor(string nickname) = 0;
+	// virtual std::set<DTProducto> seleccionarVendedor(string nickname) = 0;
 	virtual std::set<EnviosPendientes> seleccionarProductoAEnviar(int) = 0;
 	virtual void seleccionarVenta(EnviosPendientes env) = 0;
 
