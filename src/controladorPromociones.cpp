@@ -62,7 +62,8 @@ void ControladorPromociones::ingresarDatosPromocion(string nombre, string descri
 	if (promociones.count(nombre) > 0) {
 		throw std::runtime_error("Ya existe una promocion con ese nombre");
 	}
-	this->promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
+	// Vendedor va vacio xq nos lo dan despues
+	this->promocionTmp = DTPromocion(nombre, "", descripcion, descuento, fechaVenc);
 }
 
 void ControladorPromociones::agregarPromocion(Promocion p)
@@ -81,6 +82,7 @@ set<string> ControladorPromociones::obtenerNicknames()
 void ControladorPromociones::seleccionarNickname(String n)
 {
 	this->nickname = n;
+	this->promocionTmp.vendedor = n;
 }
 
 set<DTProducto> ControladorPromociones::obtenerProductosAsociados()
