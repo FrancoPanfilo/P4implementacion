@@ -110,3 +110,11 @@ void ControladorProductos::crearProducto(DTProducto dtprod) {
 	this->ultimaId++;
 	 
 }
+
+void ControladorProductos::eliminarTodosLosProductos()
+{
+    for (auto it = productos.begin(); it != productos.end(); ++it) {
+        delete it->second;
+    }
+    productos.clear();
+}

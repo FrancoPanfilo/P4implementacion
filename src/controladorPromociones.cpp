@@ -177,3 +177,10 @@ bool ControladorPromociones::estaEnPromocionVigente(int codigo) {
 	}
 	return false;
 }
+
+void ControladorPromociones::eliminarTodasLasPromociones() {
+    for (auto it = promociones.begin(); it != promociones.end(); ++it) {
+        delete it->second;
+    }
+    promociones.clear();
+}

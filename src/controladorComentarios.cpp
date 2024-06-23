@@ -130,3 +130,9 @@ void ControladorComentarios::confirmarDejarComentario(){
 	this->comentarioSobre = NULL;
 }
 
+void ControladorComentarios::eliminarTodosLosComentarios() {
+    for (auto it = comentarios.begin(); it != comentarios.end(); ++it) {
+        delete it->second;
+    }
+    comentarios.clear();
+}

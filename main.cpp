@@ -77,6 +77,22 @@ bool pedirConfirmacion(string pregunta)
 	return respuesta == "y";
 }
 
+void liberarMemoria(Fabrica *f, IUsuario *contUsuarios, IComentario *contCom, IProducto *contProductos, ISuscripcion *contSuscripciones, IPromocion *contPromociones, ICompra *contCompra) {
+	contUsuarios->eliminarProductosAsociados();
+	contCom->eliminarTodosLosComentarios();
+	contCompra->eliminarTodasLasCompras();
+	contPromociones->eliminarTodasLasPromociones();
+	contProductos->eliminarTodosLosProductos();
+	contUsuarios->eliminarTodosLosUsuarios();
+	delete contUsuarios;
+	delete contCom;
+	delete contProductos;
+	delete contSuscripciones;
+	delete contPromociones;
+	delete contCompra;
+	delete f;
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -94,6 +110,7 @@ int main(int argc, char *argv[])
 	while (indice != 0)
 	{
 		cout << "Ingresar indice caso de uso " << endl;
+		cout << "0--Salir" << endl;
 		cout << "1--altaDeProducto" << endl;
 		cout << "2--altaDeUsuario" << endl;
 		cout << "3--consultaDeNotificaciones" << endl;
@@ -115,7 +132,7 @@ int main(int argc, char *argv[])
 
 		if (indice == 0)
 		{
-			continue;
+			break;;
 		}
 		// else if (indice == "15")
 		// {
@@ -1005,5 +1022,6 @@ int main(int argc, char *argv[])
 			cout << "Indice incorrecto " << indice << endl;
 		}
 	}
+	liberarMemoria(f, contUsuarios, contCom, contProductos, contSuscripciones, contPromociones, contCompra);
 	return 0;
 }

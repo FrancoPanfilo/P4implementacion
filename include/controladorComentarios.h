@@ -52,6 +52,7 @@ public:
     set<DTComentario> listarComentarios();
     void ingresarRespuesta(int codigo, string contenido);
     void confirmarDejarComentario();
+    void eliminarTodosLosComentarios();
 };
 
 #endif // _CONTROLADORCOMENTARIOS_H

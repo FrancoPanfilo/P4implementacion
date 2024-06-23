@@ -19,6 +19,7 @@ public:
 	virtual set<DTComentario> listarComentarios() = 0;
 	virtual void ingresarRespuesta(int codigo, string contenido) = 0;
 	virtual void confirmarDejarComentario() = 0;
+	virtual void eliminarTodosLosComentarios() = 0;
 };
 
 #endif // _ICOMENTARIO_H

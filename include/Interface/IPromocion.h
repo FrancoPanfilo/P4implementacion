@@ -28,6 +28,7 @@ public:
     virtual std::set<DTPromocion> listarPromocionesVendedor(string) = 0;
     virtual std::set<DTPromocion> obtenerPromocionesVigentes() = 0;
     virtual DTProductosYVendedor seleccionarPromocionPorNombre(string) = 0;
+    virtual void eliminarTodasLasPromociones() = 0;
 };
 
 #endif // _IPROMOCION_H

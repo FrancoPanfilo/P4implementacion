@@ -39,6 +39,7 @@ public:
     void eliminarSuscriptor(Cliente *c);
     void notificar(DTNotificacion dtNotif);
     Vendedor *create(DTAltaVendedor altaVendedor);
+    void eliminarProductosAsociados();
 };
 
 #endif // _VENDEDOR_H

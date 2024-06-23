@@ -45,6 +45,7 @@ public:
     std::set<DTPromocion> obtenerPromocionesVigentes();
     DTProductosYVendedor seleccionarPromocionPorNombre(String);
     std::set<DTPromocion> listarPromocionesVendedor(String nickname);
+    void eliminarTodasLasPromociones();
 };
 
 #endif // _CONTROLADORPROMOCIONES_H
