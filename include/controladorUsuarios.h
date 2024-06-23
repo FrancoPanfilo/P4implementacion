@@ -68,6 +68,8 @@ public:
 
     void agregarComentario(string nickname, Comentario *com);
     void borrarComentario(string nickname, Comentario *com);
+    void eliminarTodosLosUsuarios();
+    void eliminarProductosAsociados();
 };
 
 #endif // _CONTROLADORUSUARIOS_H

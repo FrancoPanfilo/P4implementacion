@@ -70,3 +70,11 @@ Vendedor *Vendedor::create(DTAltaVendedor altaVendedor)
     Vendedor *v = new Vendedor(altaVendedor.nickname, altaVendedor.contrasenia, altaVendedor.fechaNac, altaVendedor.RUT);
     return v;
 }
+
+void Vendedor::eliminarProductosAsociados()
+{
+    for (auto it = productosAsociados.begin(); it != productosAsociados.end(); ++it) {
+        delete it->second;
+    }
+    productosAsociados.clear();
+}

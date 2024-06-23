@@ -251,4 +251,19 @@ void ControladorUsuarios::borrarComentario(string nickname, Comentario *com)
     u->borrarComentario(com);
 }
 
+void ControladorUsuarios::eliminarTodosLosUsuarios()
+{
+    for (auto it = listaUsuarios.begin(); it != listaUsuarios.end(); ++it) {
+        delete it->second;
+    }
+    listaUsuarios.clear();
+    listaClientes.clear();
+    listaVendedores.clear();
+}
 
+void ControladorUsuarios::eliminarProductosAsociados()
+{
+    for (auto it = listaVendedores.begin(); it != listaVendedores.end(); ++it) {
+        it->second->eliminarProductosAsociados();
+    }
+}
