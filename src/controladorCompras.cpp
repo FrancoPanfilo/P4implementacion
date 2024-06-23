@@ -130,3 +130,11 @@ std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
 	}
 	return resultado;
 }
+
+void ControladorCompras::eliminarTodasLasCompras()
+{
+    for (auto it = compras.begin(); it != compras.end(); ++it) {
+        delete it->second;
+    }
+    compras.clear();
+}

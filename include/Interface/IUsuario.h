@@ -44,6 +44,9 @@ public:
     virtual void finalizarExpediente() = 0;
 
     virtual ~IUsuario(){};
+
+    virtual void eliminarTodosLosUsuarios() = 0;
+    virtual void eliminarProductosAsociados() = 0;
 };
 
 #endif // _IUSUARIO_H

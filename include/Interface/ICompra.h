@@ -18,5 +18,6 @@ public:
     virtual DTDetalleCompra devolverDetalles() = 0;
     virtual ~ICompra(){};
     virtual std::set<DTDetalleCompra> obtenerCompras() = 0; 
+    virtual void eliminarTodasLasCompras() = 0;
 };
 #endif // _ICOMPRA_H
