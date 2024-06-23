@@ -430,7 +430,9 @@ int main(int argc, char *argv[])
 				map<int, bool> enviosC = comp.second->getEnvios();
 				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
 				{
-					enviosC.at(prodAEnviar) = true;
+					//cl->enviar(codigo compra codigo producto)
+					cl->enviar(comp.first, prodAEnviar);
+					//enviosC.at(prodAEnviar) = true;
 					cout << "entre" << endl;
 
 				}
