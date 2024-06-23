@@ -53,11 +53,12 @@ void ControladorComentarios::cargarComentario(DTComentario c, string n)
 {
 	this->ultimaId++;
 	ControladorProductos *contProductos = ControladorProductos::getInstance();
+	cout << c.idProducto << endl;
 	Producto *p = contProductos->obtenerProducto(c.idProducto);
 	Comentario *com = new Comentario(this->ultimaId, c.contenido, c.fecha, p, n);
 	this->comentarios.insert(std::pair<int, Comentario *>(com->getId(), com));
 	ControladorUsuarios *cUsuarios = ControladorUsuarios::getInstance();
-	cUsuarios->agregarComentario(this->comentador, com);
+	cUsuarios->agregarComentario(n, com);
 }
 void ControladorComentarios::cargarRespuesta(DTComentario c, int id, string n)
 {
@@ -67,7 +68,7 @@ void ControladorComentarios::cargarRespuesta(DTComentario c, int id, string n)
 	Comentario *com = new Comentario(this->ultimaId, c.contenido, c.fecha, p, n);
 	this->comentarios.insert(std::pair<int, Comentario *>(com->getId(), com));
 	ControladorUsuarios *cUsuarios = ControladorUsuarios::getInstance();
-	cUsuarios->agregarComentario(this->comentador, com);
+	cUsuarios->agregarComentario(n, com);
 	Comentario *padre = this->comentarios.at(id);
 	padre->agregarRespuesta(com);
 	com->setRespuestaA(padre);
