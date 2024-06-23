@@ -100,6 +100,7 @@ void cargarDatos()
     DTCompra dataCO8 = DTCompra(DTFecha(14, 5, 2024), 5600, {dataPR1.codigo});
     DTCompra dataCO9 = DTCompra(DTFecha(15, 5, 2024), 7000, {dataPR1.codigo});
 
+
     // Comentarios
     // IComentario *contComentarios = f->getIComentarios();
     DTComentario dataCM1 = DTComentario(1, "¿La camiseta azul esta disponible en talla M?", DTFecha(1, 6, 2024), 1);

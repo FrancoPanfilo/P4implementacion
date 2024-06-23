@@ -39,7 +39,7 @@ public:
     map<int, Compra *> getCompras();
 
     // Setters
-    void setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes);
+    // void setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes);
     void setSuscripciones(set<string> suscripciones);
 
     // Metodos
