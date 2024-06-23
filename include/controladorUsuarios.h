@@ -62,7 +62,9 @@ public:
     set<DTDetalleCompra> listarComprasCliente();
     DTCliente listarInfoCliente();
     void finalizarExpediente();
-   
+    void agregarCompra(Compra*);
+
+
 
     void agregarComentario(string nickname, Comentario *com);
     void borrarComentario(string nickname, Comentario *com);
