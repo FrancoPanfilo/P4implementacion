@@ -93,9 +93,19 @@ set<DTProducto> ControladorPromociones::obtenerProductosAsociados()
 }
 void ControladorPromociones::agregarProductoAPromocion(int codigo, int cantidad)
 {
-	// Fabrica *f = Fabrica::getFabrica();
-	// IProducto *contProducto = f->getIProductos();
-	// Producto *p = contProducto->obtenerProducto(codigo);
+	Fabrica *f = Fabrica::getFabrica();
+	IUsuario *contUsuarios = f->getIUsuarios();
+	set<DTProducto> dp = contUsuarios->prodDeVendedor(nickname);
+	bool esDelVendedor = false;
+	for (auto p : dp){
+		if (p.codigo == codigo){
+			esDelVendedor = true;
+			break;
+		}
+	}
+	if (!esDelVendedor){
+		throw std::runtime_error("El producto no es vendido por el vendedor seleccionado");
+	}
 	bool estaEnPromo = this->estaEnPromocionVigente(codigo);
 	if (estaEnPromo) {
 		throw std::runtime_error("El producto ya esta en una promocion vigente");

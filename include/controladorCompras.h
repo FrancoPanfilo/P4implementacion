@@ -28,6 +28,7 @@ private:
     int idC;
     map<int, bool> envios;
     DTDetalleCompra compraActual;
+    string promocionUsada;
 
 public:
     static ControladorCompras *getInstance();

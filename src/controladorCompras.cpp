@@ -45,6 +45,11 @@ void ControladorCompras::seleccionarProducto(int cantidad, int id)
 {
 	ControladorProductos *cpro = ControladorProductos::getInstance();
 	Producto *prod = cpro->obtenerProducto(id);
+	string err = "Stock insuficiente: (" + to_string(prod->getStock()) + ")";
+	if (prod->getStock() < cantidad){
+		
+		throw std::runtime_error(err);
+	}
 	ParProdCant par = ParProdCant(prod->getCodigo(), cantidad);
 	// control producto no repetido
 	for (auto p : datosProductos)
@@ -65,19 +70,15 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 	double total = 0;
 	ControladorPromociones *cprom = ControladorPromociones::getInstance();
 	Promocion *promo = cprom->obtenerPromocion(datosProductos);
-	if (promo == NULL) {
-		cout << "NO HAY PROMO PARA APLICAR" << endl;
-	} else {
-		cout << "Aplicando promocion " << promo->getNombre() << endl;
-		//guardar nombre promo
-	}
 	ControladorProductos *cprod = ControladorProductos::getInstance();
 	if (promo != NULL)
-	{
+	{	
+		cout << "Aplicando promocion " << promo->getNombre() << endl;
 		double desc = promo->getDescuento();
+		promocionUsada = promo->getNombre();
 		set<DTProducto> pd = promo->getProductos();
 		for (auto p : datosProductos)
-		{
+		{	
 			Producto *pr = cprod->obtenerProducto(p.codigo);
 			if (pd.count(DTProducto(p.codigo, pr->getStock(), pr->getPrecio(), pr->getNombre(), pr->getDescripcion(), pr->getTipo())) == 1)
 			{
@@ -90,7 +91,9 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 		}
 	}
 	else
-	{
+	{	
+		cout << "NO HAY PROMO PARA APLICAR" << endl;
+		promocionUsada = "";
 		for (auto p : datosProductos)
 		{
 			Producto *pr = cprod->obtenerProducto(p.codigo);
@@ -104,11 +107,14 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 
 void ControladorCompras::registrarCompra()
 {
-	Compra *c = new Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios, cliente);
+	Compra *c = new Compra(fechaActual, compraActual.montoFinal, compraActual.id, datosProductos, envios, cliente, promocionUsada);
 	//Compra *c = new Compra(compra);
 	//if promo != " " entonces agregarpromo a c
-	cliente->agregarCompra(c);
-	compras.insert((std::pair<int, Compra *>(idC, c)));
+	c->getCliente()->agregarCompra(c);
+	std::pair<int, Compra *> p;
+    p.first = c->getId();
+    p.second = c;
+	compras.insert(p);
 }
 
 void ControladorCompras::finalizarCompra()
@@ -120,6 +126,7 @@ void ControladorCompras::finalizarCompra()
 		pr->setStock(pr->getStock() - p.cantidad);
 	};
 	datosProductos.clear();
+	envios.clear();
 	nickname = "";
 }
 
@@ -127,7 +134,7 @@ std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
 	set<DTDetalleCompra> resultado;
 	for (auto c : compras){
 		Compra* co = c.second;
-		DTDetalleCompra dc = DTDetalleCompra(co->getId(), co->getMontoFinal(),co->getFechaCompra(),co->getEnvios(),co->getProductos(), cliente->getNickname());
+		DTDetalleCompra dc = DTDetalleCompra(co->getId(), co->getMontoFinal(),co->getFechaCompra(),co->getEnvios(),co->getProductos(), co->getCliente()->getNickname());
 		resultado.insert(dc);
 	}
 	return resultado;
@@ -142,6 +149,7 @@ void ControladorCompras::eliminarTodasLasCompras()
 }
 
 void ControladorCompras::cargarCompra(Compra c){
+	idC++;
 	Compra * compra = new Compra(c);
 	ControladorUsuarios *cu = ControladorUsuarios::getInstance();
 	compra->getCliente()->agregarCompra(compra);

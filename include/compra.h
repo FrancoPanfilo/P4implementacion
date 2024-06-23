@@ -30,7 +30,7 @@ public:
 	Cliente* getCliente();
     set<ParProdCant> getProductos();
     map<int, bool> getEnvios();
-    Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente *cliente);
+    Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente *cliente, string promo);
     Compra(DTFecha fechaCompra, double montoFinal, int id, Cliente *cliente);
     Compra();
     ~Compra();

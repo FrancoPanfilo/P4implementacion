@@ -303,10 +303,9 @@ int main(int argc, char *argv[])
 			// agregarProductoAPromocion
 			bool seguir = true;
 			while (seguir)
-			{
+			{	
 				int codigo = leerInt("Codigo: ");
 				int cantidad = leerInt("Cantidad: ");
-
 				try
 				{
 					contPromociones->agregarProductoAPromocion(codigo, cantidad);
@@ -383,15 +382,18 @@ int main(int argc, char *argv[])
 					string respuesta = leerStr("Texto: ");
 
 					contCom->ingresarRespuesta(id, respuesta);
+					contCom->confirmarDejarComentario();
+					cout << "Comentario creado" << endl;
 				}
 			}
 			else
 			{
 				string contenido = leerStr("Contenido: ");
 				contCom->introducirTexto(contenido);
+				contCom->confirmarDejarComentario();
+				cout << "Comentario creado" << endl;
 			}
-			contCom->confirmarDejarComentario();
-			cout << "Comentario creado" << endl;
+			
 		}
 		else if (indice == 8)
 		{
@@ -514,13 +516,9 @@ int main(int argc, char *argv[])
 				map<int, bool> enviosC = comp.second->getEnvios();
 				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
 				{
-					// cl->enviar(codigo compra codigo producto)
 					cl->enviar(comp.first, prodAEnviar);
-					// enviosC.at(prodAEnviar) = true;
-					cout << "entre" << endl;
 				}
-				cout << enviosC.count(prodAEnviar) << endl;
-				;
+				
 			}
 		}
 		else if (indice == 11)
@@ -723,366 +721,6 @@ int main(int argc, char *argv[])
 			if (resp2 == "y")
 			{
 				contSuscripciones->confirmarSuscripcion();
-			}
-		}
-		else if (indice == 15)
-		{
-			string accion = " ";
-			while (accion != "salir" && accion != "")
-			{
-				accion = leerStr("Ingrese funcion uso interno:   ");
-				if (accion == "ingresarDatosCliente")
-				{
-					DTAltaCliente data = DTAltaCliente();
-					data.nickname = leerStr("Nickname: ");
-					data.contrasenia = leerStr("Contrasenia: ");
-					data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-					data.ciudad = leerStr("Ciudad: ");
-					data.direccion = leerStr("Direccion: ");
-
-					contUsuarios->ingresarDatosCliente(data);
-				}
-				else if (accion == "ingresarDatosVendedor")
-				{
-					DTAltaVendedor data = DTAltaVendedor();
-					data.nickname = leerStr("Nickname: ");
-					data.contrasenia = leerStr("Contrasenia: ");
-					data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
-					data.RUT = leerInt("RUT: ");
-
-					contUsuarios->ingresarDatosVendedor(data);
-				}
-				else if (accion == "listarClientes")
-				{
-					set<string> clientes = contUsuarios->listarClientes();
-					for (auto nick : clientes)
-					{
-						cout << nick << endl;
-					}
-				}
-				else if (accion == "listarVendedores")
-				{
-					set<string> vendedores = contUsuarios->listarVendedores();
-					for (auto nick : vendedores)
-					{
-						cout << nick << endl;
-					}
-				}
-				else if (accion == "listarUsuarios")
-				{
-					set<string> usuarios = contUsuarios->listarUsuarios();
-					for (auto nick : usuarios)
-					{
-						cout << nick << endl;
-					}
-				}
-				else if (accion == "listarNoSuscritos")
-				{
-					string nickname = leerStr("Cliente: ");
-					set<string> noSusc = contUsuarios->listarNoSuscritos(nickname);
-					for (auto nick : noSusc)
-					{
-						cout << nick << endl;
-					}
-				}
-				else if (accion == "agregarSuscripcion")
-				{
-					string nickname = leerStr("Cliente: ");
-					set<string> noSusc = contSuscripciones->listarNoSuscritos(nickname);
-					for (auto nick : noSusc)
-					{
-						cout << nick << endl;
-					}
-					bool seguir = true;
-					set<string> sLista;
-					while (seguir && size(noSusc) != 0)
-					{
-						string vendedor = leerStr("Vendedor: ");
-						contSuscripciones->agregarSuscripcion(vendedor);
-						string resp = leerStr("¿Desea seguir agregando suscripciones? [y/n] ");
-						while (!(resp == "y" || resp == "n"))
-						{
-							resp = leerStr("Respuesta no válida. ¿Desea seguir agregando suscripciones? [y/n] ");
-						}
-						seguir = (resp == "y");
-						sLista.insert(vendedor);
-						noSusc.erase(vendedor);
-					}
-					cout << "Suscripciones:" << endl;
-					for (auto s : sLista)
-					{
-						cout << s << endl;
-					}
-					string resp2 = leerStr("¿Desea confirmar las suscripciones? [y/n] ");
-					while (!(resp2 == "y" || resp2 == "n"))
-					{
-						resp2 = leerStr("Respuesta no válida. ¿Desea confirmar las suscripciones? [y/n] ");
-					}
-					if (resp2 == "y")
-					{
-						contSuscripciones->confirmarSuscripcion();
-					}
-				}
-				else if (accion == "obtenerListaComentarios")
-				{
-					string nickname = leerStr("Usuario: ");
-					set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
-					for (auto com : comentarios)
-					{
-						printf("%d", com.id);
-						mostrarFecha(com.fecha);
-						cout << com.contenido << endl;
-					}
-				}
-				else if (accion == "obtenerCliente")
-				{
-					string nickname = leerStr("Cliente: ");
-					Cliente *c = contUsuarios->obtenerCliente(nickname);
-					std::cout << "El cliente de nickname " << c->getNickname() << " vive en la ciudad "
-							  << c->getCiudad() << " y tiene como direccion " << c->getDireccion() << ". Nacio el dia: ";
-					mostrarFecha(c->getFechaNac());
-					std::cout << std::endl;
-				}
-				else if (accion == "obtenerVendedor")
-				{
-					string nickname = leerStr("Vendedor: ");
-					Vendedor *v = contUsuarios->obtenerVendedor(nickname);
-					std::cout << "El vendedor de nickname " << v->getNickname() << " lo identifica el RUT "
-							  << v->getRUT() << ". Nacio el dia: ";
-					mostrarFecha(v->getFechaNac());
-					std::cout << v->getNickname() << "Tiene asociados los siguientes productos: ";
-					std::cout << std::endl;
-					set<DTProducto> pa = v->getProductosAsociados();
-					for (auto p : pa)
-					{
-						mostrarProducto(p);
-					}
-				}
-				else if (accion == "prodDeVendedor")
-				{
-				}
-				else if (accion == "seleccionarUsuarioCompra")
-				{
-					string nick = leerStr("Nickname: ");
-					contCompra->seleccionarUsuario(nick);
-				}
-				else if (accion == "seleccionarProductoCompra")
-				{
-					bool seguir = true;
-					while (seguir)
-					{
-						int idProd = leerInt("Ingrese id del producto: ");
-						int cantidad = leerInt("Ingrese cantidad a comprar: ");
-						contCompra->seleccionarProducto(cantidad, idProd);
-						string resp = leerStr("¿Desea comprar otro producto? [y/n] ");
-						while (!(resp == "y" || resp == "n"))
-						{
-							resp = leerStr("Respuesta no válida. ¿Desea comprar otro producto? [y/n] ");
-						}
-						seguir = (resp == "y");
-					}
-					DTDetalleCompra detalles = contCompra->devolverDetalles();
-					// cout << "El monto final de la compra será: $" << detalles.montoFinal << endl;
-					printf("El monto final de la compra será: %lf \n", detalles.montoFinal);
-					cout << "Fecha de compra: ";
-					mostrarFecha(detalles.fechaCompra);
-					cout << "Producto/s a comprar: " << endl;
-					for (auto parprodcant : detalles.productos)
-					{
-						Producto *prod = contProductos->obtenerProducto(parprodcant.codigo);
-						cout << prod->getNombre() << " x " << parprodcant.cantidad << endl;
-					}
-				}
-				else if (accion == "confirmarCompra")
-				{
-					contCompra->registrarCompra();
-					contCompra->finalizarCompra();
-				}
-				else if (accion == "seleccionarNicknameExp")
-				{
-				}
-				else if (accion == "listarProductosVendedor")
-				{
-				}
-				else if (accion == "listarPromocionesVendedor")
-				{
-					string nickname = leerStr("Vendedor: ");
-					set<DTPromocion> dp = contPromociones->listarPromocionesVendedor(nickname);
-					cout << "EL vendedor " << nickname << " tiene las siguientes promociones." << std::endl;
-					for (auto p : dp)
-					{
-						cout << "Nombre: " << p.nombre << std::endl
-							 << "Descripción: " << p.descripcion << std::endl
-							 << "Descuento: " << p.descuento << "%" << std::endl
-							 << "Fecha de Vencimiento: " << std::endl;
-						mostrarFecha(p.fechaVencimiento);
-						std::cout << "" << std::endl;
-					}
-				}
-				else if (accion == "listarInfoVendedor")
-				{
-				}
-				else if (accion == "listarComprasCliente")
-				{
-				}
-				else if (accion == "listarInfoCliente")
-				{
-				}
-				else if (accion == "finalizarExpediente")
-				{
-				}
-				// ---- ControladorPromociones ----
-				else if (accion == "ingresarDatosPromocion")
-				{
-					string nombre = leerStr("Nombre: ");
-					string descripcion = leerStr("Descripcion: ");
-					int descuento = leerInt("Descuento: ");
-					DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
-					contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
-				}
-				else if (accion == "obtenerNicknames")
-				{
-					set<string> vendedores = contPromociones->obtenerNicknames();
-					for (auto nick : vendedores)
-					{
-						cout << nick << endl;
-					}
-				}
-				else if (accion == "seleccionarNickname")
-				{
-					string nick = leerStr("Nickname: ");
-					contPromociones->seleccionarNickname(nick);
-				}
-				else if (accion == "obtenerProductosAsociados")
-				{
-					set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
-					for (auto p : dtproductos)
-					{
-						mostrarProducto(p);
-					}
-				}
-				else if (accion == "agregarProductoAPromocion")
-				{
-					bool seguir = true;
-					while (seguir)
-					{
-						int codigo = leerInt("Codigo: ");
-						int cantidad = leerInt("Cantidad: ");
-						contPromociones->agregarProductoAPromocion(codigo, cantidad);
-						string resp = leerStr("¿Desea seguir agregando productos? [y/n]");
-						while (!(resp == "y" || resp == "n"))
-						{
-							resp = leerStr("Respuesta no válida. ¿Desea seguir agregando productos? [y/n]");
-						}
-						seguir = resp == "y";
-					}
-				}
-				else if (accion == "confirmarCrearPromocion")
-				{
-					contPromociones->confirmarCrearPromocion();
-				}
-				else if (accion == "obtenerPromocionesVigentes")
-				{
-					set<DTPromocion> promosVigentes = contPromociones->obtenerPromocionesVigentes();
-					for (auto promo : promosVigentes)
-					{
-						cout << promo.nombre << " (-" << promo.descuento << "%): " << promo.descripcion << endl;
-						cout << "Vendida por: " << promo.vendedor << endl;
-						cout << "Hasta ";
-						mostrarFecha(promo.fechaVencimiento);
-					}
-				}
-				else if (accion == "seleccionarPromocionPorNombre")
-				{
-					// string nombre = leerStr("Nombre de la promocion: ");
-					// DTProductosYVendedor pyv = contPromociones->seleccionarPromocionPorNombre(nombre);
-					// cout << "Vendedor: " << pyv.vendedor.getNickname() << endl;
-					// for (auto producto : pyv.productos)
-					// {
-					// 	mostrarProducto(producto);
-					// }
-				}
-				// ---- ControladorProductos ----
-
-				else if (accion == "listarProductosConId")
-				{
-					set<DTProducto> productos = contProductos->listarProductosConId();
-					for (auto producto : productos)
-					{
-						mostrarProducto(producto);
-					}
-				}
-				else if (accion == "seleccionarProductoPorCodigo")
-				{
-				}
-				else if (accion == "mostrarProducto")
-				{
-				}
-				else if (accion == "seleccionarProducto")
-				{
-				}
-				else if (accion == "obtenerProducto")
-				{
-				}
-				else if (accion == "altaProducto")
-				{
-				}
-				else if (accion == "seleccionarVendedor")
-				{
-				}
-				else if (accion == "seleccionarProductoAEnviar")
-				{
-				}
-				else if (accion == "seleccionarVenta")
-				{
-				}
-
-				// ---- ControladorComentarios ----
-				else if (accion == "elegirYBorrarComentario")
-				{
-					int id = leerInt("Id: ");
-					contCom->elegirYBorrarComentario(id);
-				}
-				else if (accion == "elegirProducto")
-				{
-					int codigo = leerInt("Codigo: ");
-					contCom->elegirProducto(codigo);
-				}
-				else if (accion == "seleccionarUsuarioCom")
-				{
-					string nick = leerStr("Nickname: ");
-					contCom->seleccionarUsuarioCom(nick);
-				}
-				else if (accion == "introducirTexto")
-				{
-					string contenido = leerStr("Contenido: ");
-					contCom->introducirTexto(contenido);
-				}
-				else if (accion == "listarComentarios")
-				{
-					set<DTComentario> comentarios = contCom->listarComentarios();
-					cout << "Listando todos los comentarios" << endl;
-					for (auto com : comentarios)
-					{
-						printf("%d", com.id);
-						mostrarFecha(com.fecha);
-						cout << com.contenido << endl;
-					}
-				}
-				else if (accion == "ingresarRespuesta")
-				{
-					int id = leerInt("Id: ");
-					string respuesta = leerStr("Respuesta: ");
-					contCom->ingresarRespuesta(id, respuesta);
-				}
-				else if (accion == "confirmarDejarComentario")
-				{
-					contCom->confirmarDejarComentario();
-				}
-				else
-				{
-					cout << "Accion incorrecta " << accion << endl;
-				}
 			}
 		}
 		else

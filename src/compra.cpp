@@ -28,7 +28,7 @@ Cliente* Compra::getCliente() {
 	return cliente;
 }
 
-Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente* cliente)
+Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente* cliente, string promo)
     : fechaCompra(fechaCompra), montoFinal(montoFinal), id(id), productos(productos), envios(envios), cliente(cliente) {}
 
 Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, Cliente *cliente)

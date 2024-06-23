@@ -87,11 +87,16 @@ Cliente *Cliente::create(DTAltaCliente altaCliente)
 {
 
     Cliente *c = new Cliente(altaCliente.nickname, altaCliente.contrasenia, altaCliente.fechaNac, altaCliente.direccion, altaCliente.ciudad);
+    map<int, Compra *> lista;
+    c->compras = lista;
     return c;
 }
 
 void Cliente::agregarCompra(Compra *c){
-    compras.insert(std::pair<int, Compra *> (c->getId() , c));
+    std::pair<int, Compra *> p;
+    p.first = c->getId();
+    p.second = c;
+    compras.insert(p);
 }
 
 void Cliente::enviar(int cC, int cP){
