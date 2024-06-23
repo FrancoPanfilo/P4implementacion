@@ -85,7 +85,7 @@ DTNotificacion::DTNotificacion(string nombreVendedor, set<int> productos, string
 
 DTNotificacion::~DTNotificacion(){}    
 bool DTNotificacion::operator<(const DTNotificacion &otra) const {
-	return (this->nombrePromo.compare(otra.nombrePromo) == -1);
+	return (this->nombrePromo.compare(otra.nombrePromo) < 0);
 }
 
 DTProducto::DTProducto(int codigo, int stock, double precio, string nombre, string descripcion, string tipo)
@@ -126,7 +126,7 @@ bool ParProdCant::operator<(const ParProdCant &other) const
     return codigo < other.codigo;
 }
 
-DTProductosYVendedor::DTProductosYVendedor(std::set<DTProducto> productos, Vendedor vendedor)
+DTProductosYVendedor::DTProductosYVendedor(std::set<ParProdCant> productos, Vendedor vendedor)
     : productos(productos), vendedor(vendedor) {}
 
 bool DTComentario::operator<(const DTComentario &other) const

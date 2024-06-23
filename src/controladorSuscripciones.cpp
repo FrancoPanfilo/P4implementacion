@@ -63,6 +63,7 @@ void ControladorSuscripciones::eliminarSuscriptor(string nickname)
   v->eliminarSuscriptor(suscriptor);
   suscriptor->eliminarSub(nickname);
 }
+
 set<DTNotificacion> ControladorSuscripciones::consultarNotificacionesRecibidas(string nickname)
 {
   set<DTNotificacion> resultado;
@@ -71,6 +72,7 @@ set<DTNotificacion> ControladorSuscripciones::consultarNotificacionesRecibidas(s
   resultado = suscriptor->getNotificacionesPendientes();
   return resultado;
 }
+
 void ControladorSuscripciones::eliminarNotificaciones()
 {
   suscriptor->eliminarNotificacionesPendientes();

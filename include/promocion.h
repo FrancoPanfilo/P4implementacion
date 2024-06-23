@@ -30,6 +30,7 @@ public:
     map<Producto, Minimo> getMinimos();
     Promocion *obtenerSiAplica(std::set<ParProdCant>);
     set<DTProducto> getProductos();
+    set<ParProdCant> obtenerProductosConMinimo();
     void agregarAPromo(Producto *prod, int cantidad);
     // Promocion obtenerSiAplica(std::set<ParProdCant>);
 };

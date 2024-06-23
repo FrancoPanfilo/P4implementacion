@@ -79,3 +79,14 @@ void Promocion::agregarAPromo(Producto *p, int cantidad)
     Minimo m(p, cantidad);
     this->productos.insert(std::pair<int, Minimo>(p->getCodigo(), m));
 }
+
+set<ParProdCant> Promocion::obtenerProductosConMinimo() {
+	set<ParProdCant> resultado;
+	for (auto par : productos) {
+		int codigo = par.second.getProducto()->getCodigo();
+		int cantidad = par.second.getCantidad();
+		ParProdCant ppc = ParProdCant(codigo, cantidad);
+		resultado.insert(ppc);
+	}
+	return resultado;
+}

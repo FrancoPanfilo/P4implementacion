@@ -2,7 +2,9 @@
 #include "../include/controladorProductos.h"
 #include <cstddef>
 #include <cstdio>
+#include <iostream>
 #include <set>
+#include <stdexcept>
 #include <string>
 #include <ctime>
 #include "../include/Interface/IUsuario.h"
@@ -46,7 +48,7 @@ DTProductosYVendedor ControladorPromociones::seleccionarPromocionPorNombre(strin
 	Fabrica *f = f->getFabrica();
 	IUsuario *cu = f->getIUsuarios();
 	Vendedor *v = cu->obtenerVendedor(p->getVendedor());
-	return DTProductosYVendedor(p->getProductos(), *v);
+	return DTProductosYVendedor(p->obtenerProductosConMinimo(), *v);
 }
 
 // no seberia devolver un set DTPromos?
@@ -57,6 +59,9 @@ map<string, Promocion *> ControladorPromociones::listarPromociones()
 
 void ControladorPromociones::ingresarDatosPromocion(string nombre, string descripcion, int descuento, DTFecha fechaVenc)
 {
+	if (promociones.count(nombre) > 0) {
+		throw std::runtime_error("Ya existe una promocion con ese nombre");
+	}
 	this->promocionTmp = DTPromocion(nombre, descripcion, descuento, fechaVenc);
 }
 
@@ -86,9 +91,13 @@ set<DTProducto> ControladorPromociones::obtenerProductosAsociados()
 }
 void ControladorPromociones::agregarProductoAPromocion(int codigo, int cantidad)
 {
-	Fabrica *f = Fabrica::getFabrica();
-	IProducto *contProducto = f->getIProductos();
+	// Fabrica *f = Fabrica::getFabrica();
+	// IProducto *contProducto = f->getIProductos();
 	// Producto *p = contProducto->obtenerProducto(codigo);
+	bool estaEnPromo = this->estaEnPromocionVigente(codigo);
+	if (estaEnPromo) {
+		throw std::runtime_error("El producto ya esta en una promocion vigente");
+	}
 	ParProdCant ppp(codigo, cantidad);
 	productosTmp.insert(ppp);
 }
@@ -112,6 +121,8 @@ void ControladorPromociones::confirmarCrearPromocion()
 	Vendedor *v = contUsuarios->obtenerVendedor(nickname);
 	DTNotificacion notificacion(nickname, pCodigos, promo.getNombre());
 	v->notificar(notificacion);
+
+	productosTmp.clear();
 }
 
 std::set<DTPromocion> ControladorPromociones::listarPromocionesVendedor(String nickname)
@@ -142,8 +153,27 @@ Promocion *ControladorPromociones::obtenerPromocion(set<ParProdCant> ppp)
 	return promo;
 }
 
-int ControladorPromociones::obtenerDescuento(ParProdCant)
-{
-	// TODO
-	return 0;
+// int ControladorPromociones::obtenerDescuento(ParProdCant)
+// {
+// 	return 0;
+// }
+
+bool ControladorPromociones::estaEnPromocionVigente(int codigo) {
+	time_t ahora = time(0);
+	tm *local = localtime(&ahora);
+	DTFecha hoy = DTFecha(local->tm_mday, local->tm_mon + 1, local->tm_year + 1900);
+
+	for (auto par : promociones) {
+		Promocion* promo = par.second;
+		if (hoy > promo->getVencimiento())
+		{
+			continue;
+		}
+		for (auto prod : promo->getProductos()) {
+			if (prod.codigo == codigo) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
