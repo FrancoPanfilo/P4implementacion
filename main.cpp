@@ -77,7 +77,8 @@ bool pedirConfirmacion(string pregunta)
 	return respuesta == "y";
 }
 
-void liberarMemoria(Fabrica *f, IUsuario *contUsuarios, IComentario *contCom, IProducto *contProductos, ISuscripcion *contSuscripciones, IPromocion *contPromociones, ICompra *contCompra) {
+void liberarMemoria(Fabrica *f, IUsuario *contUsuarios, IComentario *contCom, IProducto *contProductos, ISuscripcion *contSuscripciones, IPromocion *contPromociones, ICompra *contCompra)
+{
 	contUsuarios->eliminarProductosAsociados();
 	contCom->eliminarTodosLosComentarios();
 	contCompra->eliminarTodasLasCompras();
@@ -132,7 +133,8 @@ int main(int argc, char *argv[])
 
 		if (indice == 0)
 		{
-			break;;
+			break;
+			;
 		}
 		// else if (indice == "15")
 		// {
@@ -140,7 +142,7 @@ int main(int argc, char *argv[])
 		// }
 
 		else if (indice == 1)
-		{	
+		{
 			cout << "altaDeProducto" << endl;
 			cout << "Vendedores: " << endl;
 			set<string> lc = contUsuarios->listarVendedores();
@@ -153,7 +155,7 @@ int main(int argc, char *argv[])
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
 			p.stock = leerInt("Ingrese la cantidad en stock: ");
-			//stock tiene que ser positivo
+			// stock tiene que ser positivo
 			p.precio = leerDouble("Ingrese el precio: ");
 			p.tipo = leerStr("Ingrese el tipo de producto [R , E , O]: ");
 			contProductos->altaProducto(n, p);
@@ -175,9 +177,12 @@ int main(int argc, char *argv[])
 				v.fechaNac = leerDTFecha("Ingrese fecha de nacimiento [dia mes anio]:  ");
 				v.RUT = leerStr("Ingrese RUT [12 digitos]:  ");
 
-				try {
+				try
+				{
 					contUsuarios->ingresarDatosVendedor(v);
-				} catch (const std::runtime_error& error) {
+				}
+				catch (const std::runtime_error &error)
+				{
 					cout << "ERROR: " << error.what() << endl;
 					continue;
 				}
@@ -193,9 +198,12 @@ int main(int argc, char *argv[])
 				data.ciudad = leerStr("Ciudad: ");
 				data.direccion = leerStr("Direccion: ");
 
-				try {
+				try
+				{
 					contUsuarios->ingresarDatosCliente(data);
-				} catch (const std::runtime_error& error) {
+				}
+				catch (const std::runtime_error &error)
+				{
 					cout << "ERROR: " << error.what() << endl;
 					continue;
 				}
@@ -261,14 +269,17 @@ int main(int argc, char *argv[])
 			cout << "crearPromocion" << endl;
 			// ingresarDatosPromocion
 			string nombre = leerStr("Nombre: ");
-			//no repetir nombre
+			// no repetir nombre
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
 
-			try {
+			try
+			{
 				contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
-			} catch (const std::runtime_error& error) {
+			}
+			catch (const std::runtime_error &error)
+			{
 				cout << "ERROR: " << error.what() << endl;
 				continue;
 			}
@@ -286,7 +297,7 @@ int main(int argc, char *argv[])
 			// obtenerProductosAsociados
 			set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
 			for (auto p : dtproductos)
-			{	//checkear si estan en alguna promocion ya
+			{ // checkear si estan en alguna promocion ya
 				mostrarProducto(p);
 			}
 			// agregarProductoAPromocion
@@ -296,9 +307,12 @@ int main(int argc, char *argv[])
 				int codigo = leerInt("Codigo: ");
 				int cantidad = leerInt("Cantidad: ");
 
-				try {
+				try
+				{
 					contPromociones->agregarProductoAPromocion(codigo, cantidad);
-				} catch (const std::runtime_error& error) {
+				}
+				catch (const std::runtime_error &error)
+				{
 					cout << "ERROR: " << error.what() << endl;
 					continue;
 				}
@@ -312,7 +326,6 @@ int main(int argc, char *argv[])
 			}
 			// confirmarCrearPromocion
 			contPromociones->confirmarCrearPromocion();
-
 		}
 		else if (indice == 7)
 		{
@@ -342,7 +355,8 @@ int main(int argc, char *argv[])
 			{
 				// listarComentarios
 				set<DTComentario> comentarios = contCom->listarComentarios();
-				if (comentarios.size() == 0) {
+				if (comentarios.size() == 0)
+				{
 					cout << "No hay comentarios para responder en este producto" << endl;
 					continue;
 				}
@@ -350,16 +364,20 @@ int main(int argc, char *argv[])
 				int i = 0;
 				for (auto com : comentarios)
 				{
-					if(com.idProducto == codigo){
+					if (com.idProducto == codigo)
+					{
 						printf("%d ", com.id);
 						mostrarFecha(com.fecha);
 						cout << com.contenido << endl;
 						i++;
 					}
 				}
-				if (i == 0){
+				if (i == 0)
+				{
 					cout << "Este producto no tiene comentarios." << endl; // no hay que confirmar crear comentario si entro acá
-				} else {
+				}
+				else
+				{
 					int id = leerInt("Responder a: ");
 					// cin.ignore();
 					string respuesta = leerStr("Texto: ");
@@ -381,9 +399,12 @@ int main(int argc, char *argv[])
 			// listarComentarios
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
-			if (comentarios.size() == 0){
+			if (comentarios.size() == 0)
+			{
 				cout << "El usuario seleccionado no tiene comentarios publicados. " << endl;
-			} else {
+			}
+			else
+			{
 				for (auto com : comentarios)
 				{
 					printf("%d ", com.id);
@@ -463,12 +484,12 @@ int main(int argc, char *argv[])
 			for (auto p : prod)
 			{
 				for (auto co : c)
-				{	
-					if (co.productosEnvio.count(p.codigo) == 1 && !co.productosEnvio.at(p.codigo)){
+				{
+					if (co.productosEnvio.count(p.codigo) == 1 && !co.productosEnvio.at(p.codigo))
+					{
 						res.insert(p);
 						break;
-						
-					}	
+					}
 				}
 			}
 			for (auto pe : res)
@@ -493,13 +514,13 @@ int main(int argc, char *argv[])
 				map<int, bool> enviosC = comp.second->getEnvios();
 				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
 				{
-					//cl->enviar(codigo compra codigo producto)
+					// cl->enviar(codigo compra codigo producto)
 					cl->enviar(comp.first, prodAEnviar);
-					//enviosC.at(prodAEnviar) = true;
+					// enviosC.at(prodAEnviar) = true;
 					cout << "entre" << endl;
-
 				}
-				cout << enviosC.count(prodAEnviar) << endl; ;
+				cout << enviosC.count(prodAEnviar) << endl;
+				;
 			}
 		}
 		else if (indice == 11)
@@ -514,7 +535,7 @@ int main(int argc, char *argv[])
 				t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
 			}
 			if (t == "v")
-			{	
+			{
 				time_t ahora = time(0);
 				tm *local = localtime(&ahora);
 				DTFecha fechaActual = DTFecha(local->tm_mday, local->tm_mon + 1, local->tm_year + 1900);
@@ -536,12 +557,13 @@ int main(int argc, char *argv[])
 				cout << endl
 					 << "El vendedor " << nickname << " tiene las siguientes promociones en vigencia:" << endl;
 				for (auto p : dProm)
-				{	
-					if (p.fechaVencimiento > fechaActual){
+				{
+					if (p.fechaVencimiento > fechaActual)
+					{
 						cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " vence en la fecha ";
 						mostrarFecha(p.fechaVencimiento);
 						cout << endl;
-					}	
+					}
 				}
 			}
 			else
@@ -557,8 +579,18 @@ int main(int argc, char *argv[])
 					cout << "Id: " << co.id << "  Monto final: " << co.montoFinal << "  Fecha: ";
 					mostrarFecha(co.fechaCompra);
 					cout << endl;
-					for (auto p : dP){
-						cout << p.first << p.second << endl;
+					for (auto p : dP)
+					{
+						string e;
+						if (p.second)
+						{
+							e = " Enviado";
+						}
+						else
+						{
+							e = " Por enviar";
+						}
+						cout << p.first << e << endl;
 					}
 				}
 			}
@@ -599,9 +631,12 @@ int main(int argc, char *argv[])
 				{
 					int cantidad = leerInt("Ingrese cantidad a comprar: ");
 
-					try {
+					try
+					{
 						contCompra->seleccionarProducto(cantidad, idProd);
-					} catch (const std::runtime_error& error) {
+					}
+					catch (const std::runtime_error &error)
+					{
 						cout << "ERROR: " << error.what() << endl;
 						continue;
 					}
@@ -627,7 +662,7 @@ int main(int argc, char *argv[])
 			cout << "Producto/s a comprar: " << endl;
 			for (auto parprodcant : detalles.productos)
 			{
-				Producto *prod = contProductos->obtenerProducto(parprodcant.codigo);	
+				Producto *prod = contProductos->obtenerProducto(parprodcant.codigo);
 				cout << prod->getNombre() << " x " << parprodcant.cantidad << endl;
 			}
 			string conf = leerStr("¿Desea confirmar la compra? [y/n] ");
