@@ -64,7 +64,6 @@ double leerDouble(string pregunta)
 	double respuesta;
 	scanf("%lf", &respuesta);
 	cout << endl;
-
 	return respuesta;
 }
 
@@ -124,13 +123,20 @@ int main(int argc, char *argv[])
 		// }
 
 		else if (indice == 1)
-		{
+		{	
 			cout << "altaDeProducto" << endl;
+			cout << "Vendedores: " << endl;
+			set<string> lc = contUsuarios->listarVendedores();
+			for (auto nick : lc)
+			{
+				cout << nick << endl;
+			}
 			DTProducto p;
 			string n = leerStr("Ingrese el nickname del vendedor: ");
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
 			p.stock = leerInt("Ingrese la cantidad en stock: ");
+			//stock tiene que ser positivo
 			p.precio = leerDouble("Ingrese el precio: ");
 			p.tipo = leerStr("Ingrese el tipo de producto [R , E , O]: ");
 			contProductos->altaProducto(n, p);
@@ -207,7 +213,7 @@ int main(int argc, char *argv[])
 			set<DTPromocion> dP = contPromociones->obtenerPromocionesVigentes();
 			for (auto p : dP)
 			{
-				cout << "Nombre: " << p.nombre << "   Vendedor: " << p.vendedor << "  Descripcion: " << p.descripcion << endl;
+				cout << "Nombre: " << p.nombre << "   Vendedor: " << p.vendedor << "  Descripcion: " << p.descripcion << "Descuento: %" << p.descuento << endl;
 			}
 			string n = leerStr("Ingrese el nombre de la promocion que desea consultar:  ");
 			DTProductosYVendedor p = contPromociones->seleccionarPromocionPorNombre(n);
@@ -225,6 +231,7 @@ int main(int argc, char *argv[])
 			cout << "crearPromocion" << endl;
 			// ingresarDatosPromocion
 			string nombre = leerStr("Nombre: ");
+			//no repetir nombre
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
@@ -243,7 +250,7 @@ int main(int argc, char *argv[])
 			// obtenerProductosAsociados
 			set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
 			for (auto p : dtproductos)
-			{
+			{	//checkear si estan en alguna promocion ya
 				mostrarProducto(p);
 			}
 			// agregarProductoAPromocion
@@ -313,6 +320,7 @@ int main(int argc, char *argv[])
 					int id = leerInt("Responder a: ");
 					// cin.ignore();
 					string respuesta = leerStr("Texto: ");
+
 					contCom->ingresarRespuesta(id, respuesta);
 				}
 			}
@@ -483,7 +491,7 @@ int main(int argc, char *argv[])
 					cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " . Su codigo es " << p.codigo << endl;
 				}
 				cout << endl
-					 << "El vendedor " << nickname << " tiene las siguientes promociones creadas" << endl;
+					 << "El vendedor " << nickname << " tiene las siguientes promociones en vigencia:" << endl;
 				for (auto p : dProm)
 				{	
 					if (p.fechaVencimiento > fechaActual){

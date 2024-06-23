@@ -29,7 +29,6 @@ set<string> ControladorSuscripciones::listarNoSuscritos(string nickname)
 }
 void ControladorSuscripciones::agregarSuscripcion(string nickname)
 {
-  //suscriptor->agregarSub(nickname);
   subsParaAgregar.insert(nickname);
 }
 void ControladorSuscripciones::confirmarSuscripcion()
