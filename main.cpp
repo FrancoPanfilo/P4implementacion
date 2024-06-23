@@ -169,6 +169,11 @@ int main(int argc, char *argv[])
 		else if (indice == 3)
 		{
 			cout << "consultaDeNotificaciones" << endl;
+			set<string> clientes = contUsuarios->listarClientes();
+			for (auto nick : clientes)
+			{
+				cout << nick << endl;
+			}
 			string n = leerStr("Ingrese nickname del cliente: ");
 			set<DTNotificacion> nP = contSuscripciones->consultarNotificacionesRecibidas(n);
 			for (auto n : nP)
@@ -285,6 +290,10 @@ int main(int argc, char *argv[])
 			{
 				// listarComentarios
 				set<DTComentario> comentarios = contCom->listarComentarios();
+				if (comentarios.size() == 0) {
+					cout << "No hay comentarios para responder en este producto" << endl;
+					continue;
+				}
 				cout << "Listando todos los comentarios" << endl;
 				for (auto com : comentarios)
 				{
@@ -333,6 +342,7 @@ int main(int argc, char *argv[])
 			}
 			string nickname = leerStr("Cliente: ");
 			set<string> listaSus = contSuscripciones->listarVendedoresSuscritos(nickname);
+			cout << "Suscripciones de " << nickname << endl;
 			for (auto s : listaSus)
 			{
 				cout << s << endl;

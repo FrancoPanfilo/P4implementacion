@@ -2,6 +2,7 @@
 
 #include "../include/cliente.h"
 
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -49,21 +50,21 @@ map<int, Compra *> Cliente::getCompras()
 }
 
 // Setters
+// void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes)
+// {
+//     this->notificacionesPendientes = notificacionesPendientes;
+// }
 
-void Cliente::setNotificacionesPendientes(set<DTNotificacion> notificacionesPendientes)
-{
-    this->notificacionesPendientes = notificacionesPendientes;
-}
-
-void Cliente::setSuscripciones(set<string> suscripciones)
-{
-    this->suscripciones = suscripciones;
-}
+// void Cliente::setSuscripciones(set<string> suscripciones)
+// {
+//     this->suscripciones = suscripciones;
+// }
 
 // Metodos
 
 void Cliente::notificar(DTNotificacion notificacion)
 {
+	cout << "Notificando a " << this->getNickname() << endl;
     notificacionesPendientes.insert(notificacion);
 }
 
