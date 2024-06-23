@@ -11,6 +11,8 @@ void cargarDatos()
     Fabrica *f = Fabrica::getFabrica();
     IUsuario *contUsuarios = f->getIUsuarios();
     IProducto *contProductos = f->getIProductos();
+    IComentario *contComentarios = f->getIComentarios();
+
     DTAltaVendedor dataUS1 = DTAltaVendedor("ana23", DTFecha(15, 5, 1988), "qwer1234", "212345678001");
     DTAltaVendedor dataUS2 = DTAltaVendedor("carlos78", DTFecha(18, 6, 1986), "asdfghj", "356789012345");
     DTAltaVendedor dataUS3 = DTAltaVendedor("diegom", DTFecha(28, 7, 1993), "zxcvbn", "190123456789");
@@ -146,7 +148,6 @@ void cargarDatos()
     //contUsuarios->obtenerCliente(dataCO9.cliente)->agregarCompra(&c9);
     contCompras->cargarCompra(c9);
 
-
     // Comentarios
     // IComentario *contComentarios = f->getIComentarios();
     DTComentario dataCM1 = DTComentario(1, "¿La camiseta azul esta disponible en talla M?", DTFecha(1, 6, 2024), 1);
@@ -174,6 +175,30 @@ void cargarDatos()
     DTComentario dataCM23 = DTComentario(23, "Si, es compatible con ambos.", DTFecha(6, 6, 2024), 5);
     DTComentario dataCM24 = DTComentario(24, "¿Cuanto dura la bateria?", DTFecha(7, 6, 2024), 5);
     DTComentario dataCM25 = DTComentario(25, "¿La aplicacion movil es facil de usar?", DTFecha(7, 6, 2024), 5);
-
+    contComentarios->cargarComentario(dataCM1, "juan87");
+    contComentarios->cargarRespuesta(dataCM2, 1, "carlos78");
+    contComentarios->cargarRespuesta(dataCM3, 2, "laura");
+    contComentarios->cargarRespuesta(dataCM4, 3, "juan87");
+    contComentarios->cargarComentario(dataCM5, "natalia");
+    contComentarios->cargarComentario(dataCM6, "laura");
+    contComentarios->cargarRespuesta(dataCM7, 6, "ana23");
+    contComentarios->cargarComentario(dataCM8, "pablo10");
+    contComentarios->cargarRespuesta(dataCM9, 8, "ana23");
+    contComentarios->cargarComentario(dataCM10, "natalia");
+    contComentarios->cargarRespuesta(dataCM11, 10, "carlos78");
+    contComentarios->cargarRespuesta(dataCM12, 10, "laura");
+    contComentarios->cargarRespuesta(dataCM13, 12, "carlos78");
+    contComentarios->cargarRespuesta(dataCM14, 10, "roberto");
+    contComentarios->cargarComentario(dataCM15, "pablo10");
+    contComentarios->cargarRespuesta(dataCM16, 15, "ana23");
+    contComentarios->cargarRespuesta(dataCM17, 15, "natalia");
+    contComentarios->cargarRespuesta(dataCM18, 17, "ana23");
+    contComentarios->cargarRespuesta(dataCM19, 15, "roberto");
+    contComentarios->cargarComentario(dataCM20, "roberto");
+    contComentarios->cargarRespuesta(dataCM21, 20, "diegom");
+    contComentarios->cargarRespuesta(dataCM22, 20, "pablo10");
+    contComentarios->cargarRespuesta(dataCM23, 22, "diegom");
+    contComentarios->cargarRespuesta(dataCM24, 20, "natalia");
+    contComentarios->cargarRespuesta(dataCM25, 20, "pablo10");
     // nuestros datos
 }

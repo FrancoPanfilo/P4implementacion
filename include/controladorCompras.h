@@ -52,6 +52,6 @@ public:
     void registrarCompra();
     void finalizarCompra();
     std::set<DTDetalleCompra> obtenerCompras();
-
+    void eliminarTodasLasCompras();
 };
 #endif // _CONTROLADORCOMPRAS_H

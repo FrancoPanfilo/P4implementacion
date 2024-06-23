@@ -45,6 +45,7 @@ public:
     // std::set<DTProducto> seleccionarVendedor(string nickname);
     std::set<EnviosPendientes> seleccionarProductoAEnviar(int);
     void seleccionarVenta(EnviosPendientes env);
+    void eliminarTodosLosProductos();
 };
 
 #endif // _CONTROLADORPRODUCTOS_H

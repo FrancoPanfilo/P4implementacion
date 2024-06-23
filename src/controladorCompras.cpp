@@ -133,6 +133,14 @@ std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
 	return resultado;
 }
 
+void ControladorCompras::eliminarTodasLasCompras()
+{
+    for (auto it = compras.begin(); it != compras.end(); ++it) {
+        delete it->second;
+    }
+    compras.clear();
+}
+
 void ControladorCompras::cargarCompra(Compra c){
 	Compra * compra = new Compra(c);
 	ControladorUsuarios *cu = ControladorUsuarios::getInstance();

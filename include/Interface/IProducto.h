@@ -30,6 +30,7 @@ public:
 	virtual void elegirProducto(string) = 0;
 	virtual void crearProducto(DTProducto) = 0;
 	virtual ~IProducto(){};
+	virtual void eliminarTodosLosProductos() = 0;
 };
 
 #endif // _IPRODUCTO_H

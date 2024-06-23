@@ -77,6 +77,22 @@ bool pedirConfirmacion(string pregunta)
 	return respuesta == "y";
 }
 
+void liberarMemoria(Fabrica *f, IUsuario *contUsuarios, IComentario *contCom, IProducto *contProductos, ISuscripcion *contSuscripciones, IPromocion *contPromociones, ICompra *contCompra) {
+	contUsuarios->eliminarProductosAsociados();
+	contCom->eliminarTodosLosComentarios();
+	contCompra->eliminarTodasLasCompras();
+	contPromociones->eliminarTodasLasPromociones();
+	contProductos->eliminarTodosLosProductos();
+	contUsuarios->eliminarTodosLosUsuarios();
+	delete contUsuarios;
+	delete contCom;
+	delete contProductos;
+	delete contSuscripciones;
+	delete contPromociones;
+	delete contCompra;
+	delete f;
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -94,6 +110,7 @@ int main(int argc, char *argv[])
 	while (indice != 0)
 	{
 		cout << "Ingresar indice caso de uso " << endl;
+		cout << "0--Salir" << endl;
 		cout << "1--altaDeProducto" << endl;
 		cout << "2--altaDeUsuario" << endl;
 		cout << "3--consultaDeNotificaciones" << endl;
@@ -115,7 +132,7 @@ int main(int argc, char *argv[])
 
 		if (indice == 0)
 		{
-			continue;
+			break;;
 		}
 		// else if (indice == "15")
 		// {
@@ -157,7 +174,14 @@ int main(int argc, char *argv[])
 				v.contrasenia = leerStr("Ingrese contraseña: ");
 				v.fechaNac = leerDTFecha("Ingrese fecha de nacimiento [dia mes anio]:  ");
 				v.RUT = leerStr("Ingrese RUT [12 digitos]:  ");
-				contUsuarios->ingresarDatosVendedor(v);
+
+				try {
+					contUsuarios->ingresarDatosVendedor(v);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
+
 				cout << "Vendedor ingresado correctamente " << endl;
 			}
 			else
@@ -168,7 +192,13 @@ int main(int argc, char *argv[])
 				data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
 				data.ciudad = leerStr("Ciudad: ");
 				data.direccion = leerStr("Direccion: ");
-				contUsuarios->ingresarDatosCliente(data);
+
+				try {
+					contUsuarios->ingresarDatosCliente(data);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
 				cout << "Cliente ingresado correctamente " << endl;
 			}
 		}
@@ -235,7 +265,13 @@ int main(int argc, char *argv[])
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
-			contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+
+			try {
+				contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+			} catch (const std::runtime_error& error) {
+				cout << "ERROR: " << error.what() << endl;
+				continue;
+			}
 
 			// listarVendedores
 			set<string> vendedores = contUsuarios->listarVendedores();
@@ -259,7 +295,14 @@ int main(int argc, char *argv[])
 			{
 				int codigo = leerInt("Codigo: ");
 				int cantidad = leerInt("Cantidad: ");
-				contPromociones->agregarProductoAPromocion(codigo, cantidad);
+
+				try {
+					contPromociones->agregarProductoAPromocion(codigo, cantidad);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
+
 				string resp = leerStr("¿Desea seguir agregando productos? [y/n]");
 				while (!(resp == "y" || resp == "n"))
 				{
@@ -555,7 +598,13 @@ int main(int argc, char *argv[])
 				if (dp.count(prod) != 0)
 				{
 					int cantidad = leerInt("Ingrese cantidad a comprar: ");
-					contCompra->seleccionarProducto(cantidad, idProd);
+
+					try {
+						contCompra->seleccionarProducto(cantidad, idProd);
+					} catch (const std::runtime_error& error) {
+						cout << "ERROR: " << error.what() << endl;
+						continue;
+					}
 					dp.erase(prod);
 				}
 				else
@@ -1006,5 +1055,6 @@ int main(int argc, char *argv[])
 			cout << "Indice incorrecto " << indice << endl;
 		}
 	}
+	liberarMemoria(f, contUsuarios, contCom, contProductos, contSuscripciones, contPromociones, contCompra);
 	return 0;
 }
