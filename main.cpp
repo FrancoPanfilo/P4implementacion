@@ -64,7 +64,6 @@ double leerDouble(string pregunta)
 	double respuesta;
 	scanf("%lf", &respuesta);
 	cout << endl;
-
 	return respuesta;
 }
 
@@ -124,13 +123,20 @@ int main(int argc, char *argv[])
 		// }
 
 		else if (indice == 1)
-		{
+		{	
 			cout << "altaDeProducto" << endl;
+			cout << "Vendedores: " << endl;
+			set<string> lc = contUsuarios->listarVendedores();
+			for (auto nick : lc)
+			{
+				cout << nick << endl;
+			}
 			DTProducto p;
 			string n = leerStr("Ingrese el nickname del vendedor: ");
 			p.nombre = leerStr("Ingrese el nombre: ");
 			p.descripcion = leerStr("Describa brevemente el producto: ");
 			p.stock = leerInt("Ingrese la cantidad en stock: ");
+			//stock tiene que ser positivo
 			p.precio = leerDouble("Ingrese el precio: ");
 			p.tipo = leerStr("Ingrese el tipo de producto [R , E , O]: ");
 			contProductos->altaProducto(n, p);
@@ -193,7 +199,10 @@ int main(int argc, char *argv[])
 			}
 			int id = leerInt("Ingrese el codigo del producto que desea consultar: ");
 			Producto *p = contProductos->obtenerProducto(id);
-			cout << "El producto seleccionado es " << p->getNombre() << " su vendedor lo describe de la siguiente forma " << p->getDescripcion() << ". Tiene un valor de " << p->getPrecio() << " y en este momento hay " << p->getStock() << " unidades en stock" << endl;
+			cout << "El producto seleccionado es " << p->getNombre() << " su vendedor lo describe de la siguiente forma " << p->getDescripcion() << ". Tiene un valor de $" << p->getPrecio();
+			if (p->getStock() == 0){
+				cout << " y en este momento no hay unidades en stock" << endl;
+			} else cout << " y en este momento hay " << p->getStock() << " unidades en stock" << endl;
 		}
 		else if (indice == 5)
 		{
@@ -201,13 +210,13 @@ int main(int argc, char *argv[])
 			set<DTPromocion> dP = contPromociones->obtenerPromocionesVigentes();
 			for (auto p : dP)
 			{
-				cout << "Nombre: " << p.nombre << "   Vendedor: " << p.vendedor << "  Descripcion: " << p.descripcion << endl;
+				cout << "Nombre: " << p.nombre << "   Vendedor: " << p.vendedor << "  Descripcion: " << p.descripcion << "Descuento: %" << p.descuento << endl;
 			}
 			string n = leerStr("Ingrese el nombre de la promocion que desea consultar:  ");
 			DTProductosYVendedor p = contPromociones->seleccionarPromocionPorNombre(n);
 			cout << "La Promocion " << n << " tiene los siguientes productos: " << endl;
 			for (auto pr : p.productos)
-			{
+			{	//poner el minimo de cada producto?
 				cout << "Nombre: " << pr.nombre << "  Codigo: " << pr.codigo << endl;
 			}
 			cout << "Estos productos son vendidos por " << p.vendedor.getNickname() << ".  Que tiene como RUT: " << p.vendedor.getRUT() << endl;
@@ -218,6 +227,7 @@ int main(int argc, char *argv[])
 			cout << "crearPromocion" << endl;
 			// ingresarDatosPromocion
 			string nombre = leerStr("Nombre: ");
+			//no repetir nombre
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
@@ -236,7 +246,7 @@ int main(int argc, char *argv[])
 			// obtenerProductosAsociados
 			set<DTProducto> dtproductos = contPromociones->obtenerProductosAsociados();
 			for (auto p : dtproductos)
-			{
+			{	//checkear si estan en alguna promocion ya
 				mostrarProducto(p);
 			}
 			// agregarProductoAPromocion
@@ -285,7 +295,7 @@ int main(int argc, char *argv[])
 			{
 				// listarComentarios
 				set<DTComentario> comentarios = contCom->listarComentarios();
-				cout << "Listando todos los comentarios" << endl;
+				cout << "Listando todos los comentarios en el producto" << codigo << endl;
 				int i = 0;
 				for (auto com : comentarios)
 				{
@@ -300,8 +310,8 @@ int main(int argc, char *argv[])
 					cout << "Este producto no tiene comentarios." << endl; // no hay que confirmar crear comentario si entro acá
 				} else {
 					int id = leerInt("Responder a: ");
-					// cin.ignore();
 					string respuesta = leerStr("Texto: ");
+					//checkear que el comentario este en los listados?
 					contCom->ingresarRespuesta(id, respuesta);
 				}
 			}
@@ -471,7 +481,7 @@ int main(int argc, char *argv[])
 					cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " . Su codigo es " << p.codigo << endl;
 				}
 				cout << endl
-					 << "El vendedor " << nickname << " tiene las siguientes promociones creadas" << endl;
+					 << "El vendedor " << nickname << " tiene las siguientes promociones en vigencia:" << endl;
 				for (auto p : dProm)
 				{	
 					if (p.fechaVencimiento > fechaActual){
