@@ -174,7 +174,14 @@ int main(int argc, char *argv[])
 				v.contrasenia = leerStr("Ingrese contraseña: ");
 				v.fechaNac = leerDTFecha("Ingrese fecha de nacimiento [dia mes anio]:  ");
 				v.RUT = leerStr("Ingrese RUT [12 digitos]:  ");
-				contUsuarios->ingresarDatosVendedor(v);
+
+				try {
+					contUsuarios->ingresarDatosVendedor(v);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
+
 				cout << "Vendedor ingresado correctamente " << endl;
 			}
 			else
@@ -185,7 +192,13 @@ int main(int argc, char *argv[])
 				data.fechaNac = leerDTFecha("Fecha de nacimiento: ");
 				data.ciudad = leerStr("Ciudad: ");
 				data.direccion = leerStr("Direccion: ");
-				contUsuarios->ingresarDatosCliente(data);
+
+				try {
+					contUsuarios->ingresarDatosCliente(data);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
 				cout << "Cliente ingresado correctamente " << endl;
 			}
 		}
@@ -252,7 +265,13 @@ int main(int argc, char *argv[])
 			string descripcion = leerStr("Descripcion: ");
 			int descuento = leerInt("Descuento: ");
 			DTFecha fechaVenc = leerDTFecha("Vencimiento: ");
-			contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+
+			try {
+				contPromociones->ingresarDatosPromocion(nombre, descripcion, descuento, fechaVenc);
+			} catch (const std::runtime_error& error) {
+				cout << "ERROR: " << error.what() << endl;
+				continue;
+			}
 
 			// listarVendedores
 			set<string> vendedores = contUsuarios->listarVendedores();
@@ -276,7 +295,14 @@ int main(int argc, char *argv[])
 			{
 				int codigo = leerInt("Codigo: ");
 				int cantidad = leerInt("Cantidad: ");
-				contPromociones->agregarProductoAPromocion(codigo, cantidad);
+
+				try {
+					contPromociones->agregarProductoAPromocion(codigo, cantidad);
+				} catch (const std::runtime_error& error) {
+					cout << "ERROR: " << error.what() << endl;
+					continue;
+				}
+
 				string resp = leerStr("¿Desea seguir agregando productos? [y/n]");
 				while (!(resp == "y" || resp == "n"))
 				{
@@ -572,7 +598,13 @@ int main(int argc, char *argv[])
 				if (dp.count(prod) != 0)
 				{
 					int cantidad = leerInt("Ingrese cantidad a comprar: ");
-					contCompra->seleccionarProducto(cantidad, idProd);
+
+					try {
+						contCompra->seleccionarProducto(cantidad, idProd);
+					} catch (const std::runtime_error& error) {
+						cout << "ERROR: " << error.what() << endl;
+						continue;
+					}
 					dp.erase(prod);
 				}
 				else
