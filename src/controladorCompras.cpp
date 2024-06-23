@@ -69,6 +69,7 @@ DTDetalleCompra ControladorCompras::devolverDetalles()
 		cout << "NO HAY PROMO PARA APLICAR" << endl;
 	} else {
 		cout << "Aplicando promocion " << promo->getNombre() << endl;
+		//guardar nombre promo
 	}
 	ControladorProductos *cprod = ControladorProductos::getInstance();
 	if (promo != NULL)
@@ -105,6 +106,7 @@ void ControladorCompras::registrarCompra()
 {
 	Compra *c = new Compra(fechaActual, compraActual.montoFinal, idC, datosProductos, envios, cliente);
 	//Compra *c = new Compra(compra);
+	//if promo != " " entonces agregarpromo a c
 	cliente->agregarCompra(c);
 	compras.insert((std::pair<int, Compra *>(idC, c)));
 }
@@ -129,4 +131,11 @@ std::set<DTDetalleCompra> ControladorCompras::obtenerCompras(){
 		resultado.insert(dc);
 	}
 	return resultado;
+}
+
+void ControladorCompras::cargarCompra(Compra c){
+	Compra * compra = new Compra(c);
+	ControladorUsuarios *cu = ControladorUsuarios::getInstance();
+	compra->getCliente()->agregarCompra(compra);
+	compras.insert(std::pair<int, Compra *> (compra->getId() ,compra));
 }

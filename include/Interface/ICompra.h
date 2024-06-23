@@ -10,6 +10,7 @@ using String = std::string;
 class ICompra
 {
 public:
+    virtual void cargarCompra(Compra) = 0;
     virtual void registrarCompra() = 0;
     virtual void finalizarCompra() = 0;
     virtual std::set<String> listarClientes() = 0;

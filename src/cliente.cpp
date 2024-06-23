@@ -90,7 +90,7 @@ Cliente *Cliente::create(DTAltaCliente altaCliente)
     return c;
 }
 
-void Cliente::agregarCompra(Compra* c){
+void Cliente::agregarCompra(Compra *c){
     compras.insert(std::pair<int, Compra *> (c->getId() , c));
 }
 

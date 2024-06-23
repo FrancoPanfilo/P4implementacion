@@ -1,6 +1,7 @@
 #include "./include/Datatypes/DTAltaCliente.h"
 #include "./include/Datatypes/DTAltaVendedor.h"
 #include "./include/Datatypes/DTCompra.h"
+#include "./include/Datatypes/DTDetalleCompra.h"
 #include "include/Interface/IUsuario.h"
 #include "include/Interface/IProducto.h"
 #include "include/Interface/ISuscripcion.h"
@@ -65,6 +66,7 @@ void cargarDatos()
     contProductos->altaProducto("sofia25", dataPR13);
     contProductos->altaProducto("diegom", dataPR14);
     contProductos->altaProducto("sofia25", dataPR15);
+
     // Promociones
     IPromocion *contPromociones = f->getIPromociones();
     DTPromocion dataPM1 = DTPromocion("Casa nueva", "ana23", "Para que puedas ahorrar en la casa nueva", 30, DTFecha(25, 10, 2024));
@@ -89,16 +91,60 @@ void cargarDatos()
     contPromociones->agregarPromocion(p4);
 
     // Compras
-    // ICompra *contCompras = f->getICompras();
-    DTCompra dataCO1 = DTCompra(DTFecha(1, 5, 2024), 57581.993, {dataPR2.codigo, dataPR4.codigo, dataPR8.codigo});
-    DTCompra dataCO2 = DTCompra(DTFecha(1, 5, 2024), 599.99, {dataPR5.codigo});
-    DTCompra dataCO3 = DTCompra(DTFecha(15, 5, 2024), 150000, {dataPR14.codigo});
-    DTCompra dataCO4 = DTCompra(DTFecha(25, 4, 2024), 11734, {dataPR11.codigo, dataPR12.codigo, dataPR13.codigo});
-    DTCompra dataCO5 = DTCompra(DTFecha(20, 5, 2024), 1263.984, {dataPR3.codigo, dataPR6.codigo});
-    DTCompra dataCO6 = DTCompra(DTFecha(12, 5, 2024), 2800, {dataPR1.codigo});
-    DTCompra dataCO7 = DTCompra(DTFecha(13, 5, 2024), 4200, {dataPR1.codigo});
-    DTCompra dataCO8 = DTCompra(DTFecha(14, 5, 2024), 5600, {dataPR1.codigo});
-    DTCompra dataCO9 = DTCompra(DTFecha(15, 5, 2024), 7000, {dataPR1.codigo});
+    ICompra *contCompras = f->getICompras();
+    DTDetalleCompra dataCO1 = DTDetalleCompra(1, 68389.293, DTFecha(1, 5, 2024), dataUS4.nickname);
+    DTDetalleCompra dataCO2 = DTDetalleCompra(2, 599.99, DTFecha(1, 5, 2024), dataUS4.nickname);
+    DTDetalleCompra dataCO3 = DTDetalleCompra(3, 150000, DTFecha(15, 4, 2024), dataUS5.nickname);
+    DTDetalleCompra dataCO4 = DTDetalleCompra(4, 11734, DTFecha(25, 5, 2024), dataUS7.nickname);
+    DTDetalleCompra dataCO5 = DTDetalleCompra(5, 1263.984, DTFecha(20, 5, 2024), dataUS4.nickname);
+    DTDetalleCompra dataCO6 = DTDetalleCompra(6, 2800, DTFecha(12, 5, 2024), dataUS5.nickname);
+    DTDetalleCompra dataCO7 = DTDetalleCompra(7, 4200, DTFecha(13, 5, 2024), dataUS7.nickname);
+    DTDetalleCompra dataCO8 = DTDetalleCompra(8, 5600, DTFecha(14, 5, 2024), dataUS8.nickname);
+    DTDetalleCompra dataCO9 = DTDetalleCompra(9, 7000, DTFecha(15, 5, 2024), dataUS9.nickname);
+
+    Compra c1(dataCO1.fechaCompra, dataCO1.montoFinal, dataCO1.id, contUsuarios->obtenerCliente(dataCO1.cliente));
+    c1.agregarProductosYEnvios(dataPR2.codigo, 2, true);
+    c1.agregarProductosYEnvios(dataPR4.codigo, 1, false);
+    c1.agregarProductosYEnvios(dataPR8.codigo, 1, false);
+    c1.agregarPromocion(dataPM1.nombre);
+    //contUsuarios->obtenerCliente(dataCO1.cliente)->agregarCompra(&c1);
+    contCompras->cargarCompra(c1);
+    Compra c2(dataCO2.fechaCompra, dataCO2.montoFinal, dataCO2.id, contUsuarios->obtenerCliente(dataCO2.cliente));
+    c2.agregarProductosYEnvios(dataPR5.codigo, 1, true);
+    //contUsuarios->obtenerCliente(dataCO2.cliente)->agregarCompra(&c2);
+    contCompras->cargarCompra(c2);
+    Compra c3(dataCO3.fechaCompra, dataCO3.montoFinal, dataCO3.id, contUsuarios->obtenerCliente(dataCO3.cliente));
+    c3.agregarProductosYEnvios(dataPR14.codigo, 10, true);
+    //contUsuarios->obtenerCliente(dataCO3.cliente)->agregarCompra(&c3);
+    contCompras->cargarCompra(c3);
+    Compra c4(dataCO4.fechaCompra, dataCO4.montoFinal, dataCO4.id, contUsuarios->obtenerCliente(dataCO4.cliente));
+    c4.agregarProductosYEnvios(dataPR11.codigo, 1, true);
+    c4.agregarProductosYEnvios(dataPR12.codigo, 1, true);
+    c4.agregarProductosYEnvios(dataPR13.codigo, 1, true);
+    //contUsuarios->obtenerCliente(dataCO4.cliente)->agregarCompra(&c4);
+    contCompras->cargarCompra(c4);
+    Compra c5(dataCO5.fechaCompra, dataCO5.montoFinal, dataCO5.id, contUsuarios->obtenerCliente(dataCO5.cliente));
+    c5.agregarProductosYEnvios(dataPR3.codigo, 2, false);
+    c5.agregarProductosYEnvios(dataPR6.codigo, 3, true);
+    c5.agregarPromocion(dataPM2.nombre);
+    //contUsuarios->obtenerCliente(dataCO5.cliente)->agregarCompra(&c5);
+    contCompras->cargarCompra(c5);
+    Compra c6(dataCO6.fechaCompra, dataCO6.montoFinal, dataCO6.id, contUsuarios->obtenerCliente(dataCO6.cliente));
+    c6.agregarProductosYEnvios(dataPR1.codigo, 2, false);
+    //contUsuarios->obtenerCliente(dataCO6.cliente)->agregarCompra(&c6);
+    contCompras->cargarCompra(c6);
+    Compra c7(dataCO7.fechaCompra, dataCO7.montoFinal, dataCO7.id, contUsuarios->obtenerCliente(dataCO7.cliente));
+    c7.agregarProductosYEnvios(dataPR1.codigo, 3, true);
+    //contUsuarios->obtenerCliente(dataCO7.cliente)->agregarCompra(&c7);
+    contCompras->cargarCompra(c7);
+    Compra c8(dataCO8.fechaCompra, dataCO8.montoFinal, dataCO8.id, contUsuarios->obtenerCliente(dataCO8.cliente));
+    c8.agregarProductosYEnvios(dataPR1.codigo, 4, false);
+    //contUsuarios->obtenerCliente(dataCO8.cliente)->agregarCompra(&c8);
+    contCompras->cargarCompra(c8);
+    Compra c9(dataCO9.fechaCompra, dataCO9.montoFinal, dataCO9.id, contUsuarios->obtenerCliente(dataCO9.cliente));
+    c9.agregarProductosYEnvios(dataPR1.codigo, 5, false);
+    //contUsuarios->obtenerCliente(dataCO9.cliente)->agregarCompra(&c9);
+    contCompras->cargarCompra(c9);
 
 
     // Comentarios

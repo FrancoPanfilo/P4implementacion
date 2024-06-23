@@ -44,6 +44,7 @@ public:
     int getPrecioTotal();
     void setPrecioTotal(int); */
 
+    void cargarCompra(Compra);
     std::set<String> listarClientes();
     void seleccionarUsuario(String);
     void seleccionarProducto(int, int);

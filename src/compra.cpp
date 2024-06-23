@@ -30,9 +30,22 @@ Cliente* Compra::getCliente() {
 
 Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente* cliente)
     : fechaCompra(fechaCompra), montoFinal(montoFinal), id(id), productos(productos), envios(envios), cliente(cliente) {}
+
+Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, Cliente *cliente)
+    : fechaCompra(fechaCompra), montoFinal(montoFinal), id(id), cliente(cliente) {}
+
 Compra::Compra(){}
 Compra::~Compra(){}
 
 void Compra::enviarEnCompra(int cp){
     envios.at(cp) = true;
+}
+
+void Compra::agregarProductosYEnvios(int codigo, int cantidad, bool enviado){
+    productos.insert(ParProdCant(codigo, cantidad));
+    envios.insert(std::pair<int, bool>(codigo, enviado));
+}
+
+void Compra::agregarPromocion(string nombrePromo){
+    promocionCumplida = nombrePromo;
 }
