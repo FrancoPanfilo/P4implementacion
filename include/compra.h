@@ -30,6 +30,7 @@ public:
     Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> productos, map<int, bool> envios, Cliente *cliente);
     Compra();
     ~Compra();
+    void enviarEnCompra(int cp);
 };
 
 #include "cliente.h"

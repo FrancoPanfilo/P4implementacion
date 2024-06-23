@@ -46,7 +46,7 @@ void mostrarFecha(DTFecha fecha)
 
 void mostrarProducto(DTProducto p)
 {
-	std::cout << "Producto: " << p.nombre << " (" << p.codigo << ") . Descripcion: " << p.descripcion << "." << std::endl;
+	std::cout << "Producto: " << p.nombre << " (" << p.codigo << ")" << std::endl;
 }
 
 int leerInt(string pregunta)
@@ -297,15 +297,24 @@ int main(int argc, char *argv[])
 					continue;
 				}
 				cout << "Listando todos los comentarios" << endl;
+				int i = 0;
 				for (auto com : comentarios)
 				{
-					printf("%d", com.id);
-					mostrarFecha(com.fecha);
-					cout << com.contenido << endl;
+					if(com.idProducto == codigo){
+						printf("%d ", com.id);
+						mostrarFecha(com.fecha);
+						cout << com.contenido << endl;
+						i++;
+					}
 				}
-				int id = leerInt("Responder a: ");
-				string respuesta = leerStr("Texto: ");
-				contCom->ingresarRespuesta(id, respuesta);
+				if (i == 0){
+					cout << "Este producto no tiene comentarios." << endl; // no hay que confirmar crear comentario si entro acá
+				} else {
+					int id = leerInt("Responder a: ");
+					// cin.ignore();
+					string respuesta = leerStr("Texto: ");
+					contCom->ingresarRespuesta(id, respuesta);
+				}
 			}
 			else
 			{
@@ -321,17 +330,20 @@ int main(int argc, char *argv[])
 			// listarComentarios
 			string nickname = leerStr("Usuario: ");
 			set<DTComentario> comentarios = contUsuarios->listarComentarios(nickname);
-			for (auto com : comentarios)
-			{
-				printf("%d", com.id);
-				mostrarFecha(com.fecha);
-				cout << com.contenido << endl;
+			if (comentarios.size() == 0){
+				cout << "El usuario seleccionado no tiene comentarios publicados. " << endl;
+			} else {
+				for (auto com : comentarios)
+				{
+					printf("%d ", com.id);
+					mostrarFecha(com.fecha);
+					cout << com.contenido << endl;
+				}
+				// elegirYBorrarComentario
+				int id = leerInt("Id a borrar: ");
+				contCom->elegirYBorrarComentario(id);
+				cout << "Comentario borrado" << endl;
 			}
-			// elegirYBorrarComentario
-			int id = leerInt("Id a borrar: ");
-			contCom->elegirYBorrarComentario(id);
-
-			cout << "Comentario borrado" << endl;
 		}
 		else if (indice == 9)
 		{
@@ -400,13 +412,12 @@ int main(int argc, char *argv[])
 			for (auto p : prod)
 			{
 				for (auto co : c)
-				{
-					pendienteEnvio = !co.productosEnvio.at(p.codigo);
-					if (pendienteEnvio)
-					{
+				{	
+					if (co.productosEnvio.count(p.codigo) == 1 && !co.productosEnvio.at(p.codigo)){
 						res.insert(p);
 						break;
-					}
+						
+					}	
 				}
 			}
 			for (auto pe : res)
@@ -418,7 +429,7 @@ int main(int argc, char *argv[])
 			cout << "Lista de compras en las que dicho producto aún no se ha enviado: " << endl;
 			for (auto ev : env)
 			{
-				cout << "Compra de " << ev.nickname << "realizada el día ";
+				cout << "Compra de " << ev.nickname << " realizada el día ";
 				mostrarFecha(ev.fecha);
 			}
 			string nick = leerStr("Seleccione el cliente: ");
@@ -431,8 +442,13 @@ int main(int argc, char *argv[])
 				map<int, bool> enviosC = comp.second->getEnvios();
 				if (fechaC.anio == f.anio && fechaC.mes == f.mes && fechaC.dia == f.dia && enviosC.count(prodAEnviar) == 1 && !enviosC.at(prodAEnviar))
 				{
-					enviosC.at(prodAEnviar) = true;
+					//cl->enviar(codigo compra codigo producto)
+					cl->enviar(comp.first, prodAEnviar);
+					//enviosC.at(prodAEnviar) = true;
+					cout << "entre" << endl;
+
 				}
+				cout << enviosC.count(prodAEnviar) << endl; ;
 			}
 		}
 		else if (indice == 11)
@@ -447,7 +463,10 @@ int main(int argc, char *argv[])
 				t = leerStr("¿Es un cliente o un vendedor? [ c / v]");
 			}
 			if (t == "v")
-			{
+			{	
+				time_t ahora = time(0);
+				tm *local = localtime(&ahora);
+				DTFecha fechaActual = DTFecha(local->tm_mday, local->tm_mon + 1, local->tm_year + 1900);
 				set<string> lV = contUsuarios->listarVendedores();
 				for (auto v : lV)
 				{
@@ -466,10 +485,12 @@ int main(int argc, char *argv[])
 				cout << endl
 					 << "El vendedor " << nickname << " tiene las siguientes promociones creadas" << endl;
 				for (auto p : dProm)
-				{
-					cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " vence en la fecha ";
-					mostrarFecha(p.fechaVencimiento);
-					cout << endl;
+				{	
+					if (p.fechaVencimiento > fechaActual){
+						cout << "Nombre: " << p.nombre << "  Descripcion: " << p.descripcion << " vence en la fecha ";
+						mostrarFecha(p.fechaVencimiento);
+						cout << endl;
+					}	
 				}
 			}
 			else
@@ -479,11 +500,15 @@ int main(int argc, char *argv[])
 				Cliente *c = contUsuarios->obtenerCliente(nickname);
 				cout << "Nombre: " << nickname << " Direccion:" << c->getDireccion() << endl;
 				set<DTDetalleCompra> dC = contUsuarios->listarComprasCliente();
-				for (auto c : dC)
+				for (auto co : dC)
 				{
-					cout << "Id: " << c.id << "  Monto final: " << c.montoFinal << "  Fecha: ";
-					mostrarFecha(c.fechaCompra);
+					map<int, bool> dP = co.productosEnvio;
+					cout << "Id: " << co.id << "  Monto final: " << co.montoFinal << "  Fecha: ";
+					mostrarFecha(co.fechaCompra);
 					cout << endl;
+					for (auto p : dP){
+						cout << p.first << p.second << endl;
+					}
 				}
 			}
 		}

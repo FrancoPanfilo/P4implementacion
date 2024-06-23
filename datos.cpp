@@ -67,10 +67,10 @@ void cargarDatos()
     contProductos->altaProducto("sofia25", dataPR15);
     // Promociones
     IPromocion *contPromociones = f->getIPromociones();
-    DTPromocion dataPM1 = DTPromocion("Casa nueva", "Para que puedas ahorrar en la casa nueva", 30, DTFecha(25, 10, 2024));
-    DTPromocion dataPM2 = DTPromocion("Fiesta", "Para que no te quedes sin ropa para las fiestas", 20, DTFecha(26, 10, 2024));
-    DTPromocion dataPM3 = DTPromocion("Domotica", "Para modernizar tu casa", 10, DTFecha(26, 10, 2024));
-    DTPromocion dataPM4 = DTPromocion("Liquidacion", "Hasta agotar stock", 10, DTFecha(26, 3, 2024));
+    DTPromocion dataPM1 = DTPromocion("Casa nueva", "ana23", "Para que puedas ahorrar en la casa nueva", 30, DTFecha(25, 10, 2024));
+    DTPromocion dataPM2 = DTPromocion("Fiesta", "carlos78", "Para que no te quedes sin ropa para las fiestas", 20, DTFecha(26, 10, 2024));
+    DTPromocion dataPM3 = DTPromocion("Domotica", "diegom", "Para modernizar tu casa", 10, DTFecha(26, 10, 2024));
+    DTPromocion dataPM4 = DTPromocion("Liquidacion", "diegom", "Hasta agotar stock", 10, DTFecha(26, 3, 2024));
 
     Promocion p1(dataPM1, "ana23");
     p1.agregarAPromo(contProductos->obtenerProducto(2), 1);
@@ -103,31 +103,31 @@ void cargarDatos()
 
     // Comentarios
     // IComentario *contComentarios = f->getIComentarios();
-    DTComentario dataCM1 = DTComentario(1, "¿La camiseta azul esta disponible en talla M?", DTFecha(1, 6, 2024));
-    DTComentario dataCM2 = DTComentario(2, "Si, tenemos la camiseta azul en talla M.", DTFecha(1, 6, 2024));
-    DTComentario dataCM3 = DTComentario(3, "¿Es de buen material? Me preocupa la durabilidad.", DTFecha(1, 6, 2024));
-    DTComentario dataCM4 = DTComentario(4, "He comprado antes y la calidad es buena.", DTFecha(2, 6, 2024));
-    DTComentario dataCM5 = DTComentario(5, "¿Como es el ajuste? ¿Es ajustada o holgada?", DTFecha(2, 6, 2024));
-    DTComentario dataCM6 = DTComentario(6, "¿Cual es la resolucion del Televisor LED?", DTFecha(2, 6, 2024));
-    DTComentario dataCM7 = DTComentario(7, "El televisor LED tiene una resolucion de 4K UHD.", DTFecha(2, 6, 2024));
-    DTComentario dataCM8 = DTComentario(8, "¿Tiene soporte para HDR10?", DTFecha(3, 6, 2024));
-    DTComentario dataCM9 = DTComentario(9, "Si, soporta HDR10.", DTFecha(3, 6, 2024));
-    DTComentario dataCM10 = DTComentario(10, "¿La chaqueta de cuero es resistente al agua?", DTFecha(3, 6, 2024));
-    DTComentario dataCM11 = DTComentario(11, "No, la chaqueta de cuero no es resistente al agua.", DTFecha(3, 6, 2024));
-    DTComentario dataCM12 = DTComentario(12, "¿Viene en otros colores?", DTFecha(4, 6, 2024));
-    DTComentario dataCM13 = DTComentario(13, "Si, tambien esta disponible en marron.", DTFecha(4, 6, 2024));
-    DTComentario dataCM14 = DTComentario(14, "¿Es adecuada para climas frios?", DTFecha(4, 6, 2024));
-    DTComentario dataCM15 = DTComentario(15, "¿El microondas digital tiene funcion de descongelacion rapida?", DTFecha(4, 6, 2024));
-    DTComentario dataCM16 = DTComentario(16, "Si, el microondas digital incluye una funcion de descongelacion rapida.", DTFecha(4, 6, 2024));
-    DTComentario dataCM17 = DTComentario(17, "¿Cuantos niveles de potencia tiene?", DTFecha(5, 6, 2024));
-    DTComentario dataCM18 = DTComentario(18, "Tiene 10 niveles de potencia.", DTFecha(5, 6, 2024));
-    DTComentario dataCM19 = DTComentario(19, "¿Es facil de limpiar?", DTFecha(5, 6, 2024));
-    DTComentario dataCM20 = DTComentario(20, "¿La luz LED se puede controlar con una aplicacion movil?", DTFecha(6, 6, 2024));
-    DTComentario dataCM21 = DTComentario(21, "Si, la luz LED se puede controlar a traves de una aplicacion movil.", DTFecha(6, 6, 2024));
-    DTComentario dataCM22 = DTComentario(22, "¿Es compatible con Alexa o Google Home?", DTFecha(6, 6, 2024));
-    DTComentario dataCM23 = DTComentario(23, "Si, es compatible con ambos.", DTFecha(6, 6, 2024));
-    DTComentario dataCM24 = DTComentario(24, "¿Cuanto dura la bateria?", DTFecha(7, 6, 2024));
-    DTComentario dataCM25 = DTComentario(25, "¿La aplicacion movil es facil de usar?", DTFecha(7, 6, 2024));
+    DTComentario dataCM1 = DTComentario(1, "¿La camiseta azul esta disponible en talla M?", DTFecha(1, 6, 2024), 1);
+    DTComentario dataCM2 = DTComentario(2, "Si, tenemos la camiseta azul en talla M.", DTFecha(1, 6, 2024), 1);
+    DTComentario dataCM3 = DTComentario(3, "¿Es de buen material? Me preocupa la durabilidad.", DTFecha(1, 6, 2024), 1);
+    DTComentario dataCM4 = DTComentario(4, "He comprado antes y la calidad es buena.", DTFecha(2, 6, 2024), 1);
+    DTComentario dataCM5 = DTComentario(5, "¿Como es el ajuste? ¿Es ajustada o holgada?", DTFecha(2, 6, 2024), 1);
+    DTComentario dataCM6 = DTComentario(6, "¿Cual es la resolucion del Televisor LED?", DTFecha(2, 6, 2024), 2);
+    DTComentario dataCM7 = DTComentario(7, "El televisor LED tiene una resolucion de 4K UHD.", DTFecha(2, 6, 2024), 2);
+    DTComentario dataCM8 = DTComentario(8, "¿Tiene soporte para HDR10?", DTFecha(3, 6, 2024), 2);
+    DTComentario dataCM9 = DTComentario(9, "Si, soporta HDR10.", DTFecha(3, 6, 2024), 2);
+    DTComentario dataCM10 = DTComentario(10, "¿La chaqueta de cuero es resistente al agua?", DTFecha(3, 6, 2024), 3);
+    DTComentario dataCM11 = DTComentario(11, "No, la chaqueta de cuero no es resistente al agua.", DTFecha(3, 6, 2024), 3);
+    DTComentario dataCM12 = DTComentario(12, "¿Viene en otros colores?", DTFecha(4, 6, 2024), 3);
+    DTComentario dataCM13 = DTComentario(13, "Si, tambien esta disponible en marron.", DTFecha(4, 6, 2024), 3);
+    DTComentario dataCM14 = DTComentario(14, "¿Es adecuada para climas frios?", DTFecha(4, 6, 2024), 3);
+    DTComentario dataCM15 = DTComentario(15, "¿El microondas digital tiene funcion de descongelacion rapida?", DTFecha(4, 6, 2024), 4);
+    DTComentario dataCM16 = DTComentario(16, "Si, el microondas digital incluye una funcion de descongelacion rapida.", DTFecha(4, 6, 2024), 4);
+    DTComentario dataCM17 = DTComentario(17, "¿Cuantos niveles de potencia tiene?", DTFecha(5, 6, 2024), 4);
+    DTComentario dataCM18 = DTComentario(18, "Tiene 10 niveles de potencia.", DTFecha(5, 6, 2024), 4);
+    DTComentario dataCM19 = DTComentario(19, "¿Es facil de limpiar?", DTFecha(5, 6, 2024), 4);
+    DTComentario dataCM20 = DTComentario(20, "¿La luz LED se puede controlar con una aplicacion movil?", DTFecha(6, 6, 2024), 5);
+    DTComentario dataCM21 = DTComentario(21, "Si, la luz LED se puede controlar a traves de una aplicacion movil.", DTFecha(6, 6, 2024), 5);
+    DTComentario dataCM22 = DTComentario(22, "¿Es compatible con Alexa o Google Home?", DTFecha(6, 6, 2024), 5);
+    DTComentario dataCM23 = DTComentario(23, "Si, es compatible con ambos.", DTFecha(6, 6, 2024), 5);
+    DTComentario dataCM24 = DTComentario(24, "¿Cuanto dura la bateria?", DTFecha(7, 6, 2024), 5);
+    DTComentario dataCM25 = DTComentario(25, "¿La aplicacion movil es facil de usar?", DTFecha(7, 6, 2024), 5);
 
     // nuestros datos
 }

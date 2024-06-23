@@ -32,3 +32,7 @@ Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> 
     : fechaCompra(fechaCompra), montoFinal(montoFinal), id(id), productos(productos), envios(envios), cliente(cliente) {}
 Compra::Compra(){}
 Compra::~Compra(){}
+
+void Compra::enviarEnCompra(int cp){
+    envios.at(cp) = true;
+}

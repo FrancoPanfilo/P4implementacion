@@ -49,6 +49,8 @@ public:
 
     void agregarSub(string nickname);
     void eliminarSub(string nickname);
+    void agregarCompra(Compra*);
+    void enviar(int cC, int cP);
 };
 
 #endif // _CLIENTE_H

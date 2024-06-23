@@ -11,7 +11,8 @@ public:
     int id;
     string contenido;
     DTFecha fecha;
-    DTComentario(int id, string contenido, DTFecha fecha);
+    int idProducto;
+    DTComentario(int id, string contenido, DTFecha fecha, int idProducto);
     DTComentario() = default;
     ~DTComentario();
 
