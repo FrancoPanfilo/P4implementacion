@@ -7,7 +7,9 @@
 
 ControladorSuscripciones *ControladorSuscripciones::instance = NULL;
 
-ControladorSuscripciones::ControladorSuscripciones() {}
+ControladorSuscripciones::ControladorSuscripciones()
+    : suscriptor(NULL) {}
+
 ControladorSuscripciones::~ControladorSuscripciones() {}
 
 ControladorSuscripciones *ControladorSuscripciones::getInstance()

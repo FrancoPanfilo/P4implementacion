@@ -2,6 +2,8 @@
 
 Minimo::Minimo(Producto *p, int cantidad)
     : producto(p), cantidad(cantidad) {}
+Minimo::Minimo()
+    : producto(NULL) {}
 int Minimo::getCantidad()
 {
     return this->cantidad;

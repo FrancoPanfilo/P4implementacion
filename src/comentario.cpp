@@ -16,7 +16,9 @@ Comentario::Comentario(int id, string contenido, DTFecha fecha, Producto *produc
 
 // Destructor
 
-Comentario::Comentario() {}
+//Comentario::Comentario() {}
+Comentario::Comentario()
+    : respuestaA(NULL), producto(NULL) {}
 Comentario::~Comentario() {}
 
 // Getters

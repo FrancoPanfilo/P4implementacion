@@ -18,17 +18,20 @@ using namespace std;
 ControladorComentarios *ControladorComentarios::instance = NULL;
 
 // Constructor
-ControladorComentarios::ControladorComentarios()
-{
-	// Memoria vacía
-	this->respondiendoA = -1;
-	this->contenido = "";
-	this->comentador = "";
-	this->comentarioSobre = NULL;
+// ControladorComentarios::ControladorComentarios()
+// {
+// 	// Memoria vacía
+// 	this->respondiendoA = -1;
+// 	this->contenido = "";
+// 	this->comentador = "";
+// 	this->comentarioSobre = NULL;
 
-	// Inicializamos id en 0
-	this->ultimaId = 0;
-}
+// 	// Inicializamos id en 0
+// 	this->ultimaId = 0;
+// }
+
+ControladorComentarios::ControladorComentarios()
+    : ultimaId(0), comentador(""), contenido(""), respondiendoA(-1), comentarioSobre(NULL) {}
 
 // Destructor
 ControladorComentarios::~ControladorComentarios() {}

@@ -11,6 +11,7 @@ private:
 
 public:
     Minimo(Producto*, int);
+    Minimo();
     int getCantidad();
     Producto* getProducto();
     bool verificarMinimo(std::set<ParProdCant> prod);

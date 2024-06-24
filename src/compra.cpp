@@ -34,7 +34,8 @@ Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, set<ParProdCant> 
 Compra::Compra(DTFecha fechaCompra, double montoFinal, int id, Cliente *cliente)
     : fechaCompra(fechaCompra), montoFinal(montoFinal), id(id), cliente(cliente) {}
 
-Compra::Compra(){}
+Compra::Compra()
+    : cliente(NULL) {}
 Compra::~Compra(){}
 
 void Compra::enviarEnCompra(int cp){
