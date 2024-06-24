@@ -11,9 +11,13 @@ using namespace std;
 ControladorCompras *ControladorCompras::instance = NULL;
 
 ControladorCompras::ControladorCompras()
-{
-	int idC = 0;
-}
+    : idC(0), cliente(NULL) {}
+
+// ControladorCompras::ControladorCompras()
+// {
+// 	int idC = 0;
+// }
+
 ControladorCompras::~ControladorCompras(){};
 
 ControladorCompras *ControladorCompras::getInstance()
