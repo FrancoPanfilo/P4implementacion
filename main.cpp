@@ -456,6 +456,10 @@ int main(int argc, char *argv[])
 			}
 			string vendedor = leerStr("Vendedor: ");
 			Vendedor *v = contUsuarios->obtenerVendedor(vendedor);
+			if (v == NULL) {
+				cout << "ERROR: Vendedor no encontrado" << endl;
+				continue;
+			}
 			set<DTProducto> prod = v->getProductosAsociados();
 			set<DTDetalleCompra> c = contCompra->obtenerCompras();
 			set<DTProducto> res;
